@@ -1,0 +1,262 @@
+F-4 VERDICT: Audit complete. All eight audit targets investigated against working tree at commit `d36ddda64b0b3c92209738847e08162a0cacd812` on branch `fix/f3-i18n-audit`. No production code was modified.
+
+---
+
+## 1. Baseline
+
+| Item | Value |
+|---|---|
+| **Branch** | `fix/f3-i18n-audit` |
+| **HEAD commit** | `d36ddda64b0b3c92209738847e08162a0cacd812` |
+| **origin/main commit** | `a22fbdc` (HEAD is 1 commit ahead of origin/main) |
+| **Working tree modifications** | `public/static/styles.css` (modified); `docs/16-AGENT-PROMPTS-PLAN.md` and `scripts/` (untracked) |
+| **Repository modified for audit** | No — audit is read-only |
+
+---
+
+## 2. Controller SQL Audit
+
+| File | Lines | Operation | Existing Model/Service | Architectural Finding | Severity |
+|---|---|---|---|---|---|
+| `src/controllers/CompetitionController.ts` | 163–168 | `SELECT COUNT(*) FROM competition_requests` + `SELECT COUNT(*) FROM ratings` | `CompetitionRequestModel`, `RatingModel` exist | Direct count queries bypass models; light aggregations in controller | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 174–176 | `SELECT 1 FROM competition_requests WHERE ... pending` | `CompetitionRequestModel.findPending()` exists | Duplicates existing model method | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 418–444 | Atomic batch: `UPDATE competitions`, `UPDATE competition_requests`, `UPDATE competition_invitations` | `CompetitionRequestModel`, `CompetitionInvitationModel` exist | Race-safe accept logic lives in controller instead of model/service | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 619–621 | `DELETE FROM chunk_keys WHERE competition_id = ?` | No `ChunkKeyModel` found | Cleanup of streaming artifact in controller; no model owns chunk_keys | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 1025–1036 | `SELECT id FROM competition_invitations` + `INSERT INTO competition_invitations` | `CompetitionInvitationModel` exists | Direct invite existence check and insert bypass model | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 1085–1088 | `SELECT * FROM competition_invitations WHERE ... pending` | `CompetitionInvitationModel` exists | Direct fetch bypasses model | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 1176–1189 | `SELECT ... FROM competition_invitations JOIN competitions` + `UPDATE competition_invitations` | `CompetitionInvitationModel` exists | Decline logic with JOIN bypasses model | REMEDIATION REQUIRED |
+| `src/controllers/CompetitionController.ts` | 1226–1293 | Multiple `SELECT/DELETE/UPDATE` on competitions, requests, invitations, users | `CompetitionModel`, `CompetitionRequestModel` exist | `handleAutoDeleteOnJoin` private method contains extensive direct SQL | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 34–46 | `SELECT COUNT(*)` from users, competitions, reports, ads; `GROUP BY status`; `SUM(amount)` | `UserModel`, `CompetitionModel`, `ReportModel`, `AdvertisementModel`, `PlatformFinancialLogModel` exist | Dashboard stats aggregations in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 70–85 | `SELECT ... FROM users` with search, pagination | `UserModel` exists | Admin user list query with dynamic WHERE in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 111–120 | `SELECT id, is_admin FROM users` + `UPDATE users SET is_active` | `UserModel`, `SessionModel` exist | Ban/unban logic with session destruction in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 187–196 | `SELECT target_type, target_id FROM reports` + `AdminAuditLogModel.log()` | `ReportModel`, `AdminAuditLogModel` exist | Audit log details fetch in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 220–266 | `SELECT user_id FROM comments`, `SELECT creator_id FROM competitions`, `SELECT is_admin FROM users`, `UPDATE users`, `DELETE` from comments, requests, invitations, ratings, chunk_keys, competitions | `ReportModel`, `SessionModel` exist | Moderation action executor with cascade deletes in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 598–619 | `SELECT COUNT(*)` from users, competitions, reports, ads; `GROUP BY status`; demographics; hottest competitions | Multiple models exist | Enhanced stats dashboard with complex JOINs in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 716–754 | `SELECT ... FROM competitions` + `UPDATE competitions SET status='suspended'` + `INSERT INTO competition_suspensions` | `CompetitionModel` exists; no `CompetitionSuspensionModel` found | Suspend broadcast with tombstone in controller | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 810–833 | `SELECT id, status FROM competitions` + `UPDATE competitions SET status='archived'` + `UPDATE competition_suspensions` | No `CompetitionSuspensionModel` found | Restore broadcast in controller | REMEDIATION REQUIRED |
+| `src/controllers/UserController.ts` | 85–96 | `SELECT ... FROM users` with subqueries for followers, following, competitions | `UserModel` exists | User list with inline aggregations | REMEDIATION REQUIRED |
+| `src/controllers/UserController.ts` | 204–251 | `SELECT ... FROM competition_requests JOIN competitions JOIN users` (3 variants for sent/received/invitations) | `CompetitionRequestModel`, `CompetitionInvitationModel` exist | Request listing with complex JOINs in controller | REMEDIATION REQUIRED |
+| `src/controllers/MatchmakingController.ts` | 50–53 | `SELECT id, creator_id, opponent_id, status, category_id, language, country FROM competitions` | `CompetitionModel` exists | Competition verification in controller | REMEDIATION REQUIRED |
+| `src/controllers/MatchmakingController.ts` | 75–77 | `SELECT following_id FROM follows WHERE follower_id = ?` | No `FollowModel` in `src/models/` | Followed IDs fetch in controller | REMEDIATION REQUIRED |
+| `src/controllers/MatchmakingController.ts` | 152, 185 | Complex matchmaking query with scoring + count query | No `MatchmakingModel` exists | Entire matchmaking algorithm in controller | REMEDIATION REQUIRED |
+| `src/controllers/MatchmakingController.ts` | 211–216, 234–239 | `UPDATE users SET is_online, last_seen_at` | `UserModel` exists | Heartbeat/offline in controller | REMEDIATION REQUIRED |
+| `src/controllers/RecommendationController.ts` | 76–99, 101–104 | Guest recommendations query with scoring + count | `RecommendationEngine` service exists for user recs; guest path bypasses it | Guest recommendations directly in controller | REMEDIATION REQUIRED |
+| `src/modules/api/analytics/routes.ts` | 24–27, 31–45, 96–186 | Multiple `db.prepare()` for stats, categories, DAU, engagement, revenue, time series | No `AnalyticsModel` exists | All analytics SQL in route handler (not even in controller) | REMEDIATION REQUIRED |
+| `src/modules/api/users/delete-account.ts` | 36–150 | GDPR deletion: UPDATE users, DELETE sessions/settings/posts/notifications/follows, UPDATE competitions, DELETE messages/conversations | No `AccountDeletionModel` exists | Multi-table deletion logic in route handler | REMEDIATION REQUIRED |
+| `src/modules/api/ad-reports/routes.ts` | 147, 266, 330, 338 | `SELECT id FROM users WHERE is_admin`, stats query, `UPDATE advertisements SET is_active=0`, notification insert | `AdReportModel` (inline) exists for report CRUD; admin queries bypass it | Admin ad-report operations with direct SQL | REMEDIATION REQUIRED |
+| `src/modules/api/search/enhanced-routes.ts` | 95–111 | `SELECT DISTINCT title FROM competitions`, `SELECT DISTINCT display_name FROM users`, `SELECT DISTINCT name_en FROM categories` | `SearchModel` exists but does not cover suggestions | Search suggestions SQL in route handler | REMEDIATION REQUIRED |
+
+---
+
+## 3. Controller-Local Models
+
+| File | Class | Existing Model in `src/models/` | Duplicate? | Finding | Severity |
+|---|---|---|---|---|---|
+| `src/controllers/CompetitionController.ts` | `CompetitionRequestModel` (lines 28–108) | `src/models/CompetitionRequestModel.ts` ✅ | **Yes — duplicate** | Controller-local class duplicates the proper model. Controller instantiates the local class (lines 322, 367, 391, 489, 980) instead of the model. The proper model has richer business logic (conflict checks, max pending, expiration). This is a confirmed architectural violation. | REMEDIATION REQUIRED |
+| `src/controllers/UserController.ts` | `FollowModel` (lines 18–64) | **None** | N/A | No `FollowModel.ts` exists in `src/models/`. The inline class provides follow/unfollow/isFollowing/getFollowersCount/getFollowingCount. This is an architectural gap — the model should be extracted to `src/models/FollowModel.ts`. | REMEDIATION REQUIRED |
+| `src/modules/api/search/enhanced-routes.ts` | `SearchHistoryModel` (lines 18–75) | `src/models/SearchModel.ts` exists but covers search discovery, not history | **Different domain** | `SearchHistoryModel` manages search history tracking (add/getUserHistory/getTrending/clearUserHistory). No duplicate exists, but it should be in `src/models/` not in a route file. | REMEDIATION REQUIRED |
+| `src/modules/api/ad-reports/routes.ts` | `AdReportModel` (lines 18–95) | **None** | N/A | No `AdReportModel.ts` exists in `src/models/`. The inline class handles ad report CRUD. This should be extracted to `src/models/AdReportModel.ts`. | REMEDIATION REQUIRED |
+
+---
+
+## 4. Page/Module SQL Audit
+
+| File | Lines | Operation | Existing Abstraction | Finding | Severity |
+|---|---|---|---|---|---|
+| `src/modules/pages/profile-page.ts` | 68–69 | `SELECT COUNT(*) FROM follows WHERE following_id/follower_id = ?` | No `FollowModel` in `src/models/` | Direct count queries for profile stats. Comment in code explains this is intentional to avoid subrequest loops on Preview, but the queries bypass any model layer. | REMEDIATION REQUIRED |
+| `src/modules/pages/live/main.ts` | 131–141, 174–184 | `SELECT user_id FROM sessions WHERE id = ? AND expires_at > datetime('now')` + `SELECT creator_id/opponent_id FROM competitions WHERE id = ?` | `SessionModel`, `CompetitionModel` exist | Session and competition lookups for host/guest page auth. These are SSR orchestration queries, but they bypass models. | REMEDIATION REQUIRED |
+| `src/modules/pages/live/scripts/server/core.ts` | 88–98 | `fetch('/api/signaling/ice-servers')` | N/A | Client-side fetch of ICE servers — not SQL, no violation. | NOT A VIOLATION |
+
+**Client-side SQL:** `src/client/` contains zero SQL queries. The only `SELECT/INSERT/UPDATE/DELETE` matches in client code are HTTP method type strings in `ApiClient.ts`.
+
+---
+
+## 5. i18n / User-Visible Text
+
+| File | Lines | Text/Behavior | User-visible? | i18n Status | Severity |
+|---|---|---|---|---|---|
+| `src/lib/services/ScheduledTaskService.ts` | 168–175 | Notification title: `'Competition Deleted'`, message: `'Your instant competition was deleted because no opponent joined within 1 hour.'` | **Yes** — system notification | Hardcoded English. No `ar.ts`/`en.ts` entry. | REMEDIATION REQUIRED |
+| `src/lib/services/ScheduledTaskService.ts` | 218–221 | Notification title: `'Competition Cancelled'`, message about scheduled competition cancellation | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/ScheduledTaskService.ts` | 270–274 | Notification title: `'Competition Cancelled'`, message about scheduled no-opponent | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/ScheduledTaskService.ts` | 310–313 | Notification title: `'Competition Cancelled'`, message about not starting in time | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/ScheduledTaskService.ts` | 369–372 | Notification title: `'Competition Ended'`, message about 2-hour maximum | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/ScheduledTaskService.ts` | 387–389 | Notification title: `'Competition Reminder'`, message: `'The competition will start soon!'` | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/CronHandler.ts` | 109 | Same strings as above for Rule A | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/CronHandler.ts` | 141 | Same strings as above for Rule B | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/lib/services/CronHandler.ts` | 174 | Same strings as above for Rule C | **Yes** — system notification | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 108 | `'Cannot ban yourself'` | **Yes** — API error response | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 115 | `'Cannot ban an admin'` | **Yes** — API error response | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 728 | `` `Competition is already in '${competition.status}' state...` `` | **Yes** — API error response | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/AdminController.ts` | 816 | `'Competition is not in suspended state.'` | **Yes** — API error response | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/AuthController.ts` | 348 | `'Server configuration error'` | **Yes** — API error response | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/DonationController.ts` | 36, 41 | `'Amount is required'`, `'Minimum donation is $1'` | **Yes** — API validation error | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/PaymentController.ts` | 59, 65, 69, 102, 137, 164, 213, 236 | Various validation errors (`'Valid type required'`, `'IBAN and bank name are required'`, `'Invalid ID'`, `'ad_id is required'`, etc.) | **Yes** — API validation errors | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/controllers/UserController.ts` | 254 | `'Invalid type. Use: sent, received, or invitations'` | **Yes** — API validation error | Hardcoded English. | REMEDIATION REQUIRED |
+| `src/modules/pages/admin-dashboard-page.ts` | Throughout (100–354) | `'Cancel'`, `'Confirm Approve'`, `'Reject Withdrawal'`, `'Transaction ID *'`, `'Execute Transparent Suspension'`, `'Restore to Archive'`, `'Withdrawal Queue'`, `'Competition ID *'`, `'Approve'`, `'Reject'`, etc. | **Yes** — admin UI text | Mixed: some use `tt()`/`tr.` fallbacks, but many are hardcoded English in HTML/JS. | REMEDIATION REQUIRED |
+| `src/lib/services/*` | Various | `console.error` / `console.log` debug output | No — developer diagnostics | Logging, not user-visible. | NOT A VIOLATION |
+
+---
+
+## 6. Lifecycle Duplication
+
+**Actual relationship between `ScheduledTaskService` and `CronHandler`:**
+
+`ScheduledTaskService` (`src/lib/services/ScheduledTaskService.ts`) is a **task processor** that:
+- Schedules tasks (`schedule()`, `cancel()`)
+- Processes pending tasks (`processPendingTasks()`)
+- Executes task handlers (`executeTask()`)
+- Implements Rule A (`handleAutoDelete`), Rule B (`handleScheduledNoOpponent`, `handleScheduledNotStarted`), Rule C (`handleAutoEnd`)
+- Handles reminders, disconnection checks, aggregate recalculation, payout finalization
+
+`CronHandler` (`src/lib/services/CronHandler.ts`) is a **cron trigger dispatcher** that:
+- Dispatches Cloudflare Workers `scheduled` events by cron expression
+- Calls `ScheduledTaskService.processPendingTasks()` for `* * * * *`
+- Calls cleanup methods for `*/5 * * * *` and `0 * * * *` and `0 3 * * *`
+- Contains a **separate** `handleLifecycleTimers()` function (lines 85–183) that **re-implements** Rule A, Rule B, and Rule C with **identical logic** but different SQL
+
+**Concrete evidence of duplication:**
+
+| Rule | ScheduledTaskService | CronHandler.handleLifecycleTimers |
+|---|---|---|
+| **Rule A** (Instant, 1hr no opponent) | `handleAutoDelete()` lines 151–229: SELECT competitions, DELETE requests/invitations/competition, FREE users, INSERT notifications | Lines 88–116: SELECT competitions with same WHERE, DELETE requests/invitations/competition, FREE users, INSERT notifications — **identical SQL patterns** |
+| **Rule B** (Scheduled, 1hr post-schedule) | `handleScheduledNoOpponent()` lines 235–275 + `handleScheduledNotStarted()` lines 281–315 | Lines 118–149: SELECT competitions with same WHERE, UPDATE status='cancelled', FREE users, INSERT notifications — **identical SQL patterns** |
+| **Rule C** (Live, 2hr max) | `handleAutoEnd()` lines 320–374 | Lines 151–182: SELECT competitions with same WHERE, UPDATE status='completed', FREE users, DELETE chunk_keys, INSERT notifications — **identical SQL patterns** |
+
+**Key observation:** `ScheduledTaskService` already handles all three rules via its task queue. `CronHandler.handleLifecycleTimers()` bypasses the task queue entirely and runs the same logic directly. This is **behavioral duplication**, not merely different triggering. Both will fire for the same competitions if a `competition_scheduled_tasks` row exists AND the cron expression matches.
+
+**Delegation:** `CronHandler.runMinuteMaintenance()` delegates to `ScheduledTaskService.processPendingTasks()`, but `handleLifecycleTimers()` does **not** delegate — it reimplements.
+
+**Consolidation warranted:** Yes. The `handleLifecycleTimers()` function in `CronHandler` should be removed and its rules delegated to `ScheduledTaskService` (which already owns them). This is a clear **F-6 remediation candidate**.
+
+---
+
+## 7. OOP/MVC Boundary Findings
+
+Only meaningful findings beyond the SQL/inline-model violations already documented:
+
+1. **`AdminController.executeModerationAction()` (lines 213–274)** — This private method implements a mini service (ban_user, delete_comment, delete_competition) with cascade deletes inside the controller. It should be extracted to `ArbitrationService` or a dedicated `ModerationService`. The controller is orchestrating data mutations that belong in a service layer.
+
+2. **`MatchmakingController` (entire file)** — The entire matchmaking algorithm (scoring, filtering, pagination) is implemented as raw SQL in the controller. There is no `MatchmakingModel` or `MatchmakingService`. This is the most substantial MVC violation after `AdminController`.
+
+3. **`RecommendationController.getGuestRecommendations()` (lines 76–104)** — Guest recommendations bypass `RecommendationEngine` and execute raw SQL directly in the controller, while authenticated recommendations correctly use the service. This is an inconsistency in the same controller.
+
+4. **`analytics/routes.ts` and `delete-account.ts`** — SQL is placed in route handlers (`routes.ts`) rather than in controllers or models. This bypasses both the controller orchestration layer and the model data-access layer.
+
+---
+
+## 8. Core-First Findings
+
+**No Core-First violations found.**
+
+- `src/models/` contains zero imports from `src/client/`, `src/modules/pages/`, or any presentation-layer module.
+- `src/models/` imports only from `src/lib/services/` (business logic), `src/config/` (types), and `src/lib/errors/` (domain errors). No optional integration modules (advertisements, donations, payments, streaming) are imported by core models.
+- `workers/dueli-realtime/` is a **separate Worker** (own `wrangler.toml`, own `package.json`). The core `src/` codebase has zero imports from it. `EventPusher` communicates via HTTP/Durable Objects, not via module imports.
+- All optional integrations (advertisements, donations, payments, ad-blocks, ad-reports, earnings, withdrawals, transparency) are in separate `src/modules/api/*/routes.ts` files mounted in `main.ts`. They do not leak into core domain models.
+- `main.ts` is strictly a wiring file — it imports and mounts routes but contains no business logic or SQL.
+
+---
+
+## 9. Historical / Documentation Findings
+
+| Artifact | Classification | Rationale |
+|---|---|---|
+| `.blackbox/` | **Historical — do not delete now** | Contains historical planning docs and agent config from previous AI-assisted sessions. |
+| `.claude/` | **Historical — do not delete now** | Claude-specific planning artifacts (vision, goals, scenarios, SRS). |
+| `.plan/` | **Historical — do not delete now** | Duplicate of `.gemini/` content (DUELI_COMPLETE_DOCUMENTATION.html, SRS_TECHNICAL_REQUIREMENTS.md). |
+| `.gemini/` | **Historical — do not delete now** | Gemini-specific planning artifacts. |
+| `.agent/` | **Active configuration** | Contains `commands/`, `rules/`, `skills/` subdirectories and `config.json` — this is Kilo agent configuration, not project historical debris. |
+| `.specify/` | **Historical tooling** | Spec-kit tool artifacts (memory, scripts, specs, templates). |
+| `.testsprite/` | **Historical tooling** | Contains only `config.json` — TestSprite CI tool config. |
+| `specs/001-competition-lifecycle/` | **Historical specification** | Detailed competition lifecycle spec from early planning. |
+| `repomix-output.xml` | **Historical tool output** | Repomix bundle output. |
+| `import_remote_db.py` | **Historical dev tool** | One-time DB migration script. |
+| `ecosystem.config.cjs` | **Obsolete infrastructure** | PM2 config for Node.js — project now runs on Cloudflare Workers. |
+| `docs/COMPLETE_PROJECT_PLANS.md` | **Historical documentation** | Archive of task IDs (P?-T??); `PLAN-STATUS.md` + `docs/15-ROADMAP.md` are the current authorities per AGENTS.md. |
+| `docs/16-AGENT-PROMPTS-PLAN.md` | **Active documentation** | Explicitly retained per project decision. |
+| `workers/dueli-realtime/` | **Real production source code** | Separate Cloudflare Worker for realtime streaming. Must NOT be classified as historical. |
+| `disabled .github/workflows/deploy-streaming.yml` | **Obsolete CI** | (If present) Streaming deployment workflow for frozen realtime worker. |
+| `dev-tools/` | **Active dev tooling** | Contains `route-inventory.mjs` referenced in docs. |
+
+---
+
+## 10. Proposed F-5/F-6/F-8/F-9 Remediation Candidates
+
+Derived strictly from evidence:
+
+**F-5 (MVC Cleanup — Controllers):**
+1. Extract `CompetitionController` inline `CompetitionRequestModel` → use `src/models/CompetitionRequestModel.ts` (also fix the duplicate class definition).
+2. Extract `AdminController` direct SQL into models/services: stats queries → `AdminStatsService`; moderation actions → `ModerationService`; suspend/restore → `CompetitionSuspensionModel`.
+3. Extract `MatchmakingController` raw SQL → `MatchmakingModel` + `MatchmakingService`.
+4. Extract `UserController` inline `FollowModel` → `src/models/FollowModel.ts`.
+5. Extract `RecommendationController` guest SQL → move into `RecommendationEngine` service.
+
+**F-5 (MVC Cleanup — Routes/Pages):**
+6. Extract `analytics/routes.ts` SQL → `AnalyticsModel`.
+7. Extract `delete-account.ts` SQL → `AccountDeletionService`.
+8. Extract `ad-reports/routes.ts` inline `AdReportModel` → `src/models/AdReportModel.ts`; move admin queries into model.
+9. Extract `search/enhanced-routes.ts` inline `SearchHistoryModel` → `src/models/SearchHistoryModel.ts`; move suggestion SQL into model.
+10. Replace `profile-page.ts` direct follow-count queries with `FollowModel` calls.
+11. Replace `live/main.ts` direct session/competition queries with `SessionModel`/`CompetitionModel` calls.
+
+**F-6 (Lifecycle Consolidation):**
+12. Remove `CronHandler.handleLifecycleTimers()` and delegate Rule A/B/C entirely to `ScheduledTaskService` (which already implements them via its task queue).
+
+**F-8 (i18n Cleanup):**
+13. Move all hardcoded English notification strings in `ScheduledTaskService` and `CronHandler` into `i18n/ar.ts` + `i18n/en.ts`.
+14. Move all hardcoded English validation/error strings in controllers into `i18n/ar.ts` + `i18n/en.ts`.
+15. Move hardcoded English strings in `admin-dashboard-page.ts` into `i18n/ar.ts` + `i18n/en.ts`.
+
+**F-9 (Historical Artifacts):**
+16. Document classification of all dot-folders and historical files per Section 9 above; defer deletion until project completion.
+
+---
+
+## 11. Negative Findings
+
+Important items investigated that are **NOT violations**:
+
+1. **`src/models/` OOP structure** — All 31 model classes properly extend `BaseModel<T>`. No model contains presentation concerns or client imports.
+2. **`src/client/` SQL-free** — Client-side TypeScript contains zero database queries. The `SELECT/INSERT/UPDATE/DELETE` matches are HTTP method type strings.
+3. **`src/modules/pages/` orchestration, not data-access** — Page modules (`profile-page.ts`, `settings-page.ts`, `admin-dashboard-page.ts`, etc.) generate HTML and embed client JS. They do not execute SQL except for the two documented cases in Section 4.
+4. **`src/modules/api/*/routes.ts` pattern** — Route files delegate to controllers (e.g., `competitions/routes.ts`). The exceptions (`analytics`, `delete-account`, `ad-reports`, `search`) are violations, not the pattern itself.
+5. **`EventPusher` → realtime worker** — `EventPusher` communicates with `workers/dueli-realtime/` via HTTP/Durable Objects, not via module imports. Core-First boundary is preserved.
+6. **`NotificationModel` imports `NotificationPresenter`** — This is a service-layer import (`lib/services/`), not a presentation/client import. Legitimate.
+7. **`console.error` / `console.log` in controllers and services** — These are developer diagnostics, not user-visible text. Not i18n violations.
+8. **Migration SQL in `migrations/`** — Schema definitions are exempt from MVC/i18n rules.
+9. **`ScheduledTaskService` task scheduling from controllers** — Controllers calling `taskService.schedule()` is legitimate orchestration; the violation is the duplicate lifecycle logic in `CronHandler`, not the scheduling itself.
+
+---
+
+## 12. Final Summary
+
+### Remediation Required
+
+| Category | Count | Severity |
+|---|---|---|
+| Direct SQL in controllers | 23+ locations | REMEDIATION REQUIRED |
+| Direct SQL in route handlers (not controllers) | 4 files | REMEDIATION REQUIRED |
+| Direct SQL in page modules | 2 files | REMEDIATION REQUIRED |
+| Controller-local model classes (duplicates or missing from `src/models/`) | 4 classes | REMEDIATION REQUIRED |
+| Hardcoded user-visible English strings (notifications, errors, admin UI) | 20+ locations | REMEDIATION REQUIRED |
+| Lifecycle logic duplication (ScheduledTaskService vs CronHandler) | 1 systemic duplication | REMEDIATION REQUIRED |
+
+### Documentation Only
+
+| Item | Classification |
+|---|---|
+| `.blackbox/`, `.claude/`, `.plan/`, `.gemini/`, `.specify/`, `.testsprite/`, `specs/`, `repomix-output.xml`, `import_remote_db.py`, `ecosystem.config.cjs` | Historical/obsolete — document, do not delete now |
+| `workers/dueli-realtime/` | Real production source — not historical |
+| `docs/16-AGENT-PROMPTS-PLAN.md` | Active per project decision |
+| `.agent/` | Active Kilo agent configuration |
+
+### Not a Violation
+
+| Item | Reason |
+|---|---|
+| Client-side code SQL-free | No database queries in `src/client/` |
+| Models extend `BaseModel` correctly | OOP structure intact |
+| `EventPusher` uses HTTP, not imports | Core-First boundary preserved |
+| Route files delegate to controllers | Normal pattern (exceptions are violations) |
+| `console.error` / `console.log` | Developer diagnostics, not user-visible |
+| Migration SQL | Exempt by definition |
+| Page modules generate HTML/JS | Orchestration, not data-access (except documented cases) |
