@@ -1,0 +1,1381 @@
+chatgpt
+# DUELI — DISCOVERY & MASTER ROADMAP PROPOSAL
+
+**تاريخ التحقيق:** 24 سبتمبر 2026
+**Current `main`:** `19b744a89f8a2a87896d3468fc61bd3de4bfe44d`
+**المستودع:** `Maelsh/dueli-opus`
+**المصادر:** الكود الحالي + migrations + tests + docs + historical plans + `dueli-front-plan` + الوضع الحالي في GitHub.
+
+---
+
+# 1. Current Reality
+
+## 1.1 أين نحن فعلياً؟
+
+Dueli لم تعد في مرحلة Backend Debt Closure.
+
+الـBackend الحالي يحتوي بالفعل على:
+
+* authentication / authorization
+* competitions
+* comments / ratings / follows
+* messaging
+* recommendations
+* matchmaking
+* SSE
+* WebRTC signaling
+* TURN credentials
+* Stripe / donations
+* Ledger
+* earnings
+* withdrawals
+* transparency
+* advertising
+* synthetic-data lifecycle
+* security hardening
+* CSP hardening
+* cron operational hardening.
+
+وآخر سلسلة Backend closure وصلت إلى C5/C6 ثم D1/D2/D3/N-2، وآخر commit على `main` هو دمج PR #57.
+
+آخر تحقق موثق على سلسلة C5/C6 كان:
+
+* `npm test` = **610/610**
+* `tsc` نظيف
+* `build` ناجح
+* migration stack = `0001–0032`
+* cron-runs = 6/6.
+
+لكن هذا **ليس دليلاً على Product Completeness**.
+
+---
+
+# 2. Completed / Verified
+
+## 2.1 Backend closure
+
+أعتبر البنود السابقة:
+
+**C1/C2/C3b/C4/C5/C6/D1/D2/D3/N-2**
+
+جزءاً من الـbaseline الحالي، ولا أوصي بإعادة فتحها كـGates مستقلة.
+
+السبب ليس الثقة العمياء؛ بل لأن الكود الحالي يحمل آثار تنفيذها، ومنها:
+
+* C4 realtime tickets
+* C5 إزالة CSP unsafe-inline/unsafe-eval
+* C6 cron locks/run logging
+* D2 synthetic badges/lifecycle
+* D3 archive
+* N-2 actor/session audit.
+
+---
+
+## 2.2 Database
+
+الحالة الحالية أقوى بكثير من الحالة القديمة.
+
+الـrepository يحتوي الآن على migration `0032_cron_run_guard.sql`، والـreconciliation runbook يثبت سلسلة `0001–0032` في بيئة D1 التي أعيدت مطابقتها.
+
+إذن:
+
+**Database Reality = Implemented / Reconciled**
+
+لكن:
+
+**Production Verified = يجب أن تبقى منفصلة عن code verification**
+
+ولا أعتبر مجرد وجود runbook بديلاً عن operational check جديد عندما نصل إلى Release Gate.
+
+---
+
+# 3. Frontend Reality
+
+هنا توجد أكبر فجوة حالياً.
+
+لدينا مستودع `dueli-front-plan` فعلياً وليس فارغاً؛ يحتوي على:
+
+* A00–A05
+* consolidated remediation
+* failed-tests verification
+* final report
+* remediation plan
+* supplement review
+* QA gate.
+
+إذن الخطة السابقة للـFrontend يجب أن تستخدم كمصدر تاريخي/تحقيقي، لا كدليل تنفيذ.
+
+التقرير النهائي هناك، بتاريخ 20 سبتمبر، فحص production باستخدام متصفح حقيقي ووجد:
+
+* 4 S0
+* 25 S1
+* 68 S2
+* 75 S3
+* 29 S4
+* 201 finding إجمالاً.
+
+وكانت النتيجة في ذلك التاريخ: **لا إطلاق**.
+
+الأهم: بعض النتائج القديمة يمكن الآن إثبات استمرارها في الكود الحالي.
+
+---
+
+# 4. Proven Frontend Gaps Still Present
+
+## 4.1 S0 — Reflected XSS
+
+هذا ليس مجرد finding تاريخي.
+
+في `src/modules/pages/explore-page.ts` ما زال هناك:
+
+`searchQueryDisplay.innerHTML = ... ${search} ...`
+
+أي أن query parameter يدخل مباشرة إلى HTML.
+
+هذا يثبت أن W0.1 من خطة الـFrontend **لم يُغلق بعد**.
+
+**Classification: G — Broken / Security Risk**
+
+**Priority: BLOCKER**
+
+---
+
+## 4.2 S0 — Session Key Duplication
+
+ما زال الكود الحالي يحتوي على:
+
+`localStorage.getItem('session_id')`
+
+في صفحات منها:
+
+* advertiser portal
+* complaint tracking
+* earnings
+* live finance
+* admin.
+
+بينما بقية النظام يستخدم `sessionId`.
+
+مثلاً advertiser portal ما زال يقرأ `session_id`.
+
+والـroadmap نفسه يحدد هذا كتعدد مصدر حقيقة لنفس الجلسة.
+
+**Classification: G — Broken / Architecture Inconsistency**
+
+والأهم:
+
+هذا ليس Bug واحداً.
+
+إنه **contract-level frontend infrastructure defect** يؤثر عدة flows.
+
+---
+
+# 5. Messaging — الوضع تغيّر ويجب عدم نسخ التقرير القديم
+
+هنا وجدت فرقاً مهماً.
+
+التقرير القديم قال إن الصفحة تستخدم عقداً مختلفاً، لكن الكود الحالي أصبح يستخدم:
+
+`/api/conversations`
+
+وهو نفس العقد الموجود في backend، و`MessagingService` يستخدمه أيضاً.
+
+بل إن `messages-page.ts` الحالي يحتوي فعلياً على:
+
+* conversation list
+* chat area
+* load messages
+* send message.
+
+لذلك:
+
+**لا أعتبر S0-2 القديم مثبتاً حالياً بنفس الصيغة.**
+
+لكن الصفحة ما زالت تستخدم `innerHTML` لبناء أجزاء من المحادثات والرسائل، ولذلك تحتاج Browser/E2E validation حقيقية قبل اعتبار messaging مكتمل.
+
+**Classification: C — Partially Verified**
+
+وليس D أو G في الوقت الحالي.
+
+---
+
+# 6. Finance / Money Reality
+
+Backend money architecture قوية نسبياً:
+
+* LedgerService
+* integer cents
+* double-entry
+* withdrawals
+* Stripe
+* donations
+* earnings
+* transparency
+* advertising ledger.
+
+والإعلانات أصبحت مرتبطة بـ`AdCampaignManager` و`AdServingService`، مع فصل orchestration عن routes.
+
+لكن **Financial Product Completion ≠ Financial Backend Completion**.
+
+ما زال يجب إثبات:
+
+```text
+Donate
+ ↓
+Stripe
+ ↓
+Webhook
+ ↓
+Ledger
+ ↓
+Competitor earnings
+ ↓
+Withdrawal request
+ ↓
+Admin approval
+ ↓
+Actual external payout
+ ↓
+Reconciliation
+```
+
+الكود يستطيع تمثيل معظم هذه السلسلة.
+
+لكن الجزء الأخير **External Money Operations** غير مثبت من GitHub.
+
+---
+
+# 7. Banking / Stripe — Finding مهم جداً
+
+بحثت في الوضع الحالي لـStripe، وليس في افتراضات قديمة.
+
+Stripe حالياً لا يدرج **Egypt** ضمن قائمة الدول المدعومة لفتح حساب Stripe تقليدي لاستقبال المدفوعات.
+
+وفي المقابل، Stripe تعرض Egypt ضمن Global Payouts مع EGP عبر SWIFT كقدرة مستقبلية مدرجة لـH2 2027، وليست حلاً حالياً لحساب Stripe مصري تقليدي.
+
+كما أن فتح Stripe في دولة أخرى يتطلب entity قانونية وtax ID وموقعاً فعلياً وحساباً بنكياً فعلياً في تلك الدولة وغيرها.
+
+لذلك:
+
+**لا يجوز أن نضع "Stripe Connect" كحل نهائي في الـRoadmap قبل قرار مالك المشروع عن الكيان القانوني/الدولة التي ستملك حساب Stripe.**
+
+### Current classification
+
+**H — External Dependency**
+
+والقرارات المطلوبة:
+
+1. أين الكيان القانوني الذي سيشغّل Dueli؟
+2. أين حساب Stripe؟
+3. أين الحساب البنكي الذي يستقبل settlement؟
+4. هل المنافسون سيكونون connected accounts؟
+5. كيف سيتم payout لهم؟
+6. ما الدولة/الدول التي يسمح بها الهيكل القانوني الفعلي؟
+
+هذا **Project Owner + Legal + Operational Decision**، وليس Coding Task.
+
+---
+
+# 8. Donation Policy
+
+السياسة المالية السابقة يجب عدم إعادة اختراعها.
+
+المشروع الحالي يحمل قرار:
+
+* platform share = 20%
+* competitor pool = 80%
+* minimum donation = $1
+* لا Dueli-level maximum موثق.
+
+كما أن 8.G كان قد ثبت سياسياً/محاسبياً وفق القرار القائم، ولا يجب فتح السياسة من جديد إلا بدليل جديد.
+
+إذن:
+
+**Policy = Locked**
+
+لكن:
+
+**Operational Stripe flow = Needs external verification**
+
+---
+
+# 9. Recommendations — اكتشاف معماري مهم
+
+هنا توجد مشكلة حقيقية تستحق Gate مستقلة.
+
+لدينا **محركان باسم RecommendationEngine**:
+
+### Backend
+
+`src/lib/services/RecommendationEngine.ts`
+
+يحسب:
+
+* language
+* country
+* category
+* unwatched
+* recency
+* rating
+* followed users
+
+ويستخدم degradation phases.
+
+### Client
+
+`src/client/helpers/RecommendationEngine.ts`
+
+يقوم أيضاً بـ:
+
+* language
+* country
+* rating
+* category
+* unwatched
+* recency
+
+ويحفظ preferences في `localStorage`.
+
+هذا **ليس مجرد duplicate class**.
+
+إنه:
+
+> **Two Sources of Truth for Ranking**
+
+لأن السؤال:
+
+> "لماذا ظهر هذا المحتوى للمستخدم؟"
+
+يمكن أن يجيب عنه server بإجابة، ثم يعيد client ترتيب النتائج بطريقة أخرى.
+
+### Classification
+
+**E — Implemented but Architecturally Duplicated**
+
+وهذا أحد أهم نتائج الـDiscovery.
+
+---
+
+# 10. Recommendation Scope يجب تقسيمه
+
+لا يجب أن يكون G3 مجرد "تحسين RecommendationEngine".
+
+نحتاج فصل:
+
+### R1
+
+Spectator → Competition
+
+### R2
+
+Competition → Similar Competitions
+
+### R3
+
+User → Competitor
+
+### R4
+
+Competition → Competitor Matching
+
+### R5
+
+Competitor → Competition
+
+الكود الحالي يثبت وجود Recommendation/Matchmaking primitives، لكنه **لا يثبت وجود نظام موحد ناضج لهذه الخمسة**.
+
+وبالتالي لا أضع خوارزمية جديدة الآن.
+
+المطلوب أولاً:
+
+**Architecture Discovery + Product Decision + experiments**
+
+تماماً كما طلبت في الـMaster Program.
+
+---
+
+# 11. Matchmaking
+
+هناك backend matchmaking فعلي:
+
+* routes
+* controller
+* online users
+* heartbeat
+* invitation paths.
+
+وهو مربوط فعلياً في `main.ts`.
+
+لكن الموجود حالياً أقرب إلى:
+
+**candidate discovery / invitation infrastructure**
+
+وليس دليلاً كافياً على:
+
+**intelligent compatibility matching engine**
+
+لذلك:
+
+**Classification: C**
+
+---
+
+# 12. Synthetic Data
+
+هذه المنطقة أصبحت من أفضل المناطق إغلاقاً.
+
+الـcurrent main يحتوي على:
+
+* `is_fake`
+* Demo badges
+* dependency-safe retirement
+* oldest-first retirement
+* reconciliation/runbook.
+
+وتم دمج D2 ضمن PR #57.
+
+إذن:
+
+**G5 لا ينبغي أن يكون إعادة بناء للنظام.**
+
+المرحلة التالية فقط يجب أن تدرس:
+
+* operational thresholds
+* minimum synthetic population
+* retirement cadence
+* observability
+* safe automation.
+
+**Classification: A/B — Implemented, with future operational policy**
+
+---
+
+# 13. Realtime / Live
+
+الوضع الحالي يحتاج فصل ثلاثة أشياء:
+
+### Production path
+
+الموثق حالياً:
+
+**SSE/polling**
+
+وليس Durable Objects WebSocket production path.
+
+### Optional future Worker
+
+`workers/dueli-realtime`
+
+موجود، لكن نشره يتطلب Worker/DO infrastructure إضافية، والـrepo نفسه يوثق أن المسار المستقبلي يتطلب خطة Workers مدفوعة.
+
+### WebRTC
+
+لديه signaling + reconnect + TURN credentials.
+
+إذن:
+
+**Backend realtime architecture = substantial**
+
+لكن:
+
+**Browser Product Reality = not yet proven end-to-end**
+
+وهذا تحديداً سبب وجود Browser Gate لاحقاً.
+
+---
+
+# 14. Infrastructure
+
+Current dependencies discovered:
+
+| Dependency               | Current state                                  |
+| ------------------------ | ---------------------------------------------- |
+| Cloudflare Pages         | Active                                         |
+| Cloudflare Workers       | Active / optional components                   |
+| D1                       | Active                                         |
+| SSE                      | Production path                                |
+| Durable Objects realtime | Optional future                                |
+| TURN                     | Implemented/configurable                       |
+| FFmpeg/upload server     | External dependency                            |
+| Stripe                   | Implemented but operational account unresolved |
+| OAuth providers          | Configurable                                   |
+| Email/iFastNet SMTP API  | External                                       |
+| PWA                      | Basic foundation                               |
+| Push notifications       | Not implemented                                |
+| Analytics                | Needs product-level verification               |
+| Monitoring               | Needs release-level verification               |
+
+The environment file explicitly shows email, OAuth, FFmpeg/upload, TURN, Stripe and realtime secrets as external dependencies; it also explicitly marks Web Push as not yet implemented.
+
+---
+
+# 15. PWA / Mobile
+
+Current repository already has:
+
+* manifest
+* service worker
+* PWA foundation.
+
+The historical plan records that the PWA foundation exists while full offline behavior is future work.
+
+Therefore:
+
+### Stage 1
+
+Responsive Web = incomplete
+
+### Stage 2
+
+PWA = foundation exists, completion not proven
+
+### Stage 3
+
+Android = not started as product
+
+### Stage 4
+
+iOS = not started
+
+### Stage 5
+
+TV = not started
+
+No native technology should be selected yet.
+
+---
+
+# 16. Help / Contextual UX
+
+I found no evidence of a mature in-product:
+
+* Help Center
+* contextual help architecture
+* glossary
+* troubleshooting system
+* scalable tooltip/content model.
+
+There are documentation files and i18n infrastructure, but that is not the same as a user-facing help system.
+
+**Classification: I — Product Gap**
+
+This should become a dedicated UX/Product Gate rather than being scattered among frontend tasks.
+
+---
+
+# 17. Legal / Trust
+
+There is a `PRIVACY.md`, but it combines Privacy Policy and Terms of Service and is dated **December 2024**.
+
+It covers:
+
+* personal information
+* OAuth
+* usage data
+* cookies
+* user rights
+* GDPR
+* terms
+* acceptable use.
+
+But the Master Program asks for a much broader trust layer:
+
+* Community Guidelines
+* Content Policy
+* Copyright/IP
+* Reporting/moderation policy
+* account deletion/data rights
+* Payments
+* Refund
+* Donations
+* Withdrawal
+* Competition Rules
+* Rating Rules.
+
+Therefore:
+
+**Legal layer = Partially Implemented**
+
+Not empty.
+
+Not release-complete.
+
+And this requires legal review rather than AI inventing policy.
+
+---
+
+# 18. i18n
+
+Backend i18n architecture is mature enough that new keys are generally handled in ar/en together.
+
+However the Frontend historical audit found numerous localization issues, and current code still contains English fallback literals such as:
+
+`'Messages'`, `'Loading...'`, `'No conversations yet'`.
+
+That does not prove every fallback is user-visible in every path, but it proves the rule:
+
+> Complete UX localization
+
+has not yet been mechanically enforced everywhere.
+
+**Classification: C**
+
+The future Gate must test the rendered UI, not just compare dictionaries.
+
+---
+
+# 19. Accessibility
+
+No evidence currently supports:
+
+**Production Verified Accessibility**
+
+The frontend plan explicitly contains dedicated:
+
+* real devices
+* screen reader
+* human feel
+
+tracks.
+
+Therefore Accessibility should not be treated as "the HTML looks semantic".
+
+It requires:
+
+* automated checks
+* keyboard journeys
+* focus behavior
+* screen-reader validation
+* visual/manual validation.
+
+**Classification: B/C**
+
+---
+
+# 20. Performance
+
+No current evidence justifies declaring performance complete.
+
+We have build tooling and server architecture, but we do not yet have a measured baseline for:
+
+* first load
+* mobile load
+* competition page
+* video
+* live
+* search
+* recommendations
+* D1 latency
+* bundle size.
+
+Therefore:
+
+**Performance = Unknown / Needs Measurement**
+
+No optimization should start before measurements.
+
+---
+
+# 21. Security
+
+The security program has substantially improved.
+
+C1–C6 are now represented in the current main history.
+
+However the current product still has a directly proven frontend security defect:
+
+**reflected XSS in `/explore?search=`.**
+
+That means:
+
+> Backend Security Closure ≠ Product Security Closure.
+
+This is exactly why the new Master program must contain a **Product Security Regression Gate** without reopening the entire old Backend Gate.
+
+---
+
+# 22. Architecture Coherence
+
+The strongest architecture problems found so far are:
+
+### A
+
+Backend + client RecommendationEngine duplication.
+
+### B
+
+`sessionId` vs `session_id`.
+
+### C
+
+Historical documentation/plans vs current implementation.
+
+### D
+
+Multiple realtime paths:
+
+* SSE production
+* WebRTC signaling
+* optional DO/WS future.
+
+### E
+
+Frontend pages contain substantial inline application logic.
+
+This does not automatically mean a rewrite is justified.
+
+The correct strategy is:
+
+**contract consolidation before structural refactoring.**
+
+---
+
+# 23. Product Completeness Matrix
+
+| Domain             | Current State | Evidence                     | Missing                 | Risk         | Dependency        | Proposed Gate |
+| ------------------ | ------------- | ---------------------------- | ----------------------- | ------------ | ----------------- | ------------- |
+| Backend Core       | A             | merged closure chain         | browser proof           | Medium       | Browser           | G1            |
+| Frontend           | C/G           | current code + browser audit | many flows              | **Critical** | Browser           | G2            |
+| Recommendations    | E             | two engines                  | SSOT/design             | High         | Product decisions | G3            |
+| Matchmaking        | C             | routes/controller            | compatibility engine    | High         | G3                | G3            |
+| Finance            | B/C           | Ledger + flows               | E2E + ops               | High         | Stripe/bank       | G4            |
+| Banking            | H             | external Stripe facts        | legal/account structure | **Critical** | Owner/Legal       | G4            |
+| Synthetic Data     | A/B           | D2/C7                        | lifecycle operations    | Medium       | Metrics           | G5            |
+| Help               | I             | no mature system found       | architecture/content    | Medium       | Product           | G6            |
+| i18n               | C             | ar/en + UI literals          | rendered parity         | Medium       | Browser           | G6            |
+| Accessibility      | B/C           | plan exists                  | real validation         | Medium       | Browser/devices   | G6            |
+| Legal              | C             | PRIVACY/Terms                | complete policy set     | **High**     | Legal             | G7            |
+| Browser Acceptance | D             | historical report            | full current rerun      | **Critical** | deployed env      | G8            |
+| PWA                | B             | manifest/SW                  | full UX validation      | Medium       | Browser           | G9            |
+| Android            | D             | no product implementation    | architecture/build      | Medium       | G9                |               |
+| iOS                | D             | no implementation            | architecture/build      | Medium       | G10               |               |
+| TV                 | D             | no implementation            | product design          | Low/Medium   | Mobile/core       | G11           |
+| Security           | B/C           | C1-C6 + current XSS          | product regression      | **Critical** | G2/G8             | G2/G8         |
+| Performance        | B             | build works                  | measurements            | Medium       | production        | G12           |
+| Admin              | C/G           | APIs + broken page contract  | operational UI          | **High**     | G2                | G2/G12        |
+| Operations         | B/C           | cron/D1 docs                 | monitoring/runbooks     | High         | external infra    | G12           |
+
+---
+
+# 24. Dependency Graph
+
+التحقيق يغيّر ترتيب الـMaster Program الأصلي قليلاً.
+
+أقترح:
+
+```text
+G0 — Reality Audit
+        │
+        ├── immediate security/product blockers
+        │
+        ▼
+G1 — Core User Journeys & Contracts
+        │
+        ▼
+G2 — Frontend Completion + Contract Repair
+        │
+        ├──────────────┐
+        ▼              ▼
+G3 — Discovery/       G4 — Money/
+     Recommendation        Banking/Ops
+     /Matching
+        │              │
+        └──────┬───────┘
+               ▼
+G5 — Synthetic Lifecycle
+               │
+               ▼
+G6 — Help + i18n + Accessibility
+               │
+               ▼
+G7 — Legal / Trust / Mission / Documentation
+               │
+               ▼
+G8 — Browser E2E + Human Product Audit
+               │
+               ▼
+G9 — Mobile/PWA + Android Architecture
+               │
+               ▼
+G10 — iOS
+               │
+               ▼
+G11 — TV / Large Screens
+               │
+               ▼
+G12 — Production / Operations / Scale / Release
+```
+
+لكن توجد **مسارات متوازية**:
+
+```text
+G2 ──────────────→ G8
+G3 ──────────────→ G8
+G4 ──────────────→ G8
+G6 ──────────────→ G8
+G7 ──────────────→ G8
+```
+
+---
+
+# 25. Proposed Master Gates
+
+## G0 — Reality Audit
+
+**Objective:** معرفة الحقيقة الحالية.
+
+Exit:
+
+* current GitHub SHA pinned
+* frontend plan reconciled
+* major domains classified
+* blockers identified
+* unknowns separated.
+
+**Status: NOW / THIS REPORT**
+
+---
+
+## G1 — Core Product & User Journey Contracts
+
+ليس تنفيذ كل شيء.
+
+بل تثبيت:
+
+* canonical user journeys
+* frontend/backend contracts
+* authentication/session contract
+* route contract
+* core entities
+* critical error states.
+
+Exit:
+
+كل رحلة أساسية لها endpoint/UI/permission contract واضح.
+
+---
+
+## G2 — Frontend Completion & Product Wiring
+
+الأولوية الأولى حالياً.
+
+يشمل:
+
+* XSS
+* sessionId SSOT
+* admin
+* earnings
+* withdrawals UI
+* messaging
+* competition flows
+* live UI
+* discovery
+* notifications
+* empty/loading/error states
+* RTL/LTR
+* responsive.
+
+Exit:
+
+لا S0 frontend blockers مفتوحة.
+
+---
+
+## G3 — Recommendation / Discovery / Matching
+
+أولاً Architecture:
+
+```text
+What is recommendation?
+What is discovery?
+What is matching?
+What is ranking?
+Who owns scoring?
+```
+
+ثم experiments.
+
+لا خوارزمية جديدة الآن.
+
+Exit:
+
+One Source of Truth لكل ranking responsibility.
+
+---
+
+## G4 — Finance / Banking / Money Operations
+
+يشمل:
+
+* Stripe E2E
+* donations
+* ledger
+* earnings
+* withdrawal lifecycle
+* admin approval
+* refunds
+* reconciliation
+* external payout.
+
+لكن الجزء البنكي/القانوني لا يمكن إغلاقه من GitHub وحده.
+
+Exit:
+
+technical + operational + legal payment path مثبت.
+
+---
+
+## G5 — Synthetic Lifecycle
+
+لا إعادة بناء.
+
+فقط:
+
+* thresholds
+* retirement cadence
+* monitoring
+* safety invariants
+* real/synthetic separation.
+
+---
+
+## G6 — Help / UX / i18n / Accessibility
+
+يضم:
+
+* contextual help
+* tooltips
+* onboarding
+* glossary
+* help center
+* Arabic/English rendered parity
+* RTL/LTR
+* keyboard
+* screen reader
+* focus
+* errors.
+
+---
+
+## G7 — Legal / Trust / Mission
+
+إكمال:
+
+* Terms
+* Privacy
+* Cookies
+* Community
+* Content
+* Copyright
+* Moderation
+* Deletion/Data Rights
+* Payments
+* Refund
+* Donations
+* Withdrawal
+* Competition
+* Rating
+* Mission.
+
+مع مراجعة قانونية بشرية.
+
+---
+
+## G8 — Browser Acceptance / Human Product Audit
+
+هذه ليست unit tests.
+
+Browser agents سيقومون بـ:
+
+* anonymous journey
+* registration
+* OAuth
+* profile
+* follow
+* discovery
+* competition
+* invitation
+* acceptance
+* live
+* spectator
+* rating
+* comments
+* messaging
+* donation
+* earnings
+* withdrawal
+* admin
+* moderation.
+
+Exit:
+
+إنسان افتراضي يستطيع إكمال الرحلات الأساسية دون كسر أو dead-end أو تضارب.
+
+---
+
+## G9 — Mobile/PWA + Android
+
+أولاً:
+
+Responsive → PWA → Android architecture.
+
+لا native implementation قبل اكتمال G8.
+
+---
+
+## G10 — iOS
+
+بعد تثبيت shared mobile architecture.
+
+---
+
+## G11 — TV
+
+بعد إثبات أن viewing experience نفسها مكتملة.
+
+---
+
+## G12 — Production / Scale / Release
+
+يشمل:
+
+* monitoring
+* backups
+* D1
+* Stripe operations
+* email
+* upload/FFmpeg
+* realtime
+* domains/DNS
+* rate limits
+* incident response
+* performance
+* accessibility
+* release checklist.
+
+---
+
+# 26. Browser User Journeys
+
+## J1 Anonymous Viewer
+
+```text
+Landing
+→ Explore
+→ Search
+→ Open Competition
+→ Watch
+→ Discover Similar
+→ Register
+```
+
+## J2 New User
+
+```text
+Register
+→ Verify
+→ Profile
+→ Preferences
+→ Follow
+→ Discover
+→ Watch
+→ Rate
+→ Comment
+```
+
+## J3 Competitor
+
+```text
+Register
+→ Profile
+→ Create Competition
+→ Define Topic/Rules
+→ Find Candidate
+→ Invite
+→ Accept
+→ Schedule
+→ Prepare
+→ Live
+→ Ratings
+→ Earnings
+→ Withdrawal
+```
+
+## J4 Competition Creator
+
+```text
+Create
+→ Requirements
+→ Candidate Discovery
+→ Invite
+→ Accept
+→ Schedule
+→ Run
+→ Results
+→ Ratings
+```
+
+## J5 Spectator
+
+```text
+Explore
+→ Recommendation
+→ Watch
+→ Follow Competitor
+→ Comment
+→ Rate
+→ Donate
+```
+
+## J6 Messaging
+
+```text
+Profile
+→ Message
+→ Conversation
+→ Receive
+→ Reply
+→ Notification
+```
+
+## J7 Admin
+
+```text
+Login
+→ Admin Gate
+→ Dashboard
+→ Reports
+→ Moderation
+→ Competition action
+→ Withdrawal approval
+→ Audit
+```
+
+## J8 Advertiser
+
+```text
+Advertiser
+→ Create Campaign
+→ Fund
+→ Submit Review
+→ Admin Review
+→ Active
+→ Impressions
+→ Clicks
+→ Analytics
+```
+
+هذه تصبح لاحقاً **Browser Acceptance Suite**.
+
+---
+
+# 27. Questions / Decisions Required from Project Owner
+
+ليست كلها مطلوبة الآن.
+
+لكن هذه هي القرارات التي لا يجب أن يخترعها الـAgents:
+
+### Finance
+
+1. ما الكيان القانوني الذي سيملك Dueli؟
+2. في أي دولة؟
+3. ما الحساب البنكي؟
+4. ما Stripe account country؟
+5. هل payout للمنافسين سيكون Stripe Connect أم rail آخر؟
+
+### Product
+
+6. هل messaging يجب أن يكون Core launch feature؟
+7. هل live competition يجب أن يكون mandatory في النسخة الأولى أم يمكن إطلاق VOD أولاً؟
+8. ما تعريف "completed competition" النهائي من منظور المستخدم؟
+
+### Recommendations
+
+9. ما الأولوية بين:
+
+   * personalization
+   * popularity
+   * similarity
+   * language
+   * country
+   * quality
+   * engagement؟
+
+10. هل matchmaking هدفه:
+
+* أفضل skill match؟
+* compatibility؟
+* availability؟
+* user preference؟
+* مزيج؟
+
+هذه لا تُحسم بخوارزمية من عندنا.
+
+---
+
+# 28. Immediate Blockers
+
+بعد التحقيق، لدي الآن **أربع فئات يجب ألا نتجاوزها**:
+
+### BLOCKER 1
+
+Reflected XSS في Explore.
+
+### BLOCKER 2
+
+`sessionId` / `session_id` contract split.
+
+### BLOCKER 3
+
+Frontend Product Flows غير مثبتة Browser-wise.
+
+### BLOCKER 4
+
+External financial operating model غير محسوم.
+
+---
+
+# 29. What We Should NOT Do
+
+لا أوصي الآن بـ:
+
+* إعادة Backend Gate القديم.
+* إعادة كتابة Dueli.
+* إعادة بناء Ledger.
+* استبدال Cloudflare stack.
+* اختيار React/Next أو framework جديد.
+* بناء Android مباشرة.
+* بناء iOS مباشرة.
+* بناء TV مباشرة.
+* اختراع recommendation algorithm.
+* تحويل SSE إلى Durable Objects الآن.
+* إضافة Stripe Connect إلى الكود قبل حسم الكيان القانوني والحساب.
+* حذف synthetic data.
+* optimization عشوائي.
+
+---
+
+# 30. Recommended Execution Order
+
+الترتيب العملي المقترح:
+
+```text
+G0  ← THIS DISCOVERY
+ ↓
+G1  Core contracts + journeys
+ ↓
+G2  Frontend completion
+ │
+ ├────────→ G3 Recommendation/Matching
+ │
+ ├────────→ G4 Finance/Banking
+ │
+ └────────→ G6 UX/i18n/a11y
+             ↓
+G5  Synthetic lifecycle
+             ↓
+G7  Legal/Trust
+             ↓
+G8  Browser + human audit
+             ↓
+G9  PWA/Android
+             ↓
+G10 iOS
+             ↓
+G11 TV
+             ↓
+G12 Production/Release
+```
+
+مع إمكانية تنفيذ بعض G3/G4/G6 بالتوازي **بعد تثبيت G1**.
+
+---
+
+# 31. Final Reality Verdict
+
+Dueli الحالية ليست "Backend ناقص".
+
+وليست "منتجاً مكتملاً".
+
+الحقيقة الأدق:
+
+> **Dueli لديها Core Backend متقدم ومغلق تقنياً بدرجة كبيرة، لكن Product Completion متأخر عن Backend Completion.**
+
+أكبر المخاطر الآن ليست migration أو Ledger.
+
+بل:
+
+1. **Frontend wiring**
+2. **real user journeys**
+3. **browser validation**
+4. **recommendation architecture coherence**
+5. **financial operational reality**
+6. **legal/trust layer**
+7. **accessibility/i18n completeness**
+8. **release operations**
+
+والأهم أن التحقيق أثبت أن بعض نتائج الـFrontend القديمة **ما زالت حية فعلاً**، وأثبت في الوقت نفسه أن بعض النتائج القديمة تغيرت أو تم إصلاحها؛ لذلك لن ننسخ `FINAL-REPORT.md` إلى خطة جديدة كما هو.
+
+هذا بالضبط سبب أن المرحلة التالية يجب أن تكون:
+
+**Reality-driven Master Completion — وليس إعادة تنفيذ الخطط القديمة.**
+
+---
+
+# 32. Master Completion Definition
+
+لن نعتبر Dueli مكتملة عندما:
+
+```text
+npm test = PASS
+```
+
+ولا عندما:
+
+```text
+build = PASS
+```
+
+بل عندما يتحقق:
+
+```text
+Human
+ ↓
+Understands Dueli
+ ↓
+Registers
+ ↓
+Discovers
+ ↓
+Participates
+ ↓
+Competes
+ ↓
+Watches
+ ↓
+Interacts
+ ↓
+Earns / Donates
+ ↓
+Withdraws
+ ↓
+Gets Help
+ ↓
+Is Protected
+ ↓
+Can Delete / Manage Account
+ ↓
+Platform Can Be Moderated
+ ↓
+Money Can Be Reconciled
+ ↓
+Operations Can Be Run
+ ↓
+Web Experience Works
+ ↓
+Mobile Path Is Defined
+ ↓
+Release Is Reproducible
+```
+
+وهذا يتوافق مع مبدأ الـMaster Program: **Evidence first → Reality map → Dependencies → Gates → Master Roadmap**.
