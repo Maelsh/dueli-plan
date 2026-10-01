@@ -9,8 +9,8 @@
 | خطة 16 والبنية/البث/المال/الإعلانات | CLOSED؛ لا إعادة تحقق |
 | R1 كلها | DONE بتأكيد المالك |
 | R3-B7 | DONE CODE — PR#75 مدموجة؛ HEAD c8f8e86f592ddf3a593b52fd5c88156c9ad3a6a7؛ merge d19204738407657c97f6ba6ede9c601a3cbdb644 |
-| Guest «مقترح لك» | DONE CODE — R3-GUEST-1 عبر PR#76؛ HEAD a39966a92a129591d672c690668d83067fb078da؛ merge 79edbf2ffd3ee0755a9b35c6fd20d5e62acd7ff5؛ ينتظر تجربة المالك فقط |
-| بريد استعادة/تغيير المرور | OPEN DEFECT — التفعيل يصل، كود الاستعادة/التغيير لا يصل بحسب المالك |
+| Guest «مقترح لك» | DONE — R3-GUEST-1 عبر PR#76؛ HEAD a39966a92a129591d672c690668d83067fb078da؛ merge 79edbf2ffd3ee0755a9b35c6fd20d5e62acd7ff5؛ تجربة المالك PASS |
+| بريد استعادة/تغيير المرور | DONE CODE — R2-AUTH-1 عبر PR#77؛ HEAD 98e3ba012e61feede45e5c8005ac46ff8332a0f4؛ merge 1376c045adaf901ad9b266741789665f0137f3f8؛ وصول صندوق المالك pending |
 | R0 قرارات المنتج | OWNER CONFIRMED في 08، عدا أرقام H7؛ الإجراءات الخارجية منفصلة ولم يثبت إنجازها |
 | R2 وبقية R3/R4 | PLANNED؛ لا نعلن إكمالها من اعتماد السياسة |
 | R5 | DEFERRED AFTER WEB LAUNCH |
@@ -21,8 +21,8 @@
 
 | الوحدة | الحالة / الاعتماد |
 |---|---|
-| R3-GUEST-1 | DONE CODE — PR#76 مدموج بعد APPROVE مستقل من وكيلين؛ تجربة المالك pending |
-| R2-AUTH-1 | NEXT/INDEPENDENT — رسالة الاستعادة/التغيير المستهدفة؛ بعد Guest أو بالتوازي |
+| R3-GUEST-1 | DONE — PR#76 مدموج بعد APPROVE مستقل من وكيلين؛ تجربة المالك PASS |
+| R2-AUTH-1 | DONE CODE — PR#77 مدموج بعد APPROVE مستقل من وكيلين وreal-D1 integration؛ اختبار وصول الصندوق الحقيقي للمالك pending |
 | R2-J | PLANNED — H3 محسومة، لا طلب موازٍ وقبول واحد يغلق المعلق الآخر |
 | R2-L1 | PLANNED — H1=300 ثانية، H2 معتمدة؛ تعليقات وحضور وكاتب مشاهدة |
 | R2-V | PLANNED — بعد L1؛ تعديل 1..5 لكل طرف، حصيلة live ظاهرة ثم حسم نهائي |
@@ -38,7 +38,7 @@
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT:** بعد تجربة المالك لـR3-GUEST-1: Auth المستهدفة → J → L1 → V → L2 → A → M → P → F → D1/D2 وبقية 01. تصميم D0 قابل للعمل بالتوازي. لا إعادة B7 ولا R1.
+**NEXT:** بعد تأكيد المالك لوصول بريد R2-AUTH-1: J → L1 → V → L2 → A → M → P → F → D1/D2 وبقية 01. تصميم D0 قابل للعمل بالتوازي. لا إعادة B7 ولا R1.
 
 ## القرارات المثبتة
 
@@ -64,7 +64,8 @@
 | الوحدة | base SHA | PR/HEAD | REMOTE ودليله | merge SHA | المتبقي |
 |---|---|---|---|---|---|
 | R3-B7 | يرجعلسجل#75 | #75 / c8f8e86f592ddf3a593b52fd5c88156c9ad3a6a7 | قرارالمراجع يرجع لسجل القائد؛ لااختبارجديد هنا | d19204738407657c97f6ba6ede9c601a3cbdb644 | Guest المقترح في وحدةمحددة، لايعاد كل Explore |
-| R3-GUEST-1 | d19204738407657c97f6ba6ede9c601a3cbdb644 | #76 / a39966a92a129591d672c690668d83067fb078da | وكيلان مستقلان: APPROVE؛ T+B ar/en، continuation حتى النفاد، reuse #75، لا blockers | 79edbf2ffd3ee0755a9b35c6fd20d5e62acd7ff5 | تجربة المالك؛ ثم R2-AUTH-1 |
+| R3-GUEST-1 | d19204738407657c97f6ba6ede9c601a3cbdb644 | #76 / a39966a92a129591d672c690668d83067fb078da | وكيلان مستقلان: APPROVE؛ T+B ar/en، continuation حتى النفاد، reuse #75، لا blockers | 79edbf2ffd3ee0755a9b35c6fd20d5e62acd7ff5 | تجربة المالك PASS |
+| R2-AUTH-1 | 79edbf2ffd3ee0755a9b35c6fd20d5e62acd7ff5 | #77 / 98e3ba012e61feede45e5c8005ac46ff8332a0f4 | وكيلان مستقلان: APPROVE؛ real-D1 integration مثبت، TTL/NULL clearing/one-time PASS، لا blockers | 1376c045adaf901ad9b266741789665f0137f3f8 | اختبار وصول البريد الحقيقي للمالك؛ ثم R2-J |
 
 القائد يثبت main قبل التكليف ويحدث هذه اللوحة بعد كل LOCAL/REMOTE/دمج. حالات OPEN/IN PROGRESS/REMOTE/REJECT/DONE/ALREADY DONE/BLOCKED DEVICE/H/DEFERRED بدليلها؛ وجودمكونخلفي لايغلقرحلة.
 T/B أولاً؛ S للصورةوالصوتوالجهازالحقيقي فقط؛ H للإجراءالبشري. لا Astra للرانك/النجوم/الصلاحيات/التمرير، ولابوابات مغلقةتعاد.
