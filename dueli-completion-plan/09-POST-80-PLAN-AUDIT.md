@@ -46,7 +46,7 @@ Code BASE: `b23cfe2a9202136f47da08d55fecee74e259f979`، بعد دمج #80.
 
 **الوحدات:** R3-RAILS-1A providers/eligibility/context بعد RELEASE؛ R3-RAILS-1B near-end horizontal fetch بعد A، ويجوز PR واحد متوسط. D0 بالتوازي لتصميم H7؛ D1 يطبق ترتيب المنافسات/البحث/المشابهات المعتمد، D2 للمستخدمين. continuation المنجزة لا تعاد داخل D1.
 
-**الفصل:** A يحافظ على ordering policy القائمة مرة عند T0 دون new weights: current guest score/personal engine/current category shuffle المجمد. B أرقام H7 تنتظر شرحًا واعتماد المالك، ثم تستبدل providers وتؤثر في جلسات جديدة. استخراج pool كامل شرط؛ لا freeze لـ15 صفًا والقول إن البنية مكتملة. لا ranking مؤقت يناقض قرارًا معتمدًا.
+**توضيح المالك بعد التقرير:** الأوزان مطلوبة لكل قسم وفرع، وليست Suggested وحده. A يمكن تجهيزه مستقلاً لكن random-only ليس نهائياً ولا continuation وحده قبول Home. D0 يبدأ مع RELEASE ويعرض الأرقام مبكراً، وD1 يطبقها على كل الصفوف بعد الاعتماد وجاهزية إشاراتها. freeze أثناء التمرير فقط؛ إعادة الدخول/refresh تعيد احتساب الترتيب. extraction كامل شرط؛ no cap15. التنويع وخفض تكرار المشاهد يدخلان D0، دون RANDOM لكل دفعة أو حذف ذيل النتائج.
 
 **DoD:** stable snapshot؛ no RANDOM+OFFSET؛ near-end loading؛ كل مؤهل مستمر يظهر مرة داخل صفه حتى exhaustion؛ لا سقف15؛ filters/identity/language/surface معزولة؛ refresh/new arrivals؛ expiry/retry/stale response؛ hasMore true عند partial continuation؛ recorded playable/live/upcoming صحيحان؛ ar/en وRTL/LTR وmobile/desktop. T traversal + B DOM/network كافيان، لا Astra أو مشاهدة وسائط. 05 §8 المرجع الكامل.
 
@@ -62,3 +62,5 @@ Code BASE: `b23cfe2a9202136f47da08d55fecee74e259f979`، بعد دمج #80.
 - [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/): استرجاع قاعدة إلى نقطة سابقة يختلف عن rollback للكود؛ لا ننفذه تلقائياً.
 
 كل التعليمات الجديدة في01–05 و08 متسقة مع هذا التقرير؛ سجل التنفيذ في04 يحدث بعد كل merge حقيقي.
+
+التوضيح أعلاه يستبدل أي تفسير سابق لإبقاء category shuffle كترتيب نهائي؛ فصل البنية عن الأرقام لا يعني استثناء أقسام/فروع من الأوزان.
