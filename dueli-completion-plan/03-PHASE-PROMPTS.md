@@ -57,7 +57,7 @@ OOP/MVC/SQL Models/ar-en/CSP. لا إعادة R1/خطة 16/خوادم/TURN/ما�
 التقرير: BASE/HEAD/PR، التغيير والأدلة والاختبارات، المتبقي و H/DEVICE.
 ```
 
-## LOCAL التالي — R-RELEASE-1
+## قالب تاريخي — R-RELEASE-1 مدموجة#81، لا يعاد التكليف
 
 ```text
 DUELI — LOCAL — R-RELEASE-1
@@ -75,7 +75,7 @@ T مستهدفة وrunbook قابل للمراجعة. لا Astra أو full suite
 فرع+PR دون دمج؛ سلّم BASE/HEAD/PR والأدلة والاعتماديات المتبقية.
 ```
 
-## LOCAL اللاحق — R3-RAILS-1A/1B
+## قالب تاريخي — R3-RAILS-1A/1B مدموجة#82، لا يعاد التكليف
 
 ```text
 DUELI — LOCAL — R3-RAILS-1A/1B
@@ -108,3 +108,22 @@ PR: <url> | BASE: <sha> | HEAD: <sha>
 ```
 
 موجه R4/S لا يصدر إلا عند الجاهزية: سؤال حصري، جهاز/صوت/وسائط متاحة، حسابات A/B/C يرفقها المالك خاصة، رحلة واحدة وأدلة. لا تغيير كود أو أموال/حذف/مراسلة ناس. BLOCKED DEVICE إن تعذر الالتقاط، ولا استنتاج فشل خوادم.
+
+## LOCAL الحالي — remediation الإصدار بعد #81/#82
+
+```text
+DUELI — LOCAL — R-RELEASE-1-REM1
+CODE: https://github.com/Maelsh/dueli-opus
+PLAN: https://github.com/Maelsh/dueli-plan/tree/main/dueli-completion-plan
+اقرأ10 و05 §7 و04. القائد يثبت BASE من main لحظة إصدار التكليف.
+عالج deploy workflow expression/contexts وانتظار Quality للنسخة نفسها.
+حدد Cloudflare Git integration الموازي، وجهز منع bypass وفق تفويض القائد؛
+لا dashboard changes أو deploy أو remote writes من تلقاء نفسك.
+شخص assertion الثانية الواحدة في turn-credentials.test على cb80789؛
+ثبت زمن الاختبار عند ثبوت race دون إضعاف العقد أو تعديل TURN runtime.
+لا إعادة RELEASE/RAILS كاملتين أو gates تاريخية. T مستهدفة وworkflow validation.
+PR واحدة→REMOTE على آخرHEAD/candidate→القائد يدمج مع expected_head_sha.
+تقرير BASE/HEAD/PR/الأدلة والمتبقي؛ لا إعلان DEPLOYED من merge فقط.
+```
+
+كل LOCAL/REMOTE من القوالب أعلاه يلتزم10؛ بطاقة التكليف تحوي repo/plan commit/BASE/branch/UNIT/DoD، وREMOTE يحوي PR/HEAD/base/tested candidate. حالات main بعد الدمج لا تسقط من التسليم.
