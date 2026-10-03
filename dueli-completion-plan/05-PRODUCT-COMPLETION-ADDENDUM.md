@@ -142,7 +142,7 @@ T/B لكل وحدة حسب 03؛ S للصوت والصورة والأجهزة ح�
 
 ## 7. R-RELEASE-1 — سلامة النشر وجاهزية مخطط الإنتاج
 
-وحدة محددة ناتجة عن #79 وحادث0033، أُنجزتصحيحهافي#81/#83؛ هذا مرجععقدالإصدار المستمر، لاNEXT جديد؛ تفاصيل الأدلة في [09-POST-80-PLAN-AUDIT.md](09-POST-80-PLAN-AUDIT.md).
+وحدة محددة ناتجة عن #79 وحادث0033، أُنجز تصحيحها في #81/#83؛ هذا مرجع عقد الإصدار المستمر، وليس NEXT جديداً؛ تفاصيل الأدلة في [09-POST-80-PLAN-AUDIT.md](09-POST-80-PLAN-AUDIT.md).
 
 ### النطاق والآلية
 - أبقِ Wrangler الرسمي المثبت في lockfile، المشروع والمخرجات، وbranch عبر env مع quoting. لا تغيير مزود أو أسرار، ولا تشغيل كود PR غير موثوق بأسرار الإنتاج؛ fork بلا أسرار يتوقف بأمان.
@@ -197,7 +197,7 @@ T/B لكل وحدة حسب 03؛ S للصوت والصورة والأجهزة ح�
 
 **NEXT بعد R2-J/#85، وقبل L1.** عيب جديد رصده المالك، لا إعادة #75/#76/#82 ولا H7. المطلوب معتمد: View All ينقل سياق الصف إلى Explore ويتيح تعديل الفرع صراحةً، وتظل كل الدفعات داخل المرشحات حتى النفاد.
 
-### السبب المثبت على code main020eacc
+### السبب المثبت على code main 020eacc
 - src/shared/components/home-rail.ts يكتب href=/explore?lang فقط، رغم وجود railKey.
 - explore-page.ts يقرأ وينقل search/category/status/view/lang، ولا يرسم subcategory filter ولا ينقلها في رابط preview/view-all/back أو POST/GET للجلسة.
 - CompetitionController.createExploreSession/readExploreSessionPage يسقطان subcategory، وExploreCanonicalFilters/canonicalKey/ExploreResultProvider لا تشملها في snapshot/re-check.
