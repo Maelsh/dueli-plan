@@ -1,6 +1,6 @@
 # Dueli — بروتوكول التكليف والمراجعة والدمج والنشر
 
-**ملزم للقائد وLOCAL وREMOTE.** يكمّل 02/03؛ لا يغير سياسات المنتج في08 ولا يعيد فتح الأعمال المغلقة. تحديث 2026-10-03 بعد #81/#82.
+**ملزم للقائد وLOCAL وREMOTE.** يكمّل 02/03؛ لا يغير سياسات المنتج في 08 ولا يعيد فتح الأعمال المغلقة. تحديث 2026-10-03 بعد #81/#82.
 
 ## 1. بطاقة التكليف — مرجع لا يعتمد على الذاكرة
 
@@ -32,7 +32,7 @@
 
 ## 4. بعد الدمج — لا انتقال أعمى
 
-- اقرأ merge result ثم main الحقيقي وmerge SHA/parents/history. سجّل المدموج في04؛ لا تعِد دمجه ولا ترسل للمهمة التالية SHA من الذاكرة.
+- اقرأ merge result ثم main الحقيقي وmerge SHA/parents/history. سجّل المدموج في 04؛ لا تعِد دمجه ولا ترسل للمهمة التالية SHA من الذاكرة.
 - انتظر Quality Gate للـmerge commit الفعلي، ثم تحقق مسار النشر المقرر لنفس إصدار الكود. لا إعادة full suite يدويًا إذا CI تؤديها بالفعل.
 - failure على main = MERGED / POST-MERGE BLOCKED، لا DONE تشغيلي. أصلح السبب المحدد عبر LOCAL→REMOTE→PR جديد. توقف عمليات دمج features التالية حتى حسم blocker؛ يجوز تصميم D0 أو عمل مستقل لا يتسبب بنشر جديد.
 - لا revert تلقائي بسبب X حمراء: rollback فقط عند أثر مثبت وخطة متوافقة ومراجعة القائد وتفويض العملية. لا reset/seed/DROP أو restore DB من أجل CI.
@@ -42,14 +42,14 @@
 ## 5. عقد النشر — مسار واحد معروف
 
 - حدد مسارات النشر الفعلية: GitHub Actions وCloudflare Git integration. وجود green Cloudflare مع فشل Actions ليس إثبات أن gate عملت.
-- لا مسار automatic deployment يلتف على Quality/schema gate. جهّز التصحيح في runbook ووحدة محددة؛ لا تغير dashboard/تعطل production بلا تفويض.
+- لا مسار نشر يلتف على Quality/schema gate. حدد topology الفعلية والبيئة بالدليلأولاً؛ لا تفترض أنكلCloudflare check مسارproduction مستقل، ولا تعطل parallel path افتراضياً. جهز التصحيح الموافقعلىtopology فيrunbook؛ dashboard changes بتفويضالمالك فقط. نجاحActions وحدهلايثبتكلإعداداتdashboard.
 - لا polling فوري لآخر run ثم الفشل لأن Quality لم تبدأ بعد؛ orchestration تنتظر workflow الصحيح/نفس commit وevent وتقيّم conclusion بعد completed مع timeout وخطأ واضح، وتحدد repo صراحةً حيث CLI لا تملك checkout.
 - checkout/build/artifact/SHA المنتظر يجب أن يمثل النسخة نفسها. نجاح head لا يسمح نشر synthetic merge مختلف دون إثبات مطابق.
 - preview/production bindings منفصلة كما في05 §7؛ لا أسرار production لكود fork غير موثوق.
 - secrets غير مسموحة مباشرة في step if؛ استخدم الآلية الموثقة الآمنة (env/outputs مناسبة) دون طباعة القيم. actionlint أو validation مكافئ يراجع expressions/contexts وليس YAML فقط.
 - schema readiness تبقى read-only، والتطبيق الخارجي وفق التفويض وrunbook، لا blind migrations أو bypass gates.
 
-## 6. سجل إلزامي مختصر في04
+## 6. سجل إلزامي مختصر في 04
 
 UNIT | PR | BASE | approved HEAD | tested candidate SHA/event | REMOTE | merge SHA | main Quality run/result | deploy run/environment/SHA | status/blocker | NEXT.
 
@@ -64,4 +64,14 @@ Code main المقروء: cb80789b20c3f766b3deec8b16d7ed8393aa57ed.
 - check Cloudflare Pages id111209903606 لنفس cb80789 سجّل successful deployment عند13:14:40Z، قبل انتهاء Quality الفاشلة13:15:12Z. هذا يثبت وجود مسار نشر Cloudflare لا ينتظر هذه Quality، لا يثبت نوع production/preview أو سلامتَها من الواجهة. يلزم حسم المسار قبل تشغيل الإصدار المعتاد.
 - الصورة لا تثبت وحدها دمج فرع خاطئ أو فقد commits. لا اتهام rebase/force بلا دليل. المؤكد: success PR وحده لم يغلق main/release، وعقد النشر غير مكتمل.
 
-**NEXT الآن: R-RELEASE-1-REM1**: صلاحية deploy expression، تنسيق انتظار Quality لنفس candidate، حسم مسار Cloudflare الموازي، ومعالجة فشل الساعة المستهدف في main دون تعديل TURN runtime أو gates التاريخية. LOCAL→REMOTE→merge→main CI→deploy evidence؛ لا feature merge تالية قبل حسم blocker. D0 تصميم قابل للاستمرار.
+**NEXT تاريخياً عند#82، وأُغلقت في#83: R-RELEASE-1-REM1**: صلاحية deploy expression، تنسيق انتظار Quality لنفس candidate، حسم مسار Cloudflare الموازي، ومعالجة فشل الساعة المستهدف في main دون تعديل TURN runtime أو gates التاريخية. LOCAL→REMOTE→merge→main CI→deploy evidence؛ لا feature merge تالية قبل حسم blocker. D0 تصميم قابل للاستمرار.
+
+## 8. توثيق PR والمدخلات المنفصلة — ملزم
+
+كل PR كود تشمل WORKLOG.md وPLAN-STATUS.md داخل نفس PR؛ تصف ما اختبر وحالة LOCAL VERIFIED / awaiting REMOTE، ولا تعلن DONE / DEPLOYED قبل حدوثهما. بعد الدمج والبوابات يحدث القائد 04 بالحالة المثبتة. لا PR توثيق شكلي منفصل لكل تغيير، ولا حالة متفائلة في main لإغلاق عمل ناقص.
+
+كل LOCAL مكتفٍ بذاته: رابطا code وplan، commit الخطة، الملفات والأقسام وروابطها أو النص اللازم، BASE الحالي، UNIT والنطاق المحدد وقرارات المالك وDoD والاختبارات ومتطلبات السجل. لا يفترض رؤية repo الخطة من checkout الكود. إذا تغير BASE يعود للقائد لتحديث التكليف وفحص الأثر.
+
+صلاحيات Cloudflare في repo secrets محدودة: Pages Edit + D1 Read للحساب المحدد وفق قرار المالك. لا Global API Key أو توسيع للصلاحيات لإسكات readiness. remote migrations/write/restore تتطلب تفويض المالك المحدد؛ بوابة النشر تقرأ الجاهزية فقط.
+
+حادث #81/#82 عولج في #83، وmain gates خضراء في #84/#85؛ هذه القواعد مستمرة، ولا يعاد الحادث كعائق تاريخي. NEXT الحالي في 04 و05 §9.
