@@ -28,9 +28,9 @@
 |---|---|
 | R3-GUEST-1 | DONE — PR#76 مدموج بعد APPROVE مستقل من وكيلين؛ تجربة المالك PASS |
 | R2-AUTH-1 | DONE CODE — PR#77 مدموج بعد APPROVE مستقل من وكيلين وreal-D1 integration؛ وصول Spam رُصد وفق تقرير المالك؛ لا Inbox blocker؛ قرار تأجيل deliverability |
-| R-RELEASE-1 | NEXT / PLANNED — SEC-06 coverage، preview bindings، required schema gate، نفس SHA؛ T ومراجعة مستقلة |
-| R3-RAILS-1A | PLANNED — بعد RELEASE؛ providers/context/filter على البنية القائمة؛ لا H7 coefficients |
-| R3-RAILS-1B | PLANNED — بعد 1A؛ كل الصفوف حتى exhaustion؛ T+B؛ يجوز جمع A/B |
+| R-RELEASE-1 | MERGED #81 / POST-MERGE BLOCKED — SEC-06 coverage، preview bindings، required schema gate، نفس SHA؛ T ومراجعة مستقلة |
+| R3-RAILS-1A | MERGED #82 / POST-MERGE BLOCKED —؛ providers/context/filter على البنية القائمة؛ لا H7 coefficients |
+| R3-RAILS-1B | MERGED #82 / POST-MERGE BLOCKED —؛ كل الصفوف حتى exhaustion؛ T+B؛ يجوز جمع A/B |
 | R2-J | PLANNED — H3 محسومة، لا طلب موازٍ وقبول واحد يغلق المعلق الآخر |
 | R2-L1 | PLANNED — H1=300 ثانية، H2 معتمدة؛ تعليقات وحضور وكاتب مشاهدة |
 | R2-V | PLANNED — بعد L1؛ تعديل 1..5 لكل طرف، حصيلة live ظاهرة ثم حسم نهائي |
@@ -46,7 +46,7 @@
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT: R-RELEASE-1 فقط.** السبب: نقص تغطية SEC-06 مثبت وعزل preview/schema readiness غير مضمونين؛ تمنع تكرار حادث0033 قبل المزيد من الإصدارات. بعدها R3-RAILS-1A/1B → J → L1 → V → L2 → A → M → P → F → D1/D2 وبقية01. D0 يبدأ مع RELEASE ويعرض أوزان كل قسم وفرع مبكراً. continuation يمكن تجهيزه قبل الأرقام؛ إكمال Home يتطلب أوزان D1 المعتمدة.
+**NEXT الحالي: R-RELEASE-1-REM1 وفق10.** #81/#82 merged؛ توقف feature merges حتى حسم deploy/main Quality. ما يلي وصف ترتيب ما بعد#80 قبل هذه الواقعة: السبب: نقص تغطية SEC-06 مثبت وعزل preview/schema readiness غير مضمونين؛ تمنع تكرار حادث0033 قبل المزيد من الإصدارات. بعدها R3-RAILS-1A/1B → J → L1 → V → L2 → A → M → P → F → D1/D2 وبقية01. D0 يبدأ مع RELEASE ويعرض أوزان كل قسم وفرع مبكراً. continuation يمكن تجهيزه قبل الأرقام؛ إكمال Home يتطلب أوزان D1 المعتمدة.
 
 ## القرارات المثبتة
 
@@ -84,3 +84,15 @@ T/B أولاً؛ S للصورةوالصوتوالجهازالحقيقي فقط؛
 ملاحظة النطاق: #77 تخص استعادة المنسي وتطبيع البريد والعقد العام؛ لا تعني إنشاء رحلة تغيير كلمة المرور داخل الحساب إن كانت مفقودة. أي ناقص واجهة مثبت يبقى ضمن R2-F، ولا إعادة Auth gate.
 
 قرار المالك الأخير: كل قسم وفرع يخضع للأوزان؛ frozen session لا تعني نتائج ثابتة في كل زيارة. RANDOM-only ليس قبولاً نهائياً؛ نتيجة continuation لا تغلق weighted Home المطلوبة في D1. انظر08.
+
+## مزامنة #81/#82 — 2026-10-03
+
+| الوحدة | الدمج | main Quality | النشر / الإغلاق |
+|---|---|---|---|
+| R-RELEASE-1 | MERGED #81 / daa449b85d22704326a31d0d644ee45542dbc3b5 | PASS run37084529534 | POST-MERGE BLOCKED: deploy fail، لا DONE تشغيلي |
+| R3-RAILS-1A/1B | MERGED #82 / cb80789b20c3f766b3deec8b16d7ed8393aa57ed | FAIL run37125477474، assertion ساعة واحد؛ PR head05b8c80 PASS | POST-MERGE BLOCKED؛ continuation code merged، لا إغلاق weighted Home |
+| R-RELEASE-1-REM1 | NEXT / PLANNED | workflow/clock remediation محددة | وفق10؛ D0 تصميم مستقل مستمر |
+
+Cloudflare check id111209903606 سجل deployment ناجحًا لنفس cb80789 قبل اكتمال Quality الفاشلة؛ لا production verification هنا. تفسير الصورة والأدلة في10. لا إعادة TURN gate أو إعادة تنفيذRAILS. سجّل run/event/SHA لكل نجاح، وتميّز حالة MERGED عن DEPLOYED.
+
+السجل لكل دمج تالٍ: UNIT/PR/BASE/approved HEAD/tested candidate+event/REMOTE/merge SHA/main Quality run/deploy environment+SHA/status/blocker/NEXT.
