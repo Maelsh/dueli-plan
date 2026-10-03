@@ -142,7 +142,7 @@ T/B لكل وحدة حسب 03؛ S للصوت والصورة والأجهزة ح�
 
 ## 7. R-RELEASE-1 — سلامة النشر وجاهزية مخطط الإنتاج
 
-وحدة محددة ناتجة عن #79 وحادث 0033، وليست إعادة فتح Backend أو بوابات الأمن التاريخية. NEXT بعد #80؛ تفاصيل الأدلة في [09-POST-80-PLAN-AUDIT.md](09-POST-80-PLAN-AUDIT.md).
+وحدة محددة ناتجة عن #79 وحادث0033، أُنجزتصحيحهافي#81/#83؛ هذا مرجععقدالإصدار المستمر، لاNEXT جديد؛ تفاصيل الأدلة في [09-POST-80-PLAN-AUDIT.md](09-POST-80-PLAN-AUDIT.md).
 
 ### النطاق والآلية
 - أبقِ Wrangler الرسمي المثبت في lockfile، المشروع والمخرجات، وbranch عبر env مع quoting. لا تغيير مزود أو أسرار، ولا تشغيل كود PR غير موثوق بأسرار الإنتاج؛ fork بلا أسرار يتوقف بأمان.
@@ -191,4 +191,50 @@ T/B لكل وحدة حسب 03؛ S للصوت والصورة والأجهزة ح�
 
 ### قبول الترتيب الموزون لجميع الأقسام
 
-نطاق الأوزان معتمد في08؛ الأرقام وحدها تنتظر D0. لا إغلاق تجربة Home من نجاح RAILS فقط؛ D1 تحقق وجود score/ordering مناسب لكل صف وفرع وLive/Recorded/Upcoming لكل هوية. fixtures سلوكية تثبت أثر الأوزان المعتمدة على الترتيب داخل القسم، وتغير المشاهدة/الحداثة/إشارات الجودة ثم جلسة جديدة، وثبات ترتيب الجلسة القديمة بلا تكرار/skip. D0 يشرح التنويع وخفض تكرار المشاهد دون حذفه أو قطع exhaustion. عدم تغير ترتيب عند ثبات كل الإشارات ليس فشلاً بذاته، ولا وعد بتغيير عشوائي إجباري كل زيارة. تجهيز البنية مستقل؛ تطبيق الأرقام وإغلاق Home معتمدان على H7 والبيانات الصحيحة.
+نطاق الأوزان معتمد في 08؛ الأرقام وحدها تنتظر D0. لا إغلاق تجربة Home من نجاح RAILS فقط؛ D1 تحقق وجود score/ordering مناسب لكل صف وفرع وLive/Recorded/Upcoming لكل هوية. fixtures سلوكية تثبت أثر الأوزان المعتمدة على الترتيب داخل القسم، وتغير المشاهدة/الحداثة/إشارات الجودة ثم جلسة جديدة، وثبات ترتيب الجلسة القديمة بلا تكرار/skip. D0 يشرح التنويع وخفض تكرار المشاهد دون حذفه أو قطع exhaustion. عدم تغير ترتيب عند ثبات كل الإشارات ليس فشلاً بذاته، ولا وعد بتغيير عشوائي إجباري كل زيارة. تجهيز البنية مستقل؛ تطبيق الأرقام وإغلاق Home معتمدان على H7 والبيانات الصحيحة.
+
+## 9. R3-EXPLORE-CONTEXT-1 — View All وعقد فلاتر الفرع
+
+**NEXT بعد R2-J/#85، وقبل L1.** عيب جديد رصده المالك، لا إعادة #75/#76/#82 ولا H7. المطلوب معتمد: View All ينقل سياق الصف إلى Explore ويتيح تعديل الفرع صراحةً، وتظل كل الدفعات داخل المرشحات حتى النفاد.
+
+### السبب المثبت على code main020eacc
+- src/shared/components/home-rail.ts يكتب href=/explore?lang فقط، رغم وجود railKey.
+- explore-page.ts يقرأ وينقل search/category/status/view/lang، ولا يرسم subcategory filter ولا ينقلها في رابط preview/view-all/back أو POST/GET للجلسة.
+- CompetitionController.createExploreSession/readExploreSessionPage يسقطان subcategory، وExploreCanonicalFilters/canonicalKey/ExploreResultProvider لا تشملها في snapshot/re-check.
+- CompetitionModel يدعم subcategory slug أصلًا؛ لا engine أو قاعدة بيانات جديدة. HomeRailProviders تحمل السياق الصحيح؛ استخرج metadata موثوقة من بيانات الصف، لا parsing عشوائي للاسم المترجم أو DOM title.
+
+### العقد والحل المتماسك
+1. View All link من typed rail context ينقل category الرئيسي+subcategory عند وجوده+status bucket+lang، وview=competitions للعرض الكامل. Suggested ينقل حالته بلا اختلاق قسم؛ الأقسام الرئيسية بلا فرع تنقل category/status. الوسوم المترجمة لا تصبح query keys. url يبنى بـURLSearchParams ويُescaped وفق مكونات المشروع وCSP.
+2. Explore يظهر category وsubcategory واضحين مترجمين، options من taxonomy القائمة وparent-child mapping. تغيير parent يمسح فرعاً لم يعد صالحاً؛ تغيير الفرع لا يسقط status/search/lang/view. All داخل فرع فلتر مقصود من المستخدم، لا fallback صامت عند خطأ.
+3. Canonical query/API/session context: search/category/subcategory/status/lang/view حسب اختصاص كل حقل؛ الهوية والسطح/policy-version من عقد الجلسة. subcategory تدخل استخراج IDs وhydration eligibility re-check وcontextKey في الخادم، لا filter عميل بعد limit.
+4. URL مستقلة قابلة للنسخ والفتح المباشر، refresh/back/forward تستعيد controls والنتائج نفسها **من حيث المرشحات**؛ لا وعد بتثبيت snapshot بعد إنشاء جلسة جديدة. إعادة تحميل صفحة كاملة مقبولة؛ لا SPA/history abstraction جديدة بلا حاجة. حافظ على query في preview→view-all/back.
+5. category/subcategory slugs من المصدر القائم. pair غير صالح/فرع لparent آخر يُرفض أو يعرض خطأ واضحاً؛ لا يتحول إلى all وتختلط النتائج. URL بفرع صالح بلا parent يجوز canonicalize إلى parent المعروف. لا أسماء عربية/إنجليزية حرة كمعرفات فروع، ولا سؤال مالك لتحديد mapping موجود.
+6. Live=live، Upcoming=pending+accepted، Recorded=completed مع recording playable وفق عقد Home القائم (nonempty trimmed vod_url أو youtube_video_url). لا completed بلا تسجيل ضمن recorded القادمة من الصف. أعد استخدام predicate/أهلية مشتركة صغيرة بقدر الحاجة، لا global تغيير لسجلات نتائج completed القديمة أو خدمات الوسائط.
+7. كل session مرتبطة بالفلتر الكامل؛ تغيير الفرع/status/اللغة/الهوية ينشئ جلسة جديدة أو mismatch/reset وفق العقد. esession/cursor القديمة لا تُستعمل بسياق مختلف ولا widen عند retry/expiry؛ skip-fill يطابق جميع الشروط. snapshot القديم بإصدار canonical قديم يعاد إنشاؤه بشكل واضح، لا migration بيانات أو تعديل جلساته إلى all.
+8. reuse مخزن/chunks/cursor من#75 والخدمات/Models الحالية. لا ORDER BY RANDOM+OFFSET، cap إجمالي أو second engine. filtering أولًا؛ ترتيب الموجود داخل eligible set يبقى كما هو لهذه الوحدة، ولا أوزان H7 جديدة. كل صف وفرع سيخضع للأوزان المعتمدة في D1 لاحقاً كما في 08.
+9. لا خلط مع قائمة المستخدمين أو إسقاط صلاحيات guest/blocked/private الحالية؛ لا تعديل دعواتR2-J. لا تنظيف واسع أو externalwrites. رابط View All يجب أن يكون قابلاً للاستخدام على mobile أيضاً وفق التصميم القائم، لا غياب صامت إذا كان المسار مطلوباً.
+
+### DoD واختبارات T/B المستهدفة
+- T fixtures >دفعتين تضم dialogue/science/talents وفروع مختلفة وlive/upcoming/recorded وتسجيلات فارغة/غير جاهزة. traversal يتضمن فقط تقاطع filter الصحيح، كل مؤهل مستمر مرة حتى hasMore=false بلا skip/dup؛ فقد أهلية skip-fill، stale cursor/subcategory change mismatch، retry/TTL/هوية.
+- اختبارات عقد link/query وPOST/GET/provider/canonical key/predicate سلوكية؛ لا string pins وحدها. taxonomy parent/child، invalid pair، parent change يمسح child، default all صريح.
+- B حقيقي بالـDOM/network على ar/en وRTL/LTR، desktop/mobile: Home dialogue→sectarian→live→View All، political→recorded، الأقسام الرئيسية وSuggested؛ controls محددة ونتائج متطابقة و>صفحتين، direct URL/refresh/back-forward وتعديل الفلاتر. Keyboard label/focus واضح، بلا console/CSP errors. لا Astra أو بث فعلي لهذه المسألة.
+- اختبارات الجوار اللازمة فقط (Explore/home link/session)، لا إعادة full suite يدوية أو gates المغلقة؛ CI القائمة تعمل وفق 10.
+- كل PR كود تشمل WORKLOG.md وPLAN-STATUS.md بحالة التنفيذ الصادقة قبل الدمج؛ REMOTE آخرHEAD→merge expected_head_sha→main Quality→production Deploy→تحديث04.
+
+### LOCAL self-contained
+```text
+DUELI — LOCAL — R3-EXPLORE-CONTEXT-1
+CODE: https://github.com/Maelsh/dueli-opus
+PLAN: https://github.com/Maelsh/dueli-plan/tree/main/dueli-completion-plan
+BASE: <القائد يقرأ main الحالي؛ آخر مرجع sync020eacc وليس افتراضاً دائماً>
+PLAN COMMIT: <القائد يثبت commit الخطة المدموج>
+اقرأ05 §9 و08 و10؛ إن تعذر plan repo، القائد يرفق نص05 §9 قبل البدء.
+View All يحفظ category+subcategory+status+lang إلى Explore view=competitions.
+أضف Subcategory filter وURL/restoration وsession canonical/server predicate،
+بما يمنع mixing أثناء كل الدفعات/retry/refresh/back-forward.
+استخدم taxonomy وModels/session القائمة؛ لا patch link فقط، لا H7 أو engine جديد.
+DoD:05 §9، T+B ar/en desktop/mobile، >دفعتين وفلاتر متقاطعة.
+حدث WORKLOG.md وPLAN-STATUS.md داخل PR؛ لا DONE قبل post-merge gates.
+لا production writes/deploy أو إعادة#75/#76/#82/J أو اختبارات تاريخية.
+فرع+PR؛ سلّم BASE/HEAD/tests/الأدلة والمتبقي؛ القائد وحده يدمج.
+```
