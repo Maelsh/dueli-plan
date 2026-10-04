@@ -1,3 +1,6 @@
+
+> **تقرير تاريخي بعد #80:** عوائق الإصدار هنا عولجت في #81–#84؛ الحالة الحالية وNEXT في 04، ومواصفة العيب الجديد في 05 §9. لا يعاد تكليف الوحدات القديمة.
+
 # Dueli — مراجعة الخطة بعد PR #80
 
 ## BASE وحدود الإثبات
@@ -12,7 +15,7 @@ Code BASE: `b23cfe2a9202136f47da08d55fecee74e259f979`، بعد دمج #80.
 - DONE: R1 المغلقة، #75 جلسة نتائج Explore، #76 continuation Guest مع قبول المالك، #77 إصلاح reset/normalization/error contract، #78 domain identity، #79 عودة مسار deploy، #80 Spam UX وforensic. DONE هنا لنطاق PR، لا كل مرحلة R2/R3.
 - incident0033: code منشور قبل تطبيق schema؛ manual remote apply عالج العطل بحسب القائد، دون reset/seed/DROP. readiness الآلية ما زالت ناقصة.
 - باقي J/L1/V/L2/A/M/P/F/D0/D1/D2/C1/C2/C3/R0/R4 حسب 04؛ H7 coefficients غير معتمدة. admin/bank/doc interfaces وقرارات النجوم لا تسقط من النطاق.
-- obsolete: «Guest هو NEXT»، و«انتظار وصول Inbox قبل J»، وتعليمات LOCAL لإعادة #76/#77، وافتراض أن Home كله يستخدم session أو أن cap15 يحقق استمرارًا. أزيلت من الموجهات النشطة؛ أبقي سجل قرار العيبين في08 تاريخياً.
+- obsolete: «Guest هو NEXT»، و«انتظار وصول Inbox قبل J»، وتعليمات LOCAL لإعادة #76/#77، وافتراض أن Home كله يستخدم session أو أن cap15 يحقق استمرارًا. أزيلت من الموجهات النشطة؛ أبقي سجل قرار العيبين في 08 تاريخياً.
 - #80 UX فقط: register warnings machine-readable؛ لا guidance عند failed/unconfigured؛ resend generic لا يثبت send؛ forgot يحافظ على anti-enumeration. لا وصف ذلك كإصلاح deliverability، ولا نقل Spam إلى blocker جديد.
 - لا تعديل 06/07 التاريخيين؛ 08 قرارات المالك أعلى من المقترحات القديمة، مع إضافة قرار Home والبريد الصريحين.
 
@@ -61,6 +64,6 @@ Code BASE: `b23cfe2a9202136f47da08d55fecee74e259f979`، بعد دمج #80.
 - [Cloudflare D1 migrations](https://developers.cloudflare.com/d1/reference/migrations/): list/apply للمتبقي؛ لا تعامل apply كاختيار migration واحدة بالاسم.
 - [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/): استرجاع قاعدة إلى نقطة سابقة يختلف عن rollback للكود؛ لا ننفذه تلقائياً.
 
-كل التعليمات الجديدة في01–05 و08 متسقة مع هذا التقرير؛ سجل التنفيذ في04 يحدث بعد كل merge حقيقي.
+كل التعليمات الجديدة في01–05 و08 متسقة مع هذا التقرير؛ سجل التنفيذ في 04 يحدث بعد كل merge حقيقي.
 
 التوضيح أعلاه يستبدل أي تفسير سابق لإبقاء category shuffle كترتيب نهائي؛ فصل البنية عن الأرقام لا يعني استثناء أقسام/فروع من الأوزان.

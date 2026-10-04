@@ -1,6 +1,6 @@
 # Dueli — لوحة التنفيذ والقرارات
 
-**مزامنة بعد PR #80 — code main: b23cfe2a9202136f47da08d55fecee74e259f979.** [08-OWNER-DECISIONS.md](08-OWNER-DECISIONS.md) مرجع القرارات، لا المقترحات القديمة. دمج الخطة لا يعني تنفيذ متطلباتها.
+**مزامنة بعد PR #85 — code main020eacc38e5d81676ed35e159e5662f9fc8aae94؛ 2026-10-03 UTC.** [08-OWNER-DECISIONS.md](08-OWNER-DECISIONS.md) مرجع القرارات، لا المقترحات القديمة. دمج الخطة لا يعني تنفيذ متطلباتها.
 
 ## الحالة المرجعية
 
@@ -28,10 +28,10 @@
 |---|---|
 | R3-GUEST-1 | DONE — PR#76 مدموج بعد APPROVE مستقل من وكيلين؛ تجربة المالك PASS |
 | R2-AUTH-1 | DONE CODE — PR#77 مدموج بعد APPROVE مستقل من وكيلين وreal-D1 integration؛ وصول Spam رُصد وفق تقرير المالك؛ لا Inbox blocker؛ قرار تأجيل deliverability |
-| R-RELEASE-1 | MERGED #81 / POST-MERGE BLOCKED — SEC-06 coverage، preview bindings، required schema gate، نفس SHA؛ T ومراجعة مستقلة |
-| R3-RAILS-1A | MERGED #82 / POST-MERGE BLOCKED —؛ providers/context/filter على البنية القائمة؛ لا H7 coefficients |
-| R3-RAILS-1B | MERGED #82 / POST-MERGE BLOCKED —؛ كل الصفوف حتى exhaustion؛ T+B؛ يجوز جمع A/B |
-| R2-J | PLANNED — H3 محسومة، لا طلب موازٍ وقبول واحد يغلق المعلق الآخر |
+| R-RELEASE-1 | DONE AFTER REMEDIATION #83 — SEC-06 coverage، preview bindings، required schema gate، نفس SHA؛ T ومراجعة مستقلة |
+| R3-RAILS-1A | CODE MERGED #82 / RELEASE RECOVERED #83 —؛ providers/context/filter على البنية القائمة؛ لا H7 coefficients |
+| R3-RAILS-1B | CODE MERGED #82 / RELEASE RECOVERED #83 —؛ كل الصفوف حتى exhaustion؛ T+B؛ يجوز جمع A/B |
+| R2-J | CODE DONE / DEPLOYED #85 — H3 والدعوة/القبول والسجل والواجهة؛ post-merge Quality#223+Deploy#452 |
 | R2-L1 | PLANNED — H1=300 ثانية، H2 معتمدة؛ تعليقات وحضور وكاتب مشاهدة |
 | R2-V | PLANNED — بعد L1؛ تعديل 1..5 لكل طرف، حصيلة live ظاهرة ثم حسم نهائي |
 | R2-L2 | PLANNED — غرفة/وسائط/إعلان و Like/Dislike وتعليقات video-time |
@@ -46,7 +46,7 @@
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT الحالي: R-RELEASE-1-REM1 وفق10.** #81/#82 merged؛ توقف feature merges حتى حسم deploy/main Quality. ما يلي وصف ترتيب ما بعد#80 قبل هذه الواقعة: السبب: نقص تغطية SEC-06 مثبت وعزل preview/schema readiness غير مضمونين؛ تمنع تكرار حادث0033 قبل المزيد من الإصدارات. بعدها R3-RAILS-1A/1B → J → L1 → V → L2 → A → M → P → F → D1/D2 وبقية01. D0 يبدأ مع RELEASE ويعرض أوزان كل قسم وفرع مبكراً. continuation يمكن تجهيزه قبل الأرقام؛ إكمال Home يتطلب أوزان D1 المعتمدة.
+**NEXT: R3-EXPLORE-CONTEXT-1** وفق 05 §9، قبل L1. #83/#84/J مغلقة برمجياً ومنشورة بدليلmain gates. D0/R0 بالتوازي؛ لا أرقام H7 قبل عرضها واعتمادها.
 
 ## القرارات المثبتة
 
@@ -85,14 +85,31 @@ T/B أولاً؛ S للصورةوالصوتوالجهازالحقيقي فقط؛
 
 قرار المالك الأخير: كل قسم وفرع يخضع للأوزان؛ frozen session لا تعني نتائج ثابتة في كل زيارة. RANDOM-only ليس قبولاً نهائياً؛ نتيجة continuation لا تغلق weighted Home المطلوبة في D1. انظر08.
 
-## مزامنة #81/#82 — 2026-10-03
+## سجل حادث #81/#82 التاريخي — عولج لاحقاً في#83
 
 | الوحدة | الدمج | main Quality | النشر / الإغلاق |
 |---|---|---|---|
 | R-RELEASE-1 | MERGED #81 / daa449b85d22704326a31d0d644ee45542dbc3b5 | PASS run37084529534 | POST-MERGE BLOCKED: deploy fail، لا DONE تشغيلي |
 | R3-RAILS-1A/1B | MERGED #82 / cb80789b20c3f766b3deec8b16d7ed8393aa57ed | FAIL run37125477474، assertion ساعة واحد؛ PR head05b8c80 PASS | POST-MERGE BLOCKED؛ continuation code merged، لا إغلاق weighted Home |
-| R-RELEASE-1-REM1 | NEXT / PLANNED | workflow/clock remediation محددة | وفق10؛ D0 تصميم مستقل مستمر |
+| R-RELEASE-1-REM1 | DONE #83 — السطر التالي تاريخي | workflow/clock remediation محددة | وفق 10؛ D0 تصميم مستقل مستمر |
 
 Cloudflare check id111209903606 سجل deployment ناجحًا لنفس cb80789 قبل اكتمال Quality الفاشلة؛ لا production verification هنا. تفسير الصورة والأدلة في10. لا إعادة TURN gate أو إعادة تنفيذRAILS. سجّل run/event/SHA لكل نجاح، وتميّز حالة MERGED عن DEPLOYED.
 
 السجل لكل دمج تالٍ: UNIT/PR/BASE/approved HEAD/tested candidate+event/REMOTE/merge SHA/main Quality run/deploy environment+SHA/status/blocker/NEXT.
+
+## الحالة الحالية بعد #85 — مصدرGitHub والمالك
+
+| الوحدة | mergeSHA | actual main Quality | actual production Deploy | الحالة |
+|---|---|---|---|---|
+| REM1/#83 | 861e8d7f212711a5eeaefa2c999d9c495ce9be47 | [#219 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37135947624) | [#448 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37135947630) | CODE DONE / DEPLOYED |
+| MAINT/#84 | 4c0286209a321180689a29d31cc052cea7f448ae | [#221 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37152320610) | [#450 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37152320600) | CODE DONE / DEPLOYED |
+| R2-J/#85 | 020eacc38e5d81676ed35e159e5662f9fc8aae94 | [#223 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37158786428) | [#452 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37158786451) | CODE DONE / DEPLOYED |
+| R3-EXPLORE-CONTEXT-1 | لم تنفذ | NEXT/PLANNED | لا ادعاء تنفيذ | قبل L1؛05 §9 |
+
+#85 BASE: 4c0286209a321180689a29d31cc052cea7f448ae؛ APPROVED HEAD: e80e52bb8af67b2c546860e3b2dea2ae4493663f. REMOTE APPROVE و1156/1156 مصدرهما تقرير القائد؛ metadata وmain runs قرئت مباشرة من GitHub، وخطوة Deploy production فعلية SUCCESS وليست skipped. لا يدعي هذا السجل قبولاً بشرياً جديداً لرحلة J أو PROD VERIFIED لكل الأدوار.
+
+#84 نقل checkout/setup-node إلى v7 وubuntu إلى 24.04؛ صيانة مغلقة. #83 أصلح workflow وانتظار Quality واختبار الساعة وبوابة جاهزية المخطط. صلاحيات Pages Edit + D1 Read للحساب المحدد مصدرها قرار وتقرير المالك؛ لم تفحص قيم الأسرار أو صلاحيات الحساب هنا.
+
+ملاحظة topology: لا نعطل مسار Cloudflare افتراضياً؛ تحديد البيئة بالدليل وتفويض المالك يسبقان أي تغيير في dashboard. نجاح Actions لا يثبت تعطيل كل المسارات الموازية. القائد يرفق دليل topology الموجود في handoff إن كان قد حسمه.
+
+لا LOCAL/REMOTE نشطة معلومة بعد #85؛ القائد يحفظ أي تكليف خارجي جديد قبل handoff دون تكراره.
