@@ -1,5 +1,7 @@
 # Dueli — لوحة التنفيذ والقرارات
 
+> **تحديث معتمد — 2026-10-04:** H7 الرقمية معتمدة في [11-H7-APPROVED-RANKING-POLICY.md](11-H7-APPROVED-RANKING-POLICY.md). D0 مكتملة وثائقياً؛ تنفيذ D1/D2 ينتظر دوره وجاهزية إشاراته. أي نص تاريخي يقول إن الأرقام غير معتمدة أصبح متجاوزاً. الحالة في04 وقرارات المالك في08.
+
 **مزامنة بعد PR #85 — code main020eacc38e5d81676ed35e159e5662f9fc8aae94؛ 2026-10-03 UTC.** [08-OWNER-DECISIONS.md](08-OWNER-DECISIONS.md) مرجع القرارات، لا المقترحات القديمة. دمج الخطة لا يعني تنفيذ متطلباتها.
 
 ## الحالة المرجعية
@@ -16,7 +18,7 @@
 | #80 UX البريد + rails forensic | DONE — merge b23cfe2a9202136f47da08d55fecee74e259f979؛ production deployed وفق القائد، UX لا deliverability fix |
 | incident 0033 | REMEDIATED OPERATIONALLY حسب القائد: manual remote apply، الجدولان موجودان؛ منع التكرار PLANNED في RELEASE |
 | Home rails | Guest continuation موجودة؛ logged Suggested/category/subcategory دفعة15 بلا continuation. Suggested Guest/User يتجاهلان status؛ recorded eligibility ناقصة. 05 §8 و09 |
-| R0 قرارات المنتج | OWNER CONFIRMED في 08، عدا أرقام H7؛ الإجراءات الخارجية منفصلة ولم يثبت إنجازها |
+| R0 قرارات المنتج | OWNER CONFIRMED في08/11، بما فيها H7؛ الإجراءات الخارجية منفصلة ولم يثبت إنجازها |
 | R2 وبقية R3/R4 | PLANNED؛ لا نعلن إكمالها من اعتماد السياسة |
 | R5 | DEFERRED AFTER WEB LAUNCH |
 
@@ -39,14 +41,14 @@
 | R2-M | PLANNED — personal ثم admin مستقل وظيفياً وبياناتياً، هويةرسمية وتبويب وإشعار منفصلان |
 | R2-P | PLANNED — طرق صرف محفوظة؛ البنك الحقيقي إجراء خارجي |
 | R2-F | CONDITIONAL — وظائف أصلية ناقصة خارج R1، لا بوابة خدمات قديمة |
-| R3-D0 | DESIGN OPEN / START WITH RELEASE — أوزان كل صف وقسم وفرع، عرض مبكر للمالك؛ النطاق معتمد والأرقام مفتوحة |
+| R3-D0 | DOCS DONE / OWNER APPROVED 2026-10-04 — h7-v1 في11؛ D1/D2 لم تنفذا |
 | R3-D1 | PLANNED — أوزان جميع Home rails والأقسام والفروع بعد D0 وجاهزية الإشارات؛ استمرار وحده لا يغلق Home |
 | R3-D2 | PLANNED — Profile=SUM نجوم/عدد منافسات، ترتيب المستخدمين ومطابقة التخصص |
 | R3-C1/C2 | PLANNED — مساعدة/إتاحة ووثائق من لوحة المدير؛ الحقيقيات بعدالإطلاق حسب H9 |
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT: R3-EXPLORE-CONTEXT-1** وفق 05 §9، قبل L1. #83/#84/J مغلقة برمجياً ومنشورة بدليلmain gates. D0/R0 بالتوازي؛ لا أرقام H7 قبل عرضها واعتمادها.
+**NEXT: R3-EXPLORE-CONTEXT-1** وفق 05 §9، قبل L1. #83/#84/J مغلقة برمجياً ومنشورة بدليلmain gates. D0 DOCS DONE؛ R0 بالتوازي؛ H7 اعتمدت في11؛ التنفيذ في D1/D2.
 
 ## القرارات المثبتة
 
@@ -58,10 +60,10 @@
 | H4:1..5 لكل طرف، قابلللتعديل حتىالنهاية بصوتفعالواحد | OWNER CONFIRMED |
 | H5:نتيجةحيةمؤقتةظاهرة، ثم نهائيةعندالإغلاق | OWNER CONFIRMED |
 | Profile=SUM النجومعبرالمنافسات÷عددالمنافسات، لاعددالمصوتين | OWNER CONFIRMED |
-| Rank المنافسة=أثرجمعنجومطرفيها+المشاهدات+Like/Dislike، الوزنضمن H7 | OWNER CONFIRMED INPUTS؛ coefficients OPEN |
+| Rank المنافسة=أثرجمعنجومطرفيها+المشاهدات+Like/Dislike، الوزنضمن H7 | OWNER CONFIRMED INPUTS + COEFFICIENTS في11 |
 | استبدالالقلب بـ Like/Dislike | OWNER CONFIRMED |
 | H6:رسائلإدارةمستقلة، هويةإداريةرسمية، تبويبخاصوإشعارخارجي | OWNER CONFIRMED؛ مقترحدعمشخصيرُفض |
-| H7:الفريقيصممالأوزانمنكلالإشاراتثم يعرضها | DESIGN AUTHORIZED؛ أرقامغيرمعتمدة |
+| H7:الفريقيصممالأوزانمنكلالإشاراتثم يعرضها | OWNER APPROVED — h7-v1 في11 |
 | H8:admin/admin مؤقت، إعدادات username/password/email؛ التغييرقبلالإطلاقالعام وفقردالقائد | OWNER CONFIRMED؛ تنفيذحسابغيرمثبت |
 | H9:نظامالوثائقوالبياناتمنواجهةالمدير؛ الحقيقياتبعدالإطلاق | OWNER CONFIRMED؛ لاادعاءبنك/KYC منجز |
 | التعليقاتمفتوحة؛ video_offset وتشغيلمتزامن وقائمةأخيرةزمنية | OWNER CONFIRMED |
@@ -113,3 +115,7 @@ Cloudflare check id111209903606 سجل deployment ناجحًا لنفس cb80789 
 ملاحظة topology: لا نعطل مسار Cloudflare افتراضياً؛ تحديد البيئة بالدليل وتفويض المالك يسبقان أي تغيير في dashboard. نجاح Actions لا يثبت تعطيل كل المسارات الموازية. القائد يرفق دليل topology الموجود في handoff إن كان قد حسمه.
 
 لا LOCAL/REMOTE نشطة معلومة بعد #85؛ القائد يحفظ أي تكليف خارجي جديد قبل handoff دون تكراره.
+
+## H7 — قرار المالك النهائي 2026-10-04
+
+R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تنفيذ الأوزان بعد جاهزية إشارات L1/V/L2 وفق ترتيب03. المفضلات الاختيارية من الإعدادات ضمن D1، ومؤشر المتنافس وعرضه ضمن D2 دون تبديل صيغة08. لا LOCAL/REMOTE جديدة أطلقت ضمن تحديث الخطة؛ NEXT لم يتغير.
