@@ -37,7 +37,7 @@
 | R3-EXPLORE-CONTEXT-1 | CODE DONE / DEPLOYED #86 — typed View All + subcategory/session context؛ REMOTE APPROVE×2؛ merge 4c6ddd98fbab619470c124fe0e5da7ac2e1cb87c؛ post-merge Quality#225+Deploy#454 |
 | R2-L1 | CODE DONE / DEPLOYED #87 + release remediation #88/#89 — H1=300 ثانية، H2؛ تعليقات/حضور/مشاهدة؛ post-merge Quality#231 + Deploy#460 على fbc8607920a658cf58cb52a069b2dea7afae1765 |
 | R2-V | CODE DONE / DEPLOYED #90 — تقييم 1..5 بعد 300s، تعديل حتى cutoff، live provisional ثم final exactly-once؛ merge 35ccd4f899e6687e780744505d0e7a6a83c3fef2؛ Quality#233 + Deploy#462 SUCCESS |
-| R2-L2 | PLANNED — غرفة/وسائط/إعلان و Like/Dislike وتعليقات video-time |
+| R2-L2 | CODE DONE / DEPLOYED #91 — غرفة/وسائط/إعلان وLike/Dislike وتعليقات video-time؛ migration0035 مطبقة ومثبتة؛ merge fed9b939cd40472a945c9074618b5c7cc9984a27؛ Quality#236 + Deploy#465 SUCCESS |
 | R2-A | PLANNED — admin المؤقت وإعداداته وصلاحياته ونظام وثائق/بيانات؛ الحساب لم ينشأ بهذا التحديث |
 | R2-M | PLANNED — personal ثم admin مستقل وظيفياً وبياناتياً، هويةرسمية وتبويب وإشعار منفصلان |
 | R2-P | PLANNED — طرق صرف محفوظة؛ البنك الحقيقي إجراء خارجي |
@@ -49,7 +49,7 @@
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT: R2-L1** وفق 03/05 بعد إغلاق R3-EXPLORE-CONTEXT-1 عبر #86. #83/#84/J/#86 مغلقة برمجياً ومنشورة بدليل main gates. D0 DOCS DONE؛ R0 بالتوازي؛ H7 اعتمدت في11؛ التنفيذ في D1/D2.
+**NEXT: R2-A** بعد إغلاق R2-L1/R2-V/R2-L2 ونشرها؛ R0 بالتوازي، D0 DOCS DONE.
 
 ## القرارات المثبتة
 
@@ -110,6 +110,7 @@ Cloudflare check id111209903606 سجل deployment ناجحًا لنفس cb80789 
 | R3-EXPLORE-CONTEXT-1/#86 | 4c6ddd98fbab619470c124fe0e5da7ac2e1cb87c | [#225 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37266797252) | [#454 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37266797256) | CODE DONE / DEPLOYED |
 | R2-L1/#87 + release remediation #88/#89 | fbc8607920a658cf58cb52a069b2dea7afae1765 | #231 SUCCESS | #460 SUCCESS | CODE DONE / DEPLOYED |
 | R2-V/#90 | 35ccd4f899e6687e780744505d0e7a6a83c3fef2 | #233 SUCCESS | #462 SUCCESS | CODE DONE / DEPLOYED |
+| R2-L2/#91 | fed9b939cd40472a945c9074618b5c7cc9984a27 | #236 SUCCESS | #465 SUCCESS | CODE DONE / DEPLOYED |
 
 #85 BASE: 4c0286209a321180689a29d31cc052cea7f448ae؛ APPROVED HEAD: e80e52bb8af67b2c546860e3b2dea2ae4493663f. REMOTE APPROVE و1156/1156 مصدرهما تقرير القائد؛ metadata وmain runs قرئت مباشرة من GitHub، وخطوة Deploy production فعلية SUCCESS وليست skipped. لا يدعي هذا السجل قبولاً بشرياً جديداً لرحلة J أو PROD VERIFIED لكل الأدوار.
 
