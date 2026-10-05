@@ -35,7 +35,7 @@
 | R3-RAILS-1B | CODE MERGED #82 / RELEASE RECOVERED #83 —؛ كل الصفوف حتى exhaustion؛ T+B؛ يجوز جمع A/B |
 | R2-J | CODE DONE / DEPLOYED #85 — H3 والدعوة/القبول والسجل والواجهة؛ post-merge Quality#223+Deploy#452 |
 | R3-EXPLORE-CONTEXT-1 | CODE DONE / DEPLOYED #86 — typed View All + subcategory/session context؛ REMOTE APPROVE×2؛ merge 4c6ddd98fbab619470c124fe0e5da7ac2e1cb87c؛ post-merge Quality#225+Deploy#454 |
-| R2-L1 | PLANNED — H1=300 ثانية، H2 معتمدة؛ تعليقات وحضور وكاتب مشاهدة |
+| R2-L1 | CODE DONE / DEPLOYED #87 + release remediation #88/#89 — H1=300 ثانية، H2؛ تعليقات/حضور/مشاهدة؛ post-merge Quality#231 + Deploy#460 على fbc8607920a658cf58cb52a069b2dea7afae1765 |
 | R2-V | PLANNED — بعد L1؛ تعديل 1..5 لكل طرف، حصيلة live ظاهرة ثم حسم نهائي |
 | R2-L2 | PLANNED — غرفة/وسائط/إعلان و Like/Dislike وتعليقات video-time |
 | R2-A | PLANNED — admin المؤقت وإعداداته وصلاحياته ونظام وثائق/بيانات؛ الحساب لم ينشأ بهذا التحديث |
@@ -108,6 +108,7 @@ Cloudflare check id111209903606 سجل deployment ناجحًا لنفس cb80789 
 | MAINT/#84 | 4c0286209a321180689a29d31cc052cea7f448ae | [#221 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37152320610) | [#450 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37152320600) | CODE DONE / DEPLOYED |
 | R2-J/#85 | 020eacc38e5d81676ed35e159e5662f9fc8aae94 | [#223 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37158786428) | [#452 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37158786451) | CODE DONE / DEPLOYED |
 | R3-EXPLORE-CONTEXT-1/#86 | 4c6ddd98fbab619470c124fe0e5da7ac2e1cb87c | [#225 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37266797252) | [#454 SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/37266797256) | CODE DONE / DEPLOYED |
+| R2-L1/#87 + release remediation #88/#89 | fbc8607920a658cf58cb52a069b2dea7afae1765 | #231 SUCCESS | #460 SUCCESS | CODE DONE / DEPLOYED |
 
 #85 BASE: 4c0286209a321180689a29d31cc052cea7f448ae؛ APPROVED HEAD: e80e52bb8af67b2c546860e3b2dea2ae4493663f. REMOTE APPROVE و1156/1156 مصدرهما تقرير القائد؛ metadata وmain runs قرئت مباشرة من GitHub، وخطوة Deploy production فعلية SUCCESS وليست skipped. لا يدعي هذا السجل قبولاً بشرياً جديداً لرحلة J أو PROD VERIFIED لكل الأدوار.
 
@@ -115,7 +116,7 @@ Cloudflare check id111209903606 سجل deployment ناجحًا لنفس cb80789 
 
 ملاحظة topology: لا نعطل مسار Cloudflare افتراضياً؛ تحديد البيئة بالدليل وتفويض المالك يسبقان أي تغيير في dashboard. نجاح Actions لا يثبت تعطيل كل المسارات الموازية. القائد يرفق دليل topology الموجود في handoff إن كان قد حسمه.
 
-لا LOCAL/REMOTE نشطة بعد إغلاق #86؛ NEXT هو R2-L1.
+R2-L1 أغلقت بعد #87 ثم release remediation #88/#89. main الحالي: fbc8607920a658cf58cb52a069b2dea7afae1765؛ Quality #231 SUCCESS وDeploy #460 SUCCESS. لا LOCAL/REMOTE نشطة؛ NEXT هو R2-V.
 
 ## H7 — قرار المالك النهائي 2026-10-04
 
