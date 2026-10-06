@@ -38,7 +38,7 @@
 | R2-L1 | CODE DONE / DEPLOYED #87 + release remediation #88/#89 — H1=300 ثانية، H2؛ تعليقات/حضور/مشاهدة؛ post-merge Quality#231 + Deploy#460 على fbc8607920a658cf58cb52a069b2dea7afae1765 |
 | R2-V | CODE DONE / DEPLOYED #90 — تقييم 1..5 بعد 300s، تعديل حتى cutoff، live provisional ثم final exactly-once؛ merge 35ccd4f899e6687e780744505d0e7a6a83c3fef2؛ Quality#233 + Deploy#462 SUCCESS |
 | R2-L2 | CODE DONE / DEPLOYED #91 — غرفة/وسائط/إعلان وLike/Dislike وتعليقات video-time؛ migration0035 مطبقة ومثبتة؛ merge fed9b939cd40472a945c9074618b5c7cc9984a27؛ Quality#236 + Deploy#465 SUCCESS |
-| R2-A | PLANNED — admin المؤقت وإعداداته وصلاحياته ونظام وثائق/بيانات؛ الحساب لم ينشأ بهذا التحديث |
+| R2-A | CODE DONE / DEPLOYED #92 — admin/settings/roles/H9 documents؛ migration0036 مطبقة ومثبتة؛ merge c2c3e4c61338ffba66798ea27a7a94bafed21f9e؛ Quality#239 + Deploy#468 SUCCESS |
 | R2-M | PLANNED — personal ثم admin مستقل وظيفياً وبياناتياً، هويةرسمية وتبويب وإشعار منفصلان |
 | R2-P | PLANNED — طرق صرف محفوظة؛ البنك الحقيقي إجراء خارجي |
 | R2-F | CONDITIONAL — وظائف أصلية ناقصة خارج R1، لا بوابة خدمات قديمة |
@@ -49,7 +49,7 @@
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT: R2-A** بعد إغلاق R2-L1/R2-V/R2-L2 ونشرها؛ R0 بالتوازي، D0 DOCS DONE.
+**NEXT: R2-M** بعد إغلاق R2-A ونشرها؛ R0 بالتوازي، D0 DOCS DONE.
 
 ## القرارات المثبتة
 
