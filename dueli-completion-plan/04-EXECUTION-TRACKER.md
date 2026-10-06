@@ -41,7 +41,7 @@
 | R2-A | CODE DONE / DEPLOYED #92 — admin/settings/roles/H9 documents؛ migration0036 مطبقة ومثبتة؛ merge c2c3e4c61338ffba66798ea27a7a94bafed21f9e؛ Quality#239 + Deploy#468 SUCCESS |
 | R2-M | CODE DONE / DEPLOYED #93 — personal/admin messaging منفصلان؛ migration0037 مطبقة ومثبتة؛ merge ec27f722e1caea693597c6d341301e21efa2f333؛ Quality#242 + Deploy#471 SUCCESS |
 | R2-P | CODE DONE / DEPLOYED #94 — طرق صرف محفوظة + ownership/snapshot/legacy؛ migration0038 مطبقة ومثبتة؛ merge 2497bdae4c25ade69852de73720138f9932bd680؛ Quality#244 + Deploy#473 SUCCESS |
-| R2-F | CONDITIONAL — وظائف أصلية ناقصة خارج R1، لا بوابة خدمات قديمة |
+| R2-F | CODE DONE / DEPLOYED #95 — الرحلات الأصلية المتبقية أغلقت بفحص+إصلاح موضعي؛ merge 17d6dd7c06b0fec7bc5b98425c0d2325d7f81a5e؛ Quality#246 + Deploy#475 SUCCESS |
 | R3-D0 | DOCS DONE / OWNER APPROVED 2026-10-04 — h7-v1 في11؛ D1/D2 لم تنفذا |
 | R3-D1 | PLANNED — أوزان جميع Home rails والأقسام والفروع بعد D0 وجاهزية الإشارات؛ استمرار وحده لا يغلق Home |
 | R3-D2 | PLANNED — Profile=SUM نجوم/عدد منافسات، ترتيب المستخدمين ومطابقة التخصص |
@@ -49,7 +49,7 @@
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT: R2-F** بعد إغلاق R2-P ونشرها؛ R0 بالتوازي، D0 DOCS DONE.
+**NEXT: R3-D1** بعد إغلاق R2-F ونشرها؛ R0 بالتوازي، D0 DOCS DONE / OWNER APPROVED.
 
 ## القرارات المثبتة
 
