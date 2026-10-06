@@ -42,14 +42,14 @@
 | R2-M | CODE DONE / DEPLOYED #93 — personal/admin messaging منفصلان؛ migration0037 مطبقة ومثبتة؛ merge ec27f722e1caea693597c6d341301e21efa2f333؛ Quality#242 + Deploy#471 SUCCESS |
 | R2-P | CODE DONE / DEPLOYED #94 — طرق صرف محفوظة + ownership/snapshot/legacy؛ migration0038 مطبقة ومثبتة؛ merge 2497bdae4c25ade69852de73720138f9932bd680؛ Quality#244 + Deploy#473 SUCCESS |
 | R2-F | CODE DONE / DEPLOYED #95 — الرحلات الأصلية المتبقية أغلقت بفحص+إصلاح موضعي؛ merge 17d6dd7c06b0fec7bc5b98425c0d2325d7f81a5e؛ Quality#246 + Deploy#475 SUCCESS |
-| R3-D0 | DOCS DONE / OWNER APPROVED 2026-10-04 — h7-v1 في11؛ D1/D2 لم تنفذا |
-| R3-D1 | PLANNED — أوزان جميع Home rails والأقسام والفروع بعد D0 وجاهزية الإشارات؛ استمرار وحده لا يغلق Home |
+| R3-D0 | DOCS DONE / OWNER APPROVED 2026-10-04 — h7-v1 في11؛ D1 منفذة، D2 NEXT |
+| R3-D1 | CODE DONE / DEPLOYED #96 + REM1 #97 — h7-v1 لأسطح اكتشاف المنافسات؛ #96 merge 1c84bc4ec416fcc636508a644b418682cffb9e37؛ REM1 أغلق Unicode search وfav namespace وH2 view-writer invariant والتعليق؛ #97 merge f8c7add89409a65ae04546e4cbc8d2c927fc1f54؛ Quality#250 + Deploy#479 SUCCESS |
 | R3-D2 | PLANNED — Profile=SUM نجوم/عدد منافسات، ترتيب المستخدمين ومطابقة التخصص |
 | R3-C1/C2 | PLANNED — مساعدة/إتاحة ووثائق من لوحة المدير؛ الحقيقيات بعدالإطلاق حسب H9 |
 | R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
 | R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
 
-**NEXT: R3-D1** بعد إغلاق R2-F ونشرها؛ R0 بالتوازي، D0 DOCS DONE / OWNER APPROVED.
+**NEXT: R3-D2** بعد إغلاق R3-D1 وREM1 ونشرهما؛ R0 بالتوازي، H7-v1 في11 ثابتة ولا يعاد اعتمادها.
 
 ## القرارات المثبتة
 
@@ -123,3 +123,11 @@ R2-L1 أغلقت بعد #87 ثم release remediation #88/#89. R2-V أغلقت و
 ## H7 — قرار المالك النهائي 2026-10-04
 
 R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تنفيذ الأوزان بعد جاهزية إشارات L1/V/L2 وفق ترتيب03. المفضلات الاختيارية من الإعدادات ضمن D1، ومؤشر المتنافس وعرضه ضمن D2 دون تبديل صيغة08. لا LOCAL/REMOTE جديدة أطلقت ضمن تحديث الخطة؛ NEXT لم يتغير.
+
+
+## تحديث 2026-10-06 — R3-D1 / REM1
+
+- R3-D1 #96: APPROVE مستقل؛ merge `1c84bc4ec416fcc636508a644b418682cffb9e37`؛ H7-v1 مطبقة على أسطح اكتشاف المنافسات، الجلسات frozen/exhaustion بلا سقف، لا migration.
+- R3-D1-REM1 #97: الأربع ملاحظات المعروفة CLOSED بتحقق مستقل: Unicode word boundaries ar/en، حجز `fav:`، توحيد counted-view writer وفق H2، وتصحيح تعليق H7SignalsModel. merge `f8c7add89409a65ae04546e4cbc8d2c927fc1f54`؛ Quality #250 SUCCESS؛ Deploy #479 SUCCESS؛ لا migration.
+- ملاحظة REMOTE غير مانعة: tokenless guest requests قد تنشئ هويات ضيف جديدة وفق semantics الهوية القائمة؛ ليست regression في #97 ولا يعاد فتح REM1 بسببها، وتراجع فقط إذا دخلت نطاق وحدة لاحقة.
+- NEXT: **R3-D2** وفق03/05/08/11؛ لا إعادة تصميم H7.
