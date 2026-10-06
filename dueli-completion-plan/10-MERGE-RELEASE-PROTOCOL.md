@@ -75,7 +75,16 @@ Code main المقروء: cb80789b20c3f766b3deec8b16d7ed8393aa57ed.
 - لا REMOTE ولا production migration ولا merge قبل HEAD أخضر. الاستثناء فقط إذا كان الفشل مثبتاً كعطل بنية خارجي غير متعلق بالـdiff؛ يوثق كـBLOCKER ولا يدعى نجاح الوحدة.
 - الهدف التشغيلي: **LOCAL واحد → PR أخضر → REMOTE → pre-merge production action المصرح إن لزم → merge → main gates**، وتقليل جولات الإصلاح المتأخرة.
 
-## 9. توثيق PR والمدخلات المنفصلة — ملزم
+## 9. تفويض المالك الدائم + وضوح موجهات الوكلاء
+
+- **تفويض مالك دائم:** بعد REMOTE APPROVE لوحدة تتطلب migration إنتاجية قبل الدمج، للقائد أن يصدر مباشرةً موجه LOCAL لتطبيق **migration المطلوبة لتلك الوحدة فقط** على Production D1 وفق runbook، دون إعادة طلب تفويض المالك كل مرة. قبل الكتابة يجب إثبات target والـHEAD/hash وأن production عند baseline المتوقع وأن migration المقصودة وحدها pending؛ أي اختلاف أو migration إضافية = STOP بلا كتابة. لا يشمل التفويض bootstrap/admin/users/seeds/restore/DROP أو أي production write آخر.
+- كل موجه LOCAL أو REMOTE يجب أن يذكر روابط المستودعات كاملة صراحةً، خصوصاً للوكلاء الجدد:
+  CODE: https://github.com/Maelsh/dueli-opus
+  PLAN: https://github.com/Maelsh/dueli-plan/tree/main/dueli-completion-plan
+  ولا يفترض معرفة سابقة أو سياق وكيل سابق.
+- اطلب من LOCAL/REMOTE تقريراً **مختصراً**: verdict، HEAD/PR، الأدلة الحاجبة/المهمة، CI، blockers/next action فقط؛ لا إعادة سرد مطولة لكل الاختبارات الناجحة إلا عند وجود خلاف أو blocker يحتاج الدليل.
+
+## 10. توثيق PR والمدخلات المنفصلة — ملزم
 
 كل PR كود تشمل WORKLOG.md وPLAN-STATUS.md داخل نفس PR؛ تصف ما اختبر وحالة LOCAL VERIFIED / awaiting REMOTE، ولا تعلن DONE / DEPLOYED قبل حدوثهما. بعد الدمج والبوابات يحدث القائد 04 بالحالة المثبتة. لا PR توثيق شكلي منفصل لكل تغيير، ولا حالة متفائلة في main لإغلاق عمل ناقص.
 
