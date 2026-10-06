@@ -66,7 +66,16 @@ Code main المقروء: cb80789b20c3f766b3deec8b16d7ed8393aa57ed.
 
 **NEXT تاريخياً عند#82، وأُغلقت في#83: R-RELEASE-1-REM1**: صلاحية deploy expression، تنسيق انتظار Quality لنفس candidate، حسم مسار Cloudflare الموازي، ومعالجة فشل الساعة المستهدف في main دون تعديل TURN runtime أو gates التاريخية. LOCAL→REMOTE→merge→main CI→deploy evidence؛ لا feature merge تالية قبل حسم blocker. D0 تصميم قابل للاستمرار.
 
-## 8. توثيق PR والمدخلات المنفصلة — ملزم
+## 8. بوابة تسليم LOCAL قبل REMOTE — قاعدة ثابتة
+
+- LOCAL مسؤول عن تسليم HEAD أخضر، لا مجرد نجاح الاختبارات التي كتبها للوحدة. قبل التقرير النهائي يقرأ diff ويحدد كل invariant/gate متأثر ويشغل الحراس المرتبطين به.
+- أمثلة إلزامية: migration/schema → release-readiness + schema contracts، وأي FK جديد → SyntheticRetirement/FK coverage؛ routes/UI handlers → route inventory/CSP/contracts؛ auth/roles → authorization/session/security guards؛ المال → ledger/idempotency/concurrency ذات الصلة.
+- الاختبارات متناسبة مع التغيير وليست full historical suite تلقائياً، لكن لا يجوز إسقاط حارس معروف يمس الـdiff بحجة أنه خارج targeted tests.
+- بعد آخر commit ينتظر LOCAL الـQuality Gate وDeploy Preview الرسميين على **HEAD النهائي نفسه**. إذا فشل CI بسبب تغييره، يصلحه داخل نفس التكليف/PR ويعيد التحقق قبل أن يرجع للقائد؛ لا يسلم تقرير DONE/awaiting REMOTE على HEAD أحمر أو CI لم يكتمل.
+- لا REMOTE ولا production migration ولا merge قبل HEAD أخضر. الاستثناء فقط إذا كان الفشل مثبتاً كعطل بنية خارجي غير متعلق بالـdiff؛ يوثق كـBLOCKER ولا يدعى نجاح الوحدة.
+- الهدف التشغيلي: **LOCAL واحد → PR أخضر → REMOTE → pre-merge production action المصرح إن لزم → merge → main gates**، وتقليل جولات الإصلاح المتأخرة.
+
+## 9. توثيق PR والمدخلات المنفصلة — ملزم
 
 كل PR كود تشمل WORKLOG.md وPLAN-STATUS.md داخل نفس PR؛ تصف ما اختبر وحالة LOCAL VERIFIED / awaiting REMOTE، ولا تعلن DONE / DEPLOYED قبل حدوثهما. بعد الدمج والبوابات يحدث القائد 04 بالحالة المثبتة. لا PR توثيق شكلي منفصل لكل تغيير، ولا حالة متفائلة في main لإغلاق عمل ناقص.
 
