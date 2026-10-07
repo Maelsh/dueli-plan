@@ -168,3 +168,11 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - merge `88461f6afd3546650b7be1e3801d0d5f5dfc0770`؛ main Quality #262 SUCCESS؛ Deploy #491 SUCCESS. R3-C2 CODE DONE / DEPLOYED.
 - Deferred non-blocking إلى R4/عند الحاجة: مراجعة مركزية لتهريب `<title>` عبر generateHTML/callers مع تجنب double escaping؛ `/docs` pagination فقط عند نمو catalog فعلياً. لا يُسجّل تحويل SEC grace-period إلى blocking كدين مطلوب؛ بعض الحراس لتقنيات غير مستخدمة وقد تكون non-blocking عمداً.
 - NEXT: R3-C3 حسب 03/05/08: synthetic retirement future design/documentation only؛ لا deletion/migration/production write.
+
+
+## تحديث 2026-10-07 — R3-C3
+
+- PR #102 وثّق تصميم Synthetic Retirement المستقبلي فقط؛ لا runtime deletion أو migration أو production write. final HEAD `cdbecebeba23acf840dac20c8342b2be41c4a1ab`؛ REMOTE ×2 APPROVE / MERGE-SAFE YES.
+- merge `2e3d3681093a591e917dd1c57dc9cc249c307458`؛ main Quality #264 SUCCESS؛ Deploy #493 SUCCESS. R3-C3 CODE/DOCS DONE / DEPLOYED.
+- التصميم المستقبلي fail-closed، dry-run إلزامي، وتصريح المالك مطلوب عند التنفيذ؛ هذا الإغلاق لا يفوض أي حذف مستقبلي.
+- R3 C1/C2/C3 CLOSED. NEXT: R4 وفق 01/03/04/05/08/10؛ لا إعادة فتح الأعمال المغلقة دون blocker جديد محدد.
