@@ -93,3 +93,12 @@ Code main المقروء: cb80789b20c3f766b3deec8b16d7ed8393aa57ed.
 صلاحيات Cloudflare في repo secrets محدودة: Pages Edit + D1 Read للحساب المحدد وفق قرار المالك. لا Global API Key أو توسيع للصلاحيات لإسكات readiness. remote migrations/write/restore تتطلب تفويض المالك المحدد؛ بوابة النشر تقرأ الجاهزية فقط.
 
 حادث #81/#82 عولج في #83، وmain gates خضراء في #84/#85؛ هذه القواعد مستمرة، ولا يعاد الحادث كعائق تاريخي. NEXT الحالي في 04 و05 §9.
+
+
+## 11. حد معاملات Cloudflare D1 — قاعدة دائمة بعد حادث #100
+
+- سقف D1 المعتمد للمشروع: 100 bound parameters لكل SQL statement. احسب الإجمالي الفعلي: كل القوائم الديناميكية والمكررة وأي scalar binds؛ batch length وحده ليس دليلاً على السلامة.
+- يمنع توسيع مدخل صالح غير محدود مباشرة إلى IN/NOT IN placeholders إذا أمكن أن يتجاوز الإجمالي 100. استخدم anti-join/NOT EXISTS عندما تكون البيانات في جداول، أو chunking آمناً مع دمج يحفظ semantics والترتيب.
+- tests/helpers/sqlite-d1.ts يجب أن يحاكي السقف: >100 يفشل و<=100 يمر. لا تعطيل الحارس أو رفعه لإسكات اختبار.
+- أي تغيير يمس dynamic placeholders أو hydration/query batching يتطلب worst-case bind calculation واختباراً فوق threshold إذا كان الحجم قد ينمو. REMOTE يدقق production reachability ولا يقبل «غير مرجح أن يصل 100» كحد مثبت.
+- حادث #100: تجاوز السقف سبب production 500 في Home rails؛ node:sqlite سمح بعدد أكبر فأفلت الخلل من CI. HEAD المعتمد b1b1a0235a4fc59e7c36a4fe2565b5320e3f920d؛ merge 3fac1e360d144dc46acb99d50c658afb0ff65e3d؛ Quality #258 وDeploy #487 SUCCESS؛ لا migration.
