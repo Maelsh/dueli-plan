@@ -151,3 +151,12 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - قاعدة دائمة: احسب إجمالي binds في statement (كل القوائم المكررة + scalar binds)، لا batch size فقط. المدخل الصالح غير المحدود لا يوسع مباشرة إلى placeholders؛ استخدم anti-join أو chunking يحفظ semantics والترتيب.
 - #99/R3-C1 بقي OPEN/HOLD بلا تغيير أثناء الحادث؛ بعد #100 يحدث على main الجديد ويحتاج delta/integration verification فقط ما لم تغير التعارضات سلوكه، لا إعادة المراجعة الكاملة.
 - الحالة: D1-100 CODE DONE / DEPLOYED. NEXT: تحديث #99 على main ثم delta verification وفق10.
+
+
+## تحديث 2026-10-07 — R3-C1
+
+- PR #99: C1 help/accessibility؛ approved pre-integration C1 HEAD `77dca79c1e9fb34cbe910568ade9dc98764afff5`، ثم حُجز الدمج أثناء حادث #100 دون نسبة الحادث إليه.
+- بعد إغلاق #100 وتحقق الإنتاج، دُمج main في #99 فقط؛ final candidate HEAD `91eb729cb9314b65511082efd609c908a75c0791`. REMOTE delta APPROVE / MERGE-SAFE YES: لا source/function overlap مع #100، وC1 وD1 guards محفوظة، ولا migration.
+- merge `d7021aee56c8fec2f63c0a8865b6b83ac4474db0`؛ main Quality #260 SUCCESS؛ Deploy #489 SUCCESS على merge SHA.
+- R3-C1 CODE DONE / DEPLOYED. لا إعادة C1 أو #100.
+- NEXT: R3-C2 وفق03/05/08 H9؛ افحص ما أنجزه R2-A في managed documents ثم نفّذ الناقص فقط، ولا تعاود بناء الموجود.
