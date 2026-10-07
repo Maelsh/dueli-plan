@@ -160,3 +160,11 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - merge `d7021aee56c8fec2f63c0a8865b6b83ac4474db0`؛ main Quality #260 SUCCESS؛ Deploy #489 SUCCESS على merge SHA.
 - R3-C1 CODE DONE / DEPLOYED. لا إعادة C1 أو #100.
 - NEXT: R3-C2 وفق03/05/08 H9؛ افحص ما أنجزه R2-A في managed documents ثم نفّذ الناقص فقط، ولا تعاود بناء الموجود.
+
+
+## تحديث 2026-10-07 — R3-C2
+
+- PR #101 أكمل C2 فوق managed_documents الموجود من R2-A دون نظام موازٍ أو migration. final HEAD `6c3e3dbeee76890da576114933b031b8519d2bd8`؛ REMOTE ×2: APPROVE / MERGE-SAFE YES.
+- merge `88461f6afd3546650b7be1e3801d0d5f5dfc0770`؛ main Quality #262 SUCCESS؛ Deploy #491 SUCCESS. R3-C2 CODE DONE / DEPLOYED.
+- Deferred non-blocking إلى R4/عند الحاجة: مراجعة مركزية لتهريب `<title>` عبر generateHTML/callers مع تجنب double escaping؛ `/docs` pagination فقط عند نمو catalog فعلياً. لا يُسجّل تحويل SEC grace-period إلى blocking كدين مطلوب؛ بعض الحراس لتقنيات غير مستخدمة وقد تكون non-blocking عمداً.
+- NEXT: R3-C3 حسب 03/05/08: synthetic retirement future design/documentation only؛ لا deletion/migration/production write.
