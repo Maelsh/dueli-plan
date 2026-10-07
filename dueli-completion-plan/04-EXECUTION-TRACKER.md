@@ -139,3 +139,15 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - إعادة REMOTE من الوكيلين: APPROVE / MERGE-SAFE YES؛ لا blockers ولا migration.
 - merge `d5233f44de9b24ecd0d4b327c2b740b40057d7e2`؛ main Quality #253 SUCCESS؛ production Deploy #482 SUCCESS على نفس SHA.
 - R3-D2 CODE DONE / DEPLOYED. H7 D0/D1/D2 مغلقة. NEXT: **R3-C1**؛ C2/C3 بعدها وفق03، وR0 يبقى بالتوازي.
+
+
+## تحديث 2026-10-07 — INCIDENT D1-100 / PR #100
+
+- بعد نشر #98 ظهر في الإنتاج POST /api/home-rails/sessions = 500 لبعض الصفوف الكبيرة؛ #99/C1 كان مفتوحاً وغير مدموج، فأوقف الدمج ولم يُنسب الحادث إليه.
+- التحقيق الخارجي أثبت السبب: Cloudflare D1 يسمح بحد أقصى 100 bound parameters لكل statement؛ بعض SQL الديناميكية كانت توسع قوائم IDs فوق الحد. ظهر الخلل مع حجم بيانات الإنتاج، بينما node:sqlite المحلي لم يكن يحاكي الحد.
+- PR #100 أغلق الفئة المعروفة: NOT EXISTS anti-joins للمدخلات غير المحدودة، وchunking آمن للhydration/loads مع حفظ الترتيب، وحارس اختبار دائم: >100 يفشل و<=100 يمر.
+- REMOTE مستقلان: APPROVE / MERGE-SAFE YES على HEAD b1b1a0235a4fc59e7c36a4fe2565b5320e3f920d بعد تدقيق dynamic-bind sites؛ لا production-reachable valid-data query معروف يتجاوز 100 binds.
+- merge 3fac1e360d144dc46acb99d50c658afb0ff65e3d؛ main Quality #258 SUCCESS؛ Deploy #487 SUCCESS؛ لا migration/schema/config write.
+- قاعدة دائمة: احسب إجمالي binds في statement (كل القوائم المكررة + scalar binds)، لا batch size فقط. المدخل الصالح غير المحدود لا يوسع مباشرة إلى placeholders؛ استخدم anti-join أو chunking يحفظ semantics والترتيب.
+- #99/R3-C1 بقي OPEN/HOLD بلا تغيير أثناء الحادث؛ بعد #100 يحدث على main الجديد ويحتاج delta/integration verification فقط ما لم تغير التعارضات سلوكه، لا إعادة المراجعة الكاملة.
+- الحالة: D1-100 CODE DONE / DEPLOYED. NEXT: تحديث #99 على main ثم delta verification وفق10.
