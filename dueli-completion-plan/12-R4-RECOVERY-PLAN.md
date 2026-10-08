@@ -1,3 +1,10 @@
+## 2026-10-08 — Owner screenshot findings and mandatory agent safeguards
+
+- Authenticated competition page `/competition/2201?lang=ar`: top navigation Help icon duplicates Help in authenticated account menu; show top-nav Help **only to guests** while preserving guest discoverability, keyboard/aria, RTL/LTR and 390px layout. Scope to R4-UX-STATE-1 / VIS-02, no blanket removal.
+- Same Arabic completed competition shows literal English `Reminder On`: i18n leak and incorrect completed lifecycle action. Scope to R4-UX-STATE-1 / U-01 and I-01: all visible states/labels translated via ar/en dictionaries and t()/translations, completed reminder hidden/disabled; verify ar/en and desktop/mobile. Screenshot alone does not establish VOD backend failure; check player processing/unavailable fallback in MEDIA/ADMIN.
+- Every LOCAL/REMOTE prompt for UI work must explicitly require reading `AGENTS.md` and relevant binding docs (`docs/01-ARCHITECTURE-RULES.md`, `docs/11-DEFINITION-OF-DONE.md`, `docs/13-TEST-STRATEGY.md`, `docs/18-REPOSITORY-CHANGE-POLICY.md`), plus PLAN 08/10/12. Acceptance gates: MVC/OOP, SQL Models only, i18n ar/en, RTL/LTR, accessibility/aria, dark/mobile; tests on changed paths. No blanket re-audit of closed phases.
+- Chat report compact: STATUS, PR/FULL HEAD, 3–5 evidence findings, BLOCKERS, NEXT; full evidence in repository. Repeated long reports are not requested.
+
 ## 2026-10-08 — Verified execution update (supersedes historical snapshot in §1)
 
 - CODE MAIN: `5a74310667bfed286cc1f1ba0dfa450be1bb041b`; PR#103 title fix MERGED/DEPLOYED; PR#104 R4-DB-OPT-1 MERGED with owner-authorized production migration 0039 applied and six indexes reported verified. No automatic migration in workflow.

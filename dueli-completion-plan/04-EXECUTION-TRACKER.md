@@ -1,3 +1,9 @@
+## 2026-10-08 — PR106 and owner visual findings (pending production gates)
+
+- **CODE PR#106 R4-EVENTS-NOTIFY-1 MERGED** on `375bd1809482d21ce2abd4aa7e6c013704967e50`; independently approved remediation HEAD `253a1b724d8f36f6f40eaee3eadb4145982abe56`. PR Quality Gate #37794609452 SUCCESS, preview Deploy #37794609471 SUCCESS. Post-merge Quality Gate #37799232295 and production Deploy #37799232315 were IN PROGRESS at last check; do not mark DEPLOYED/DONE before both success. Owner-authorized old-notifications cleanup cutoff `2026-10-08T03:31:39Z` still NOT EXECUTED; SQL reviewed conditionally, production schema/count guard required.
+- **OWNER VISUAL NEW FINDINGS** (screenshot competition/2201?lang=ar, authenticated): authenticated top-bar Help icon duplicated with account-menu Help, hurts mobile layout; retain top-bar Help for guests only. Arabic page shows raw English `Reminder On` on a **completed** competition; require ar/en translation via t()/translations and lifecycle-aware hide/disable of reminder on completed state, plus RTL/mobile/a11y regression. Screenshot also shows VOD spinner; investigate availability/state separately under MEDIA, not proof of unavailable recording.
+- **NON-NEGOTIABLE AGENT CONTRACT**: before changing UI read CODE `AGENTS.md`, `docs/01-ARCHITECTURE-RULES.md`, `docs/11-DEFINITION-OF-DONE.md`, `docs/13-TEST-STRATEGY.md`, `docs/18-REPOSITORY-CHANGE-POLICY.md`, relevant 00/16, and PLAN 08/10/12; enforce MVC/OOP, no SQL in controllers/pages, ar/en i18n, RTL/LTR, accessibility/aria, mobile and dark mode. Agent chat reports ≤5 short evidence items + STATUS/PR/HEAD/BLOCKERS/NEXT; long evidence in repo only.
+
 ## 2026-10-08 — LEADERSHIP SYNC: PR103–105 (verified GitHub)
 
 - **CODE MAIN** `5a74310667bfed286cc1f1ba0dfa450be1bb041b`. PR#103 title escaping **MERGED** `9cbb93c5c05103f30466d10aa5fd59f639bcc3ea`, Quality Gate/Deploy **SUCCESS** (runs 37760838270/37760838240).
