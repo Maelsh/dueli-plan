@@ -1,8 +1,10 @@
 # Dueli — لوحة التنفيذ والقرارات
 
-> **تحديث معتمد — 2026-10-04:** H7 الرقمية معتمدة في [11-H7-APPROVED-RANKING-POLICY.md](11-H7-APPROVED-RANKING-POLICY.md). D0 مكتملة وثائقياً؛ تنفيذ D1/D2 ينتظر دوره وجاهزية إشاراته. أي نص تاريخي يقول إن الأرقام غير معتمدة أصبح متجاوزاً. الحالة في04 وقرارات المالك في08.
+> **الحالة الحالية — 2026-10-08:** R2 ووحدات R3 منفذة ومغلقة وفق04، بما فيها D1/D2 وC1/C2/C3. R4 كشف عيوبًا جديدة محددة؛ خطة الاستعادة في [12-R4-RECOVERY-PLAN.md](12-R4-RECOVERY-PLAN.md). NEXT: **R4-DB-DIAG-1**. PR#103 OPEN؛ لا تعاد الأعمال المغلقة. الفوترة ونقلDB وسياسة الإشعارات المقترحة ليست معتمدة.
 
-**مزامنة بعد PR #86 — code main4c6ddd98fbab619470c124fe0e5da7ac2e1cb87c؛ 2026-10-05 UTC.** [08-OWNER-DECISIONS.md](08-OWNER-DECISIONS.md) مرجع القرارات، لا المقترحات القديمة. دمج الخطة لا يعني تنفيذ متطلباتها.
+> **H7 معتمدة وثابتة:** السياسة الرقمية في11، وD0/D1/D2 مغلقة وفق04. لا إعادة تصميم أو اعتماد الأوزان؛ تحسين الاستهلاك يحفظها.
+
+**مزامنة بعد PR#102 — code main `2e3d3681093a591e917dd1c57dc9cc249c307458`؛ 2026-10-08.**08 مرجع القرارات؛12 الاستعادة الحالية. دمج الخطة لا يعني تنفيذها.
 
 ## الحالة المرجعية
 
@@ -16,10 +18,10 @@
 | #78 هوية الدومين | DONE — merge f3942c3bbe450bf3c727a235fe37a46bdf9be9b1؛ لا تغيير transport/DNS |
 | #79 استعادة النشر | DONE — merge af96b8f06fd6920e435384af444c857bf8492dc9؛ remediation محددة لاحقة في RELEASE، لا إلغاء الدمج |
 | #80 UX البريد + rails forensic | DONE — merge b23cfe2a9202136f47da08d55fecee74e259f979؛ production deployed وفق القائد، UX لا deliverability fix |
-| incident 0033 | REMEDIATED OPERATIONALLY حسب القائد: manual remote apply، الجدولان موجودان؛ منع التكرار PLANNED في RELEASE |
-| Home rails | Guest continuation موجودة؛ logged Suggested/category/subcategory دفعة15 بلا continuation. Suggested Guest/User يتجاهلان status؛ recorded eligibility ناقصة. 05 §8 و09 |
+| incident 0033 | REMEDIATED؛ حمايةrelease مدموجة وفق04/10، لا تخلط مع حادثdaily read quota الجديد |
+| Home rails | continuation وH7 منفذتان؛ عيب بطء وبناء جلسات متكرر محتمل يعالج موضعيًا في12، لا إعادةRAILS/D1 |
 | R0 قرارات المنتج | OWNER CONFIRMED في08/11، بما فيها H7؛ الإجراءات الخارجية منفصلة ولم يثبت إنجازها |
-| R2 وبقية R3/R4 | PLANNED؛ لا نعلن إكمالها من اعتماد السياسة |
+| R2/R3/R4 | R2 ووحداتR3 مغلقة وفقسجلPRs؛ R4 IN RECOVERY/ACCEPTANCE —12 |
 | R5 | DEFERRED AFTER WEB LAUNCH |
 
 #75–#80 merged مثبت من GitHub. إنتاج #80 وتطبيق migration0033 ونتيجة Spam/SPF/DKIM/DMARC مصدرها تقرير القائد/المالك؛ هذه المراجعة لم تتصل بقاعدة الإنتاج أو تفحص البريد الحي. لا إعادة تكليف Guest/Auth؛ لا ادعاء اكتمال بقية R2.
@@ -42,14 +44,14 @@
 | R2-M | CODE DONE / DEPLOYED #93 — personal/admin messaging منفصلان؛ migration0037 مطبقة ومثبتة؛ merge ec27f722e1caea693597c6d341301e21efa2f333؛ Quality#242 + Deploy#471 SUCCESS |
 | R2-P | CODE DONE / DEPLOYED #94 — طرق صرف محفوظة + ownership/snapshot/legacy؛ migration0038 مطبقة ومثبتة؛ merge 2497bdae4c25ade69852de73720138f9932bd680؛ Quality#244 + Deploy#473 SUCCESS |
 | R2-F | CODE DONE / DEPLOYED #95 — الرحلات الأصلية المتبقية أغلقت بفحص+إصلاح موضعي؛ merge 17d6dd7c06b0fec7bc5b98425c0d2325d7f81a5e؛ Quality#246 + Deploy#475 SUCCESS |
-| R3-D0 | DOCS DONE / OWNER APPROVED 2026-10-04 — h7-v1 في11؛ D1 منفذة، D2 NEXT |
+| R3-D0 | DOCS DONE / OWNER APPROVED؛ D1/D2 منفذتان ومغلقتان؛ h7-v1 ثابتة |
 | R3-D1 | CODE DONE / DEPLOYED #96 + REM1 #97 — h7-v1 لأسطح اكتشاف المنافسات؛ #96 merge 1c84bc4ec416fcc636508a644b418682cffb9e37؛ REM1 أغلق Unicode search وfav namespace وH2 view-writer invariant والتعليق؛ #97 merge f8c7add89409a65ae04546e4cbc8d2c927fc1f54؛ Quality#250 + Deploy#479 SUCCESS |
 | R3-D2 | CODE DONE / DEPLOYED #98 — Profile actual-participation SSOT + user/opponent/follow/participation H7 + frozen sessions؛ REMOTE REJECT ثم FIX ثم APPROVE×2؛ merge d5233f44de9b24ecd0d4b327c2b740b40057d7e2؛ Quality#253 + Deploy#482 SUCCESS؛ لا migration |
-| R3-C1/C2 | PLANNED — مساعدة/إتاحة ووثائق من لوحة المدير؛ الحقيقيات بعدالإطلاق حسب H9 |
-| R3-C3 | PLANNED DESIGN ONLY — KEEP NOW ثابتة |
-| R4 | PLANNED — قبول الرحلات الجديدة، تسليم مسؤول ببيانات غيرمؤقتة، إجراءات فعلية وقرار إطلاق |
+| R3-C1/C2 | CODE DONE / DEPLOYED #99/#101 وفق التحديثات أدناه |
+| R3-C3 | CODE/DOCS DONE / DEPLOYED #102؛ design only؛ لا runtime deletion |
+| R4 | IN RECOVERY / NOT ACCEPTED؛ عيوب جديدة محددة وخطة12؛ PR103 OPEN |
 
-**NEXT: R3-C1**؛ ثم C2/C3 وفق الاعتماديات في03. R0 بالتوازي؛ H7-v1/D1/D2 مغلقة ولا تعاد.
+**NEXT: R4-DB-DIAG-1** وفق12؛ متابعةPR103 القائمة مستقلًا؛ R0 بالتوازي. H7/D1/D2/C1/C2/C3 مغلقة.
 
 ## القرارات المثبتة
 
@@ -130,7 +132,7 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - R3-D1 #96: APPROVE مستقل؛ merge `1c84bc4ec416fcc636508a644b418682cffb9e37`؛ H7-v1 مطبقة على أسطح اكتشاف المنافسات، الجلسات frozen/exhaustion بلا سقف، لا migration.
 - R3-D1-REM1 #97: الأربع ملاحظات المعروفة CLOSED بتحقق مستقل: Unicode word boundaries ar/en، حجز `fav:`، توحيد counted-view writer وفق H2، وتصحيح تعليق H7SignalsModel. merge `f8c7add89409a65ae04546e4cbc8d2c927fc1f54`؛ Quality #250 SUCCESS؛ Deploy #479 SUCCESS؛ لا migration.
 - ملاحظة REMOTE غير مانعة: tokenless guest requests قد تنشئ هويات ضيف جديدة وفق semantics الهوية القائمة؛ ليست regression في #97 ولا يعاد فتح REM1 بسببها، وتراجع فقط إذا دخلت نطاق وحدة لاحقة.
-- NEXT: **R3-D2** وفق03/05/08/11؛ لا إعادة تصميم H7.
+- NEXT التاريخي عند تسجيل هذا التحديث: **R3-D2** وفق03/05/08/11؛ لا إعادة تصميم H7.
 
 
 ## تحديث 2026-10-06 — R3-D2
@@ -159,7 +161,7 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - بعد إغلاق #100 وتحقق الإنتاج، دُمج main في #99 فقط؛ final candidate HEAD `91eb729cb9314b65511082efd609c908a75c0791`. REMOTE delta APPROVE / MERGE-SAFE YES: لا source/function overlap مع #100، وC1 وD1 guards محفوظة، ولا migration.
 - merge `d7021aee56c8fec2f63c0a8865b6b83ac4474db0`؛ main Quality #260 SUCCESS؛ Deploy #489 SUCCESS على merge SHA.
 - R3-C1 CODE DONE / DEPLOYED. لا إعادة C1 أو #100.
-- NEXT: R3-C2 وفق03/05/08 H9؛ افحص ما أنجزه R2-A في managed documents ثم نفّذ الناقص فقط، ولا تعاود بناء الموجود.
+- NEXT التاريخي عند تسجيل هذا التحديث: R3-C2 وفق03/05/08 H9؛ افحص ما أنجزه R2-A في managed documents ثم نفّذ الناقص فقط، ولا تعاود بناء الموجود.
 
 
 ## تحديث 2026-10-07 — R3-C2
@@ -167,7 +169,7 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - PR #101 أكمل C2 فوق managed_documents الموجود من R2-A دون نظام موازٍ أو migration. final HEAD `6c3e3dbeee76890da576114933b031b8519d2bd8`؛ REMOTE ×2: APPROVE / MERGE-SAFE YES.
 - merge `88461f6afd3546650b7be1e3801d0d5f5dfc0770`؛ main Quality #262 SUCCESS؛ Deploy #491 SUCCESS. R3-C2 CODE DONE / DEPLOYED.
 - Deferred non-blocking إلى R4/عند الحاجة: مراجعة مركزية لتهريب `<title>` عبر generateHTML/callers مع تجنب double escaping؛ `/docs` pagination فقط عند نمو catalog فعلياً. لا يُسجّل تحويل SEC grace-period إلى blocking كدين مطلوب؛ بعض الحراس لتقنيات غير مستخدمة وقد تكون non-blocking عمداً.
-- NEXT: R3-C3 حسب 03/05/08: synthetic retirement future design/documentation only؛ لا deletion/migration/production write.
+- NEXT التاريخي عند تسجيل هذا التحديث: R3-C3 حسب 03/05/08: synthetic retirement future design/documentation only؛ لا deletion/migration/production write.
 
 
 ## تحديث 2026-10-07 — R3-C3
@@ -176,3 +178,13 @@ R3-D0: DOCS DONE / OWNER APPROVED — h7-v1 في11. D1/D2 لم تنفذا؛ تن
 - merge `2e3d3681093a591e917dd1c57dc9cc249c307458`؛ main Quality #264 SUCCESS؛ Deploy #493 SUCCESS. R3-C3 CODE/DOCS DONE / DEPLOYED.
 - التصميم المستقبلي fail-closed، dry-run إلزامي، وتصريح المالك مطلوب عند التنفيذ؛ هذا الإغلاق لا يفوض أي حذف مستقبلي.
 - R3 C1/C2/C3 CLOSED. NEXT: R4 وفق 01/03/04/05/08/10؛ لا إعادة فتح الأعمال المغلقة دون blocker جديد محدد.
+
+## الحالة النشطة — 2026-10-08 / R4 recovery
+
+- مرجعCODE المثبت: `2e3d3681093a591e917dd1c57dc9cc249c307458`. PR#103 OPEN؛ HEAD `d020d8c4febdf778fabfe592dd11f40ed48add4a`. لا merge أو deploy لها وقت القراءة؛ لا إصلاح مكرر.
+- نتائج المتصفح: NOT READY وفق ملخص القائد؛ عيوب12 لا تعيد المراحل المغلقة. الإدارة BLOCKED ACCESS؛ VOD يحتاج فحص عينة، لا FAIL شامل.
+- استهلاكD1 منقول من مساعدCloudflare/جدول المالك: 1+2 يمثلان48.5%، أعلى عشرة73.4%. الأرقام الساعية/executions متناقضة في تقرير لاحق؛ لا تستخدم لتحديد الزوار أو سببfull scan دون دليل. القراءة المباشرة للمخطط غير متاحة هنا.
+- **NEXT: R4-DB-DIAG-1 — PLANNED**؛ ثمOPT وفق الدليل. وحداتR4 الأخرى PLANNED في12، لا نفترض تنفيذها.
+- DB-HOSTING/NOTIFICATION-CLOSED POLICY/ADMIN ACCESS: OPEN؛ لا تغيّرقرارات08/11 ولا تمنح production write.
+- انتهى حوار مساعدCloudflare؛ يكمل LOCAL الفحص المحدد، لا جولات إحصاء واسعة أو تعطيل العمل لتصحيح عدد الزوار.
+- القائد يحفظ أي حالة LOCAL/REMOTE أحدث وPLAN/CODE SHA قبل handoff. تقدير5–9أيام مشروط، لا موعدإطلاق مضمونًا.
