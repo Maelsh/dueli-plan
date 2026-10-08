@@ -1,3 +1,11 @@
+## 2026-10-08 — Verified execution update (supersedes historical snapshot in §1)
+
+- CODE MAIN: `5a74310667bfed286cc1f1ba0dfa450be1bb041b`; PR#103 title fix MERGED/DEPLOYED; PR#104 R4-DB-OPT-1 MERGED with owner-authorized production migration 0039 applied and six indexes reported verified. No automatic migration in workflow.
+- PR#104 production Deploy #37771438709 failed despite Quality Gate success: `deploy.yml` index collector restricted snapshot to `required_schema.tables`, omitting six indexes on other tables. This repeated #458's incomplete collector pattern. PR#105 changed snapshot to all `sqlite_master` indexes; independent APPROVE, MERGED, post-merge Quality Gate #37774306486 SUCCESS and Deploy #37774306356 SUCCESS.
+- **DB-01 remains OPEN** pending measured production D1 rowsRead/rowsWritten/executions before/after; schema readiness and successful deploy are not proof of quota headroom. No paid upgrade or DB migration approved.
+- **NEXT** R4-EVENTS-NOTIFY-1, LOCAL tasked, no reported PR yet. Owner-approved one-time cleanup cutoff `2026-10-08T03:31:39Z` is still NOT EXECUTED; leader must review specific guarded SQL/runbook before production write. Permanent closed=read policy unapproved. Existing N-03 conflict requires targeted role/state/HEAD evidence.
+- **Leadership release regression rule**: prior incidents #458 and #37771438709 MUST be consulted for changes to manifest, schema collector or D1 migration; prove snapshot covers required indexes on tables not present in `required_schema.tables`, test missing-index fail-closed, and verify actual post-merge production workflow. PR preview success is not equivalent to production deploy success. Record run IDs and exact SHAs in 04.
+
 # Dueli — R4 Recovery / D1 Consumption / Leadership Handoff
 
 **خطة الاستعادة الهندسية — 2026-10-08. القرارات البشرية المفتوحة أدناه ليست معتمدة.** هذا الملف يضيف إصلاحات لعيوب استخدام وتشغيل جديدة محددة. لا يعيد فتح Backend/Core/Live/TURN/Finance/Ads/R1 أو الوحدات الصحيحة المغلقة. 08 مرجع قرار المالك، 11 مرجع H7 الثابتة، 04 الحالة، 10 بروتوكول الدمج والإصدار. لا تفويض فوترة أو نقل قاعدة أو كتابة إنتاجية من اعتماد هذا الملف.
