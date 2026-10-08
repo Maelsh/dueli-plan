@@ -44,7 +44,7 @@
 |---|---|---|
 | R4-DB-DIAG-1 — NEXT | ربط أعلى الاستعلامات بالكود الكامل؛ فحص الفهارس وEXPLAIN محليًا؛ تتبع تكرار تحميل profile/context وبناء جلسات Home؛ تسليم baseline وخطة تحسين صغيرة | تحليل وT؛ قراءة الإنتاج فقط بتفويض محدد؛ لا Astra |
 | R4-DB-OPT-1 | تحسين الفهارس أو الاستعلامات أو التكرار المثبت؛ مقارنة قبل/بعد بأحجام محددة؛ حفظ التقييم والمشاركة الفعلية وH7 والحجب والفلاتر والثبات والنفاد؛ binds<=100 وقياس الكتابة | بعد DIAG؛ T+B؛ migration إنتاجية بتفويض منفصل |
-| R4-EVENTS-NOTIFY-1 | حفظ receiver في CSP delegate؛ النقر واللوحة؛ تحديث القراءة والعداد؛ رابط طلب الانضمام يصل إلى القرار؛ منع تكرار toast عند replay | T+B؛ allowlist وCSP محفوظان؛ سياسة الإغلاق المقترحة لا تنفذ قبل حسم الاختلاف |
+| R4-EVENTS-NOTIFY-1 | حفظ receiver في CSP delegate؛ فحص handleNotificationClick وtoggleStar والـhandlers المعتمدة المتأثرة بالنمط نفسه موضعيًا؛ النقر واللوحة؛ تحديث القراءة والعداد؛ رابط طلب الانضمام يصل إلى القرار؛ منع تكرار toast عند replay | T+B؛ allowlist وCSP محفوظان؛ سياسة الإغلاق المقترحة لا تنفذ قبل حسم الاختلاف |
 | R4-MESSAGES-1 | إظهار محادثة الهاتف والعودة للقائمة؛ Compose؛ فتح المحادثة الموجودة من profile وعرض الاسم؛ تحديث المعاينات والعدادات | T+B ar/en mobile/desktop؛ الملكية والحجب محفوظان |
 | R4-PROFILE-SAVE-1 | تتبع PUT settings الذي يعيد200 دون حفظ display_name/bio؛ إصلاح المسار المثبت؛ GET وrefresh يثبتان الحفظ | T+B محدد؛ لا إعادة Auth/settings كاملة |
 | R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry؛ الصف البطيء لا يحجب السريع؛ منع stale paint والطلبات المتكررة | ينسق مع DB-OPT على HomePage؛ لا تكليفين متعارضين |
@@ -78,6 +78,8 @@
 | VOD-01 | NEEDS TARGETED VERIFICATION | processing في عينات؛ لم يحسم demo قديم أم عطل | MEDIA-ADMIN-ACCEPT |
 | ADM-01 | BLOCKED ACCESS | لا حساب إداري صالح للتجربة؛ لا PASS ولا FAIL | MEDIA-ADMIN-ACCEPT |
 | VIS-01 | TARGETED | responsive/a11y/dark mode؛ يلزم موضع وشاهد لكل بند | الرحلة المتأثرة ثم ACCEPT |
+| DATA-01 | DATA / TARGETED | بيانات demo قديمة أو غير مناسبة وفق ملخص القائد؛ توثيق العينات وأثرها على الاختبار، دون حذف أو تعديل يخالف KEEP NOW | UX-STATE / MEDIA-ADMIN-ACCEPT |
+| AUTH-OBS-01 | OBSERVATION / NOT AUTOMATIC DEFECT | الدخول يعتمد البريد وفق التقرير؛ فشل admin/admin يثبت غياب وصول صالح فقط. تحقق من عقد معرف الدخول قبل وصفه عيبًا؛ لا إضافة username login أو إنشاء حساب إنتاجي تلقائيًا | MEDIA-ADMIN-ACCEPT / حساب مصرح |
 
 يضيف القائد روابط الشواهد الأصلية عند توفرها. لا حذف demo أو التاريخ لإخفاء العيوب، ولا فتح TURN/Finance/Ads كاملة من عينة وسائط أو واجهة.
 
@@ -131,3 +133,7 @@ PLAN COMMIT: <merged plan SHA>; BASE: <current code main confirmed by lead>
 لا كود أو PR شكلي، ولا production load/export/write/index/migration،
 ولا billing أو نقل أو حذف synthetic. اذكر نقص الوصول دون طلب أسرار بالمحادثة.
 ```
+
+## 9. مطابقة تغطية ملخص التحقيق — 2026-10-08
+
+راجعت قائمة BLOCKERS/HIGH/MEDIUM/UX/DATA في موجه القائد المرفق بندًا ببند مقابل سجل§4. جميع الموانع والعيوب المسماة في هذا الملخص لها وحدة معالجة أو قبول/تصنيف محدد، بما فيها بياناتdemo وعقد معرف الدخول وtoggleStar. هذه تغطية للملخص المتاح، وليست ادعاء جرد كل صفحة في تقريري المتصفح الأصليين أو ضمان عدم ظهور عيب جديد. عند توفر التقريرين، يطابق القائد الشواهد والمواضع الإضافية بالسجل، دون إعادة اختبار بند ثبت أو إعادة فتح تاريخ مغلق.
