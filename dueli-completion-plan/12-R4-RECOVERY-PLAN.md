@@ -38,75 +38,80 @@
 - ExploreSessionService يستدعي deleteExpired عند البناء ويكتب chunks؛ expiry index موجود في0033.
 - migration0006 تتضمن(status,started_at) ومؤشرات status/category/language/country. فهرس started_at مستقلاً ليس حلًا مفروضًا؛ تحقق من الفهارس الفعلية والخطة أولًا.
 
-## 3. الوحدات والنطاق ومعيار القبول
+## 3. وحدات التنفيذ ومعايير القبول
 
-| الوحدة | الهدف وDoD | الوسيلة / الاعتماد |
+| الوحدة | النطاق ومعيار الإغلاق | التحقق والاعتماد |
 |---|---|---|
-|R4-DB-DIAG-1 — NEXT|ربط الاستعلامات الأعلى بالكود الكامل؛ قراءة مخطط الفهارس عند توفر تفويض القراءة؛ EXPLAIN محلي على مخطط مماثل؛ تحديد إعادة البناء/loadProfiles/context/polling ومسار attribution؛ تسليمbaseline وخطة تحسين صغيرة بلا كودإنتاجي|T+تحليل؛ Analytics منقولة تستخدم مع حدودها؛ لا Astra|
-|R4-DB-OPT-1|فهرس/إعادةصياغة/تقليل التكرار وفق القياس؛ مقارنة before/after على أحجام محددة؛ invariants التقييم/المشاركة/H7/الحجب/snapshot/filters/exhaustion محفوظة؛ binds<=100 شامل scalars والقوائم المكررة؛ قياس rowsWritten أيضًا|بعدDIAG؛ T+B موضعيان؛ migration جديدة تحتاج مسارrelease وتفويضproduction منفصل|
-|R4-EVENTS-NOTIFY-1|حفظ receiver في csp-delegate مع allowlist/CSP؛ نقر/keyboard؛ فتح الإشعار يحدثread والعداد بعقد ownership؛ join link يوصل إلى الطلب القابل للقرار؛ replay لا يكررtoast؛ تاريخ الحالة واضح|T+B؛ لا eval أو إعادةأذونات؛ سياسة unreadالمفتوحة أدناه تعرض عند الحاجة|
-|R4-MESSAGES-1|إظهار حاوية mobile الأم/عودةالقائمة؛ بدءمحادثةمنmessages؛ profile deep-link يرجع الموجود/الاسم؛ إرسال/معاينات/عدادات بلاreload؛ الحجب والملكية محفوظان|T+B ar/en mobile/desktop؛ لا إعادةبناءرسائلالإدارة|
-|R4-PROFILE-SAVE-1|PUTsettings200 بلاpersist فيdisplay_name/bio: تتبعpayload/controller/model/GET؛ حفظثمrefresh مثبت؛ validation/ownership|T+B محدد؛ لا إعادةAuth/settingsكاملة|
-|R4-HOME-UX-1|رسمrails المستقلة عندجاهزيتها معloading/retryواضحين؛ المتأخرلا يحجبالسريع؛ تحميلعندالرؤية/تنسيقفتحالجلسات وفققياس؛ لا stalepaint/requeststorm|ينسق معDB-OPT علىHomePage؛ لا تكليفين متعارضين|
-|R4-UX-STATE-1|قائمةالعيوبالمثبتة أدناه:ترجمة/NaN/mojibake/reminder422/help/adminvisibility/عدادات/popovers/تأخير؛ يجمعالمترابطويفصلPRعنداختلافالمسارات|T+B موضعيان؛ لااستكشافشامل|
-|R4-MEDIA-ADMIN-ACCEPT-1|VODprocessingلعينةموجودة:تمييزdemoقديمعنعيب؛ رحلةردالإدارةبحسابصالحومصرح؛ PASS/FAIL/BLOCKEDبدليل|T/Bأولًا؛ S/Hفقطللوسائطالحقيقيةأوالوصول|
-|R4-ACCEPT-REM-1|قبولالرحلاتالتيثبتفشلهاوالمواضعالمعدلةواستقرارDBضمنميزانية؛ تقريرجاهزيةلايمحوعوائقR0|بعدالخدمةوالإصلاحات؛ لا إعادةالبواباتالتاريخية|
+| R4-DB-DIAG-1 — NEXT | ربط أعلى الاستعلامات بالكود الكامل؛ فحص الفهارس وEXPLAIN محليًا؛ تتبع تكرار تحميل profile/context وبناء جلسات Home؛ تسليم baseline وخطة تحسين صغيرة | تحليل وT؛ قراءة الإنتاج فقط بتفويض محدد؛ لا Astra |
+| R4-DB-OPT-1 | تحسين الفهارس أو الاستعلامات أو التكرار المثبت؛ مقارنة قبل/بعد بأحجام محددة؛ حفظ التقييم والمشاركة الفعلية وH7 والحجب والفلاتر والثبات والنفاد؛ binds<=100 وقياس الكتابة | بعد DIAG؛ T+B؛ migration إنتاجية بتفويض منفصل |
+| R4-EVENTS-NOTIFY-1 | حفظ receiver في CSP delegate؛ النقر واللوحة؛ تحديث القراءة والعداد؛ رابط طلب الانضمام يصل إلى القرار؛ منع تكرار toast عند replay | T+B؛ allowlist وCSP محفوظان؛ سياسة الإغلاق المقترحة لا تنفذ قبل حسم الاختلاف |
+| R4-MESSAGES-1 | إظهار محادثة الهاتف والعودة للقائمة؛ Compose؛ فتح المحادثة الموجودة من profile وعرض الاسم؛ تحديث المعاينات والعدادات | T+B ar/en mobile/desktop؛ الملكية والحجب محفوظان |
+| R4-PROFILE-SAVE-1 | تتبع PUT settings الذي يعيد200 دون حفظ display_name/bio؛ إصلاح المسار المثبت؛ GET وrefresh يثبتان الحفظ | T+B محدد؛ لا إعادة Auth/settings كاملة |
+| R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry؛ الصف البطيء لا يحجب السريع؛ منع stale paint والطلبات المتكررة | ينسق مع DB-OPT على HomePage؛ لا تكليفين متعارضين |
+| R4-UX-STATE-1 | النصوص التالفة وNaN والترجمة وreminder422 وhelp وadmin visibility والعدادات/popovers والتفاصيل المثبتة | T+B موضعي؛ جمع المترابط وتقسيم غير المترابط عند الحاجة |
+| R4-MEDIA-ADMIN-ACCEPT-1 | تتبع VOD processing لعينة موجودة؛ فصل demo قديم عن عطل فعلي؛ قبول رد الإدارة بحساب صالح ومصرح | T/B أولًا؛ S/H للوسائط الحقيقية أو الوصول؛ BLOCKED ليس PASS |
+| R4-ACCEPT-REM-1 | قبول الرحلات التي ثبت فشلها والمواضع المعدلة؛ استقرار الخدمة ضمن ميزانية مقاسة؛ تقرير الجاهزية | بعد الخدمة والإصلاحات؛ لا إعادة البوابات التاريخية |
 
-هذه الوحدات ليست عددPRs مفروضًا. PR103مسارموجودمستقل؛ REMOTEرسمي ثمprotocol10، لا APPROVEشخصيبديل. DIAGيمكنبالتوازي معه؛ الواجهاتمحليًايمكنالتقدم فيها أثناءانتظارanalytics، لكن اختبارإنتاجيعلىDBمستنفدةلايفيد.
+الوحدات ليست عدد PRs مفروضًا. PR103 مسار قائم مستقل: مراجعة REMOTE رسمية ثم بروتوكول10، دون إعادة إصلاحه. يمكن DIAG بالتوازي معه، والعمل محليًا على الواجهات أثناء انتظار analytics. القبول الإنتاجي المعتمد علىDB ينتظر استعادتها.
 
-## 4. سجل العيوب الذي يغطيه الإصلاح
+## 4. سجل العيوب
 
-| ID | الأولوية | الشاهد/السبب المتاح | الوحدة |
+مصدر العيوب ملخص القائد لتقريري المتصفح. تصنيف BOTH/ONE يحتاج الشاهد الأصلي، ولا يعاد الاختبار لمجرد التصنيف.
+
+| ID | الأولوية | العيب والدليل المتاح | الوحدة |
 |---|---|---|---|
-|DB-01|BLOCKER|المالك نقلخطأdaily read quota؛ لا migration/bind-limit|DIAG/OPT|
-|N-01|BLOCKER|dropdownنقرTypeError؛ resolveFnيرجعfunctionبلاreceiver وrunHandlerيناديهابلاreceiverمؤيدبالكود|EVENTS-NOTIFY|
-|M-01|BLOCKER|mobileحاويةhidden md:flexلا تظهرعندفتحconversationوفقالتقرير|MESSAGES|
-|P-01|HIGH|settings200والاسم/bioلايحفظانحسبالتقرير؛ السبب يحتاجتتبع|PROFILE-SAVE|
-|N-02|HIGH|فتحViewبلاmarkread؛ اليدويوMarkAllيعملان|EVENTS-NOTIFY|
-|N-03|HIGH|joinnotificationيذهبcompetitionبلاdecision بينماmy-requestsفيهالإجراء|EVENTS-NOTIFY|
-|M-02|HIGH|profile→messagesاسم#id/محادثةموجودةلا تسترجع|MESSAGES|
-|H-01|HIGH|Homeتأخر15–30ثانيةوفقالمتصفح؛ Promise.allمؤيدبالكود|HOME-UX/OPT|
-|S-01|HIGH|titleغيرمهرب؛ PR103OPENيعالجالمسارالمركزي|PR103القائمة|
-|N-04|MEDIUM|SSEtoastsقديمة/closedunread/قبولبعنوانطلبجديد/عربيعلىEN|EVENTS-NOTIFY/UX-STATE|
-|I-01|MEDIUM|InvitePanelmojibake/NaN%، مفاتيحنصوصمفقودة|UX-STATE|
-|U-01|MEDIUM|RemindMe422بلاموعدوبلاتفسير/تأخرقبول10–12ثانية/تعليقاتعدادبلاrefresh|UX-STATE|
-|U-02|MEDIUM|AdminPanelلغيرadminثم403 وhelpرابطobjectObject|UX-STATE|
-|U-03|MEDIUM|بطءinviteبحث/popoversمكررة/تأخرانتقالبعدcreate|UX-STATE|
-|M-03|GAP|Composeغيرموجود/معايناترسائلوقراءةعدادمتأخرة|MESSAGES|
-|VOD-01|NEEDS TARGETED VERIFICATION|processingلعينات؛ بياناتdemoقديمةأوعطللميحسم|MEDIA-ADMIN-ACCEPT|
-|ADM-01|BLOCKED ACCESS|لاadminصالحللتجربة؛ لاPASSولاFAIL؛ admin/adminلايعمللايعنيإنشاءهإنتاجيًا|MEDIA-ADMIN-ACCEPT|
-|VIS-01|TARGETED|responsive/a11y/darkmodeحسبالتقارير؛ يلزمشاهدوموضعلكلبند|الرحلةالمتأثرةثمACCEPT|
+| DB-01 | BLOCKER | رسالة تجاوز daily reads نقلها المالك؛ ليست migration أو bind-limit | DIAG/OPT |
+| N-01 | BLOCKER | dropdown يفشل بنقر الإشعار؛ فقد receiver مؤيد بمسار resolveFn/runHandler | EVENTS-NOTIFY |
+| M-01 | BLOCKER | حاوية محادثة الهاتف hidden md:flex لا تظهر وفق التقرير | MESSAGES |
+| P-01 | HIGH | settings200 دون حفظ الاسم/bio؛ السبب يحتاج تتبع | PROFILE-SAVE |
+| N-02 | HIGH | فتح View لا يحدث is_read؛ MarkAll واليدوي يعملان | EVENTS-NOTIFY |
+| N-03 | HIGH | إشعار طلب الانضمام لا يصل لواجهة Accept/Decline الموجودة في my-requests | EVENTS-NOTIFY |
+| M-02 | HIGH | فتح الرسائل من profile يعرض #id ولا يسترجع المحادثة كما ينبغي | MESSAGES |
+| H-01 | HIGH | تأخر Home15–30ثانية وفق المتصفح؛ Promise.all مؤيد بالكود | HOME-UX/OPT |
+| S-01 | HIGH | title غير مهرب؛ PR103 مفتوحة تعالج المسار المركزي | PR103 القائمة |
+| N-04 | MEDIUM | toasts قديمة وclosed unread ونص قبول بعنوان طلب جديد وعربي داخلEN | EVENTS-NOTIFY/UX-STATE |
+| I-01 | MEDIUM | InvitePanel: mojibake وNaN% ومفاتيح ترجمة ناقصة | UX-STATE |
+| U-01 | MEDIUM | RemindMe422 بلا تفسير؛ تأخر القبول10–12ثانية؛ عداد التعليقات لا يتحدث | UX-STATE |
+| U-02 | MEDIUM | AdminPanel للعادي ثم403؛ help رابط [object Object] | UX-STATE |
+| U-03 | MEDIUM | بحث المدعوين بطيء وpopovers مكررة وتأخر الانتقال بعد create | UX-STATE |
+| M-03 | GAP | Compose غير موجود ومعاينات/عدادات الرسائل متأخرة | MESSAGES |
+| VOD-01 | NEEDS TARGETED VERIFICATION | processing في عينات؛ لم يحسم demo قديم أم عطل | MEDIA-ADMIN-ACCEPT |
+| ADM-01 | BLOCKED ACCESS | لا حساب إداري صالح للتجربة؛ لا PASS ولا FAIL | MEDIA-ADMIN-ACCEPT |
+| VIS-01 | TARGETED | responsive/a11y/dark mode؛ يلزم موضع وشاهد لكل بند | الرحلة المتأثرة ثم ACCEPT |
 
-يضيفالقائدروابطالشواهدالأصليةويصنفCONFIRMED_BY_ONE/BOTH/TARGETEDعندتوفرها؛ لا يطلبإعادةالرؤيةلامجردعدالشهود. لا حذفdemoأوالتاريخلحلUX. حالاتقديمالنصيمكنfallbackدونخلطالعربيةبالترجمةالدلاليةالجديدة.
+يضيف القائد روابط الشواهد الأصلية عند توفرها. لا حذف demo أو التاريخ لإخفاء العيوب، ولا فتح TURN/Finance/Ads كاملة من عينة وسائط أو واجهة.
 
-## 5. تحقيق وتحسين D1 دون تغيير المنتج
+## 5. التحقيق والتحسين دون تغيير المنتج
 
-1. توقفالتشخيصالمحادثيالمتكررمعمساعدCloudflare؛ الجدولأولويةكافية. استرجعrawanalyticsفقطإنكانتمتاحةبسهولة، ولا توقفالفحصالمحليعلىتناقضexecutionالذيلايغيرترتيبالمستهلكين.
-2. اقرأالفهارسالفعالةبإذنقراءةمحددإذاكانمتاحًا؛ حافظعلىمخططlocal/previewمطابق. EXPLAINQUERYPLANللنصالكاملبلاbenchmarkمستنفدعلىproduction. لا تفترضcreatedindexفيrepo=productionموجوددونreadinessدليل.
-3. قارنindexمرشحcreator/opponentمرتبطactualparticipationوملخصحالةالبدءبالخطةوالحجم، ولا تضفثلاثفهارسعمياء. تحققبأنCOUNT/SUMتجمعالصفوفالصحيحة.
-4. شاركسياقالمستخدموالإشاراتالخاملةضمنعمليةبناءمنسقةأوcacheمحكومإذاقياسالتكراربرره؛ لاKVإلزاميولاcacheشخصيمشتركيكشفبيانات. مفتاحيشملidentity/context/policyوالصلاحياتوexpiry؛ إعادةزيارةصريحةتظلجلسةجديدة.
-5. قستكلفةإنشاءsnapshotكاملةواستمرارهاكلّعلىحدة؛ المؤهلونليسوا15فقط. لا سقف15/100 ولاRANDOM+OFFSETولاخلطcontextلحلاستهلاك.
-6. aggregatesمسبقةحللاحقفقطإنأثبتالقياسحاجتها؛ تحتاجupdate/invalidationعندتعديلالتقييم/القطع/المشاركة، لا تغييرSUMstars÷participationsأوH7.
-7. ميزانيةمتوقعة=استدعاءاتالواجهات×قراءاتالطلب+polling/background/QA. متوسطmsالمنخفضلايثبتأنقراءاتD1رخيصة. freequotaقراركفايةبعدالتحسينبهامشموثق؛ لا نعدبأنفهرسينسيجعلانالحصةكافية.
-8. لا حملإنتاجيجديدمتكررلإثباتالاستقرار؛ تحققصغيربعداستعادةالخدمةضمنميزانيةمصرحهابينLOCAL/REMOTEوالقائد.
+1. لا مزيد من جولات المحادثة مع مساعد Cloudflare المغلق. الجدول دليل أولوية كافٍ للفحص المحلي؛ raw analytics إن توفر بسهولة، وليس شرطًا لتعطيل العمل على الاستعلامات المحددة.
+2. فحص indices الفعلية عند توفر وصول مصرح؛ EXPLAIN QUERY PLAN للنص الكامل على local/preview مماثل. لا benchmark ثقيل أو تصدير production وهي مستنفدة. فهرس فيrepo لا يثبت وجوده الفعلي دون شاهد.
+3. تجربة فهرس مناسب لـcreator/opponent وشرط المشاركة الفعلية حسب الخطة والحجم. لا إنشاء ثلاثة فهارس عمياء، ولا وعد بأن COUNT لخمسين مستخدمًا سيقرأ أرقامًا أحادية.
+4. قياس تكرار loadProfiles/loadViewerContext بين rails. مشاركة إشارات خام أو سياق ضمن بناء منسق أو cache محكوم إذا برره القياس. لا KV إلزامي، ولا cache شخصي مشترك يكشف بيانات؛ الهوية والسياق والسياسة والصلاحيات وexpiry محفوظة.
+5. قياس إنشاء snapshot كاملة واستمرار الصفحات كل على حدة. لا سقف15/100 ولا RANDOM+OFFSET ولا اختلاط فلاتر. إعادة الزيارة الصريحة تظل جلسة جديدة وفق السياسة.
+6. aggregates مسبقة حل لاحق إن ثبتت الحاجة؛ تحتاج invalidation عند تعديل الأصوات/النهاية/المشاركة. صيغة Profile وH7 لا تتغير؛ صفوف النتائج الفارغة لا تحذف وظيفتها دون فهم.
+7. ميزانية الاستخدام = طلبات الواجهات × القراءات لكل طلب + polling/background/QA. زمن1ms لا يثبت انخفاض استهلاك الصفوف. يقاس rowsWritten أيضًا عند تغيير session/cache/indices.
+8. اختبار إنتاجي صغير بعد استعادة الخدمة ضمن ميزانية مصرح بها؛ لا reload متكرر بلا غرض. لا إعادة اختبارات تاريخية.
+9. تجميد ترتيب الكتالوج كاملًا لكل rail عندT0 تكلفة تتوسع مع الحجم؛ التحسين يحفظ العقد. إذا لم تكف الفهارس وتقليل التكرار، يعرض تصميم بناء/precomputation مناسب قبل تغيير معنى T0/exhaustion، ولا يسقط المؤهلين بصمت.
 
-## 6. القرارات المفتوحة وحدود التفويض
+## 6. القرارات المفتوحة والتفويض
 
-- **DB-HOSTING OPEN:** إبقاءD1Free/WorkersPaid/نقلإلىاستضافةالمالكلميعتمد. توصيةالتخطيط: تحسينالاستعلاماتأولًا، ومعحاجةاستعادةالخدمةعرضPaidعلىالمالك؛ لا ترقيةأوفوترةأونقلأوSQLwriteهنا. MySQL/MariaDBعلىiFastNetقابلانللدراسةلاحقًا؛ يلزمباقة/TLS/موارد/backup/latencyواختبارترحيلمحدد. SQLiteAPIيعنيbackendإضافيلا نقلملفمباشرإلىWorker.
-- **NOTIFICATION-CLOSED POLICY PROPOSED, NOT OWNER APPROVED:** حفظالتاريخ، وسمالحالةالمغلقةوإخفاءالإجراء؛ القراءةلا تعنيالإغلاقوالإغلاقلا يعنيالقراءة؛ unreadللقراءةوالطلباتالقابلةللإجراءمستقلة. رابطdeep-linkإلىواجهةالقراركافٍبدلإضافةأزرارداخلdropdown. القائديراجع08/العقدالحالي، ويعرضفقطالاختلافالذييحتاجقرارًا؛ لايفرضهذهالمقترحاتكقرارمثبت.
-- **ADMIN ACCESS OPEN:** حسابصالحبتفويضمنالمالكخاصًا. لاadmin/adminإنتاجيمنهذهالخطة، ولا اختراعتفويضإنشائه.
-- **PRODUCTION MIGRATION:** الإذنالسابقبقراءةالفهارسوEXPLAINلمساعدCloudflareلاينتقلإلىأيLOCALكوصولعام؛ القائديحددنطاقالأوامروالهويةإذااحتاجها. الكتابةعنطريقmigration/runbookقابلللمراجعةوتفويضصريح.
-- قراراتH1–H9المثبتةوh7-v1لايعادطرحها؛ KEEP NOWلايتغير؛ grace-periodSECغيرالمانعةلاتتحولدَينًاجديدًا.
+- **DB-HOSTING OPEN:** Free/Paid/النقل لم يعتمد. توصية التخطيط: تحسين الاستعلامات، وعرض Paid على المالك عند حاجة استعادة الخدمة. لا فوترة أو نقل من اعتماد هذه الوثيقة. MySQL/MariaDB علىiFastNet يدرسان لاحقًا بمواصفات الباقة/TLS/الموارد/النسخ/latency وخطة انتقال تحفظ الكتابات. SQLite عبرAPI يضيف خدمة وصول، وليس نقل ملف يفتحه Worker بعيد.
+- **NOTIFICATION-CLOSED POLICY PROPOSED:** حفظ التاريخ مع Closed/Expired/Declined وإخفاء الإجراء المنتهي. الإغلاق لا يعني القراءة، والقراءة لا تعني الإغلاق؛ unread للقراءة والطلبات القابلة للإجراء مستقلة. رابط مباشر لواجهة القرار يكفي بدل أزرار داخلdropdown. المقترح ليس قرار مالك مثبتًا؛ القائد يراجع08 والعقد الحالي ويعرض الاختلاف فقط إن احتاج اعتمادًا.
+- **ADMIN ACCESS OPEN:** حساب صالح مصرح به، تسلم بياناته خاصًا. لا admin/admin إنتاجي من هذه الوثيقة، ولا منح دور تلقائي لفشل اختبار الدخول.
+- **REMOTE ACCESS:** الإذن بقراءة الفهارس/EXPLAIN لمساعدCloudflare لا يتحول إذن وصول عام للوكلاء. القائد يحدد أوامر القراءة والهوية عند الحاجة؛ migration إنتاجية تفوض منفصلة بعد إعدادrunbook قابل للمراجعة.
+- H1–H9 وh7-v1 ثابتة؛ KEEP NOW ثابتة؛ فحوصSEC غير المانعة لا تتحول دينًا أو بوابات جديدة.
 
 ## 7. القبول والكلفة وتسليم القيادة
 
-T: receiver/persistence/queryplan/numericinvariants/ownership. B: Playwrightأومتصفحمعتادmobile/desktopar/enRTL/LTRللنقر/الرسائل/الفلاتر/العدادات/التمرير. S/Astraأوالمالك: الصوتوالصورةوالجهازالحقيقيوالحكمالبصريالحصريعندتعذرT/B؛ لافرضAstraللرانكأوالفهارسأوالرسائل. H: حسابالإدارةوالبنكوالفوترةوالإطلاق.
+T للاستدعاء والحفظ وخطة الاستعلام والحسابات والملكية. B عبرPlaywright أو متصفح معتاد للنقر/الرسائل/الروابط/الفلاتر/العدادات/التمرير وar/en وmobile/desktop وRTL/LTR. S/Astra أو المالك فقط للصوت والصورة والجهاز الحقيقي أو حكم بصري حصري لا يحسمهT/B. H للوصول الإداري والبنك والفوترة والإطلاق.
 
-إغلاقR4الويب:لاblocker/Highمعلومفيالرحلاتالأساسية؛ snapshot/H7/صيغالتقييممحفوظة؛ الخدمةضمنميزانيةمقاسةوالأخطاءواضحة؛ قبولالرحلاتالفاشلة؛ الوصولالإداريالمصرحومعلوماتالإطلاقغيرمؤقتة. R0حالةخارجيةصريحةلاPASSمصطنع؛ البنك/المزوّد/الوثائق/قرارالإطلاقبيدالمالك.
+R4 تغلق عندما لا يوجد blocker/High معلوم في الرحلات الأساسية، والخدمة ضمن ميزانية مقاسة، والرحلات الفاشلة مقبولة، والوصول الإداري مصرح وبيانات الإطلاق غير مؤقتة. R0 خارجية حالتها صريحة؛ لا ادعاء تشغيل دفع حقيقي قبل البنك/المزود ولا قرار إطلاق آلي.
 
-تقديرتخطيطيمن8أكتوبرمعإبقاءD1:متفائل3–5أيام،أرجح5–9،ومععطلmediaأوبناءsnapshotبنيوي10–14؛ ليسموعدإطلاقمضمونًاولايتضمنترحيلDBأوالخارجيات. يحدثبعدDIAGولا يستخدمعددPRsوحدهكقياسقبول.
+تقدير من8أكتوبر مع إبقاءD1: متفائل3–5أيام، أرجح5–9، ومع عطلmedia أو بناءsnapshot بنيوي10–14. تقدير تخطيطي يحدث بعدDIAG، وليس موعد إطلاق مضمونًا ولا يشمل نقلDB أو الانتظار الخارجي.
 
-نقل القيادة يمكن الآن دون انتظارإغلاقجميعالعيوب:يحفظالقائد04وحالةPR103وتكليفREMOTEالنشطوالأدلةوالتفويضات؛ يعطيCODE/PLANSHAالنهائيينومرجع12وNEXT. لا يبدأPRإصلاحمكررلـ103ولا يعيدH7/R2/R3. كلPRكودWORKLOG+PLANSTATUS→REMOTEexactHEAD→expected_head_sha→QualityactualmergeSHA→DeployنفسSHAوفق10.
+يمكن نقل القيادة الآن دون انتظار إصلاح كل العيوب. يحفظ القائد04 وحالةPR103 وتكليفREMOTE النشط والشواهد والتفويضات، ويعطيCODE/PLAN SHA النهائيين ومرجع12 وNEXT. لا تكليف إصلاح مكرر لـ103 ولا إعادةH7/R2/R3.
+
+كلPR كود: WORKLOG.md وPLAN-STATUS.md بحالة صادقة، ثم REMOTE علىexactHEAD/currentbase، merge expected_head_sha، Quality علىactualmergeSHA، Deploy لنفسSHA، وفق10.
 
 ## 8. بطاقة LOCAL للخطوة الأولى
 
@@ -115,16 +120,14 @@ DUELI — LOCAL — R4-DB-DIAG-1 — READ ONLY / NO CODE CHANGES
 CODE: https://github.com/Maelsh/dueli-opus
 PLAN: https://github.com/Maelsh/dueli-plan/tree/main/dueli-completion-plan
 PLAN COMMIT: <merged plan SHA>; BASE: <current code main confirmed by lead>
-اقرأ12 §§1–5 و04 و08 و10 و11؛ القائد يرفقمقتطفالنطاقوالجدولعندتعذرالوصول.
-استعلاماcreator/opponentcounts يمثلان48.5%منقراءاتالجدولالمنقول.
-اربطالنصالكاملبـH7SignalsModel.loadProfilesوloadViewerContext
-وبـUserSignalsModel؛ تحققمنindicesوالـEXPLAINعلىlocal/preview.
-تتبععددsessionbuildsوتكرارprofile/contextبينHome rails؛
-قستكلفةبناءالمؤهلينكاملةواستمرارالدفعاتكلّعلىحدة.
-لا تعتبرالنصالمبتور50paramsعقدًاولاfullscanمثبتًا.
-سلمBASE/مساراتSQL/الفهارس/الخطة/baselineواقتراحأصغرOPT
-يحفظH7والتقييمactualparticipationوالحجبوالسياقوexhaustion.
-لا كودأوPRشكليولاproductionload/remoteexport/write/index/migration
-ولاbillingأوترحيلأوحذفsynthetic. غيابremoteaccessليسإذنطلبsecrets.
-استخدمالأدلةالمنقولةوالمحلية؛ اذكرماينقصفقطلتحسينمحدد.
+اقرأ12 §§1–5 و04 و08 و10 و11؛ القائد يرفق النطاق والجدول عند تعذر الوصول.
+استعلاما creator/opponent counts يمثلان48.5% من الجدول المنقول.
+اربط النص الكامل بـH7SignalsModel وUserSignalsModel.
+افحص indices وEXPLAIN علىlocal/preview، وتكرار profile/context وsession builds.
+قِس بناء جميع المؤهلين واستمرار الدفعات منفصلين.
+النص المبتور50params وfull scan ليسا حقيقتين مثبتتين.
+سلم BASE والمسارات والـSQL والفهارس والخطة وbaseline وأصغر OPT مقترحة.
+احفظ H7 والتقييم والمشاركة الفعلية والحجب والسياق وexhaustion.
+لا كود أو PR شكلي، ولا production load/export/write/index/migration،
+ولا billing أو نقل أو حذف synthetic. اذكر نقص الوصول دون طلب أسرار بالمحادثة.
 ```
