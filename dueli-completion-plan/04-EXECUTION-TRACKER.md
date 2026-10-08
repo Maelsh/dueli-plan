@@ -198,3 +198,10 @@ N-03 = DISPUTED / TARGETED CHECK: PDF يثبتone-click للقرار بينما 
 تنظيفnotification read قبل2026-10-08T03:31:39Z = OWNER APPROVED / NOT EXECUTED؛ التفويض المحدود في08 و12 §10.2، ولا تنظيف رسائل أو حذف بيانات.
 DB-01 = OPEN رغم عودة الخدمة بتقرير المالك؛ تشخيص وخفض الاستهلاك وقبول ميزانية مقاسة ما زالت مطلوبة.
 NEXT المرجعي R4-DB-DIAG-1 ثمOPT؛ إن بدأ القائد بالفعل لا يعاد التكليف ولا يلغى عمل نشط. يحدث حالةLOCAL/REMOTE/PR من الواقع الحالي قبل أيprompt جديد.
+
+
+## متابعة R4-DB-DIAG-1 — تقرير LOCAL 2026-10-08
+
+LOCAL READ-ONLY REPORT RECEIVED / LEAD REVIEW PENDING؛ بلا PR/كود/إنتاج. EXPLAIN محلي يثبت مسارات scan لratings competitor وcompetitions creator/opponent وusers active وreverse blocks وفرز SSE؛ T0/بحث كامل وpolling مصادر تضخيم. HEAD المحلي d020d8c والشجرة متسخة بملفات غير ذات صلة؛ نتائج DAU تقديرية وليست قياس rowsRead/rowsWritten. **DB-01 OPEN؛ NEXT: مراجعة التشخيص وتحديد OPT-1، لا إعادة DIAG**. التفاصيل والقيود بجوار الوحدة في12 §10.5.
+
+**OWNER PROCESS DECISION:** سجل الملاحظات بجوار وحداتها في ملفات الخطة لا في المحادثة؛ كل موجه للوكلاء يطلب تقريرًا مختصرًا جدًا مع إحالة الأدلة التفصيلية لملفات المستودع. راجع 10 §12 و12 §10.6. PR#103 ما زالت OPEN ولم تُدمج، وS-02 يحتاج حسمًا؛ تنظيف الإشعارات القديمة معتمد ولم ينفذ.
