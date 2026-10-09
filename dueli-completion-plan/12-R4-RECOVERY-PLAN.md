@@ -1,6 +1,8 @@
+> **مصدر الترتيب والحالة الوحيد:** [14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md). هذا الملف يحدد النطاق/العقود فقط؛ أرقام المهام وموضع التنفيذ والحالات القديمة فيه ليست تكليفًا نافذًا. أي تعديل نطاق أو إضافة أو تغيير أولوية يجب أن يحدّث المسار14 في PR الخطة نفسه، مع حفظ كل بند أزيح إلى ترتيب جديد.
+
 ## المزامنة الحاكمة — 2026-10-09
 
-التكامل الجديد والتوثيق في[13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md)، وحالة04 هي المرجع. NEXT LIVE-INT-1 لاDIAGمكرر؛ PR103–106 مدموجة و106نشرهاSUCCESS. DB-01 يبقىOPENللقياس. الوحداتوالشواهدالتاريخيةأدناه محفوظة، لايعادreceiver/star/title/0039 منوصفقديمOPEN.
+التكامل الجديد والتوثيق في[13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md)، وحالة04 هي المرجع. التوجيه التاريخي (ليس تكليفًا حاليًا) LIVE-INT-1 لاDIAGمكرر؛ PR103–106 مدموجة و106نشرهاSUCCESS. DB-01 يبقىOPENللقياس. الوحداتوالشواهدالتاريخيةأدناه محفوظة، لايعادreceiver/star/title/0039 منوصفقديمOPEN.
 
 MEDIAانتقلتإلىLIVE/CHUNK/COMP بوحداتهافي13؛ قبولالإدارةالمخولباقٍ. UX-STATE توسعتإلىUX-I18N-1؛ كلالعيوبالأخرىMESSAGES/PROFILE/HOME والعداداتوالـa11yفيهذاالملفمحفوظة. cleanupالمأذونغيرمثبتالتنفيذ. نتائجالتقريرالأحدث تحدّثالشاهدولايفترضALREADYDONEلأيعيبجديد.
 
@@ -9,14 +11,14 @@ MEDIAانتقلتإلىLIVE/CHUNK/COMP بوحداتهافي13؛ قبولالإد
 - Authenticated competition page `/competition/2201?lang=ar`: top navigation Help icon duplicates Help in authenticated account menu; show top-nav Help **only to guests** while preserving guest discoverability, keyboard/aria, RTL/LTR and 390px layout. Scope to R4-UX-STATE-1 / VIS-02, no blanket removal.
 - Same Arabic completed competition shows literal English `Reminder On`: i18n leak and incorrect completed lifecycle action. Scope to R4-UX-STATE-1 / U-01 and I-01: all visible states/labels translated via ar/en dictionaries and t()/translations, completed reminder hidden/disabled; verify ar/en and desktop/mobile. Screenshot alone does not establish VOD backend failure; check player processing/unavailable fallback in MEDIA/ADMIN.
 - Every LOCAL/REMOTE prompt for UI work must explicitly require reading `AGENTS.md` and relevant binding docs (`docs/01-ARCHITECTURE-RULES.md`, `docs/11-DEFINITION-OF-DONE.md`, `docs/13-TEST-STRATEGY.md`, `docs/18-REPOSITORY-CHANGE-POLICY.md`), plus PLAN 08/10/12. Acceptance gates: MVC/OOP, SQL Models only, i18n ar/en, RTL/LTR, accessibility/aria, dark/mobile; tests on changed paths. No blanket re-audit of closed phases.
-- Chat report compact: STATUS, PR/FULL HEAD, 3–5 evidence findings, BLOCKERS, NEXT; full evidence in repository. Repeated long reports are not requested.
+- Chat report compact: STATUS, PR/FULL HEAD, 3–5 evidence findings, BLOCKERS, التوجيه التاريخي (ليس تكليفًا حاليًا); full evidence in repository. Repeated long reports are not requested.
 
 ## 2026-10-08 — Verified execution update (supersedes historical snapshot in §1)
 
 - CODE MAIN: `5a74310667bfed286cc1f1ba0dfa450be1bb041b`; PR#103 title fix MERGED/DEPLOYED; PR#104 R4-DB-OPT-1 MERGED with owner-authorized production migration 0039 applied and six indexes reported verified. No automatic migration in workflow.
 - PR#104 production Deploy #37771438709 failed despite Quality Gate success: `deploy.yml` index collector restricted snapshot to `required_schema.tables`, omitting six indexes on other tables. This repeated #458's incomplete collector pattern. PR#105 changed snapshot to all `sqlite_master` indexes; independent APPROVE, MERGED, post-merge Quality Gate #37774306486 SUCCESS and Deploy #37774306356 SUCCESS.
 - **DB-01 remains OPEN** pending measured production D1 rowsRead/rowsWritten/executions before/after; schema readiness and successful deploy are not proof of quota headroom. No paid upgrade or DB migration approved.
-- **NEXT** R4-EVENTS-NOTIFY-1, LOCAL tasked, no reported PR yet. Owner-approved one-time cleanup cutoff `2026-10-08T03:31:39Z` is still NOT EXECUTED; leader must review specific guarded SQL/runbook before production write. Permanent closed=read policy unapproved. Existing N-03 conflict requires targeted role/state/HEAD evidence.
+- **التوجيه التاريخي (ليس تكليفًا حاليًا)** R4-EVENTS-NOTIFY-1, LOCAL tasked, no reported PR yet. Owner-approved one-time cleanup cutoff `2026-10-08T03:31:39Z` is still NOT EXECUTED; leader must review specific guarded SQL/runbook before production write. Permanent closed=read policy unapproved. Existing N-03 conflict requires targeted role/state/HEAD evidence.
 - **Leadership release regression rule**: prior incidents #458 and #37771438709 MUST be consulted for changes to manifest, schema collector or D1 migration; prove snapshot covers required indexes on tables not present in `required_schema.tables`, test missing-index fail-closed, and verify actual post-merge production workflow. PR preview success is not equivalent to production deploy success. Record run IDs and exact SHAs in 04.
 
 # Dueli — R4 Recovery / D1 Consumption / Leadership Handoff
@@ -63,7 +65,7 @@ MEDIAانتقلتإلىLIVE/CHUNK/COMP بوحداتهافي13؛ قبولالإد
 
 | الوحدة | النطاق ومعيار الإغلاق | التحقق والاعتماد |
 |---|---|---|
-| R4-DB-DIAG-1 — NEXT | ربط أعلى الاستعلامات بالكود الكامل؛ فحص الفهارس وEXPLAIN محليًا؛ تتبع تكرار تحميل profile/context وبناء جلسات Home؛ تسليم baseline وخطة تحسين صغيرة | تحليل وT؛ قراءة الإنتاج فقط بتفويض محدد؛ لا Astra |
+| R4-DB-DIAG-1 — التوجيه التاريخي (ليس تكليفًا حاليًا) | ربط أعلى الاستعلامات بالكود الكامل؛ فحص الفهارس وEXPLAIN محليًا؛ تتبع تكرار تحميل profile/context وبناء جلسات Home؛ تسليم baseline وخطة تحسين صغيرة | تحليل وT؛ قراءة الإنتاج فقط بتفويض محدد؛ لا Astra |
 | R4-DB-OPT-1 | تحسين الفهارس أو الاستعلامات أو التكرار المثبت؛ مقارنة قبل/بعد بأحجام محددة؛ حفظ التقييم والمشاركة الفعلية وH7 والحجب والفلاتر والثبات والنفاد؛ binds<=100 وقياس الكتابة | بعد DIAG؛ T+B؛ migration إنتاجية بتفويض منفصل |
 | R4-EVENTS-NOTIFY-1 | حفظ receiver في CSP delegate؛ فحص handleNotificationClick وtoggleStar والـhandlers المعتمدة المتأثرة بالنمط نفسه موضعيًا؛ النقر واللوحة؛ تحديث القراءة والعداد؛ رابط طلب الانضمام يصل إلى القرار؛ منع تكرار toast عند replay | T+B؛ allowlist وCSP محفوظان؛ حسم N-03؛ تنظيف الإشعارات القديمة مرة واحدة معتمد في08/§10؛ السياسة الدائمة منفصلة |
 | R4-MESSAGES-1 | إظهار محادثة الهاتف والعودة للقائمة؛ Compose؛ فتح المحادثة الموجودة من profile وعرض الاسم؛ تحديث المعاينات والعدادات | T+B ar/en mobile/desktop؛ الملكية والحجب محفوظان |
@@ -132,7 +134,7 @@ R4 تغلق عندما لا يوجد blocker/High معلوم في الرحلات
 
 تقدير من8أكتوبر مع إبقاءD1: متفائل3–5أيام، أرجح5–9، ومع عطلmedia أو بناءsnapshot بنيوي10–14. تقدير تخطيطي يحدث بعدDIAG، وليس موعد إطلاق مضمونًا ولا يشمل نقلDB أو الانتظار الخارجي.
 
-يمكن نقل القيادة الآن دون انتظار إصلاح كل العيوب. يحفظ القائد04 وحالةPR103 وتكليفREMOTE النشط والشواهد والتفويضات، ويعطيCODE/PLAN SHA النهائيين ومرجع12 وNEXT. لا تكليف إصلاح مكرر لـ103 ولا إعادةH7/R2/R3.
+يمكن نقل القيادة الآن دون انتظار إصلاح كل العيوب. يحفظ القائد04 وحالةPR103 وتكليفREMOTE النشط والشواهد والتفويضات، ويعطيCODE/PLAN SHA النهائيين ومرجع12 والتوجيه التاريخي (ليس تكليفًا حاليًا). لا تكليف إصلاح مكرر لـ103 ولا إعادةH7/R2/R3.
 
 كلPR كود: WORKLOG.md وPLAN-STATUS.md بحالة صادقة، ثم REMOTE علىexactHEAD/currentbase، merge expected_head_sha، Quality علىactualmergeSHA، Deploy لنفسSHA، وفق10.
 
@@ -228,11 +230,11 @@ DoD: تعطلDB يحاكى محليًا/preview بحقن خطأ محدد لإث�
 - **مصادر التضخيم**: إعادة بناء T0 لكل rail/status/filter/identity، وsearchUsers يحمّل جميع المستخدمين، وSSE polling كل 10 ثوانٍ/اتصال؛ تكاليف continuation أقل من T0. البذور المحلية تتضمن recorded اصطناعيًا بخلاف مسار completed+VOD في الإنتاج؛ لا تعتمد قبول recorded عليها وحدها.
 - **حدود الأدلة**: rowsRead/rowsWritten الفعلية غير مقاسة محليًا؛ أرقام DAU ‏500/125/40 للخفيف/المتوسط/الثقيل تقديرات عند 278 منافسة و26 مستخدمًا، وهامش 50%، **وليست سعة إنتاجية معتمدة**. بيانات Cloudflare السابقة مرجع baseline تاريخي منفصل. يجب إثبات before/after الحقيقي، وتكرار الطلبات، وT0/continuation، والتكلفة الثابتة، والكتابات؛ لا يُغلق DB-01 بالتعافي أو EXPLAIN وحده.
 - **مقترح OPT وليس تفويض تنفيذ**: فهارس موجهة لratings(competitor_id)، competitions(creator_id/opponent_id)، users(is_active)، user_blocks(blocked_id)، sse_event_log(channel,id) بعد فحص الحجم والخطة، ثم تحسين T0/البحث/التكرار **إذا أثبت القياس الحاجة**؛ الفهارس وحدها لا تضمن خفض rowsRead المطلوب. أي migration أو كتابة إنتاجية تحتاج بوابتها وتفويضها، ولا تفويض فوترة/نقلDB. احفظ H7-v1، actual participation، الحجب، العزل، الترتيب، continuation حتى النفاد، وحد100 binds.
-- **DoD OPT**: baseline واقعي قابل للمقارنة + EXPLAIN محلي/بيئة مأذونة، قياس rowsRead/rowsWritten/executions وT0 وcontinuation قبل/بعد، اختبارات تكافؤ، وdegraded UI مع retry محدود بحقن خطأ محلي/preview، لا استنفاد الحصة الإنتاجية. **NEXT**: مراجعة DIAG وتحديد أصغر OPT؛ لا تكليف مكرر.
+- **DoD OPT**: baseline واقعي قابل للمقارنة + EXPLAIN محلي/بيئة مأذونة، قياس rowsRead/rowsWritten/executions وT0 وcontinuation قبل/بعد، اختبارات تكافؤ، وdegraded UI مع retry محدود بحقن خطأ محلي/preview، لا استنفاد الحصة الإنتاجية. **التوجيه التاريخي (ليس تكليفًا حاليًا)**: مراجعة DIAG وتحديد أصغر OPT؛ لا تكليف مكرر.
 - **PR#103 منفصل OPEN**: اختبر S-02 (stored encoded title مثل Tom & Jerry) ومسار create→persist→render قبل REMOTE FINAL؛ لا دمج بمجرد CI.
 
 ### 10.6 انضباط الذاكرة والتقارير — توجيه المالك الملزم
 
 - **ملفات الخطة هي سجل العمل الدائم، لا سياق المحادثة**: كل ملاحظة أو قرار أو نتيجة أو قيد يُضاف **بجوار الخطوة ذات الصلة** في 12/03/08، وتُحدّث حالة 04؛ 10 يحفظ البروتوكول العام. لا تعتمد على أن القائد سيتذكر معلومة من رسالة سابقة، ولا تكرر نصوصًا مطولة في كل handoff.
-- **كل موجه LOCAL/REMOTE/مخطط/استكشافي يفرض تقريرًا بالغ الاختصار**: الحالة PASS/FAIL/BLOCKED، HEAD/PR، حتى 5 نتائج مؤثرة بدليل مرجعي، العوائق، NEXT. التفاصيل/SQL/EXPLAIN/صور/مصفوفات الاختبار في ملفات repo أو مرفق مُشار إليه، لا في الرد؛ لا تكرر تاريخ المشروع أو سجل الاختبارات الطويل. اذكر الاستثناء فقط إن كان التفصيل ضروريًا لقرار أو سلامة.
+- **كل موجه LOCAL/REMOTE/مخطط/استكشافي يفرض تقريرًا بالغ الاختصار**: الحالة PASS/FAIL/BLOCKED، HEAD/PR، حتى 5 نتائج مؤثرة بدليل مرجعي، العوائق، التوجيه التاريخي (ليس تكليفًا حاليًا). التفاصيل/SQL/EXPLAIN/صور/مصفوفات الاختبار في ملفات repo أو مرفق مُشار إليه، لا في الرد؛ لا تكرر تاريخ المشروع أو سجل الاختبارات الطويل. اذكر الاستثناء فقط إن كان التفصيل ضروريًا لقرار أو سلامة.
 - لا توقف مهمة نشطة ولا تعيد تكليفها لتوثيق الملاحظات. تحديث الخطة ليس تنفيذًا أو إغلاقًا للكود.
