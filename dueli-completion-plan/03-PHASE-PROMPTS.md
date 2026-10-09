@@ -1,6 +1,6 @@
 # Dueli — وحدات التنفيذ وموجهات LOCAL/REMOTE
 
-> **الحالة الحالية — 2026-10-08:** R2 ووحدات R3 منفذة ومغلقة وفق04، بما فيها D1/D2 وC1/C2/C3. R4 كشف عيوبًا جديدة محددة؛ خطة الاستعادة في [12-R4-RECOVERY-PLAN.md](12-R4-RECOVERY-PLAN.md). NEXT: **R4-DB-DIAG-1**. PR#103 OPEN؛ لا تعاد الأعمال المغلقة. الفوترة ونقلDB وسياسة الإشعارات المقترحة ليست معتمدة.
+> **المزامنة الحاكمة — 2026-10-09:** CODE MAIN `375bd1809482d21ce2abd4aa7e6c013704967e50`؛ PR103–106 مدموجة، وPR106 post-merge Quality/Deploy SUCCESS. لاPR كود مفتوحة وقت المراجعة. NEXT: **R4-LIVE-INT-1** وفق [13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md). بقية الاستعادة في12 محفوظة؛ DB-01 OPEN للقياس، وتنظيف الإشعارات غير مثبت التنفيذ. الحالات التاريخية أدناه ليست NEXT الحالي. لا إعادة أعمال مغلقة أو تنفيذ103–106 مجددًا.
 
 > **H7 معتمدة وثابتة:** السياسة الرقمية في11، وD0/D1/D2 مغلقة وفق04. لا إعادة تصميم أو اعتماد الأوزان؛ تحسين الاستهلاك يحفظها.
 
@@ -142,3 +142,34 @@ PR واحدة→REMOTE على آخرHEAD/candidate→القائد يدمج مع 
 ## LOCAL التالي
 
 **R4-DB-DIAG-1** — بطاقة LOCAL والنطاق وDoD في12 §8. لا كود أو كتابة إنتاجية فيDIAG؛ PR103 تكليف قائم مستقل. أصدرOPT فقط بعد تقريرDIAG، وبقية وحدات الواجهة المستقلة وفق12.
+
+## تنفيذ استعادة التكامل — مرجع13 / 2026-10-09
+
+مرجع13 حاكم للترتيب الجديد: LIVE-INT-1 → CHUNK-PLAY-1 → COMP-UNIFIED-1 وCHUNK-DOWNLOAD-1 → ACCEPT-REM. UX-I18N-1 توسعةUX-STATE، وGUIDE-1/2 فوقالتوثيقالموجود؛ لاوحداتمكررة. DB-01 وMESSAGES/PROFILE/HOME/ADMIN/R0 محفوظة وفق04/12.
+
+### LOCAL — أول وحدة
+
+```text
+DUELI — LOCAL — R4-LIVE-INT-1
+CODE: https://github.com/Maelsh/dueli-opus
+PLAN: https://github.com/Maelsh/dueli-plan/tree/main/dueli-completion-plan
+BASE: <current CODE MAIN confirmed by lead>
+PLAN SHA: <merged plan commit>; read13 §§1–5 / LIVE-INT-1.
+Read CODE AGENTS.md, docs00/01/04/05/11/13/16/18;
+PLAN08/10/11/12/13. Closed work stays closed.
+Production room uses legacy P2P signaling; reuse correct SignalingManager.
+Start with a short actual-call map for lifecycle/upload/resume/end;
+then implement the smallest shared-client integration, preserving server contracts.
+Owner: only host records/uploads; host loss does not end competition;
+resume appends ordered chunks, no overwrite; server-end documents final marker.
+Keep test pages and reuse their correct functions; no legacy aliases/new WebRTC.
+T/B first; media A/B acceptance is separate, environment BLOCKED is not PASS.
+No code PR for diagnosis only; no server/billing/migration/production writes.
+Update WORKLOG/PLAN-STATUS in same PR, truthful pre-merge status.
+Return STATUS/BASE/HEAD/PR, at most5 evidence items, BLOCKERS/NEXT;
+detailed evidence in approved repository files per10.
+```
+
+### REMOTE — لكل وحدة من13
+
+موجه مستقل يذكر CODE/PLAN وBASE/HEAD المتوقع ومرجعالوحدةوالـDoD، ويطلب قراءةالعقود وdelta الحالي، دونتعديلكود. يراجعMVC/OOP/security/i18n والاختباراتالمحددة، ويفصلT/B/S/H. الصوتوالصورةوالتنزيللاPASSمنAPIفقط. لايكررالبواباتالمغلقة، ويسلمAPPROVE/REJECT/BLOCKED والموانعبروابطشواهد. القائديفحصCIexactHEAD ثمبروتوكول10.
