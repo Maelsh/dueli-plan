@@ -1,3 +1,5 @@
+> **مرجع تاريخي مستبدل — ليس خطة تنفيذ نافذة.** الانتقال إلىdueli-completion-plan لا يعني اكتمال كل بنود هذه الوثيقة. النطاق انتقل أوعدل بقراراتالمالك؛ المطابقةفي[14 §4](../dueli-completion-plan/14-UNIFIED-EXECUTION-PATH.md). ترتيب العمل وحالته حصريًا في14؛ لا استئنافمن هنا أو إعادة أعمال مغلقة.
+
 # DUELI — الخطة الرئيسية الموحّدة للإكمال (Unified Master Completion Plan)
 
 **المصادر المدموجة:** chatgpt-plan · gemini-plan · glm-plan · opus-plan
