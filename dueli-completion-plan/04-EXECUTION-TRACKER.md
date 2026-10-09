@@ -1,3 +1,13 @@
+## الحالة الحاكمة — 2026-10-09 / استئناف بعد التخطيط
+
+- CODE MAIN: `375bd1809482d21ce2abd4aa7e6c013704967e50`. PR103–106 مدموجة؛ لاPR كود مفتوحة وقتالقراءة. PR106 **CODE DONE / DEPLOYED**: [Quality37799232295](https://github.com/Maelsh/dueli-opus/actions/runs/37799232295) و[Deploy37799232315](https://github.com/Maelsh/dueli-opus/actions/runs/37799232315) كلاهماSUCCESS علىنفسSHA؛ لاreceiver/star دوبلكيت.
+- **NEXT: R4-LIVE-INT-1 — PLANNED** وفق[13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md). اختلافعقدالإشاراتهوblockerتكاملمثبت؛ مشكلاتاستقبالالجمهوروالتنزيللايغلقهاP2Pوحده.
+- CHUNK-PLAY-1 / CHUNK-DOWNLOAD-1 / COMP-UNIFIED-1 / UX-I18N-1 / GUIDE-1/2 / ACCEPT-REM = PLANNED؛ لاكودنفذمنهذاالتحديث. UX-I18N توسعةUX-STATE وGUIDE فوقC1/C2، لاازدواج.
+- DB-01 OPEN: القياسالحقيقيوخفضالتكراروالميزانيةمازالتلازمة؛ لاإعادة0039/104/105. MESSAGES/PROFILE/HOME/ADMIN/R0 وبقية12 محفوظة.
+- cleanupالإشعاراتالمأذونقبل2026-10-08T03:31:39Z غيرمثبتالتنفيذ؛ لاDONE. التقريرالأحدثيثبتنجاحreceiver/star، وVIS-02 لم يتكررفيعينته؛ الشواهدالتاريخيةلاتفرضإصلاحًاافتراضيًا.
+- HOST RECORDING POLICY = OWNER CONFIRMED في08/13: انقطاعالمضيفلاend، التسجيلحصري، العودةappend، finalmarkerمنالخادم. صفحاتالاختبارتبقى.
+- مراجعالحالةالقديمةأدناهمحفوظةكتاريخ؛ هذاالقسمالأعلىحاكم. القائديحدثالعملالفعليوالـSHAبعدالاستئناف، لايفترضأنالوثيقةنفذتfeatures.
+
 ## 2026-10-08 — PR106 and owner visual findings (pending production gates)
 
 - **CODE PR#106 R4-EVENTS-NOTIFY-1 MERGED** on `375bd1809482d21ce2abd4aa7e6c013704967e50`; independently approved remediation HEAD `253a1b724d8f36f6f40eaee3eadb4145982abe56`. PR Quality Gate #37794609452 SUCCESS, preview Deploy #37794609471 SUCCESS. Post-merge Quality Gate #37799232295 and production Deploy #37799232315 were IN PROGRESS at last check; do not mark DEPLOYED/DONE before both success. Owner-authorized old-notifications cleanup cutoff `2026-10-08T03:31:39Z` still NOT EXECUTED; SQL reviewed conditionally, production schema/count guard required.
