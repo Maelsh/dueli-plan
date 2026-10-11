@@ -4,7 +4,7 @@
 
 ## ابدأ من مصدر واحد
 
-اقرأ[14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md) ثم04 و08 و10 و11 ومواصفة الصف في05/12/13. لا تستأنف من NEXT تاريخية أوdueli-master-plan. ثبت CODE MAIN وPLAN SHA الحاليين وتابعPR النشطة دون إعادة تكليفها؛ لقطة14 مؤرخة وليست بديلًا عن قراءة التقدم الأحدث.
+اقرأ[14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md) ثم04 و08 و10 و11 ومواصفة الصف في05/12/13/15. لا تستأنف من NEXT تاريخية أوdueli-master-plan. ثبت CODE MAIN وPLAN SHA الحاليين وتابعPR النشطة دون إعادة تكليفها؛ لقطة14 مؤرخة وليست بديلًا عن قراءة التقدم الأحدث.
 
 ## إدارة الوحدة
 
@@ -22,7 +22,7 @@
 
 **لا تدمج تحديث خطة أو تصدر تكليفًا جديدًا إن لم يتضمن14 موضعه.** عند تغيير الأولوية: سجل قبل→بعد والسبب وكلUNIT أزيح وموضعه الجديد، واحفظ DoD والعيوب والشواهد. لا إسقاط/تكرار باسم جديد. الإلغاء أو تقليص النطاق يحتاج قرار المالك ومصدره؛ تحفظ الحالة تاريخيًا. راجع14 §5 و10 قبل الدمج.
 
-لا تغلق رحلة بكاملها من دمج مكون: CODE DONE / DEPLOYED منفصلة عن ACCEPTED وعن HUMAN DONE. وسائطR2-L2 لم تكن مقبولة بالفعل، وقبولها في24–27/38 دون إعادةPhase7. لا تكلف LOCAL مكررًا لـPR نشطة.
+لا تغلق رحلة بكاملها من دمج مكون: CODE DONE / DEPLOYED منفصلة عن ACCEPTED وعن HUMAN DONE. وسائطR2-L2 لم تكن مقبولة بالفعل، وقبولها في24–30/41 دون إعادةPhase7. لا تكلف LOCAL مكررًا لـPR نشطة.
 
 ## الثوابت والتفويض
 
@@ -37,3 +37,7 @@ Cloudflare token بحسب سجل المالك Pages Edit + D1 Read للحساب 
 تقرير قصير: STATUS، UNIT/موضع، BASE/HEAD/PR، حتى5 أدلة مؤثرة، BLOCKERS، NEXT وفق14. التفاصيل في المستودع، لا المحادثة. الموجهات قصيرة فيcode block. HANDOFF يحفظPR/REMOTE النشطة والتفويضات والقبول المتبقي وروابط14/04/08/10/11 ومواصفةالصف.
 
 النسخة القديمة محفوظة في[archive](archive/02-TEAM-LEAD-PROMPT-before-unified-path.md)، لا يستأنف منها.
+
+## PR110 والمقاطع — تعليمات معتمدة11أكتوبر
+
+اقرأ15 مع14. NEXT27 INDEX؛28 SAFE ثم29 PLAYER ثم30 DOWNLOAD/PR110. PR110 HOLD/REJECT محفوظة؛ لا mergeHEAD الحالي ولاLOCALdownload مكرر. استخرج prerequisite المطلوبة منها بتوثيقpaths/commits ثمحدثbase/HEAD والمتبقي وأعدREMOTE المستقلة. لاlegacyupload دونمفتاح أوlease unavailable، لاserverFFmpeg أوoverwrite. MySQL/hosting migration ليست مهمة INDEX؛ PortableModel وD1 الآن. تطبيقPHP/DB البعيدةrunbook وتفويضمحدد وفق10. لا إعادة قرارات08 أوH7.

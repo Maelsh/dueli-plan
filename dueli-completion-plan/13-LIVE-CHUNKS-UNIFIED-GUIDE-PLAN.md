@@ -12,6 +12,10 @@
 - التاريخ: docs/archive/01_VISION.md و02_GOALS.md و03_USER_SCENARIOS.md. البنية: docs/04-STREAMING-PIPELINE.md و05-COMPETITION-LIFECYCLE.md. الأرشيف يشرح الأصل؛ لا ينسخ Jitsi أو0–100 أو«كل اللغات» كتنفيذ حالي.
 - PR103–106 مدموجة. PR106 Quality37799232295 وDeploy37799232315 SUCCESS على375bd180 وفقGitHub. لا PR كود مفتوحة وقت المزامنة. تنظيف الإشعارات لم يثبت تنفيذه؛ DB-01 يبقىOPEN رغم104/0039 وإصلاحrelease105.
 
+## تحديث معتمد — 2026-10-11
+
+PR107/108/109 CODE DONE / DEPLOYED في نطاقها؛ الحالة الأحدث حصريًا في14. شواهد PR110 وملف upload.php أحدث من لقطة9أكتوبر، ولا تفتح هذه الوحدات مجددًا. [15](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md) يضيف INDEX/SAFE/PLAYER قبل DOWNLOAD المحفوظة/PR110، ويحدد metadataDB والمشغل/التنزيل وحقوقه، ويستبدل أي عقد server FFmpeg قديم. هذه شروط جديدة محددة، لا إعادة قبول تاريخي شامل.
+
 ## 2. العقد المعتمد من المالك
 
 1. P2P للصوت والصورة بين المضيف والخصم فقط. الجمهور يشاهد المقاطع المرفوعة بالتتابع مع تأخير قصير؛ لا SFU/Jitsi أو P2P للجمهور.
@@ -72,7 +76,7 @@
 
 ### R4-CHUNK-PLAY-1
 
-**التبعية:** LIVE للقبول الوسائطي؛ تحليل القائمة والخادم يمكن بالتوازي. **النطاق:** ChunkUploader/VideoCompositor/ChunkPlayer، embeddedplayer، proxyplaylist، Models/Services للحالة، عقد FFmpeg الخارجي.
+**التبعية:** LIVE للقبول الوسائطي؛ تحليل القائمة والخادم يمكن بالتوازي. **النطاق:** ChunkUploader/VideoCompositor/ChunkPlayer، embeddedplayer، proxyplaylist، Models/Services للحالة، عقد تخزين المقاطع الخارجي؛ يمنع server FFmpeg وفق08/15.
 
 - عالج خلل استقبال المشاهد مستقلًا. القائمة تعلن القطع الموجودة بالترتيب وبياناتtimeline/format اللازمة؛ استئناف بلاoverwrite وbuffer/retry محدود وحالة gap واضحة.
 - فرق empty-live وupstreamerror وnot-recorded وprocessing وready. لا يمحو proxy كل أخطاء upstream ويحولها إلىempty مؤبدًا. احتفظ بالمشغل الحالي.
