@@ -1,23 +1,22 @@
 # Dueli — بوابة استئناف القيادة
 
-**الحالة والترتيب والمهمة الحالية وجميع المتبقي محفوظة في مصدر واحد: [14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md).** افتحه أولًا؛ هذا الملف لا يحتفظ بقائمة NEXT منافسة.
+**الحالة والترتيب والمهمة الحالية في [14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md) فقط.**
 
-## لقطة المطابقة — 2026-10-09
+## لقطة المطابقة — 2026-10-11
 
-- CODE MAIN: `375bd1809482d21ce2abd4aa7e6c013704967e50`.
-- سجل WORKLOG.md وPLAN-STATUS.md قرئ على هذا SHA، وطابقه14 معPRs والبوابات الفعلية. السجلات awaitingREMOTE القديمة حالات فرع وقت كتابتها، لا أوامرإعادةمراجعة.
-- الوحدة النشطة وحالةPR107 وHEAD وقبولها المتبقي في14 الصف24 و§1. لا تكرر LOCAL ولا تفترض APPROVE/DEPLOYED.
-- Quality37799232295 وDeploy37799232315 SUCCESS علىMAIN أعلاه؛ الروابط في14. DB-01 وcleanup والإجراءات البشرية محفوظة، لا إغلاق بتعافي D1.
-- الوضع: **الويب NOT YET ACCEPTED / NOT LAUNCHED**؛ CODE DONE لا يساوي قبول كل الرحلات.
+- CODE MAIN: `216e4b5d60beb9f5870b2baa2cc6200b2b2d3e7b` بعدPR109.
+- Quality [38113484659](https://github.com/Maelsh/dueli-opus/actions/runs/38113484659) وDeploy [38113484655](https://github.com/Maelsh/dueli-opus/actions/runs/38113484655) SUCCESS على نفسMAIN.
+- الصف26 COMP: CODE DONE / DEPLOYED؛ قبول التغييرات الوسائطية التالية مستقل.
+- PR110 OPEN، HEAD `6e7ca1039484980affbcaf6f0eab548a82c35d17`؛ REMOTE REJECT وفق التقرير المستقل، HOLD في30. تحفظ دون دمج أو تكليف مكرر.
+- NEXT والحالة الملزمة في14: الصف27 INDEX، ثم28 SAFE،29 PLAYER،30 DOWNLOAD؛ المواصفة [15](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md). كل البنود القديمة28–40 انتقلت31–43 بنفسUNIT/DoD؛ mapping في14 §6.
+- نصupload.php منالمالك محلل في15؛ لم يغيرالمخطط الكود أوPHP أوD1. metadataDB وأمانالرفع وحقوقالتنزيل وقرارMySQLالمستقبلي في08/15.
+- WORKLOG/PLAN-STATUS علىMAIN وHEAD110 مصادر حالة الفرع الزمنية، لا تعتبرREMOTE PENDING القديمة أحدث من تقريررفض لاحق.
+- الويب **NOT YET ACCEPTED / NOT LAUNCHED**؛ DB-01 والتنظيف والإجراءاتالبشرية محفوظة.
 
-## كيف تحدث السجل؟
+## تحديث السجل
 
-بعد LOCAL/REMOTE/merge/deploy/قبول/إجراء بشري: حدث صف UNIT في14 والدليل والقبول المتبقي ثم SHA فيلقطةهذهالبوابةإن تغير. القراراتفي08، تفاصيلالعيبفي12/13/المواصفة، releaseفي10، وتحديثWORKLOG/PLAN-STATUS داخلPRالكودنفسها. لا إضافةNEXT مستقل في03/05/12 أوhandoff.
+حدث صف UNIT في14 والدليل/القبول المتبقي بعد كل تقدم؛ لقطة04 توافقه ولا تنشئ NEXT منافسة. قرارات08، مواصفات05/12/13/15، إصدار10، H7 في11. كلPR كود يحدثWORKLOG/PLAN-STATUS داخلها دونDONE مبكر.
 
-عندتغييرترتيب/إضافةمهمة:14 §5 إلزامي؛ سجلالبنودالمزاحةومواضعهاالجديدة. المالكطلبحفظكلالنقاط، فلايحذفأيسطرلمجردإضافةوحدةأعلىأهمية.
+عند إضافة أو إعادة ترتيب:14 §5 إلزامي، قبل→بعد وكلUNIT مزاح؛ لا فقد شروط أوfeature صحيحة منPR110 عند extraction. تطبيق استضافة/migration بعيدة حسبrunbook والتفويض المحدد، لا مندمجخطة وحده.
 
-## السجل السابق محفوظ
-
-[04 الكامل قبل توحيد المسار](archive/04-EXECUTION-TRACKER-before-unified-path.md) يحتفظ بكلPR/HEAD/merge/run والإجراءاتوالقراراتالتاريخية. لا يستأنفمنه. التفاصيلالمغلقةلا تعاد اختباراتهابغرضالتوثيق.
-
-اقرأمع14: [08](08-OWNER-DECISIONS.md)، [10](10-MERGE-RELEASE-PROTOCOL.md)، [11](11-H7-APPROVED-RANKING-POLICY.md)، ومواصفةالصف [12](12-R4-RECOVERY-PLAN.md)/[13](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md).
+[السجل السابق الكامل](archive/04-EXECUTION-TRACKER-before-unified-path.md) محفوظ؛ الشواهد المغلقة لا تعاد بغرض التوثيق.
