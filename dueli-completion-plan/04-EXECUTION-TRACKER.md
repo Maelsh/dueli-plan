@@ -1,22 +1,23 @@
 # Dueli — بوابة استئناف القيادة
 
-**الحالة والترتيب والمهمة الحالية في [14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md) فقط.**
+الحالة والترتيب وNEXT حصريًا في[14](14-UNIFIED-EXECUTION-PATH.md). هذا تحديث **PR مفتوحة فقط**؛ لا دمج أوكود أوproduction action.
 
-## لقطة المطابقة — 2026-10-11
+## لقطة12أكتوبر2026
 
-- CODE MAIN: `216e4b5d60beb9f5870b2baa2cc6200b2b2d3e7b` بعدPR109.
-- Quality [38113484659](https://github.com/Maelsh/dueli-opus/actions/runs/38113484659) وDeploy [38113484655](https://github.com/Maelsh/dueli-opus/actions/runs/38113484655) SUCCESS على نفسMAIN.
-- الصف26 COMP: CODE DONE / DEPLOYED؛ قبول التغييرات الوسائطية التالية مستقل.
-- PR110 OPEN، HEAD `6e7ca1039484980affbcaf6f0eab548a82c35d17`؛ REMOTE REJECT وفق التقرير المستقل، HOLD في30. تحفظ دون دمج أو تكليف مكرر.
-- NEXT والحالة الملزمة في14: الصف27 INDEX، ثم28 SAFE،29 PLAYER،30 DOWNLOAD؛ المواصفة [15](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md). كل البنود القديمة28–40 انتقلت31–43 بنفسUNIT/DoD؛ mapping في14 §6.
-- نصupload.php منالمالك محلل في15؛ لم يغيرالمخطط الكود أوPHP أوD1. metadataDB وأمانالرفع وحقوقالتنزيل وقرارMySQLالمستقبلي في08/15.
-- WORKLOG/PLAN-STATUS علىMAIN وHEAD110 مصادر حالة الفرع الزمنية، لا تعتبرREMOTE PENDING القديمة أحدث من تقريررفض لاحق.
-- الويب **NOT YET ACCEPTED / NOT LAUNCHED**؛ DB-01 والتنظيف والإجراءاتالبشرية محفوظة.
+- CODE MAIN `d778090edc339fc1e9f12c1dd06b1d2af1e164c6`؛PLAN BASE `cef64014b6005faeb002a1dbcd4a45ee0b5b1874`.
+- PR111/INDEX27 MERGED؛تطبيق0041وقبولproductionغيرمثبت. PR112/SAFE28 **MERGED / POST-MERGE BLOCKED**.
+- actual-main [Quality38176712697](https://github.com/Maelsh/dueli-opus/actions/runs/38176712697) SUCCESS و[Deploy38176712714](https://github.com/Maelsh/dueli-opus/actions/runs/38176712714) FAILUREقبلpagesdeploy:0042unexpected-pending.
+- RecoveryC محليةغيرمنشورةحسبتقريرالمالك222576e؛28.1تابع28،لاPR/REMOTEاعتماد. ProfileSEC11 موضع28.2مقترحمعتمدموقعًافيPRالخطةفقط،before-next-productionrelease.
+- PR113/PLAYER29 OPEN HEAD `ef7383a8633719beba420a87197e16f2110d45dd`؛T/B وSجزئيةبحسبLOCAL؛PRQuality/PreviewSUCCESS،REMOTE PENDING. لاstashclaimقديم.
+- PR110/DOWNLOAD30 OPEN/HOLD HEAD `6e7ca1039484980affbcaf6f0eab548a82c35d17`؛REJECTمحفوظ؛لامكرر.
+- جميعالصفوف31–43وDoDمحفوظة. ملكية/mergeorder/cutover في15 §9؛حالةالخروجمنالحادثفي14.
+- لاادعاءفسادبيانات/فقدعمل أوproductionD1قياس. لاDEPLOYEDمنmerge/preview؛0040–0042التطبيقغيرمثبت.
+- تفويض10 §9الدائممحفوظداخلشروطه؛bundle/PHP/صيانةيثبتنطاقهاقبلتشغيلها،لاتنفيذمنهذهPR.
 
-## تحديث السجل
+## الاستئناف
 
-حدث صف UNIT في14 والدليل/القبول المتبقي بعد كل تقدم؛ لقطة04 توافقه ولا تنشئ NEXT منافسة. قرارات08، مواصفات05/12/13/15، إصدار10، H7 في11. كلPR كود يحدثWORKLOG/PLAN-STATUS داخلها دونDONE مبكر.
+افتح14 أولًا؛28.1مراجعةالإصدارو28.2الأمنالمحدد قبلالنشر؛29REMOTEبالتوازي دونmergefeatureحتىالحسم. تحديثكلPR/HEAD/بوابة/قبولفيموضعه،وWORKLOG/PLANSTATUSداخلPRالكودبحالةصادقة.
 
-عند إضافة أو إعادة ترتيب:14 §5 إلزامي، قبل→بعد وكلUNIT مزاح؛ لا فقد شروط أوfeature صحيحة منPR110 عند extraction. تطبيق استضافة/migration بعيدة حسبrunbook والتفويض المحدد، لا مندمجخطة وحده.
+اقرأ02/03/08/10/11/15 وCODE AGENTS/docs01/11/17/18 ومراجع00/12/13/16عندالصلة. الوثائقذاتclaimsتاريخيةتطابقمعالخطةوإغلاقاتها؛لاإعادةبواباتمغلقة. كلتكليفUNIT/BASE/ملكيةpaths/DoD/gates/authorization؛لااعتمادعلىالمحادثة.
 
-[السجل السابق الكامل](archive/04-EXECUTION-TRACKER-before-unified-path.md) محفوظ؛ الشواهد المغلقة لا تعاد بغرض التوثيق.
+[السجل السابق](archive/04-EXECUTION-TRACKER-before-unified-path.md) محفوظ،ليسNEXT منافسة.

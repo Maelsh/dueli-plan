@@ -6,21 +6,22 @@
 ## أين نحن وكم بقي؟
 
 - **تم:** المراحل التاريخية المغلقة، R1، ثم وحدات R2/R3 البرمجية، وإصلاحات103–106. لا تعاد.
-- **نحن الآن:** الصف26 PR109 CODE DONE / DEPLOYED؛ NEXT الصف27 **R4-CHUNK-INDEX-1**. PR110 مفتوحة REMOTE REJECT ومحفوظة للوحدة الأصلية DOWNLOAD في30 بعد متطلباتها الجديدة.
-- **المتبقي قبل إطلاق الويب:** الصفوف27–42: **16 محطة**؛13 معالجة/قبول و3 ذات إجراء/اعتماد بشري. عدد محطات لا PRs أو أيام؛ جميع البنود السابقة محفوظة.
+- **نحن الآن:** INDEX27/PR111 وSAFE28/PR112 MERGED؛ الصف28 **POST-MERGE BLOCKED**. Recovery28.1 ينتظر PR ومراجعة، Profile28.2 قبل النشر التالي؛ PLAYER29/PR113 مفتوحة، DOWNLOAD30/PR110 محفوظة HOLD.
+- **المتبقي قبل إطلاق الويب:** شروط نشر/قبول27–28، معالجةRecovery28.1 وProfile28.2، ثم29–42؛ الوحدات القديمة كلها محفوظة. الصفوف الفرعية لا تغير أرقام29/30 ولا تمثل عدد أيام أوPRs مفروضًا.
 - **بعد الويب فقط:** الصف43 — R5؛ لا يحجب البيتا.
 - تسلسل الأرقام موضع عرض قابل للتحديث؛ UNIT هو المعرف الثابت. تغيير الأولوية يعيد ترقيم العرض ويحفظ المعرف وكل البنود.
 
-## 1. لقطة المطابقة — 2026-10-11
+## 1. لقطة المطابقة — 2026-10-12
 
-- CODE MAIN: `216e4b5d60beb9f5870b2baa2cc6200b2b2d3e7b` بعد PR109 MERGED.
-- PLAN BASE: `6fbdc9831ef6bd3b8236782551819b71b29ad48b`؛ هذه لقطة أساس التحديث، وليس SHA النهائي لهذا الملف.
-- actual-main Quality [38113484659](https://github.com/Maelsh/dueli-opus/actions/runs/38113484659) وDeploy [38113484655](https://github.com/Maelsh/dueli-opus/actions/runs/38113484655) SUCCESS على216e4b5.
-- PR110 [OPEN](https://github.com/Maelsh/dueli-opus/pull/110)، HEAD `6e7ca1039484980affbcaf6f0eab548a82c35d17`؛ REMOTE REJECT وفق التقرير المستقل المنقول، لا merge ولا دليلMP4 ناجح. تحفظ في30 ولا تكليف مكرر؛15 §6.
-- WORKLOG/PLAN-STATUS علىMAIN وHEAD110 مصادر حالتها الزمنية؛ وصفREMOTE PENDING داخلPR لا يتغلب على تقريرREMOTE اللاحق. CODE DONE / DEPLOYED ليس ACCEPTED تلقائيًا.
-- PR107/108 مغلقتان فينطاقهما؛ شواهدالخللالجديدة تستهدف27–30 فقط. DB-01 والتنظيف والإجراءاتالبشرية لا تغلقبعودةD1 أوCI.
-- مصدرتحليلPHP: نصupload.php الذيقدمهالمالك؛ باقيالملفاتمنالتقرير المنقول تحتاجinventory، لا تعديلإنتاجي منالمخطط. المواصفات الجديدة في[15](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md).
-- السجل السابق محفوظ فيarchive؛ لا يعاد اختبار المغلق لمزامنة الخطة.
+- CODE MAIN: `d778090edc339fc1e9f12c1dd06b1d2af1e164c6` بعدPR112؛ PLAN BASE `cef64014b6005faeb002a1dbcd4a45ee0b5b1874`. هذا التحديث **PR خطة مفتوحة فقط**؛ لا دمج/كود/نشر.
+- actual-main Quality [38176712697](https://github.com/Maelsh/dueli-opus/actions/runs/38176712697) SUCCESS؛ Deploy [38176712714](https://github.com/Maelsh/dueli-opus/actions/runs/38176712714) FAILURE قبلpagesdeploy: unexpected-pending0042. SAFE28 **MERGED / POST-MERGE BLOCKED**، لاDEPLOYED.
+- PR111 MERGED؛ تطبيق0041/readyendpoint الإنتاجي غيرمثبت. ملفmanifest يذكر0040/0041 history-only و0042 غائبة؛ required/schema غيرمحدثة؛15 §9.
+- PR113 [OPEN](https://github.com/Maelsh/dueli-opus/pull/113) HEAD `ef7383a8633719beba420a87197e16f2110d45dd`،BASEd778090؛ PRQuality38205955323 وPreview38205955359 SUCCESS؛ REMOTE PENDING وSجزئيةبحسبتقريرLOCAL؛noVODaudioPASSمنpreview.
+- PR110 OPEN/HOLD HEAD `6e7ca1039484980affbcaf6f0eab548a82c35d17`؛ REMOTE REJECTمحفوظة؛لاتكليفمكرر.
+- RecoveryC محليةحسبتقريرالمالك،HEADمختصر222576e غيرمنشور؛ لااعتمادdiff/rawhashfixمنالتقرير. ملفupload/PHP الحقيقي لمينشرأويختبرمنالمخطط.
+- WORKLOG/PLANSTATUS قرئت علىMAIN؛ حالاتawaitingREMOTE القديمة لا تثبتفقدالكود أوDEPLOYED. Profile sessionquerytoken مؤكدةبالقراءةعلىMAIN؛ لاادعاءاختراقفعلي.
+- لاوصولمستقلProductionD1 منهذاالتحديث؛0040–0042 NOT APPLIED EVIDENCED / AUTHORIZATION SCOPE UNRESOLVED. التفويضالدائم10 §9محفوظ،والنطاقالمطابقلايعادسؤاله.
+- الثوابتالمغلقة/H7/KEEP NOW محفوظة.15 §9 يحددالمعالجةوالملكيةوالreleasegates،لاauditشامل.
 
 ## 2. الطريق الكامل
 
@@ -52,9 +53,11 @@
 | 24 | R4-LIVE-INT-1 | عميل signaling مشترك صحيح بدل legacy | CLOSED / CODE DONE / DEPLOYED PR107؛ قبول A/B موثق في REMOTE؛ لا إعادة Phase7 |
 | 25 | R4-CHUNK-PLAY-1 | استقبال الجمهور أثناء البث وبعده، القائمة والاستئناف والنهاية | CLOSED / CODE DONE / DEPLOYED PR108؛ T/B APPROVE مستقل، MEDIA S PASS مستقل لدى REMOTE الثاني (الأول BLOCKED بيئيًا)؛ actual-main Quality/Deploy SUCCESS على `8f3d194`؛13 §5 |
 | 26 | R4-COMP-UNIFIED-1 | صفحة competition الموحدة لجميع الأدوار والحالات | CODE DONE / DEPLOYED PR109؛ actual-main Quality/Deploy SUCCESS على216e4b5؛ لا إعادة الوحدة؛ تحسينات مثبتة في27–30 |
-| **27** | **R4-CHUNK-INDEX-1** | **DB metadata والقائمة والتوقيت والنهاية وعقدModel قابل للنقل** | **NEXT / READY FOR LOCAL** بعد26؛15 §3؛ توافق القراءة أولًا، لا تفعيل upload غير آمن؛ T/B |
-| 28 | R4-CHUNK-UPLOAD-SAFE-1 | مفتاح إلزامي وlease-generation fencing وتخزين immutable/receipt وإلغاءserverFFmpeg | PLANNED بعد27؛15 §4؛ inventory PHP، T/B+endpointدليل محدود؛ externalapply وفقrunbook وتفويض |
-| 29 | R4-CHUNK-PLAYER-UX-1 | double-buffer تحسين،latest-ready/liveedge/rewind،unifiedVOD/boundedpreload | PLANNED بعد27/28؛15 §5؛ T/B ثمS مركزة؛ لاMSE/rebuild بلاشاهد |
+| 27 | R4-CHUNK-INDEX-1 | DB metadata والقائمة والتوقيت والنهاية وعقدModel قابل للنقل | PR111 MERGED؛ تطبيق0041/قبولproduction غيرمثبت؛ الإصدار المشتركمحجوبفي28؛ لاLOCALمكرر؛15 §§3/9 |
+| **28** | **R4-CHUNK-UPLOAD-SAFE-1** | **رفع مخول وlease-generation وreceipt ومنعoverwrite** | **MERGED / POST-MERGE BLOCKED** PR112؛actual-main QualitySUCCESS/DeployFAIL d778090؛عقودPHPوالcutover غيرمقبولةبعد؛28.1معالجةتبعها لا إعادةتنفيذ |
+| 28.1 | R4-RELEASE-RECOVERY-C | معالجة حادثإصدار28: manifest/raw-hashes/lease-client/runbook | NEXT REVIEW PREPARATION؛LOCAL غيرمنشورحسبتقريرالمالك؛لاPRمعتمدة؛15 §9؛ليسSAFEجديدًا،لاimplementationمكرر |
+| 28.2 | R4-PROFILE-SEC11-1 | إزالةsession querytoken/legacycookie المحددة وحارسدقيق | PLANNED IN THIS PLAN PR؛مخالفةمؤكدةعلىMAIN؛15 §9؛قبلالنشرالتالي،لاAuthaudit أوProfileSaveجديد |
+| 29 | R4-CHUNK-PLAYER-UX-1 | المشغل: latest-ready/rewind/liveedge/windowedVOD | PR113 OPEN ef7383a؛LOCAL T/B VERIFIED+S PARTIAL حسبتقريره؛CI/PreviewSUCCESS،REMOTE PENDING؛بالتوازيقراءة/مراجعة،mergeبعدحسم28 والتكاملالجديد |
 | 30 | R4-CHUNK-DOWNLOAD-1 | FFmpeg.wasmbrowser وMP4حقيقي،errors/rightsnotice | PR110 OPEN / HOLD — REMOTE REJECT؛ بعد27–29؛15 §6؛ احفظالعملوحدثbase/HEADثمREMOTE؛لا mergeالحالي أوduplicateLOCAL |
 | 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | PLANNED؛12 §§3/4/10.1؛ M-01..05؛ الفصل الشخصي/الإداري، الملكية والحجب، Enter/Shift+Enter/IME، الثبات بعد refresh |
 | 32 | R4-PROFILE-SAVE-1 | حفظ display_name/bio صادق | PLANNED؛12/P-01؛200 وحده ليس PASS، GET وrefresh يثبتان الحفظ؛ لا إعادة Auth |
@@ -69,7 +72,7 @@
 | 41 | R4-ACCEPT-REM-1 | قبول مجمع للرحلات الفاشلة والمعدلة والوسائط والتنزيل والميزانية | PLANNED بعد المعالجات والإجراءات اللازمة؛12/13؛ T/B أولًا ثم جلسة S محددة؛ لا blocker/High معلوم؛ BLOCKED ليس PASS |
 | 42 | R0-WEB-LAUNCH | عرض الجاهزية الموثقة ثم قرار المالك وإطلاق بيتا الويب | OWNER DECISION عند الجاهزية؛ لا قرار آلي أو ادعاء تشغيل دفع حقيقي دون البنك/المزود |
 | 43 | R5 | PWA وAndroid وiOS وTV والتقنيات والتكلفة وقيود المتاجر | DEFERRED AFTER WEB؛ يعتمد المالك النطاق والترتيب لاحقًا |
-**قاعدة السير:** NEXT الصف27؛ تسلسل INDEX→SAFE→PLAYER→DOWNLOAD ثم31–42. PR110 محفوظة ولا تدمج قبلإصلاح ومراجعةمتبقيها؛ استخراجprerequisites يوثق ويحفظالعمل. لا تنفيذخارجي تلقائي؛15/10. لاNEXT منsnapshotقديمة.
+**قاعدة السير:** أولوية معالجة28.1 وإصلاح28.2 المحدد قبل النشر الإنتاجي التالي؛29/PR113 تحفظ وتراجع بالتوازي بلاmergeFeatureأثناءPOST-MERGE BLOCKED. بعدcandidate/الهجرات/PHP/Quality/Deployوالقبولالخارجي: تكاملالHEAD29ثم30ثم31–42. جميعأرقامUNITsومواضعهاالسابقةثابتة؛slots28.1/28.2مصرحة،لاNEXTمنملفقديم. هذاPRغيرمدموجلايفوضتكليفًا جديدًا.
 
 ## 3. ضمان بقاء جميع العيوب
 
@@ -152,3 +155,18 @@
 |R5|40|43|
 
 التبعيات:27بعد26؛28بعد27؛29بعد27/28؛30بعد27–29؛41يشملmetadata/upload/playback/download والميزانيةوالحقوقضمنالرحلاتالمعدلة. كل شروط12/13 القديمةالمتوافقة باقية، وثلاث وحداتتضيف عقودًا لا تلغيclosed. GUIDE38/39 يحفظالشروطوقبولنسختها؛34يبقىقياسDB-01 وموضعمتابعةDBhosting المستقبلي، لاهجرةDB الآن.
+
+### محاذاة حادث الإصدار — 2026-10-12 / مقترح مفتوح فقط
+
+السبب: MAINd778090 mergedSAFEبmanifest0039 وفشلDeploy؛العقدالخارجيغيرمطابق؛Profilequerysessiontoken مثبتة. RecoveryC ترتبطبالأب28بالslot28.1؛Profilefixبالslot28.2. لا renumber للصف29/30 أو31–43. جميع43UNITالسابقةباقية، Recoverychild+securityfixاثنتان فقط؛لاgovernancecleanupمفوضة.
+
+| القديم | الموضع الحالي | التصحيح |
+|---|---|---|
+|27 INDEX/PR111|27ثابت|MERGED،إثباتتطبيق/قبولproductionمتبقٍ|
+|28 SAFE/PR112|28ثابت|MERGED/POST-MERGE BLOCKED،RecoveryCمعالجة28.1|
+|29 PLAYER/PR113|29ثابت|OPEN،لاstashclaim،REMOTE/Sمتبقية|
+|30 DOWNLOAD/PR110|30ثابت|OPEN/HOLD،عملمحفوظ|
+|31–43جميعUNITs|31–43دونإزاحة|جميعDoDوالملاحظاتمحفوظة|
+|ProfileSave القديم32|32ثابت|لايحل28.2مكانه؛securitysessionمصدرمختلفعنحفظbio|
+
+الملكية/mergeorder/التبعيات/rawintegrity/productionauthorization/rollback في15 §9؛04 مطابق. لاNEXTمنافس في10/15. بعدكلتقدم القائد يحدثexactSHA/PR/verdict/run،لاتسقطأيشرطبنجاحT/B.
