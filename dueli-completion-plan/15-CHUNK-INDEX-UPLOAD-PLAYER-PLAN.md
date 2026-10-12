@@ -143,3 +143,42 @@ MAIN `d778090edc339fc1e9f12c1dd06b1d2af1e164c6`؛ PR111/112 MERGED، وليس ه
 ### ما لا يتحول إلى تكليف
 
 SQLالمحددفيControllers/BaseModelexceptions وSEC05/07/08/10 وG5/UNGUARDED وtsbuildinfo/importscript: تحفظ كملاحظاتتحتاجتتبعدليل/استثناء/إغلاققديم وتصنيف، لا implementationrows أوإزالةعشوائية. لا «آخرتعديلملف» كإثباتتاريخإدخالالمخالفة. Report .tmpمحذوفلايدعيكودمفقود؛ مايهمrawdiffوcontent محفوظ.
+
+## 10. المسار الحالي المعتمد — الخيارB قبلالبيتا — 2026-10-12
+
+**08قرارالمالكالأحدث نافذ:** يتقدمهذاالقسمعلى§6 «استكمالPR110نفسها» وعلى§9 الذيجعلقبولPHPبوابةتسبقكلتقدمميديا. لايعادclosedcode؛ترتيبNEXTوحالته في14فقط.
+
+### ROW30 — PRنظيفة وحفظكلعمل110
+
+ابدأمنMAIN130e18bأوأحدثبعدقراءةGitHub؛لاrebaseشاملل110 أونسخshared.tsالقديمفوق113. بطاقةالنقلداخلWORKLOG/PLANSTATUS:
+- المستبدل:metadata111،lease/server112،clientlease/rawhash114،Profile115،player113؛ربطبpaths/commits.
+- القابلللنقل:fetchretry/errors/cancel/assembly/UI/i18nواختبارات110المفيدة،معتصحيحها للعقودالحالية.
+- المتبقيغيرالمستبدل:livecompatredirect،statuspublisher/automatictransitions/rolewiring والاستعمالالصحيحلصفحةالمنافسة؛تحققموضعيًاوانقلالصحيحضمننطاق30المعتمد،لاتسقطهبدعوى«110كلهاsuperseded».
+- بعدوجودالبديلوcoverageواضحة يغلقالقائد110supersededبرابطPRالبديلةوالقائمة؛لايغلقالمخططالكودمنPRخطة،ولايفقدكلfeaturesذاتالنطاقغيرdownload.
+
+DownloadService مستقلةعنloadedChunks/windowedcache:manifest ثابتللتنزيلمنDB،orderedreadychunks/duration/format/hash/size/finalstate وجميعصفحاتالمؤهل. liveavailableclipإنأتيحيميزعنcompletefinalrecording؛لاوعدملفكاملقبلfinalmarker أوحذفmissingبصمت. failed/gap/resumeformat/timestamps معلنة،ولاinventedمدة.
+
+Remux دونreencode للcodecالمتوافق إذااثبتMP4seekable وصوتوصورةوتوقيتصحاح؛FFmpeg.wasmالمعتمد عندالحاجةمنown-origin package/worker/coreمتوافقةCSP. لاrawBlobconcat ولاغيرMIMEظاهر. WebCodecs+muxerبديلعميللدراسةمحدودةفقطإنمنعتهالموارد؛لالزومrebuildللبث.
+
+الموارد:preflightestimate،fetchنافذةمحدودة،write تدريجية/تخزينمتصفحإذايدعم،تنظيفinputs/temp/objectURLs/worker،timeout/retry/cancelفعليأثناءfetch والمعالجة. سقف512MBالقديمليسownerproductpolicy؛لايعتمدكحدنهائيدونقياس،ولايخفىdownloadpartialعلىأنهfull. قيدمتصفح/ذاكرةمثبتيعرضAR/EN معمسارعملمناسب؛لاوعدغيرمقاسلتسجيلساعتينعلىكلجهاز.
+
+Guestشاهدعاموالزرhiddenفقط؛تحققUIفيالحالاتالفعلية. loggeduserdownload معrightsnotice؛طرفاالمنافسةلهماrepublish/monetize،viewerبإذن؛الشروط/النسخة/قبولالمشتركضمنGUIDE38/39/H9القائمة،لاتنشأبوابةpay/DRM.
+
+DoDمركز:mediaواقعMP4/WebM fixturesتوافقpipelineinitprepend،hostresume/gap/containerchanges،ملفطويلممثل،duration+seek+صوتالطرفينوصورتهما وnooverlapaudio،إلغاءcleanup/timeout/CSPfailednetwork،RTL/mobile/desktop. السلاسةالصوتية/الملفSمحددة؛T/BليسPASSMP4،ولاfullhistoricalsuiteإضافية.
+
+### SEC07/08 وترتيبالحراس
+
+-30.1 SEC07: حصرالقراءوالكتابالفعليةلsession_id/sessionId فيUI/AuthService/admin/advertiser وغيرهاالمتأثرة؛مصدرواحدومفاتيحصحيحة،لاتقدمالقديمعلىالجديد،حراسةnull/transient429/5xxبدونlogoutكاذب. serverroles/Auth/Ads/Finance لايعادبناءها. Profile115منجز.
+-30.2 SEC08:HttpOnly/Secure/SameSiteكوكيويبخادميةبالخصائصالمناسبةللبيئة؛حددمسارlogin/logout/session/OAuth/expiry والحذف،لاJScookiewrite أوlocalStorage/State/windowلrawsessionsecret،ولافرضBearerعلىfetchالمتصفحبعدmigration. Server-to-serverHMAC والticketsمنفصلةولا تزال؛CSRFمتوافقويختبر،لااعتبارCORSمصادقة. تحققبقدرالتغيّرSSEticket/signaling/upload/admin/messages/rate-limit/sessiontransient والجلساتالمتعددة،لاإعادةكلالمنصة.
+-API/appمستقبلية:لايفرضقرارHttpOnlyللويبإلغاءعقدBearerالشرعيلعميلغيرمتصفح،ولاعقودمستقبليةموازيةالآن.
+-30.3:05corsallowlistموجودةفيmain؛10getWebSocketsموجودةوتجهيزغيرنشط. الحراسالحاليةgrepتلتقطcomments،فتصححبفحصتنفيذي/اختباراتسلوكموضعيةولايحذفgateلإسكاتها.07/08تتحولالحراسةذاتالصلةإلىمانعةبعدالإصلاح،لاكلgraceperiod مرةواحدة. SEC11إصلاح115منجز،تعليقاتCIالتاريخيةتصححلاexecutionجديدة.
+
+### عيوبPHP/receipt تبقىضمن28 — لابوابةجديدة
+
+بالقراءةعلى130e18b:runbookpatch يستدعيhelpersغيرمعرفة ولايرسlduration_ms؛file_exists→move_uploaded_fileغيرحصريبالسباق؛receiptcontractلايمرالgenerationأوفحصهعندready؛rollbackيتناقضمعnoDROP وfinalizeالخارجيمازالlegacytrigger. هذهعيوبمحددةلاتساويإعادةSAFEأوإثباتفشلproductionكلها.
+
+يعالجالقائدمايتأكدداخل28/28.1 معrunbookوالاختباراتالمباشرة،ويمكنمتابعة30فيالوقتنفسه. لايوضع«ProductionAcceptancePhase»مستقلولاوقفكافةmergefeaturesلهذهالملاحظات. مايحتاجstorage/durationreceipt حقيقييشهدلهعندالجاهزيةويحفظقبول41؛لاreadyمصطنعولتسهيلالتجربة.
+
+UPLOADS_FROZEN الحاليةتمنعإصدارمفاتيحWorker فقط،لاتضمنمنعkeylessPHPخارجيقديم؛لاتجعلهاgateلكلPR أوتفترضحالةsecretمنالكود. عندتغييراستضافةفعليمععيبمثبت،تحددخطوةالتطبيقالمحدودةوالتفويضالموجود،لاfreeze/maintenance افتراضيًالأعمالالتنزيل.
+
+لاserverFFmpeg،nodeletion/overwrite،rawmigrationhash/readiness،LOCAL→REMOTE→merge→actualSHAQuality/Deployباقةالقواعدالقائمة. عودةDeployالأخضر لايغلقacceptanceالملفقبلشاهد؛وبنفسالوقتmissingPHPproofلايحظرالعملمسبقًا. المالكيريدسرعةإكمالماقبلالبيتاوأصغرإصلاحفعلي،لاقيودإصدارعاممبكرًا.
