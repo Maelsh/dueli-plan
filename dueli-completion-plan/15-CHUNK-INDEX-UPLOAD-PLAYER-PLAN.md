@@ -82,6 +82,64 @@ DB-MEASURE في34 يحفظDB-01 ويضيف metadata: rowsread/written لكلuplo
 
 ## 8. تسليم القائد والتفويض
 
-NEXT يقرأمن14: INDEX ثمSAFE ثمPLAYER ثمDOWNLOAD ثمكلالباقي. OWNER APPROVED لخطة/كود/اختبار هذهالمعالجات؛ تطبيقremoteDB/PHP/إعداداستضافة يحتاجartifactراجع وتفويضالنطاق وفق10/02، لا تغير credentials أوتحذفقطعًا. لاإعادةطلبقراراتالبنية/H7. نسخةupload.php المعطاةكافيةلتحليلها؛ اطلبنسخ الملفاتالأخرىمنزوعةالأسرارعندلزومinventoryفقط.
+NEXT يقرأ من14 فقط؛ لقطة INDEX/SAFE القديمة تاريخية، وتحديث§9 هو عقد معالجة الإصدار. OWNER APPROVED لخطة/كود/اختبار هذهالمعالجات؛ تطبيقremoteDB/PHP/إعداداستضافة يحتاجartifactراجع وتفويضالنطاق وفق10/02، لا تغير credentials أوتحذفقطعًا. لاإعادةطلبقراراتالبنية/H7. نسخةupload.php المعطاةكافيةلتحليلها؛ اطلبنسخ الملفاتالأخرىمنزوعةالأسرارعندلزومinventoryفقط.
 
 مرجعFFmpeg الرسمي: https://ffmpegwasm.netlify.app/docs/getting-started/installation/ ؛ مرجعD1pricing: https://developers.cloudflare.com/d1/platform/pricing/ . يستوثقالمنفذمنversions الفعليةوعقدworkerقبلالتنفيذ.
+
+## 9. معالجة إصدار الصف28 — 2026-10-12 / مقترح PR فقط
+
+هذا التحديث يصف الحادث والتصحيح، ولا يمنح إذن نشر أو تكليفًا جديدًا قبل اعتماد PR الخطة. UNIT `R4-RELEASE-RECOVERY-C` تابع لمعالجة28 (الموضع28.1)، وليس إعادة تنفيذ SAFE. UNIT `R4-PROFILE-SEC11-1` موضع28.2 قبل النشر الإنتاجي التالي. الصفوف29–43 لم تزح.
+
+### الحالة والمصادر
+
+MAIN `d778090edc339fc1e9f12c1dd06b1d2af1e164c6`؛ PR111/112 MERGED، وليس هذا إثبات DEPLOYED. Quality38176712697 SUCCESS وDeploy38176712714 FAILURE قبل pages deploy. PR113/ROW29 OPEN HEAD `ef7383a8633719beba420a87197e16f2110d45dd`؛ PR Quality38205955323 وPreview38205955359 SUCCESS، لا تثبت الصوت أوVOD أوproduction. PR110/HOLD HEAD `6e7ca1039484980affbcaf6f0eab548a82c35d17` محفوظة. Recovery C LOCAL بحسب تقرير المالك، HEAD المختصر222576e غير منشور؛ لا مراجعة مستقلة أواعتماد لكود غير متاح.
+
+المقروء فعليًا منMAIN: manifest baseline0039،0040/0041 history-only،0042 غائبة،schema لا تغطيها؛ upload runbook يسمح Phase1/PHP القديم وfinalize ويقترحDROP/restore rollback. الملف الجديد فيRecovery محلي غير مقروء؛ إصلاح هذه العيوب يحتاج إثباتdiff مستقل، لا تقرير نجاح فقط. profile-page يقبل query token وsession_id عند حل own profile؛ middleware يعتمدBearer/sessionId. لا ادعاءاختراق أوفسادبيانات.
+
+### 28.1 — R4-RELEASE-RECOVERY-C / ملكية واحدة
+
+- نطاق: manifest/readiness/runbook، client lease والخدمات/الroutes اللازمة لتكاملها، مع الأخطاء503 الصادقة ورفضkeyless/stalegeneration/finalize غيرالمخول. لاplayer/download أو إعادة111/112؛ احفظ استخراجlease منPR110 وأثره.
+- manifest يحصر0040/0041/0042 كrequired بأختامها الخام الصحيحة منGit المعتمد، مع جداول/أعمدة/فهارس يعتمد عليها الإصدار. history membership وحده لايكفي. preserve جميع الدبابيس التاريخية؛ لا تعديلSQL تاريخي أوhash لإخفاءcheckoutCRLF.
+- integrity على **raw bytes**؛ ضبطcheckoutLF للملفاتSQL فيبيئةالفحص بدلnormalization فيsha256File. تعديلpolicy/اختبارلتغييرcontent يرفض؛ إثباتLF/CRLF وcontent mutation بمراجعGit، لااتهامخرقdocs18 كأنها تحدد خوارزميةhash.
+- runbook مصحح: لا Phase «Worker آمن/PHP قديم يسمحkeyless»، لاcall serverFFmpeg أوحذفchunks، لاrollback بـDROP أوrestoreDB تلقائي أوPHPkeyless.
+- حدودlease: acquire/heartbeat/expiry/takeover/reconnect مربوطةبالمضيففعليًا، والإصدار/الreceipt يفحصانالجيلالحالي والهويةالمخولة؛ لاوجودclass وحده دليلintegration.
+- REQUIRED T/B: manifests missing/partial/applied/hashMismatch+schema coverage،lease failure/ownership/takeover/retry/finalize،client→PHPverifyHMAC/receiptcontract ببيئةمماثلةموثقة. REMOTE مستقلةexactHEAD/currentBASE؛ أيكودغيرمنشور BLOCKED SUBMISSION.
+- لا S أوAstra لفحصschema/auth/Windows؛ PHP الحقيقي أوfaithfulequivalent للدليل الخارجي وفق§4، productionacceptance تسجلمنفصلة.
+
+### 28.2 — R4-PROFILE-SEC11-1 / إصلاح محدد
+
+- المصدر: الفحص المباشر لـprofile-page.ts علىMAIN؛ لا إعادةAuthphase أوالمالية. owner requested register before release؛ التنفيذ بعداعتمادموضعهفي14.
+- إزالة اعتماد own profile علىsession query token وcookielegacy، باستعمالمصدرauthالمعتمد بدلمنطقينمختلفين. Bearer/sessionId الصحيح يعمل، session_id/querytoken وحدهما لايصادقان.
+- حارسSEC11 يغطيقارئsessiontoken فيالصفحاتوالmiddleware، ويفرقemailverificationtokens وrealtimetickets المشروعة؛ لاحذفtokenqueryعام أوfalsepositive يدفعلتعطيلgate.
+- تحديثحالةSEC11 الحقيقية فيAGENTS/CI وتعليقاتها ذاتالصلة فقط؛ لا تفعيل جميعcontinue-on-error أوتدقيق44publicroutes. لاحاجةsecretrotation عامة دونشاهدتسريبفعلي.
+- DoD T/B: صالحBearer/cookie،غياب/invalidsession،querytokenalone مرفوض،مستخدمusername public صحيح،emailverify/ticket محفوظة،الحارسيلتقطقراءةجلسةURL. لاSQLأوProfileSavefeatureبالتكليف.
+- ملكية: وكيلمستقللهذهالوحدة عندالتكليف؛ لايكلفوكيلRecovery/playerبها ضمنيًا. مشاركةWORKLOG/PLANSTATUS append بحفظالمدخلين؛ صف32PROFILE-SAVE محفوظبنطاقه.
+
+### التبعيات وملكية الملفات
+
+| العمل | الملكية والنطاق | الاعتماد |
+|---|---|---|
+|28.1Recovery|وكيلRecovery الحالي؛lease/client/routes/manifest/readiness/runbook؛PRبعدالنشر|SAFE28والINDEX27،صلاحيةrawhashوالcutover|
+|28.2Profile|منفذمحددبعداعتمادالخطة؛profile/auth-source/SEC11guard/docsذاتالصلة|مستقلبالكود؛يجبضمنreleasecandidateقبلالنشرالتالي|
+|29/PR113|وكيلplayer الحالي؛playlist/timeline/player/page/i18n واختباراتالنطاق|لاoverwritelease/client؛REMOTEبالتوازي،ثمrecheckالتكاملبعدRecovery|
+|30/PR110|PR110المحفوظة؛downloadوالباقيالصحيحمنها|بعد28.1/28.2/29،لاتنزيلموازٍ|
+|WORKLOG/PLANSTATUS|كلمنفذيسجلتغييره؛القائديفحصmerge يحفظمدخلاتالجميع|تعارضprepend ميكانيكيلاسببreset/stash/dropعمل|
+
+ملكيةfiles تحددبالpaths الفعليةفيPRs قبلأيتعديل؛عندتعرضأيملفمشترككpage/Model تسلسلصريح،لافرض أنالتداخل دائمًاوثيقتانفقط. ROW29يبقىمحفوظًا ولاstashclaim من تقريرقديم؛ef7383a هوالدليل الحالي.
+
+### ترتيب الدمج والإنتاج — لا تنفيذ من PR الخطة
+
+1. نشرRecovery C والتحقق المستقل منexactHEAD، ومراجعةProfile المحدودة. ROW29 REMOTEبالتوازي؛ S الناقصةBLOCKED/PENDING لاPASS.
+2. جهزcandidate/releaseSHA واضحًا يجمعRecovery+Profile قبلأينشرإنتاجي، وخطةmerge/deployمراجعة. ترتيبmergeالكود: Recovery ثمProfile، ثم29بعدزوالPOST-MERGE BLOCKED وتجديدتكاملالHEAD. **لا يسمحنشرRecoveryبينهما قبلProfile**؛ يجبحاجزنشرصريحمراجع،لااستغلالreadinessالفاشلةكتنسيقضمني. إذااحتاجتطريقةالدمجدمجProfileأولًالتجنبنافذة،يثبتالقائدالطريقةفيrunbookمعexactcandidateقبلالتشغيل؛لاbypass أوblindrerun.
+3. readinessproductionقراءةفعلية: dueli-db/UUID/target وبaseline0039/hash/pendingexact0040–0042؛ الغيابأوالزيادةSTOP. لاافتراضproductionمنreport أوpreview.
+4. احترام10 §9 التفويضالدائمداخلحدوده. حزمةثلاثهجراتبعددمججزئياتها/تغييرPHP/نافذةصيانة ليستتلقائيًاهجرةواحدةpending؛ يثبتالتفويضالمحددالموجودأويطلباعتمادالنطاقغيرالمغطى فقط. لاعادةسؤاللتفويضمطابقتحققتشروطه.
+5. بعدartifact/runbook/REMOTE/CIوموافقةالنطاقاللازمة: حظررفعوتوثيقإنهاءخارجيقديمقابلللFFmpeg،drainلطلباتجارية،backupوحصرقبلالتغيير؛لاقطعنتيجةالمنافسة/cutoff. طريقةالحظرواستعادةالتشغيليحددهاالمشغّلولايفترضوجودswitchلميبن.
+6. apply0040→0041→0042 بالترتيبوالتحققبعدكلخطوة؛ additiveلايشغلكودًاوحده ولاهيtransactionذريةواحدةمضمونة. لاsubsetactivation، ولاDDLrollbackآلي.
+7. WorkercandidateالذييشملProfileعبرQuality/readinessثمPHPمحصنتحتحظرالرفع؛ ترتيبالتثبيتيمكنالتحضيرلهقبلًالكنلاتفتحخدمةغيرمتوافقة. لامفتاحHMACفيالمحادثة/الlogs ولاheadertrustمنCORS.
+8. endpointقبولحقيقي: missing/wrongbinding/stalegeneration/replay/overwrite/receiptfailure ورفعصحيح→ready؛ تأكيدnoFFmpeg/nodeletion. ثمإعادةفتحالرفعوتحديثDEPLOYED/PROD VERIFIED.
+9. فشلأيخطوة: إبقاءالرفعالمتأثرمحظورًا، حفظschemaوالchunks/history،fixforwardأوكودمتوافقمراجع؛ لاrestorelegacykeyless أوDROP. تعافيالنشرلايساويإغلاق29/S أوDB-01.
+10. لاmergefeaturesلاحقةقبلQuality/DeployلنفسreleaseSHAوقبولخارجيلازم؛لاحاجةانتظاراكتملplayer29لتصحيحالإصدار،ولاحاجةلاعادةبواباتمغلقة.
+
+### ما لا يتحول إلى تكليف
+
+SQLالمحددفيControllers/BaseModelexceptions وSEC05/07/08/10 وG5/UNGUARDED وtsbuildinfo/importscript: تحفظ كملاحظاتتحتاجتتبعدليل/استثناء/إغلاققديم وتصنيف، لا implementationrows أوإزالةعشوائية. لا «آخرتعديلملف» كإثباتتاريخإدخالالمخالفة. Report .tmpمحذوفلايدعيكودمفقود؛ مايهمrawdiffوcontent محفوظ.
