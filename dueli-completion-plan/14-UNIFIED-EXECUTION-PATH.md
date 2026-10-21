@@ -3,11 +3,17 @@
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
 هذا هو المصدر الوحيد **لترتيب العمل وحالته وNEXT**. 08 للقرارات، 11 لأوزان H7 المعتمدة، 10 للدمج والإصدار، 05/12/13/15 للمواصفات. 04 بوابة استئناف تشير إلى هذا المسار، وليست جدولًا منافسًا له.
 
+## الحالة المعتمدة الأحدث — إغلاق UNIT28 والانتقال إلى UNIT30
+
+**UNIT28 ACCEPTED — 2026-10-22 (OWNER APPROVED / PRODUCTION VERIFIED).** CODE MAIN `a2579ce5f1f0d32077506b56553fe9a0f79619f8`; PR125/126/127 MERGED. Post-merge [Quality 39662569083](https://github.com/Maelsh/dueli-opus/actions/runs/39662569083) SUCCESS and [Deploy 39662569170](https://github.com/Maelsh/dueli-opus/actions/runs/39662569170) SUCCESS on exact SHA. Independent real-browser production acceptance: new competition **2253**, three authenticated contexts, two media sources, End while publishing, finalized 11/11 inline snapshot → verified tail 12 chunks / 134.554s, bounded automatic refresh, no reload/playback reset, duration/seekbar updated, polling stopped. Report: `A28-PR127-PRODUCTION-ACCEPTANCE-REPORT.md` (2026-10-22; owner-provided acceptance artifact). Earlier PR125/126 and competitions 2243/2244/2250/2251 remain historical evidence. A28-LEASE/SURFACE/TIME and 28.1–28.5 including children closed within tested scope. No re-test of accepted work without a new independently evidenced defect. **NEXT: UNIT30 R4-CHUNK-DOWNLOAD-1, option B**; PR110 remains OPEN/HOLD and must not be merged; inventory reusable work before clean replacement PR. Preserve 30.1→30.2→30.3→31→32→32.1→33–42, all 54 units and existing DoD.
+
+> الأقسام واللقطات المؤرخة قبل 2026-10-22 أدناه تاريخية عند التعارض. NEXT الحالي هو UNIT30 فقط.
+
 ## أين نحن وكم بقي؟
 
 - **تم:** المراحل التاريخية المغلقة وR1 ووحدات R2/R3؛ ثم PR118–124 كودًا ونشرًا في نطاقها، مع نتائج قبول2242 الجزئية المحفوظة. لا تعاد.
-- **نحن الآن:** MAIN `d0768783` منشور؛ PR122/123/124 CODE MERGED/DEPLOYED؛ قبول2242: UNIT28 NOT ACCEPTED لثلاثة عيوب محددة؛15§14 يحكم المتابعة.
-- **التالي:** حزمة متابعة قبول28 بملكية واحدة (تعافي التسجيل → سطحVOD للمنافسين → الوقت الجاري)، ثم تحقق القبول المتبقي المحدد في15§14 →قبول رحلة28 →30 بالخيارB →30.1/30.2/30.3 →31 →32 →32.1 قوائم البروفايل →33–42.
+- **نحن الآن:** UNIT28 ACCEPTED على إنتاج SHA `a2579ce5`؛ NEXT UNIT30 بالخيار B؛ PR110 OPEN/HOLD.
+- **التالي:** 30 → 30.1 → 30.2 → 30.3 → 31 → 32 → 32.1 → 33–42؛ لا إعادة قبول UNIT28.
 - **بعد الويب:**43/R5، لا يحجب البيتا. لا عدد PRs أوأيام مفروض.
 - UNIT معرف ثابت؛ كل بند سابق محفوظ، والإضافات تحت آبائها دون إعادة ترقيم29–43.
 
@@ -69,7 +75,7 @@
 | 25 | R4-CHUNK-PLAY-1 | استقبال الجمهور أثناء البث وبعده، القائمة والاستئناف والنهاية | CLOSED / CODE DONE / DEPLOYED PR108؛ T/B APPROVE مستقل، MEDIA S PASS مستقل لدى REMOTE الثاني (الأول BLOCKED بيئيًا)؛ actual-main Quality/Deploy SUCCESS على `8f3d194`؛13 §5 |
 | 26 | R4-COMP-UNIFIED-1 | صفحة competition الموحدة لجميع الأدوار والحالات | CODE DONE / DEPLOYED PR109؛ actual-main Quality/Deploy SUCCESS على216e4b5؛ لا إعادة الوحدة؛ تحسينات مثبتة في27–30 |
 | 27 | R4-CHUNK-INDEX-1 | DB metadata والقائمة والتوقيت والنهاية | CODE MERGED / DEPLOYED ضمنMAIN130e18b؛0041appliedحسبLOCAL؛لاLOCALمكرر؛قبولرحلةالتسجيلالمتبقي41 |
-| **28** | **R4-CHUNK-UPLOAD-SAFE-1** | **كود الرفع وقبول رحلة البث؛ حزمة المتابعة الموحدة** | **NEXT / OWNER APPROVED؛ UNIT28 NOT ACCEPTED**؛ كودSAFE والتابعات محفوظ؛ A28-LEASE→SURFACE→TIME منمتبقي28/28.4.1/28.5 بملكيةواحدة؛15§14 قبل/بعد والقبولالمحدود؛ لا UNIT أوPRلكلعيب |
+| **28** | **R4-CHUNK-UPLOAD-SAFE-1** | **كود الرفع وقبول رحلة البث؛ حزمة المتابعة الموحدة** | **ACCEPTED 2026-10-22؛ PR125/126/127؛ إنتاج2253؛** كودSAFE والتابعات محفوظ؛ A28-LEASE→SURFACE→TIME منمتبقي28/28.4.1/28.5 بملكيةواحدة؛15§14 قبل/بعد والقبولالمحدود؛ لا UNIT أوPRلكلعيب |
 | 28.1 | R4-RELEASE-RECOVERY-C | استعادة الإصدار وmanifest/raw hash/lease/runbook | CODE DONE / DEPLOYED #114؛ تطبيق الهجرات بحسب LOCAL السابق؛ تحديثات116/117 محفوظة؛ لا عودة لحوادث مغلقة |
 | 28.2 | R4-PROFILE-SEC11-1 | إزالة session query token وlegacy cookie في Profile | PR115 MERGED / CODE DEPLOYED؛ إصلاح منجز في نطاقه؛ بقية القراء في SEC07/30.1، لا مراجعة Auth كاملة |
 | 28.3 | R4-LIVE-ENTRY-RECOVERY-1 | الاستعداد والنشر الصريح والتفاوض | PR118 CODE MERGED / DEPLOYED إلىdcb56c7؛ S غير مقبولة بعد؛ متابعة محددة28.3.1 دون إعادةPR أوPhase7؛ 15 §§11/12 |
@@ -78,7 +84,7 @@
 | 28.4.1 | R4-CHUNK-VIEW-RECOVERY-REM1 | زمن كامل وربط المشغل ونافذة التحميل | PR121/123 CODE MERGED/DEPLOYED؛ TIME الجاريFAIL في2242، START/total/window PASS بحدودها؛ A28-TIME فيحزمة28 وفق15§14؛ O19/DoD السابقةمحفوظة |
 | 28.5 | R4-LIVE-END-RECOVERY-1 | النهاية وتحديث الحالات وانتقال الجميع للتسجيل | PR124 CODE MERGED/DEPLOYED؛ الحدثوصل/أجهزةالحالةالمجربةحررت، لكنSURFACE للمنافسينFAIL؛ تكملةA28-SURFACE واختبارendمعخصمنشط ضمنحزمة28،15§14؛ FINAL/resume/DoD القديمة محفوظة |
 | 29 | R4-CHUNK-PLAYER-UX-1 | latest-ready/rewind/live edge/windowed VOD | PR113 CODE MERGED / DEPLOYED محفوظة؛ عيب ربط الزمن/الطلب المثبت يعالج في28.4.1، دون إعادة الوحدة أوقبولS مناختبارModel؛ 15§12 |
-| **30** | **R4-CHUNK-DOWNLOAD-1** | **MP4 صالح بخدمة تنزيل مستقلة عنcache المشغل؛ الخيارB** | **PLANNED AFTER ROW28 ACCEPTANCE**؛ PR نظيفة؛ حفظPR110 حتىحصرالنقلوالبديل؛ 15 §§6/10/12.6؛ جلبالباقي/حقوق/Guest/progress/cancel/ملفكبير؛ لاfetchALL أثناءالمشاهدة لحلDownload |
+| **30** | **R4-CHUNK-DOWNLOAD-1** | **MP4 صالح بخدمة تنزيل مستقلة عنcache المشغل؛ الخيارB** | **NEXT / OWNER APPROVED — UNIT28 ACCEPTED**؛ PR نظيفة؛ حفظPR110 حتىحصرالنقلوالبديل؛ 15 §§6/10/12.6؛ جلبالباقي/حقوق/Guest/progress/cancel/ملفكبير؛ لاfetchALL أثناءالمشاهدة لحلDownload |
 | 30.1 | R4-SESSION-KEY-SEC07-1 | توحيدقراءةالجلسةوإزالةsession_id القديمة | PLANNED / OWNER APPROVED؛بعد30وقبل31؛15 §10؛لاصلاحيات/Authrebuild،لاSSO/logoutمصطنع |
 | 30.2 | R4-SESSION-HTTPONLY-SEC08-1 | جلسةويبHttpOnly بدلlocalStorage/JS token | PLANNED / OWNER APPROVED؛بعد30.1؛15 §10؛login/OAuth/CSRF/logout/SSE/signaling/upload بحسبالعقودالمتأثرةفقط |
 | 30.3 | R4-SEC-GUARDS-DOCS-1 | تصحيحfalsepositive05/10 وحالةالوثائقوالحراس | PLANNED؛بعد30.2وقبل31،يمكنتحضيرهابالملفاتالمستقلة؛15 §10؛لاإعادةCORS أوتفعيلWebSocket أوبواباتتاريخيةعامة |
