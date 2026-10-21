@@ -2,6 +2,12 @@
 
 **OWNER APPROVED — 2026-10-11.** المالك وافق على التقسيم والترتيب والمعالجات وطلب تثبيتها ودمج الخطة، وسلم نص upload.php الحالي. ترتيب وحالة وNEXT حصريًا في[14](14-UNIFIED-EXECUTION-PATH.md). هذا ملف عقود وDoD، وليس مسارًا ثانيًا. 08 للقرارات و10 للإصدار؛ لا إعادة H7 أو مراحل مغلقة.
 
+## إغلاق قبول UNIT28 — 2026-10-22
+
+**UNIT28 ACCEPTED — 2026-10-22 (OWNER APPROVED / PRODUCTION VERIFIED).** CODE MAIN `a2579ce5f1f0d32077506b56553fe9a0f79619f8`; PR125/126/127 MERGED. Post-merge [Quality 39662569083](https://github.com/Maelsh/dueli-opus/actions/runs/39662569083) SUCCESS and [Deploy 39662569170](https://github.com/Maelsh/dueli-opus/actions/runs/39662569170) SUCCESS on exact SHA. Independent real-browser production acceptance: new competition **2253**, three authenticated contexts, two media sources, End while publishing, finalized 11/11 inline snapshot → verified tail 12 chunks / 134.554s, bounded automatic refresh, no reload/playback reset, duration/seekbar updated, polling stopped. Report: `A28-PR127-PRODUCTION-ACCEPTANCE-REPORT.md` (2026-10-22; owner-provided acceptance artifact). Earlier PR125/126 and competitions 2243/2244/2250/2251 remain historical evidence. A28-LEASE/SURFACE/TIME and 28.1–28.5 including children closed within tested scope. No re-test of accepted work without a new independently evidenced defect. **NEXT: UNIT30 R4-CHUNK-DOWNLOAD-1, option B**; PR110 remains OPEN/HOLD and must not be merged; inventory reusable work before clean replacement PR. Preserve 30.1→30.2→30.3→31→32→32.1→33–42, all 54 units and existing DoD.
+
+هذا التحديث يغلق معيار القبول في §14 ولا يغير عقود الوحدة 30 أو شروطها. النصوص الأقدم عن NOT ACCEPTED وNEXT28 لقطات تاريخية لا تسري على الحالة الحالية في14.
+
 ## 1. المصدر وحدود الأدلة
 
 - CODE MAIN `216e4b5d60beb9f5870b2baa2cc6200b2b2d3e7b` بعد PR109؛ Quality38113484659 وDeploy38113484655 SUCCESS على نفس SHA.
