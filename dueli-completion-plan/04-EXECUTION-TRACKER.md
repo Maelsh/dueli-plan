@@ -4,7 +4,13 @@
 
 
 
-## لقطة2026-10-21 — المعتمدة للاستئناف
+## لقطة 2026-10-22 — المعتمدة للاستئناف
+
+**UNIT28 ACCEPTED — 2026-10-22 (OWNER APPROVED / PRODUCTION VERIFIED).** CODE MAIN `a2579ce5f1f0d32077506b56553fe9a0f79619f8`; PR125/126/127 MERGED. Post-merge [Quality 39662569083](https://github.com/Maelsh/dueli-opus/actions/runs/39662569083) SUCCESS and [Deploy 39662569170](https://github.com/Maelsh/dueli-opus/actions/runs/39662569170) SUCCESS on exact SHA. Independent real-browser production acceptance: new competition **2253**, three authenticated contexts, two media sources, End while publishing, finalized 11/11 inline snapshot → verified tail 12 chunks / 134.554s, bounded automatic refresh, no reload/playback reset, duration/seekbar updated, polling stopped. Report: `A28-PR127-PRODUCTION-ACCEPTANCE-REPORT.md` (2026-10-22; owner-provided acceptance artifact). Earlier PR125/126 and competitions 2243/2244/2250/2251 remain historical evidence. A28-LEASE/SURFACE/TIME and 28.1–28.5 including children closed within tested scope. No re-test of accepted work without a new independently evidenced defect. **NEXT: UNIT30 R4-CHUNK-DOWNLOAD-1, option B**; PR110 remains OPEN/HOLD and must not be merged; inventory reusable work before clean replacement PR. Preserve 30.1→30.2→30.3→31→32→32.1→33–42, all 54 units and existing DoD.
+
+تبدأ المهمة التالية UNIT30 من CODE MAIN المثبت، وفق14 و15 §§6/10/12.6، مع احترام PR110 HOLD وعدم نقل كوده عشوائيًا. لا تكليف UNIT28 جديد.
+
+## لقطة2026-10-21 — تاريخية وليست حالة الاستئناف
 
 - CODE MAIN `d0768783ede68c11aab9cc442c148d99349fead3`؛ PLAN BASE `d9744c8ce1ee06ac8f0503f56bf792891f88d0d4`.
 - PR122→`54a3380a3c2c06319d48b2be2f953134bba2302d`؛ PR123→`a422f776381a91349e8e2b111dbe92734ed3e89a`؛ PR124→MAIN الحالي؛ كلهاMERGED. Quality39551641343 وDeploy39551641346 SUCCESS.
