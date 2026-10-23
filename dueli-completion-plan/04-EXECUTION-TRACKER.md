@@ -4,7 +4,19 @@
 
 
 
-## لقطة 2026-10-22 — المعتمدة للاستئناف
+
+## لقطة23أكتوبر — استئنافUNIT30.4
+
+- PLAN BASE `1a7caf10fae9e2d332c6c08b166fcffdb441f7d7`؛ CODE MAIN `85eec139893f3b8f783befb8b119f709f8e40b33`.
+- UNIT28 ACCEPTED/CLOSED كمافي22أكتوبر؛ لاتعاد. PR129/30،130/30.1،131/30.2،132/30.3 MERGED؛ actual-main Quality39995222613 وDeploy39995222476 SUCCESS؛ **PRODUCTION ACCEPTANCE PENDING** للوحداتالأربع.
+- مصدرNEXTوالترتيب14: الإضافةالمعتمدة30.4 قبلقبولواحدمجمّع30–30.4 ثم31وبقيةالمسار. المواصفة15§15 وقرار08/23أكتوبر. لايستأنفمنNEXT30 التاريخيةأويبدأ31أوالقبولقبلالإضافة.
+- المتطلبات: برجواحديجمعالإجراءالمناسببدءًا/نشرًامعصلاحيةوموافقةصريحة، expandغيرfullscreen؛ fullscreenبأدواتوخروجظاهر، هاتفملائم، ألوانdownload/comment/message كتدرجالمنصة.
+- إنهاءصريحقبل300s: تأكيد، خسارةالمنهي، رصيدنظامي10للخصم/0للمنهييدخلالتقييمالعام مرةواحدة؛ لاfakeviews/voters. كلقصيرةجودتها0وتعرضبعدالبدائلالأطولمعالبحثالمباشر؛ وقتالخادمهوالمرجع، لاانقطاعكإنهاء.
+-55UNITبعدإضافةواحدة،54السابقةمحفوظة. PR110 OPEN/HOLD ببديلPR129،يحصرالاستبدالقبلإغلاقهالاتُدمج.
+- الخطةفقط؛لاcode/PHP/D1/إعداداتنشرمعدلة. تحققLOCALقبلpatchوREMOTEبعدهثمقبولمجمعبالأدواروالهاتفوالحدودالزمنيةوفق15§15.6.
+
+## لقطة2026-10-22 التاريخية — NEXT30 فيها استُكملت
+
 
 **UNIT28 ACCEPTED — 2026-10-22 (OWNER APPROVED / PRODUCTION VERIFIED).** CODE MAIN `a2579ce5f1f0d32077506b56553fe9a0f79619f8`; PR125/126/127 MERGED. Post-merge [Quality 39662569083](https://github.com/Maelsh/dueli-opus/actions/runs/39662569083) SUCCESS and [Deploy 39662569170](https://github.com/Maelsh/dueli-opus/actions/runs/39662569170) SUCCESS on exact SHA. Independent real-browser production acceptance: new competition **2253**, three authenticated contexts, two media sources, End while publishing, finalized 11/11 inline snapshot → verified tail 12 chunks / 134.554s, bounded automatic refresh, no reload/playback reset, duration/seekbar updated, polling stopped. Report: `A28-PR127-PRODUCTION-ACCEPTANCE-REPORT.md` (2026-10-22; owner-provided acceptance artifact). Earlier PR125/126 and competitions 2243/2244/2250/2251 remain historical evidence. A28-LEASE/SURFACE/TIME and 28.1–28.5 including children closed within tested scope. No re-test of accepted work without a new independently evidenced defect. **NEXT: UNIT30 R4-CHUNK-DOWNLOAD-1, option B**; PR110 remains OPEN/HOLD and must not be merged; inventory reusable work before clean replacement PR. Preserve 30.1→30.2→30.3→31→32→32.1→33–42, all 54 units and existing DoD.
 
