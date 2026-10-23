@@ -3,17 +3,29 @@
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
 هذا هو المصدر الوحيد **لترتيب العمل وحالته وNEXT**. 08 للقرارات، 11 لأوزان H7 المعتمدة، 10 للدمج والإصدار، 05/12/13/15 للمواصفات. 04 بوابة استئناف تشير إلى هذا المسار، وليست جدولًا منافسًا له.
 
-## الحالة المعتمدة الأحدث — إغلاق UNIT28 والانتقال إلى UNIT30
+## الحالة المعتمدة الأحدث — 2026-10-23 / UNIT30.4 قبل القبول المجمع
+
+- CODE MAIN `85eec139893f3b8f783befb8b119f709f8e40b33`؛ PLAN BASE `1a7caf10fae9e2d332c6c08b166fcffdb441f7d7`.
+- UNIT28 **ACCEPTED/CLOSED**؛ شاهد2253 وPR125–127 محفوظ؛ لا إعادةقبولهامنجردإضافةمتطلبات.
+- UNIT30/30.1/30.2/30.3 **CODE MERGED/DEPLOYED — PRODUCTION ACCEPTANCE PENDING**. PR129→`886026f9291fecf9c5640e2aadb942e16a24b380`؛130→`d12b7065de57aef02b3829ef60a10d7bc7d05151`؛131→`312af270c32fb9a44b471da0593565093ee2e521`؛132→MAIN الحالي.
+- [Quality39995222613](https://github.com/Maelsh/dueli-opus/actions/runs/39995222613) و[Deploy39995222476](https://github.com/Maelsh/dueli-opus/actions/runs/39995222476) SUCCESS علىنفسMAIN؛ لايعلنانقبولالوحداتالأربع.
+- **NEXT: 30.4 / R4-COMP-CONTROLS-EARLY-END-1** — اعتمادالمالك23أكتوبر؛ أدواتوfullscreen/mobile/ألوانوثلاثمائةثانية/رصيدنظاميوترتيبالمنافساتالقصيرة. النطاقوالقراراتوالـDoD في15§15 و08.
+- **التسلسل:**30.4 →بوابةإنتاجواحدةمجمعة30–30.4 →31 →32 →32.1 →33–42. أوقفالتكليفالقديمبالقبولقبلالإضافة؛ لاUNIT31قبلالقبول، ولافرضبواباتمنفصلة.
+- PR110 OPEN/HOLD؛ PR129 بديلعملي، حصرالاستبدالوتوثيقهقبلإغلاقها؛ لادمجرأسهاالقديم. إضافة30.4فقط:54→55UNIT؛ كلDoDوالأرقاموالبنودالسابقةمحفوظة.
+- الأقسامالأقدمأدناهسجلتاريخيعندالتعارض؛ الحاليهذهاللقطةوجدول§2.
+
+### سجل22أكتوبر — إغلاقUNIT28 (تاريخي؛ NEXT30 فيه استُكمل)
+
 
 **UNIT28 ACCEPTED — 2026-10-22 (OWNER APPROVED / PRODUCTION VERIFIED).** CODE MAIN `a2579ce5f1f0d32077506b56553fe9a0f79619f8`; PR125/126/127 MERGED. Post-merge [Quality 39662569083](https://github.com/Maelsh/dueli-opus/actions/runs/39662569083) SUCCESS and [Deploy 39662569170](https://github.com/Maelsh/dueli-opus/actions/runs/39662569170) SUCCESS on exact SHA. Independent real-browser production acceptance: new competition **2253**, three authenticated contexts, two media sources, End while publishing, finalized 11/11 inline snapshot → verified tail 12 chunks / 134.554s, bounded automatic refresh, no reload/playback reset, duration/seekbar updated, polling stopped. Report: `A28-PR127-PRODUCTION-ACCEPTANCE-REPORT.md` (2026-10-22; owner-provided acceptance artifact). Earlier PR125/126 and competitions 2243/2244/2250/2251 remain historical evidence. A28-LEASE/SURFACE/TIME and 28.1–28.5 including children closed within tested scope. No re-test of accepted work without a new independently evidenced defect. **NEXT: UNIT30 R4-CHUNK-DOWNLOAD-1, option B**; PR110 remains OPEN/HOLD and must not be merged; inventory reusable work before clean replacement PR. Preserve 30.1→30.2→30.3→31→32→32.1→33–42, all 54 units and existing DoD.
 
-> الأقسام واللقطات المؤرخة قبل 2026-10-22 أدناه تاريخية عند التعارض. NEXT الحالي هو UNIT30 فقط.
+> لقطة22أكتوبر تاريخية: أُنجزكود30–30.3، وNEXTالحالي30.4والقبولالمجمعحسبلقطة23أكتوبر أعلاه.
 
 ## أين نحن وكم بقي؟
 
 - **تم:** المراحل التاريخية المغلقة وR1 ووحدات R2/R3؛ ثم PR118–124 كودًا ونشرًا في نطاقها، مع نتائج قبول2242 الجزئية المحفوظة. لا تعاد.
-- **نحن الآن:** UNIT28 ACCEPTED على إنتاج SHA `a2579ce5`؛ NEXT UNIT30 بالخيار B؛ PR110 OPEN/HOLD.
-- **التالي:** 30 → 30.1 → 30.2 → 30.3 → 31 → 32 → 32.1 → 33–42؛ لا إعادة قبول UNIT28.
+- **نحن الآن:** UNIT28 مغلقة؛30–30.3 مدمجةومنشورةعلى85eec139 بقبولإنتاجمعلق؛ NEXT30.4؛PR110 OPEN/HOLD.
+- **التالي:**30.4 →القبولالمجمع30–30.4 →31 →32 →32.1 →33–42؛ لا إعادةقبول28 أوتكرار30–30.3.
 - **بعد الويب:**43/R5، لا يحجب البيتا. لا عدد PRs أوأيام مفروض.
 - UNIT معرف ثابت؛ كل بند سابق محفوظ، والإضافات تحت آبائها دون إعادة ترقيم29–43.
 
@@ -84,10 +96,11 @@
 | 28.4.1 | R4-CHUNK-VIEW-RECOVERY-REM1 | زمن كامل وربط المشغل ونافذة التحميل | PR121/123 CODE MERGED/DEPLOYED؛ TIME الجاريFAIL في2242، START/total/window PASS بحدودها؛ A28-TIME فيحزمة28 وفق15§14؛ O19/DoD السابقةمحفوظة |
 | 28.5 | R4-LIVE-END-RECOVERY-1 | النهاية وتحديث الحالات وانتقال الجميع للتسجيل | PR124 CODE MERGED/DEPLOYED؛ الحدثوصل/أجهزةالحالةالمجربةحررت، لكنSURFACE للمنافسينFAIL؛ تكملةA28-SURFACE واختبارendمعخصمنشط ضمنحزمة28،15§14؛ FINAL/resume/DoD القديمة محفوظة |
 | 29 | R4-CHUNK-PLAYER-UX-1 | latest-ready/rewind/live edge/windowed VOD | PR113 CODE MERGED / DEPLOYED محفوظة؛ عيب ربط الزمن/الطلب المثبت يعالج في28.4.1، دون إعادة الوحدة أوقبولS مناختبارModel؛ 15§12 |
-| **30** | **R4-CHUNK-DOWNLOAD-1** | **MP4 صالح بخدمة تنزيل مستقلة عنcache المشغل؛ الخيارB** | **NEXT / OWNER APPROVED — UNIT28 ACCEPTED**؛ PR نظيفة؛ حفظPR110 حتىحصرالنقلوالبديل؛ 15 §§6/10/12.6؛ جلبالباقي/حقوق/Guest/progress/cancel/ملفكبير؛ لاfetchALL أثناءالمشاهدة لحلDownload |
-| 30.1 | R4-SESSION-KEY-SEC07-1 | توحيدقراءةالجلسةوإزالةsession_id القديمة | PLANNED / OWNER APPROVED؛بعد30وقبل31؛15 §10؛لاصلاحيات/Authrebuild،لاSSO/logoutمصطنع |
-| 30.2 | R4-SESSION-HTTPONLY-SEC08-1 | جلسةويبHttpOnly بدلlocalStorage/JS token | PLANNED / OWNER APPROVED؛بعد30.1؛15 §10؛login/OAuth/CSRF/logout/SSE/signaling/upload بحسبالعقودالمتأثرةفقط |
-| 30.3 | R4-SEC-GUARDS-DOCS-1 | تصحيحfalsepositive05/10 وحالةالوثائقوالحراس | PLANNED؛بعد30.2وقبل31،يمكنتحضيرهابالملفاتالمستقلة؛15 §10؛لاإعادةCORS أوتفعيلWebSocket أوبواباتتاريخيةعامة |
+| 30 | R4-CHUNK-DOWNLOAD-1 | MP4 صالح وخدمة تنزيل مستقلة / الخيارB | PR129 MERGED/DEPLOYED إلى886026f9؛ PRODUCTION ACCEPTANCE PENDING فيالبوابةالمجمعةبعد30.4؛ كلDoD15§§6/10/12.6 محفوظة وPR110لايدمج |
+| 30.1 | R4-SESSION-KEY-SEC07-1 | توحيد قراءة الجلسة وإزالةsession_id القديمة | PR130 MERGED/DEPLOYED إلىd12b7065؛ القبولالمجمع30–30.4 معلق؛15§10 وDoD السابقةمحفوظة |
+| 30.2 | R4-SESSION-HTTPONLY-SEC08-1 | جلسةويبHttpOnly بدلlocalStorage/JS token | PR131 MERGED/DEPLOYED إلى312af270؛ القبولالمجمعمعلق؛ login/OAuth/CSRF/logout/SSE/signaling/upload وفق15§10 محفوظة |
+| 30.3 | R4-SEC-GUARDS-DOCS-1 | حراس05/10 وحالةالوثائق | PR132 MERGED/DEPLOYED إلى85eec139؛ القبولالمجمعمعلق؛ لاCORSrebuild أوWebSocket جديد، DoD15§10 محفوظة |
+| **30.4** | **R4-COMP-CONTROLS-EARLY-END-1** | **توحيدأدواتالبدء/النشر، fullscreen/mobile، ألوان، إنهاءقبل300s وجودةالقصيرة** | **NEXT / OWNER APPROVED23أكتوبر**؛15§15 و08؛ LOCALواحدثمREMOTE؛ بعدهاقبولواحد30–30.4 قبل31؛54UNITقديمةمحفوظةوأصبحت55 |
 | 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | PLANNED؛12 §§3/4/10.1؛ M-01..05؛ الفصل الشخصي/الإداري، الملكية والحجب، Enter/Shift+Enter/IME، الثبات بعد refresh |
 | 32 | R4-PROFILE-SAVE-1 | حفظ display_name/bio صادق | PLANNED؛12/P-01؛200 وحده ليس PASS، GET وrefresh يثبتان الحفظ؛ لا إعادة Auth |
 | 32.1 | R4-PROFILE-COLLECTIONS-1 | المشاهدة لاحقًا وسجل المشاهدات في قسم خاص داخل بروفايل صاحبه | PLANNED / OWNER APPROVED بعد32 وقبل33؛ O19-19/20؛13§8؛ إعادةاستعمالالموجود،عزلصاحبالحساب،قوائمحتىالنفاد؛ لاreminder بديل |
@@ -103,7 +116,7 @@
 | 42 | R0-WEB-LAUNCH | عرض الجاهزية الموثقة ثم قرار المالك وإطلاق بيتا الويب | OWNER DECISION عند الجاهزية؛ لا قرار آلي أو ادعاء تشغيل دفع حقيقي دون البنك/المزود |
 | 43 | R5 | PWA وAndroid وiOS وTV والتقنيات والتكلفة وقيود المتاجر | DEFERRED AFTER WEB؛ يعتمد المالك النطاق والترتيب لاحقًا |
 
-**قاعدة السير الحالية:** حزمةمتابعة28 (LEASE→SURFACE→TIME) →التحققالمتبقيالمحدد15§14 →قبول28 →30 →30.1 →30.2 →30.3 →31 →32 →32.1 →33–42. PR118–124 محفوظة؛ لاإعادةتنفيذمغلق أوتكليفمتداخل. بقيةDoD السابقةتبقى ولايسقطSCREEN/BLOCKEDأوملاحظةPREVIEW.
+**قاعدة السير الحالية:**30.4 →بوابةقبولإنتاجواحدة30–30.4 →31 →32 →32.1 →33–42. UNIT28 ACCEPTED ومغلقة؛30–30.3كودمدمجوقبولمعلق؛15§15مواصفةالإضافة. بقيةالوحداتوالشواهدوالـDoDمحفوظة.
 
 ## 3. ضمان بقاء جميع العيوب
 
@@ -266,3 +279,9 @@ showToastفيالمسارالمعطل وSIG/replay→28.3.1؛ الطوابعوا
 قبل: متابعات28.3.1→28.4.1→28.5→قبول28. بعد: الكود122/123/124 مدمج؛ متبقيعقودها يجمع في **حزمة28 بملكيةLOCALواحدة**: A28-LEASE→A28-SURFACE→A28-TIME ثم قبولمحدد، وبعده30 كماكان.
 لاإضافة/حذف/إزاحةUNIT؛54معرفًا محفوظةبنفسالترتيب، وأرقام29–43 وDoD كماهي. جمعالمتبقيلايعنيقبولالآباءأومحوإخفاقاتهم. 28.4.1/28.5 تبقيانمراجعالعقودلاNEXTينافسحزمة28.
 المصدرتقريرFV-UNIT28-ACCEPTANCE-REPORT(1).md وموافقةالمالك21أكتوبر.15§14 يثبتالحدودوالفروضوالـbefore/after والمسؤولوالتحققSالأقل، ويحفظنجاحالمصدرينوأدلة2230المصححة. لا إعادةاختبارشامل أوتصميمبثجديد، ولا تقديم30/35/32.1.
+
+### اعتماد23أكتوبر — إضافة30.4 قبلبوابةالقبولالمجمعة
+
+قبل: قبولواحد30–30.3 →31 →32 →32.1 →33–42. بعد: **30.4 →قبولواحد30–30.4 →نفسالبقية**. تأخرتالبوابةو31ومابعدهابإضافةواحدةفقط دونإعادةترقيمأوإسقاطأيDoD. بقيت54UNITمرةواحدة، وأضيفR4-COMP-CONTROLS-EARLY-END-1ليصبح55.
+المصدرملاحظاتالمالك23أكتوبروموافقتهعلىكاملالمقترح، بمافيه10نجومنظاميةللخصمفيprofile،0للمنهي، جودة0للقصيرةوطبقةظهوربعدالأطولمعالبحثالمباشر.15§15يفصلالتنفيذوالتحقققبل/بعدوالحقوقوالاستثناءات. الهجرةوالنشرالخارجيليسامفوضينمنهذاالتحديث.
+أجزاءالألوانالمحددةالمنجزةتخصمكتكرارمن31/35بعدتوثيققبولها، لايسقطcompose/historyأوبقيةUX. H7الرقميةلايعاداعتمادها؛طبقةshortأولويةجديدةمعتمدة. PR110محفوظةإلىحصرالاستبدال؛لاcodechangesمنالمخطط.
