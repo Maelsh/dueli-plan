@@ -1,12 +1,13 @@
 # Dueli — بوابة استئناف القيادة
 
-## لقطة الاستئناف المعتمدة — 2026-10-26
+## لقطة الاستئناف المعتمدة — 2026-10-26 (بعد دمج UNIT31)
 
-- **CODE MAIN / actual merge SHA:** 70ce057f34fc7c3e39506ee6c9e98ddb917d85fc؛ PR #138 / UNIT30.6 مدموج.
-- **Quality Gate #374:** run 40313355068 SUCCESS. **Deploy to Cloudflare Pages #603:** run 40313355093 SUCCESS؛ كلاهما على SHA الدمج نفسه، والنشر الإنتاجي مؤكد بتقرير القبول.
-- **Gate 30–30.6 = ACCEPTED / CLOSED.** D-01 PASS إنتاجيًا (HTTP 200، تحديث بلا reload، إشعار SSE واحد، auto-delete ناجح). D-02 PASS إنتاجيًا (completed/zero chunks → unavailable سريعًا، بلا شارة كاذبة، النتيجة متاحة؛ AR/EN). تفاصيل الإثبات وحدود NOT TESTED في 14 و15 §15.10.3.
-- لا تُحوّل الاختبارات الإنتاجية غير المنفذة إلى PASS: تكرار-409 عبر UI، الفرع المجدول عبر UI، active lease drain، وupstream-invalid/no-DB تبقى NOT TESTED إنتاجيًا. الشواهد السابقة محفوظة ولا تعاد؛ D-03 يبقى UNIT35.
-- **NEXT = UNIT31 / R4-MESSAGES-1.** إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم 31–43. PR110 خارج النطاق. المصدر الوحيد للترتيب وNEXT هو 14.
+- **CODE MAIN / actual merge SHA:** `3cee6e78ce0750536c474131363f80902b886c7d`؛ PR #139 / UNIT31 مدموجة من HEAD المعتمد `da437d6cc8ecee5c9e1fc600826f1fe89bb76ee3`.
+- **Post-merge Quality Gate #378:** run 40371372964 SUCCESS. **Deploy to Cloudflare Pages #607:** run 40371372929 SUCCESS على SHA الدمج نفسه؛ فحص production bindings وread-only schema readiness ناجحان، وخطوة نشر الإنتاج ناجحة. لم تُطبّق migration.
+- **UNIT31 / R4-MESSAGES-1 = CODE DONE / DEPLOYED.** تقريران مستقلان APPROVE؛ M-01..M-05 PASS ضمن نطاق المراجعة وF-1 مغلق باختبار RED→GREEN. حدّ فتح profile لمحادثة خارج أحدث100 قبل أول إرسال يبقى تحسينًا غير مانع، موثقًا في12 و14.
+- **NOT TESTED / no overclaim:** لم يحدث نقر يدوي على متصفح/جهاز فعلي أو اختبار لوحة IME فعلية أو SSE حي؛ لا تسجل PROD VERIFIED. لا تغيير مخطط/هجرة أو كتابة بيانات D1؛ بوابة الإنتاج جمعت المخطط للقراءة فقط.
+- **Gate 30–30.6 = ACCEPTED / CLOSED.** D-01 وD-02 وشواهد القبول السابق محفوظة. فروع UI لduplicate-409/scheduled-conflict وactive lease drain وupstream-invalid/no-DB تبقى NOT TESTED إنتاجيًا؛ D-03 يبقى UNIT35.
+- **NEXT = UNIT32 / R4-PROFILE-SAVE-1.** إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم 31–43. PR110 خارج النطاق ولا يدمج. المصدر الوحيد للترتيب وNEXT هو14.
 
 المصدر الوحيد للترتيب والحالة وNEXT هو [14](14-UNIFIED-EXECUTION-PATH.md). قرارات [08](08-OWNER-DECISIONS.md)، ومواصفة [15§12](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md)، وقوائم البروفايل [13§8](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md) معتمدة19أكتوبر.
 

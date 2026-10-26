@@ -77,6 +77,15 @@ MEDIAانتقلتإلىLIVE/CHUNK/COMP بوحداتهافي13؛ قبولالإد
 
 الوحدات ليست عدد PRs مفروضًا. PR103 مسار قائم مستقل: مراجعة REMOTE رسمية ثم بروتوكول10، دون إعادة إصلاحه. يمكن DIAG بالتوازي معه، والعمل محليًا على الواجهات أثناء انتظار analytics. القبول الإنتاجي المعتمد علىDB ينتظر استعادتها.
 
+
+### سجل الإغلاق 2026-10-26 — UNIT31 / R4-MESSAGES-1
+
+- **الحالة: CODE DONE / DEPLOYED؛ PR #139 merged.** Actual merge SHA `3cee6e78ce0750536c474131363f80902b886c7d` (approved head `da437d6cc8ecee5c9e1fc600826f1fe89bb76ee3`). Post-merge Quality Gate #378 / run `40371372964` and Deploy #607 / run `40371372929` both SUCCESS on the exact merge SHA.
+- **M-01..M-05:** two independent REMOTE reports APPROVE on the reviewed head. **F-1 CLOSED:** following the first confirmed send from `?user=`, the client adopts the server-returned conversation ID and loads authoritative history; independent reviewer reproduced RED on pre-fix `347e610` and GREEN on `da437d6`. The regression test asserts one history read, previous rows plus the new row in chronological order, no duplicate new row, and no lingering pending bubble.
+- **Pre-open pagination boundary — non-blocking future enhancement:** when the profile target is outside the newest 100 loaded conversations, the page may initially show a named compose state until the user sends; after the first confirmed send, history is restored. REMOTE judged this distinct from the rejected F-1, and no dedicated lookup endpoint/API or schema migration was added in this unit. Do not treat this note as production acceptance or silently widen UNIT31.
+- **Deployment gate evidence:** production bindings check PASS; production schema-state collection and readiness evaluation PASS in read-only mode; `Deploy to Cloudflare Pages (production)` PASS. No migration was applied. Do not claim `PROD VERIFIED`: real browser/device clicks, physical IME keyboard, and live SSE refresh remain **NOT TESTED**.
+
+
 ## 4. سجل العيوب
 
 مصدر العيوب ملخص القائد لتقريري المتصفح. تصنيف BOTH/ONE يحتاج الشاهد الأصلي، ولا يعاد الاختبار لمجرد التصنيف.
