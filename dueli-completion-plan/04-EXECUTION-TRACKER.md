@@ -2,11 +2,11 @@
 
 ## لقطة الاستئناف المعتمدة — 2026-10-26
 
-- CODE MAIN: `20109dd59f8a8fb0eb355fbde61b05c6d64d8854`; PLAN MAIN قبل هذا التحديث: `d95b531afb16d677bae32d35362ad1b7f91f23be`.
-- PR #133–#137 مدمجة. فحص GitHub connector لحالة commit/workflow runs على CODE MAIN لم يُرجع سجلات؛ لا تُسجل أرقام Quality/Deploy قبل التحقق من Actions الفعلية.
-- قرار المالك: UNIT30.5 / ID-19 = APPROVED VIA T/B؛ الشواهد الناجحة في Gate 30 محفوظة ولا تعاد؛ D-03 يبقى في UNIT35.
-- **NEXT = UNIT30.6 / R4-COMP-ACCEPT-ZEROCHUNK-1** لمعالجة D-01 (HTTP 500 عند قبول الدعوة) وD-02 (0 chunks وتعليق المشغل/أهلية recorded) حصراً وفق 15 §15.10؛ ثم تحقق إنتاجي موضعي منهما فقط لإغلاق Gate 30–30.6، وبعدها UNIT31.
-- إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم 31–43. PR110 خارج النطاق. المصدر الوحيد للترتيب وNEXT هو [14](14-UNIFIED-EXECUTION-PATH.md).
+- **CODE MAIN / actual merge SHA:** 70ce057f34fc7c3e39506ee6c9e98ddb917d85fc؛ PR #138 / UNIT30.6 مدموج.
+- **Quality Gate #374:** run 40313355068 SUCCESS. **Deploy to Cloudflare Pages #603:** run 40313355093 SUCCESS؛ كلاهما على SHA الدمج نفسه، والنشر الإنتاجي مؤكد بتقرير القبول.
+- **Gate 30–30.6 = ACCEPTED / CLOSED.** D-01 PASS إنتاجيًا (HTTP 200، تحديث بلا reload، إشعار SSE واحد، auto-delete ناجح). D-02 PASS إنتاجيًا (completed/zero chunks → unavailable سريعًا، بلا شارة كاذبة، النتيجة متاحة؛ AR/EN). تفاصيل الإثبات وحدود NOT TESTED في 14 و15 §15.10.3.
+- لا تُحوّل الاختبارات الإنتاجية غير المنفذة إلى PASS: تكرار-409 عبر UI، الفرع المجدول عبر UI، active lease drain، وupstream-invalid/no-DB تبقى NOT TESTED إنتاجيًا. الشواهد السابقة محفوظة ولا تعاد؛ D-03 يبقى UNIT35.
+- **NEXT = UNIT31 / R4-MESSAGES-1.** إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم 31–43. PR110 خارج النطاق. المصدر الوحيد للترتيب وNEXT هو 14.
 
 المصدر الوحيد للترتيب والحالة وNEXT هو [14](14-UNIFIED-EXECUTION-PATH.md). قرارات [08](08-OWNER-DECISIONS.md)، ومواصفة [15§12](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md)، وقوائم البروفايل [13§8](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md) معتمدة19أكتوبر.
 
