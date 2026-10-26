@@ -3,18 +3,15 @@
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
 هذا هو المصدر الوحيد **لترتيب العمل وحالته وNEXT**. 08 للقرارات، 11 لأوزان H7 المعتمدة، 10 للدمج والإصدار، 05/12/13/15 للمواصفات. 04 بوابة استئناف تشير إلى هذا المسار، وليست جدولًا منافسًا له.
 
-## الحالة المعتمدة الأحدث — 2026-10-26 / Gate 30–30.6 مغلقة؛ NEXT UNIT31
+## الحالة المعتمدة الأحدث — 2026-10-26 / Gate 30–30.6 مغلقة؛ UNIT31 مدمجة ومنشورة؛ NEXT UNIT32
 
-- **CODE MAIN / actual merge SHA:** 70ce057f34fc7c3e39506ee6c9e98ddb917d85fc (PR #138 / UNIT30.6). شجرة الدمج تطابق HEAD المعتمد aade3963b08a428a16724caf6c12307f43d44429.
-- **Post-merge Quality Gate #374:** run 40313355068 SUCCESS على SHA الدمج نفسه. **Deploy to Cloudflare Pages #603:** run 40313355093 SUCCESS على SHA الدمج نفسه؛ وهو آخر نشر push-to-main وفق تقرير القبول.
-- **تأكيد النشر:** تقرير القبول يثبت بصمات UNIT30.6 الحصرية في /competition/2263 ومطابقة styles.css بايتيًا لـrepo@merge SHA (SHA-256 prefix 9ba2c5ec…). مصدر التفاصيل: تقرير المالك POST-MERGE PRODUCTION ACCEPTANCE — UNIT30.6 / GATE 30–30.6 بتاريخ 2026-10-26.
-- **D-01 PASS / الإنتاج:** قبول الدعوة أعاد HTTP 200 مع accepted:true وautoDeleted:6؛ الواجهة تحدثت بلا reload، وصل إشعار SSE واحد، ونجح الحذف التلقائي. تكرار 409 وفرع التعارض المجدول لم يُختبرا عبر واجهة الإنتاج؛ لا يُسجلان PASS إنتاجيًا.
-- **D-02 PASS / الإنتاج:** منافسة مكتملة بلا مقاطع أعادت index_metadata.recording_state='none'؛ المشغل حسم إلى unavailable خلال نحو 10–12 ثانية بالعربية والإنجليزية، دون استطلاع متكرر أو شارة تسجيل كاذبة، والنتيجة بقيت متاحة. منافسة 2262 ذات المقاطع بقيت قابلة للتشغيل بشارة صحيحة.
-- **حدود NOT TESTED:** duplicate-409 UI، scheduled-conflict branch عبر UI، active lease drain، وupstream-invalid/no-DB لم تُختبر إنتاجيًا؛ تغطية CI ليست اختبارًا إنتاجيًا. لا تعديل إنتاجي في قاعدة البيانات أو إعدادات Cloudflare أثناء القبول.
-- **UNIT30.5 / ID-19: APPROVED VIA T/B.** شواهد Gate 30 السابقة محفوظة ولا تعاد. D-03 / NaN% يبقى في UNIT35 (R4-UX-I18N-1 / I-01 / FV20-SMALL).
-- **GATE 30–30.6: ACCEPTED / CLOSED.** الشروط الأربعة مستوفاة: Quality + Deploy على SHA الدمج، تأكيد النشر، D-01 PASS، D-02 PASS.
-- **NEXT: UNIT31 / R4-MESSAGES-1**؛ ثم 32 → 32.1 → 33 → 33.1 → 34–42. إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم. PR110 خارج النطاق ولا يدمج.
-- **PLAN BASE قبل هذا التحديث:** 2965ca7d593e25c79cea595e4febe0372ebc0dfa. الأقسام الأقدم أدناه سجل تاريخي؛ هذه اللقطة وجدول §2 هما الحالة الحالية.
+- **CODE MAIN / actual merge SHA:** `3cee6e78ce0750536c474131363f80902b886c7d` (PR #139 / UNIT31). Merge parents: BASE `70ce057f34fc7c3e39506ee6c9e98ddb917d85fc` + independently approved HEAD `da437d6cc8ecee5c9e1fc600826f1fe89bb76ee3`.
+- **Post-merge Quality Gate #378:** [run 40371372964](https://github.com/Maelsh/dueli-opus/actions/runs/40371372964) SUCCESS on the exact merge SHA. **Deploy to Cloudflare Pages #607:** [run 40371372929](https://github.com/Maelsh/dueli-opus/actions/runs/40371372929) SUCCESS on the same SHA; production bindings, read-only schema collection, and release-readiness checks passed, then the production deploy step succeeded. No migration was applied.
+- **UNIT31 / R4-MESSAGES-1 — CODE DONE / DEPLOYED.** PR #139 merged after two independent REMOTE APPROVEs of exact HEAD `da437d6...`. M-01..M-05 PASS within reviewed scope; F-1 is closed with the new RED→GREEN regression test (previous `347e610` fails the history-read assertion; approved head passes). Actual production deployment is confirmed by Deploy #607 on this merge SHA.
+- **Acceptance limits / not claimed:** no manual production/browser/device click-through, physical IME keyboard test, or live SSE-refresh test was performed; therefore do **not** record `PROD VERIFIED`. A profile `?user=` target outside the newest 100 can still open a named compose state before first send; both REMOTE reviewers classified this pre-open pagination boundary as a non-blocking future enhancement. No new API, migration, or schema change was added. PR #110 remains out of scope.
+- **GATE 30–30.6 = ACCEPTED / CLOSED**; previous D-01/D-02 production evidence and untested branches remain as recorded below.
+- **NEXT: UNIT32 / R4-PROFILE-SAVE-1**; then 32.1 → 33 → 33.1 → 34–42. Total plan remains 57 UNIT; no reordering or renumbering. PR110 must not be touched/merged.
+- **PLAN BASE before this status update:** `db1e5f06d0747834e81d54fd1343be8ec51584eb`. Older sections below are historical; this snapshot and §2 remain the live execution state.
 
 ### سجل22أكتوبر — إغلاقUNIT28 (تاريخي؛ NEXT30 فيه استُكمل)
 
@@ -104,7 +101,7 @@
 | 30.3 | R4-SEC-GUARDS-DOCS-1 | حراس05/10 وحالةالوثائق | PR132 MERGED/DEPLOYED إلى85eec139؛ القبولالمجمعمعلق؛ لاCORSrebuild أوWebSocket جديد، DoD15§10 محفوظة |
 | **30.4 / 30.5** | **R4-COMP-CONTROLS-EARLY-END-1 + settlement response guard** | **UNIT30.4 + UNIT30.5; PR #133–#137 merged** | **CODE MERGED**: #133 `4c3d960`; #134 `ca78323`; #135 `251da45`; #136 `a6d9dea`; #137 `20109dd5`. ID-19 APPROVED VIA T/B. Gate 30 successful evidence preserved; no broad retest. Post-merge Quality/Deploy and production acceptance are recorded in the current combined Gate 30–30.6 closure above. |
 | **30.6** | **R4-COMP-ACCEPT-ZEROCHUNK-1** | **D-01 invitation acceptance 500; D-02 completed competition with 0 chunks and indefinite player wait** | **ACCEPTED / CLOSED 2026-10-26**: PR #138 merged at 70ce057f34fc7c3e39506ee6c9e98ddb917d85fc; post-merge Quality #374 (40313355068) and Deploy #603 (40313355093) SUCCESS on exact merge SHA; production deployment confirmed. D-01 and D-02 both PASS in production per owner acceptance report. UI duplicate-409, scheduled-conflict UI, active lease drain and upstream-invalid/no-DB remain NOT TESTED in production. Gate 30–30.6 CLOSED; NEXT UNIT31. D-03 remains UNIT35. |
-| 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | PLANNED؛12 §§3/4/10.1؛ M-01..05؛ الفصل الشخصي/الإداري، الملكية والحجب، Enter/Shift+Enter/IME، الثبات بعد refresh |
+| 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | **CODE DONE / DEPLOYED 2026-10-26**؛ PR #139 merge SHA `3cee6e78ce0750536c474131363f80902b886c7d`؛ Quality #378 `40371372964` وDeploy #607 `40371372929` SUCCESS على SHA الدمج نفسه؛ M-01..M-05 PASS؛ F-1 مغلق بـRED→GREEN؛ ما قبل الإرسال خارج أحدث100 تحسين غير مانع لاحق؛ قبول يدوي/IME/SSE وPROD VERIFIED غير مدعى؛ **NEXT UNIT32** |
 | 32 | R4-PROFILE-SAVE-1 | حفظ display_name/bio صادق | PLANNED؛12/P-01؛200 وحده ليس PASS، GET وrefresh يثبتان الحفظ؛ لا إعادة Auth |
 | 32.1 | R4-PROFILE-COLLECTIONS-1 | المشاهدة لاحقًا وسجل المشاهدات في قسم خاص داخل بروفايل صاحبه | PLANNED / OWNER APPROVED بعد32 وقبل33؛ O19-19/20؛13§8؛ إعادةاستعمالالموجود،عزلصاحبالحساب،قوائمحتىالنفاد؛ لاreminder بديل |
 | 33 | R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry ومنع الطلب والرسم القديم المكرر | PLANNED؛12/H-01 وDB-01؛ قياس التكرار، حفظ H7 والفلاتر والجلسة والنفاد؛ لا سقف مصطنع |
