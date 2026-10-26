@@ -629,3 +629,18 @@ FULLSCREEN/orientationعلىجهازلايدعمهايسجلحدودالدعمو
 - **D-01 — قبول الدعوة:** تتبع المسار بعد `acceptInvitationAtomic` وتحديد السبب المثبت لعودة 500 بعد نجاح الالتزام. إصلاحه بحيث يعيد المسار الناجح استجابة 200 صحيحة، وتنعكس حالة accepted في الواجهة فوراً دون Refresh، مع حفظ ذرية R2-J والإشعار/الحدث المطلوب. لا إعادة فتح R2-J كاملة.
 - **D-02 — انتهاء بلا مقاطع (0 chunks):** تتبع finalized/حالة غياب التسجيل ومشغل VOD وأهلية recorded. إذا كانت المنافسة complete/end ولا توجد مقاطع ولا مسجل نشط مخول لتصريف ذيل، تُحسم الحالة فوراً إلى not-recorded/unavailable؛ لا drain وهمي ولا spinner أبدي. تعرض الواجهة حالة صادقة مترجمة AR/EN وتبقى النتيجة والتفاصيل متاحة. لا تُصنّف المنافسة ذات 0 ready chunks كتسجيل قابل للتشغيل في recorded، مع إبقاء صفحة النتيجة متاحة بالرابط المباشر والبحث العام وفق 05 §2 و§8.
 - **T/B:** اختبارات RED→GREEN لـD-01 (200 صحيح وتحديث الحالة/الواجهة) وD-02 (حسم فوري وعدم الإدراج في playable recorded). بعد REMOTE APPROVE والدمج ونجاح Quality/Deploy على actual merge SHA، يُجرى تحقق إنتاجي موضعي D-01/D-02 فقط. لا تعاد المسارات الناجحة المحفوظة. عند النجاح: Gate 30–30.6 ACCEPTED/CLOSED ثم NEXT UNIT31 (R4-MESSAGES-1).
+
+
+### 15.10.3 قبول الإنتاج وإغلاق Gate 30–30.6 — 26 أكتوبر 2026
+
+**القرار:** ACCEPT — GATE 30–30.6 READY TO CLOSE، صادر عن تقرير قبول الإنتاج بعد دمج UNIT30.6. تسجل الخطة الآن **Gate 30–30.6 ACCEPTED / CLOSED** و**NEXT UNIT31 / R4-MESSAGES-1**.
+
+- **Code/merge:** PR #138 merged at 70ce057f34fc7c3e39506ee6c9e98ddb917d85fc؛ شجرة الدمج تطابق HEAD المعتمد aade3963b08a428a16724caf6c12307f43d44429.
+- **Post-merge CI/deploy:** Quality Gate #374 / run 40313355068 SUCCESS؛ Deploy to Cloudflare Pages #603 / run 40313355093 SUCCESS، كلاهما على SHA الدمج نفسه. أكد التقرير أن /competition/2263 تحتوي بصمات UNIT30.6، وأن styles.css الإنتاجي يطابق repo@merge SHA (SHA-256 prefix 9ba2c5ec…). هذه أدلة من تقرير القبول المقدم من المالك.
+- **D-01 PASS / production:** POST /api/competitions/2265/accept-invite أعاد HTTP 200 مع accepted:true وautoDeleted:6؛ الواجهة تحدثت بلا reload، وصل إشعار قبول SSE واحد، ونجح الحذف التلقائي للمنافسة المعلقة الأخرى. صفر أخطاء Console في المسار المختبر.
+- **D-02 PASS / production:** GET /api/chunks/playlist/2263 أعاد 200 مع index_metadata.recording_state='none' (finalized، صفر مقاطع، لا active lease). المشغل انتقل إلى unavailable خلال نحو 10–12 ثانية بالعربية والإنجليزية، بلا استطلاع متكرر أو شارة تسجيل كاذبة؛ صفحة النتيجة بقيت متاحة. المنافسة 2262 ذات المقاطع ظلت قابلة للتشغيل وبشارة صحيحة؛ واجهة التنزيل عرضت no_chunks.
+- **Explicit NOT TESTED in production:** duplicate acceptance 409 عبر UI؛ scheduled conflict branch عبر UI؛ active lease drain؛ upstream-invalid/no-DB. لا تُرفع هذه الحالات إلى PASS إنتاجيًا؛ تغطية CI دليل منفصل. شواهد Gate 30 الناجحة محفوظة ولا تعاد. Touch/WebKit M-02 تبقى ضمن UNIT41 ولا تُدعى PASS هنا. D-03 / NaN% يبقى UNIT35.
+- **Closure criteria met:** post-merge Quality + Deploy على actual merge SHA، تأكيد النشر، D-01 PASS، D-02 PASS. لا تغييرات إنتاجية على قاعدة البيانات أو إعدادات Cloudflare خلال القبول بحسب التقرير.
+- **Next:** UNIT31 / R4-MESSAGES-1؛ احفظ التسلسل 31 → 32 → 32.1 → 33 → 33.1 → 34–42 دون إعادة ترقيم، ولا تعِد فتح مسار مقبول بلا عيب جديد مثبت.
+
+**Evidence artifact reported by owner:** POST-MERGE-PRODUCTION-ACCEPTANCE-UNIT30.6.docx plus qa-evidence-u306/ (42 evidence files and EVIDENCE-INDEX.md). These artifacts were reported but not independently fetched in this plan update.
