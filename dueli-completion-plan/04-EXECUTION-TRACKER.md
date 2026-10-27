@@ -1,18 +1,27 @@
 # Dueli — بوابة استئناف القيادة
 
-## لقطة الاستئناف المعتمدة — 2026-10-26 (بعد دمج UNIT31)
+## لقطة الاستئناف المعتمدة — 2026-10-27 (بعد دمج ونشر UNIT32)
+
+- **CODE MAIN / actual merge SHA:** `05f0f1f84c50a13be36b6d2111a628e14985d039`؛ PR #140 / UNIT32 مدموجة من الرأس المعتمد خارجيًا `05bbfffc43bd58394798fc2a917f1002bbb783c5` وعلى BASE `3cee6e78ce0750536c474131363f80902b886c7d`.
+- **Post-merge Quality Gate #381:** [run 40422901712](https://github.com/Maelsh/dueli-opus/actions/runs/40422901712) SUCCESS على SHA الدمج نفسه: 2069 اختبارًا ناجحًا وواحدًا متجاوزًا (من أصل 2070). **Deploy to Cloudflare Pages #610:** [run 40422901631](https://github.com/Maelsh/dueli-opus/actions/runs/40422901631) SUCCESS على SHA نفسه؛ فحوص production bindings وread-only schema readiness نجحت، وخطوة نشر الإنتاج نجحت. لم تُطبّق هجرة جديدة.
+- **UNIT32 / R4-PROFILE-SAVE-1 = CODE DONE / DEPLOYED.** تقريران مستقلان APPROVE على HEAD الدقيق؛ أُصلح P-01 بحفظ `display_name` و`bio` في صف المستخدم المصادق عليه من خلال `UserModel`، والهوية من الجلسة فقط، مع إعادة قراءة خادمية، وتحديث جزئي، وتحقق حدود المدخلات وتعقيم التخزين؛ عقد GET القديم والمسارات الـ245 بلا تغيير.
+- **حدود Quality الحالية:** أبلغت خطوة `npm audit` ضمن grace-period الموثقة عن Hono (moderate) وZod (high)؛ بقيت ضمن بوابة السماح الموجودة ومسجّلة في موضعها UNIT33.1. لا يُدّعى خلو الاعتماديات من الثغرات.
+- **ملاحظات مراجعة غير مانعة:** إذا نجحت كتابة الملف الشخصي ثم فشل تحديث التفضيلات فقد يبقى الأول محفوظًا رغم إرجاع 500؛ الواجهة تعرض الفشل وإعادة المحاولة تتقارب. وإذا فشلت القراءة المرجعية عند التحميل الأول فقد تعرض نسخة الجلسة، لكن نجاح الحفظ نفسه يعتمد على الملف الذي أعاده PUT من قاعدة البيانات. لا تغيّر هذه الملاحظات نطاق الوحدة.
+- **NOT TESTED / no overclaim:** لم يُجرَ نقر يدوي على الإنتاج أو فحص جهاز/قارئ شاشة/IME؛ لا تسجل `PROD VERIFIED`. لا تغيير مخطط/هجرة أو كتابة D1 يدوية؛ نشر الإنتاج موثق بخطوة Deploy #610 فقط.
+- **Gate 30–30.6 = ACCEPTED / CLOSED**، وUNIT31 محفوظة كـCODE DONE / DEPLOYED؛ لا إعادة فتحهما. PR #110 خارج النطاق ولا يدمج.
+- **NEXT = UNIT32.1 / R4-PROFILE-COLLECTIONS-1**، المعتمدة من المالك بعد32 وقبل33: المشاهدة لاحقًا وسجل المشاهدات داخل بروفايل صاحبه؛ إعادة استعمال الموجود، وعزل صاحب الحساب، وقوائم حتى النفاد؛ المراجع O19-19/20 و13§8 و15§12. لا تُخلط مع reminder UNIT35. المسار التالي 32.1 → 33 → 33.1 → 34–42، وإجمالي الخطة 57 UNIT.
+- **PLAN BASE before this status update:** `25eb18c86fdfee8af6babd167f154fe34dc3ed13`. اللقطة الحالية في أعلى الملف و§2 هما مصدر الحالة وNEXT؛ اللقطات الأقدم أدناه تاريخية.
+
+## لقطة تاريخية — 2026-10-26 (بعد دمج UNIT31؛ NEXT حينها UNIT32، استُبدلت في27أكتوبر)
 
 - **CODE MAIN / actual merge SHA:** `3cee6e78ce0750536c474131363f80902b886c7d`؛ PR #139 / UNIT31 مدموجة من HEAD المعتمد `da437d6cc8ecee5c9e1fc600826f1fe89bb76ee3`.
 - **Post-merge Quality Gate #378:** run 40371372964 SUCCESS. **Deploy to Cloudflare Pages #607:** run 40371372929 SUCCESS على SHA الدمج نفسه؛ فحص production bindings وread-only schema readiness ناجحان، وخطوة نشر الإنتاج ناجحة. لم تُطبّق migration.
 - **UNIT31 / R4-MESSAGES-1 = CODE DONE / DEPLOYED.** تقريران مستقلان APPROVE؛ M-01..M-05 PASS ضمن نطاق المراجعة وF-1 مغلق باختبار RED→GREEN. حدّ فتح profile لمحادثة خارج أحدث100 قبل أول إرسال يبقى تحسينًا غير مانع، موثقًا في12 و14.
 - **NOT TESTED / no overclaim:** لم يحدث نقر يدوي على متصفح/جهاز فعلي أو اختبار لوحة IME فعلية أو SSE حي؛ لا تسجل PROD VERIFIED. لا تغيير مخطط/هجرة أو كتابة بيانات D1؛ بوابة الإنتاج جمعت المخطط للقراءة فقط.
 - **Gate 30–30.6 = ACCEPTED / CLOSED.** D-01 وD-02 وشواهد القبول السابق محفوظة. فروع UI لduplicate-409/scheduled-conflict وactive lease drain وupstream-invalid/no-DB تبقى NOT TESTED إنتاجيًا؛ D-03 يبقى UNIT35.
-- **NEXT = UNIT32 / R4-PROFILE-SAVE-1.** إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم 31–43. PR110 خارج النطاق ولا يدمج. المصدر الوحيد للترتيب وNEXT هو14.
+- **NEXT حينها = UNIT32 / R4-PROFILE-SAVE-1.** إجمالي الخطة 57 UNIT؛ لا إزاحة أو إعادة ترقيم 31–43. PR110 خارج النطاق ولا يدمج. المصدر الوحيد للترتيب وNEXT هو14.
 
-المصدر الوحيد للترتيب والحالة وNEXT هو [14](14-UNIFIED-EXECUTION-PATH.md). قرارات [08](08-OWNER-DECISIONS.md)، ومواصفة [15§12](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md)، وقوائم البروفايل [13§8](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md) معتمدة19أكتوبر.
-
-
-
+في تلك اللقطة كان [14](14-UNIFIED-EXECUTION-PATH.md) مرجع NEXT؛ لقطة 27أكتوبر في أعلى الملف هي المرجع الحالي. قرارات [08](08-OWNER-DECISIONS.md)، ومواصفة [15§12](15-CHUNK-INDEX-UPLOAD-PLAYER-PLAN.md)، وقوائم البروفايل [13§8](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md) معتمدة19أكتوبر.
 
 ## لقطة24أكتوبر (لاحقة) — اقتراح UNIT33.1 للاعتماديات الأمنية (PLAN PR، غير مدموج)
 
