@@ -1,14 +1,15 @@
 # Dueli — بوابة استئناف القيادة
 
-## لقطة الاستئناف المعتمدة — 2026-10-27 (قرار المالك: UNIT32.2-REM1 NEXT)
+## لقطة الاستئناف المعتمدة — 2026-10-27 (UNIT32.2-REM1 مدمجة ومنشورة؛ NEXT=UNIT33)
 
-- **CODE MAIN / actual merge SHA:** `603d826834e3f8490caff3a67db854fb6eedb647`؛ PR #142 / UNIT32.2 الأساسية؛ approved HEAD `5fa03f443c8c7dcf51f167afbdba45449beae92b`; BASE `3b1b6b64914cbfc861e00063643431c60539a284`.
-- **Post-merge Quality Gate #386:** [run 40512334779](https://github.com/Maelsh/dueli-opus/actions/runs/40512334779) SUCCESS: 2107 passed / 1 skipped, G2 300≤310, routes251. **Deploy #615:** [run 40512334753](https://github.com/Maelsh/dueli-opus/actions/runs/40512334753) SUCCESS على SHA نفسه؛ production deploy step وread-only schema readiness نجحا. لا migration.
-- **UNIT32.2 الأصلية / PR #142 = CODE MERGED / DEPLOYED**، لكن صف32.2 لا يُغلق تخطيطيًا حتى إتمام متابعة المالك REM1. لا قبول يدوي شامل على المتصفح/الجهاز/قارئ الشاشة/IME؛ لا `PROD VERIFIED`.
-- **OWNER APPROVED — NEXT = UNIT32.2-REM1 ضمن الصف32.2 نفسه:** (A) pagination مستقرة حتى `hasMore=false` وإزالة سقف50؛ (B) تصحيح تمرير العنوان ذي الاقتباسات والمحارف الخاصة؛ (C) إزالة `.trim()` من قيم كلمة المرور؛ (D) التفريق بين OAuth مع/بدون hash كلمة مرور محلي؛ (E) تصحيح توثيق اختبارات #142 من14 إلى13 وإضافة العدد الفعلي لاختبارات REM1. (F) أدلة `db.batch` والاختبارات التسلسلية مقبولة، ولا اختبارات ضغط/تزامن جديدة مطلوبة. مواصفة النطاق في13§9، القرار في08، وسجل العناصر في12.
-- **الاختبارات وحدودها:** مراجعان مستقلان وافقا HEAD الأصلي؛ اختبارات accept-first/delete-first تسلسلية لا تثبت طلبات D1 متوازية. لا توصف كاختبار تزامن حقيقي. لا اختبار Playwright مستقل أو قبول يدوي شامل مدّعى.
-- **بعد إغلاق REM1:** المسار غير المتغير `32.2-REM1 → 33 → 33.1 → 34 → 35–42`; إجمالي الخطة58 UNIT ومعرفات33–43 محفوظة. PR #110 خارج النطاق. `14-UNIFIED-EXECUTION-PATH.md` هو المصدر الوحيد لترتيب/NEXT.
-- **PLAN BASE قبل تحديث المالك:** `34758430f8e4aab987ba60abbf9abaccf94b561c`. المرجع النهائي هو PLAN MAIN الجديد بعد دمج PR التخطيط.
+- **CODE MAIN / actual merge SHA:** `bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7`؛ PR #143 / UNIT32.2-REM1؛ approved HEAD `ef6e4f51b344ce26240f9fafa5850822636be75d`؛ BASE `603d826834e3f8490caff3a67db854fb6eedb647`.
+- **Post-merge Quality Gate #390:** [run 40535579267](https://github.com/Maelsh/dueli-opus/actions/runs/40535579267) SUCCESS على SHA الدمج نفسه؛ 2113 passed / 1 skipped؛ G2 any-count 300≤310؛ route inventory 252؛ TypeScript/build/SEC gates passed.
+- **Deploy #619:** [run 40535579164](https://github.com/Maelsh/dueli-opus/actions/runs/40535579164) SUCCESS على SHA نفسه؛ فحوص production bindings وread-only schema readiness وrelease readiness وخطوة production deploy نجحت. لم تُطبّق أي migration.
+- **UNIT32.2 + UNIT32.2-REM1 = CODE DONE / DEPLOYED.** PR #143 أغلق A–E: pagination مستمرة بمؤشر ثابت؛ تمرير العنوان آمن؛ كلمات المرور خام؛ حالة كلمة المرور المحلية لـOAuth تميّز عن حساب OAuth-only؛ توثيق #142 مصحح إلى13 حالة واختبارات REM1 الفعلية=6. لا تغيير schema أو dependencies.
+- **المراجعة:** موافقتان مستقلتان على HEAD الدقيق أعلاه؛ Quality Gate #389 وPR preview #618 نجحا على HEAD قبل الدمج، ثم البوابتان #390/#619 نجحتا على actual merge SHA. ملاحظة تغطية غير حاجبة: اختبار العنوان لم يجمع بصورة مستقلة حالة apostrophe وتدفق التأكيد/الحذف/الإلغاء في اختبار واحد؛ المراجعان قبلا المسار المشترك للهروب واختبارات الحذف الموجودة. لا يُدّعى اختبار تلك التركيبة بعينها.
+- **حدود القبول:** نشر الإنتاج مثبت، لكن لا توجد أدلة قبول يدوي شاملة لمتصفح/جهاز/قارئ شاشة/IME؛ لذلك لا تسجل `PROD VERIFIED`. لا اختبارات ضغط/تزامن متوازية جديدة؛ حد الدليل مقبول بقرار المالك.
+- **NEXT = UNIT33 / R4-HOME-UX-1**، ثم `33.1 → 34 → 35–42`. إجمالي الخطة58 UNIT؛ IDs33–43 محفوظة؛ PR #110 خارج النطاق. `14-UNIFIED-EXECUTION-PATH.md` هو المصدر الوحيد لترتيب/NEXT.
+- **PLAN BASE قبل تحديث الحالة هذا:** `47f72e8333c25097bb621c65e1004d0caf64eed0`.
 
 ## لقطة تاريخية — 2026-10-26 (بعد دمج UNIT31؛ NEXT حينها UNIT32، استُبدلت في27أكتوبر)
 
