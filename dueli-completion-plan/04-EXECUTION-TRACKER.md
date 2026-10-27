@@ -1,16 +1,17 @@
 # Dueli — بوابة استئناف القيادة
 
-## لقطة الاستئناف المعتمدة — 2026-10-27 (بعد دمج ونشر UNIT32)
+## لقطة الاستئناف المعتمدة — 2026-10-27 (بعد دمج ونشر UNIT32.1)
 
-- **CODE MAIN / actual merge SHA:** `05f0f1f84c50a13be36b6d2111a628e14985d039`؛ PR #140 / UNIT32 مدموجة من الرأس المعتمد خارجيًا `05bbfffc43bd58394798fc2a917f1002bbb783c5` وعلى BASE `3cee6e78ce0750536c474131363f80902b886c7d`.
-- **Post-merge Quality Gate #381:** [run 40422901712](https://github.com/Maelsh/dueli-opus/actions/runs/40422901712) SUCCESS على SHA الدمج نفسه: 2069 اختبارًا ناجحًا وواحدًا متجاوزًا (من أصل 2070). **Deploy to Cloudflare Pages #610:** [run 40422901631](https://github.com/Maelsh/dueli-opus/actions/runs/40422901631) SUCCESS على SHA نفسه؛ فحوص production bindings وread-only schema readiness نجحت، وخطوة نشر الإنتاج نجحت. لم تُطبّق هجرة جديدة.
-- **UNIT32 / R4-PROFILE-SAVE-1 = CODE DONE / DEPLOYED.** تقريران مستقلان APPROVE على HEAD الدقيق؛ أُصلح P-01 بحفظ `display_name` و`bio` في صف المستخدم المصادق عليه من خلال `UserModel`، والهوية من الجلسة فقط، مع إعادة قراءة خادمية، وتحديث جزئي، وتحقق حدود المدخلات وتعقيم التخزين؛ عقد GET القديم والمسارات الـ245 بلا تغيير.
-- **حدود Quality الحالية:** أبلغت خطوة `npm audit` ضمن grace-period الموثقة عن Hono (moderate) وZod (high)؛ بقيت ضمن بوابة السماح الموجودة ومسجّلة في موضعها UNIT33.1. لا يُدّعى خلو الاعتماديات من الثغرات.
-- **ملاحظات مراجعة غير مانعة:** إذا نجحت كتابة الملف الشخصي ثم فشل تحديث التفضيلات فقد يبقى الأول محفوظًا رغم إرجاع 500؛ الواجهة تعرض الفشل وإعادة المحاولة تتقارب. وإذا فشلت القراءة المرجعية عند التحميل الأول فقد تعرض نسخة الجلسة، لكن نجاح الحفظ نفسه يعتمد على الملف الذي أعاده PUT من قاعدة البيانات. لا تغيّر هذه الملاحظات نطاق الوحدة.
-- **NOT TESTED / no overclaim:** لم يُجرَ نقر يدوي على الإنتاج أو فحص جهاز/قارئ شاشة/IME؛ لا تسجل `PROD VERIFIED`. لا تغيير مخطط/هجرة أو كتابة D1 يدوية؛ نشر الإنتاج موثق بخطوة Deploy #610 فقط.
-- **Gate 30–30.6 = ACCEPTED / CLOSED**، وUNIT31 محفوظة كـCODE DONE / DEPLOYED؛ لا إعادة فتحهما. PR #110 خارج النطاق ولا يدمج.
-- **NEXT = UNIT32.1 / R4-PROFILE-COLLECTIONS-1**، المعتمدة من المالك بعد32 وقبل33: المشاهدة لاحقًا وسجل المشاهدات داخل بروفايل صاحبه؛ إعادة استعمال الموجود، وعزل صاحب الحساب، وقوائم حتى النفاد؛ المراجع O19-19/20 و13§8 و15§12. لا تُخلط مع reminder UNIT35. المسار التالي 32.1 → 33 → 33.1 → 34–42، وإجمالي الخطة 57 UNIT.
-- **PLAN BASE before this status update:** `25eb18c86fdfee8af6babd167f154fe34dc3ed13`. اللقطة الحالية في أعلى الملف و§2 هما مصدر الحالة وNEXT؛ اللقطات الأقدم أدناه تاريخية.
+- **CODE MAIN / actual merge SHA:** `3b1b6b64914cbfc861e00063643431c60539a284`؛ PR #141 / UNIT32.1؛ BASE `05f0f1f84c50a13be36b6d2111a628e14985d039` وapproved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`.
+- **Post-merge Quality Gate #384:** [run 40498659504](https://github.com/Maelsh/dueli-opus/actions/runs/40498659504) SUCCESS على SHA الدمج نفسه: 2094 ناجحًا و1 متجاوزًا (2095 إجمالًا). **Deploy #613:** [run 40498659503](https://github.com/Maelsh/dueli-opus/actions/runs/40498659503) SUCCESS على SHA نفسه؛ production bindings وread-only schema readiness وfail-closed release readiness وخطوة production deploy كلها PASS. لم تُطبق migration.
+- **UNIT32.1 / R4-PROFILE-COLLECTIONS-1 = CODE DONE / DEPLOYED.** رأيان مستقلان REMOTE APPROVE على HEAD النهائي؛ 22 ملفًا، 251 route، G2=300≤310، لا migration. القوائم خاصة بالمالك وبترقيم keyset حتى النفاد؛ H1/H2 وWATCH_ELIGIBILITY_SECONDS=300 محفوظة.
+- **ملاحظات P3 محفوظة ولا تمنع الدمج:** نقرة Watch Later المبكرة قد تُهمل أثناء hydration؛ cursor يرفض fractional seconds مع أن writer الحالي whole-second؛ E2E 2/2 AR/EN محلية وليست ضمن CI؛ VOD history إشارة عميل مصادق عليها وليست إثبات تشغيل خادميًا، ولا تغير H1/H2. لا نعيد الوحدة دون عيب جديد.
+- **حدود القبول:** جودة الإنتاج والنشر الفعلي موثقان بالـworkflow؛ لا اختبار يدوي إضافي على متصفح/جهاز حقيقي أو قارئ شاشة/IME، لذا لا نسجل `PROD VERIFIED`.
+- **UNIT32 / R4-PROFILE-SAVE-1 = CODE DONE / DEPLOYED**؛ PR #140، merge SHA `05f0f1f84c50a13be36b6d2111a628e14985d039`، Quality #381 `40422901712` وDeploy #610 `40422901631` SUCCESS.
+- **حدود الاعتماديات:** Hono moderate وZod high ما زالا ضمن grace-period المسجل ويعالجان في UNIT33.1؛ لا ادعاء بأن dependencies خالية من الثغرات.
+- **Gate 30–30.6 مغلقة؛ UNIT31 و32 و32.1 CODE DONE / DEPLOYED.** PR #110 خارج النطاق ولا يدمج.
+- **NEXT = UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1** بموافقة المالك 2026-10-27؛ بعد32.1 وقبل33. تشمل واجهة تغيير كلمة المرور من API القائم، وحذف المنافسة المؤهلة قبل الخصم بحارس ذري؛ التفاصيل في14 و13§9. المسار: 32.2 →33 →33.1 →34–42؛ **58 UNIT**، دون ترقيم جديد أو إزاحة33–43.
+- **PLAN BASE قبل هذا التحديث:** `a72d9c36e600f38cfb33f6414b51b9a665ef472f`. لقطة14 أعلى الملف هي المصدر الوحيد للحالة/NEXT؛ اللقطات أدناه تاريخية.
 
 ## لقطة تاريخية — 2026-10-26 (بعد دمج UNIT31؛ NEXT حينها UNIT32، استُبدلت في27أكتوبر)
 
