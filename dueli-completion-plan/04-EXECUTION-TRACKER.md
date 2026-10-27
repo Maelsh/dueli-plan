@@ -1,15 +1,16 @@
 # Dueli — بوابة استئناف القيادة
 
-## لقطة الاستئناف المعتمدة — 2026-10-27 (UNIT32.2-REM1 مدمجة ومنشورة؛ NEXT=UNIT33)
+## لقطة الاستئناف المعتمدة — 2026-10-27 (UNIT32.2 + REM1 + UNIT32.3 test closure مدمجة؛ NEXT=UNIT33 غير مُكلّفة في هذه النافذة)
 
-- **CODE MAIN / actual merge SHA:** `bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7`؛ PR #143 / UNIT32.2-REM1؛ approved HEAD `ef6e4f51b344ce26240f9fafa5850822636be75d`؛ BASE `603d826834e3f8490caff3a67db854fb6eedb647`.
-- **Post-merge Quality Gate #390:** [run 40535579267](https://github.com/Maelsh/dueli-opus/actions/runs/40535579267) SUCCESS على SHA الدمج نفسه؛ 2113 passed / 1 skipped؛ G2 any-count 300≤310؛ route inventory 252؛ TypeScript/build/SEC gates passed.
-- **Deploy #619:** [run 40535579164](https://github.com/Maelsh/dueli-opus/actions/runs/40535579164) SUCCESS على SHA نفسه؛ فحوص production bindings وread-only schema readiness وrelease readiness وخطوة production deploy نجحت. لم تُطبّق أي migration.
-- **UNIT32.2 + UNIT32.2-REM1 = CODE DONE / DEPLOYED.** PR #143 أغلق A–E: pagination مستمرة بمؤشر ثابت؛ تمرير العنوان آمن؛ كلمات المرور خام؛ حالة كلمة المرور المحلية لـOAuth تميّز عن حساب OAuth-only؛ توثيق #142 مصحح إلى13 حالة واختبارات REM1 الفعلية=6. لا تغيير schema أو dependencies.
-- **المراجعة:** موافقتان مستقلتان على HEAD الدقيق أعلاه؛ Quality Gate #389 وPR preview #618 نجحا على HEAD قبل الدمج، ثم البوابتان #390/#619 نجحتا على actual merge SHA. ملاحظة تغطية غير حاجبة: اختبار العنوان لم يجمع بصورة مستقلة حالة apostrophe وتدفق التأكيد/الحذف/الإلغاء في اختبار واحد؛ المراجعان قبلا المسار المشترك للهروب واختبارات الحذف الموجودة. لا يُدّعى اختبار تلك التركيبة بعينها.
-- **حدود القبول:** نشر الإنتاج مثبت، لكن لا توجد أدلة قبول يدوي شاملة لمتصفح/جهاز/قارئ شاشة/IME؛ لذلك لا تسجل `PROD VERIFIED`. لا اختبارات ضغط/تزامن متوازية جديدة؛ حد الدليل مقبول بقرار المالك.
-- **NEXT = UNIT33 / R4-HOME-UX-1**، ثم `33.1 → 34 → 35–42`. إجمالي الخطة58 UNIT؛ IDs33–43 محفوظة؛ PR #110 خارج النطاق. `14-UNIFIED-EXECUTION-PATH.md` هو المصدر الوحيد لترتيب/NEXT.
-- **PLAN BASE قبل تحديث الحالة هذا:** `47f72e8333c25097bb621c65e1004d0caf64eed0`.
+- **CODE MAIN / actual merge SHA:** 8e10cdc3ec1f5f2dd1c225feee88ab7d225411cd؛ PR #144 / UNIT32.3 candidate؛ approved HEAD 1ebc73dc61c0c2eef74a06864de4f536384c794f؛ BASE bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7. هذه متابعة اختبار/دليل فقط؛ لا عيب في كود المنتج ثبت، ولا تغيير منتج أو مخطط أو dependencies.
+- **Post-merge Quality Gate #392:** [run 40553795307](https://github.com/Maelsh/dueli-opus/actions/runs/40553795307) SUCCESS على SHA الدمج نفسه؛ 2122 passed / 1 skipped؛ G2 baseline 310 لم يزد، وجرد المسارات بقي 252.
+- **Deploy #621:** [run 40553795266](https://github.com/Maelsh/dueli-opus/actions/runs/40553795266) SUCCESS على SHA نفسه؛ build وproduction bindings وread-only schema collection وfail-closed readiness وخطوة production deploy نجحت. لم تُطبّق أي migration.
+- **UNIT32.3 — R4-ACCOUNT-COMP-LIFECYCLE-EDGE-1 = CLOSED / TEST-EVIDENCE FOLLOW-UP.** PR #144 أضاف 9 اختبارات مركزة: 5 لتأكيد/إلغاء حذف المنافسة والعنوان عبر SSR وmarkup Load More، و4 لحالة تحميل الإعدادات ومساري كلمة المرور. لا تغييرات في كود المنتج؛ لم يُضف اعتماد أو route أو schema.
+- **المراجعة المستقلة:** تقريران REMOTE APPROVE على HEAD نفسه. نطاق إغلاق الاختبارات مقبول. حد دليل محفوظ: اختبار Load More يتحقق من خصائص العنوان وCSP args في markup المضاف، بينما اختبار confirmation/DELETE ينفذ handler المشترك من بطاقة SSR؛ كما أن الاختبارات الجديدة لا تستخدم production competition-card renderer لإثبات أن كل عنوان خام يبقى نصًا في card DOM. لم يعتبر المراجعان ذلك مانعًا ضمن النطاق المحدد، ولا يُدّعى اختبار هذين التركيبين end-to-end.
+- **النقطة الثانية — تأخر تحميل settings:** لا يظهر نموذج تغيير كلمة المرور أو مسار الاستعادة قبل انتهاء GET؛ الاختبارات تثبت spinner الأولي، وحالة التأخير، وتفرع الحساب المحلي/OAuth-only، وعدم إرسال طلب تغيير قبل الرسم.
+- **حالة الإصدار:** CODE DONE / DEPLOYED. لم يقع قبول يدوي شامل لمتصفح/جهاز/قارئ شاشة/IME؛ لذلك لا تسجل PROD VERIFIED.
+- **تصنيف الخطة:** UNIT32.3 متابعة فرعية لاختبارات/الأدلة داخل صف32.2، وليست UNIT رئيسية جديدة؛ يبقى إجمالي الخطة 58 UNIT والمعرفات33–43 كما هي. لا نبدأ تنفيذ الوحدة التالية في هذه النافذة. **Canonical NEXT يبقى UNIT33 / R4-HOME-UX-1** إلى حين استئناف العمل صراحةً.
+- **PLAN BASE قبل تحديث الحالة هذا:** f8e8fbbd6ab8a271f72dfb1f3b6c6e7cb69cd2ca.
 
 ## لقطة تاريخية — 2026-10-26 (بعد دمج UNIT31؛ NEXT حينها UNIT32، استُبدلت في27أكتوبر)
 
