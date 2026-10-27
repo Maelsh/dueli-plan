@@ -102,7 +102,8 @@ MEDIAانتقلتإلىLIVE/CHUNK/COMP بوحداتهافي13؛ قبولالإد
 | H-01 | HIGH | تأخر Home15–30ثانية وفق المتصفح؛ Promise.all مؤيد بالكود | HOME-UX/OPT |
 | S-01 | HIGH | title غير مهرب؛ PR103 مفتوحة تعالج المسار المركزي | PR103 القائمة |
 | N-04 | MEDIUM | toasts قديمة وclosed unread ونص قبول بعنوان طلب جديد وعربي داخلEN | EVENTS-NOTIFY/UX-STATE |
-| I-01 | MEDIUM | InvitePanel: mojibake وNaN% ومفاتيح ترجمة ناقصة | UX-STATE |
+| I-01 | MEDIUM | InvitePanel: mojibake وNaN% ومفاتيح ترجمة ناقصة؛ عند غياب compatibility_score تعرض «غير متاح» بدل نسبة مخترعة، دون تعديل H7 | UX-STATE / UNIT35 |
+| VIS-04 | HIGH | بطاقة تفاصيل المنافس inviteHoverCard (z-index:70) وإشعارات Toast (z-index:200) تقع خلف InvitePanel overlay (z-[9999])؛ يجب إصلاح stacking context وoverflow في InvitePanel.ts وsrc/styles.css وإعادة بناء public/static/styles.css، مع اختبار AR/EN للهاتف وسطح المكتب | UX-STATE / UNIT35 |
 | U-01 | MEDIUM | RemindMe422 بلا تفسير؛ تأخر القبول10–12ثانية؛ عداد التعليقات لا يتحدث | UX-STATE |
 | U-02 | MEDIUM | AdminPanel للعادي ثم403؛ help رابط [object Object] | UX-STATE |
 | U-03 | MEDIUM | بحث المدعوين بطيء وpopovers مكررة وتأخر الانتقال بعد create | UX-STATE |
