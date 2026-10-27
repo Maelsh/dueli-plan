@@ -3,17 +3,19 @@
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
 هذا هو المصدر الوحيد **لترتيب العمل وحالته وNEXT**. 08 للقرارات، 11 لأوزان H7 المعتمدة، 10 للدمج والإصدار، 05/12/13/15 للمواصفات. 04 بوابة استئناف تشير إلى هذا المسار، وليست جدولًا منافسًا له.
 
-## الحالة المعتمدة الأحدث — 2026-10-27 / UNIT32 مدمجة ومنشورة؛ NEXT UNIT32.1
+## الحالة المعتمدة الأحدث — 2026-10-27 / UNIT32 و32.1 مدمجتان ومنشورتان؛ NEXT UNIT32.2
 
-- **CODE MAIN / actual merge SHA:** `05f0f1f84c50a13be36b6d2111a628e14985d039` (PR #140 / UNIT32). Base `3cee6e78ce0750536c474131363f80902b886c7d`; independently approved HEAD `05bbfffc43bd58394798fc2a917f1002bbb783c5`.
-- **Post-merge Quality Gate #381:** [run 40422901712](https://github.com/Maelsh/dueli-opus/actions/runs/40422901712) SUCCESS on the exact merge SHA; 2069 tests passed and 1 skipped (2070 total). **Deploy to Cloudflare Pages #610:** [run 40422901631](https://github.com/Maelsh/dueli-opus/actions/runs/40422901631) SUCCESS on the same SHA. Production bindings and read-only schema readiness passed, the production deploy step succeeded, and no migration was applied.
-- **UNIT32 / R4-PROFILE-SAVE-1 — CODE DONE / DEPLOYED.** Two independent REMOTE APPROVEs covered the exact final HEAD. P-01 is fixed: `display_name` and `bio` persist to the authenticated user's row through `UserModel`; session identity only; response reflects the DB re-read; profile/preferences use partial-update semantics; validation/sanitization and RED→GREEN evidence are recorded in PR #140 and the code WORKLOG.
-- **Quality/audit limit:** the `npm audit` grace-period step reported the known Hono moderate and Zod high advisories; it remained under the repository's existing grace-period handling and is tracked for UNIT33.1. Do not claim a vulnerability-free dependency tree.
-- **Non-blocking review boundaries:** if profile write succeeds but preference write fails, the endpoint returns 500 although the profile may already be saved; the UI reports failure and retry converges. If the authoritative profile GET fails on initial load, the page may fall back to session data; save confirmation itself uses the DB-backed `data.profile` from PUT. These do not expand or reopen UNIT32.
-- **Acceptance limits / not claimed:** no manual production/browser/device, screen-reader or physical IME test was performed; do **not** record `PROD VERIFIED`. No schema/migration/route/dependency change was added; the 245-route inventory remains unchanged. PR #110 remains out of scope.
-- **GATE 30–30.6 = ACCEPTED / CLOSED**; UNIT31 remains CODE DONE / DEPLOYED. No previously verified unit is reopened.
-- **NEXT: UNIT32.1 / R4-PROFILE-COLLECTIONS-1**; owner-approved watch-later and viewing-history collections inside the profile owner's own profile, reusing existing work, isolating ownership, and supporting pagination to exhaustion. Follow O19-19/20, 13§8 and 15§12; do not conflate with UNIT35 reminders. Next order: 32.1 → 33 → 33.1 → 34–42. Total plan remains 57 UNIT; PR #110 must not be touched/merged.
-- **PLAN BASE before this status update:** `25eb18c86fdfee8af6babd167f154fe34dc3ed13`. This snapshot and §2 are authoritative; older snapshots are historical.
+- **CODE MAIN / actual merge SHA:** `3b1b6b64914cbfc861e00063643431c60539a284` (PR #141 / UNIT32.1). BASE `05f0f1f84c50a13be36b6d2111a628e14985d039`; exact approved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`.
+- **Post-merge Quality Gate #384:** [run 40498659504](https://github.com/Maelsh/dueli-opus/actions/runs/40498659504) SUCCESS on the exact merge SHA; 2094 tests passed and 1 skipped (2095 total), G2 any-count 300 against unchanged baseline 310, route inventory 251. **Deploy to Cloudflare Pages #613:** [run 40498659503](https://github.com/Maelsh/dueli-opus/actions/runs/40498659503) SUCCESS on the same SHA; production bindings, read-only production schema state, fail-closed release readiness, and production deploy step all succeeded. No migration was applied.
+- **UNIT32 / R4-PROFILE-SAVE-1 — CODE DONE / DEPLOYED.** PR #140 merged at `05f0f1f84c50a13be36b6d2111a628e14985d039`; Quality #381 `40422901712` and Deploy #610 `40422901631` SUCCESS on that SHA.
+- **UNIT32 non-blocking boundaries retained:** if the profile write succeeds but the preferences write fails, the endpoint can return 500 while the profile is already saved; the UI reports the failure and retry converges. If the authoritative profile GET fails during initial load, session DTO fallback remains. These observations do not reopen UNIT32. No schema/migration/route/dependency changes in UNIT32; no manual device/screen-reader/IME acceptance is claimed.
+- **UNIT32.1 / R4-PROFILE-COLLECTIONS-1 — CODE DONE / DEPLOYED.** PR #141 merged using expected HEAD `b75c52beab12e0b06718bf71e0022352468600dd`. Two independent REMOTE APPROVEs and pre-merge Quality/Preview succeeded. Owner-only Watch Later and Viewing History, server-enforced privacy, keyset pagination to exhaustion, AR/EN, no migration; H1/H2 and 300s eligibility unchanged.
+- **Recorded non-blocking P3 review boundaries:** early Watch Later click may be ignored while first status hydration is pending; fractional-second cursor timestamps are rejected although current writer uses whole seconds; Playwright E2E (2/2 AR/EN) is local evidence, not part of GitHub CI; VOD history remains an authenticated client signal and is not server proof of playback. These are documented, not concealed or treated as manual-production acceptance.
+- **Quality/audit limit:** npm audit continues to report the known Hono moderate and Zod high advisories under existing grace-period handling; UNIT33.1 remains the designated owner-approved dependency/security gate. Do not claim a vulnerability-free dependency tree.
+- **Acceptance limits / not claimed:** Quality and production Deploy are successful, but no additional manual production/browser/device, screen-reader, or physical IME acceptance was performed. Do **not** record `PROD VERIFIED`. The deployment workflow’s actual production deploy step is confirmed; this is distinct from manual product acceptance.
+- **GATE 30–30.6 remains ACCEPTED / CLOSED**; UNIT31 and UNIT32 remain CODE DONE / DEPLOYED. No prior closed unit is reopened, and PR #110 remains outside scope.
+- **NEXT: UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1**; owner-approved on 2026-10-27. It adds password-change UI reusing the existing account API and a safe pre-opponent competition-delete journey with an atomic server-side lifecycle guard. The next order is **32.2 → 33 → 33.1 → 34 → 35–42**. Total plan becomes 58 UNIT; IDs 33–43 are preserved without renumbering.
+- **PLAN BASE before this status update:** `a72d9c36e600f38cfb33f6414b51b9a665ef472f`. This current snapshot and §2 are authoritative; older snapshots below remain historical.
 
 ### لقطة تاريخية — 2026-10-26 / Gate 30–30.6 مغلقة وUNIT31 مدمجة؛ NEXT وقتها UNIT32 (استبدلت في27أكتوبر)
 
@@ -34,11 +36,11 @@
 
 ## أين نحن وكم بقي؟
 
-- **تم:** Gate 30–30.6 مغلقة؛ UNIT31 / R4-MESSAGES-1 مدمجة ومنشورة؛ UNIT32 / R4-PROFILE-SAVE-1 مدمجة ومنشورة على `05f0f1f84c50a13be36b6d2111a628e14985d039` مع Quality #381 وDeploy #610 ناجحتين على SHA نفسه.
-- **نحن الآن:** NEXT هو **UNIT32.1 / R4-PROFILE-COLLECTIONS-1**؛ قوائم المشاهدة لاحقًا وسجل المشاهدات داخل بروفايل صاحبه، وفق قرار المالك O19-19/20 ومراجع 13§8 و15§12.
-- **التالي:** 32.1 → 33 → 33.1 → 34–42؛ لا إعادة للوحدات المغلقة ولا تقديم لوحدة على ترتيبها المعتمد.
+- **تم:** Gate 30–30.6 مغلقة؛ UNIT31 وUNIT32 وUNIT32.1 مدمجة ومنشورة. آخر CODE MAIN هو `3b1b6b64914cbfc861e00063643431c60539a284`؛ Quality #384 `40498659504` وDeploy #613 `40498659503` نجحا على SHA نفسه.
+- **نحن الآن:** NEXT هو **UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1**، بعد32.1 وقبل33؛ واجهة تغيير كلمة المرور وحذف المنافسة المؤهلة مع حارس ذري.
+- **التالي:** 32.2 → 33 → 33.1 → 34–42؛ معرفات 33–43 لا تتغير ولا يعاد تنفيذ الوحدات المغلقة.
 - **بعد الويب:** 43/R5، لا يحجب البيتا. لا عدد PRs أوأيام مفروض.
-- إجمالي الخطة 57 UNIT؛ حافظ على جميع البنود والـDoD. PR110 خارج النطاق ولا يدمج.
+- إجمالي الخطة 58 UNIT؛ حافظ على جميع البنود والـDoD. PR110 خارج النطاق ولا يدمج.
 
 ## 1. لقطة المطابقة الحالية — 2026-10-21
 
@@ -113,23 +115,24 @@
 | 30.3 | R4-SEC-GUARDS-DOCS-1 | حراس05/10 وحالةالوثائق | PR132 MERGED/DEPLOYED إلى85eec139؛ القبولالمجمعمعلق؛ لاCORSrebuild أوWebSocket جديد، DoD15§10 محفوظة |
 | **30.4 / 30.5** | **R4-COMP-CONTROLS-EARLY-END-1 + settlement response guard** | **UNIT30.4 + UNIT30.5; PR #133–#137 merged** | **CODE MERGED**: #133 `4c3d960`; #134 `ca78323`; #135 `251da45`; #136 `a6d9dea`; #137 `20109dd5`. ID-19 APPROVED VIA T/B. Gate 30 successful evidence preserved; no broad retest. Post-merge Quality/Deploy and production acceptance are recorded in the current combined Gate 30–30.6 closure above. |
 | **30.6** | **R4-COMP-ACCEPT-ZEROCHUNK-1** | **D-01 invitation acceptance 500; D-02 completed competition with 0 chunks and indefinite player wait** | **ACCEPTED / CLOSED 2026-10-26**: PR #138 merged at 70ce057f34fc7c3e39506ee6c9e98ddb917d85fc; post-merge Quality #374 (40313355068) and Deploy #603 (40313355093) SUCCESS on exact merge SHA; production deployment confirmed. D-01 and D-02 both PASS in production per owner acceptance report. UI duplicate-409, scheduled-conflict UI, active lease drain and upstream-invalid/no-DB remain NOT TESTED in production. Gate 30–30.6 CLOSED; at closure NEXT was UNIT31 (now complete), and current NEXT is UNIT32. D-03 remains UNIT35. |
-| 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | **CODE DONE / DEPLOYED 2026-10-26**؛ PR #139 merge SHA `3cee6e78ce0750536c474131363f80902b886c7d`؛ Quality #378 `40371372964` وDeploy #607 `40371372929` SUCCESS على SHA الدمج نفسه؛ M-01..M-05 PASS؛ F-1 مغلق بـRED→GREEN؛ ما قبل الإرسال خارج أحدث100 تحسين غير مانع لاحق؛ قبول يدوي/IME/SSE وPROD VERIFIED غير مدعى؛ **NEXT UNIT32.1** |
-| 32 | R4-PROFILE-SAVE-1 | حفظ display_name/bio صادق | **CODE DONE / DEPLOYED 2026-10-27**؛ PR #140؛ approved HEAD `05bbfffc43bd58394798fc2a917f1002bbb783c5`؛ merge SHA `05f0f1f84c50a13be36b6d2111a628e14985d039`؛ Quality #381 `40422901712` وDeploy #610 `40422901631` SUCCESS على SHA نفسه؛ 2069 passed / 1 skipped؛ بلا schema/migration/route changes؛ PROD VERIFIED غير مدعى؛ **NEXT UNIT32.1** |
-| 32.1 | R4-PROFILE-COLLECTIONS-1 | المشاهدة لاحقًا وسجل المشاهدات في قسم خاص داخل بروفايل صاحبه | **NEXT / OWNER APPROVED**؛ يبدأ بعد32 وقبل33؛ O19-19/20؛13§8؛ إعادة استعمال الموجود، عزل صاحب الحساب، قوائم حتى النفاد؛ لا reminder بديل |
+| 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | **CODE DONE / DEPLOYED 2026-10-26**؛ PR #139 merge SHA `3cee6e78ce0750536c474131363f80902b886c7d`؛ Quality #378 `40371372964` وDeploy #607 `40371372929` SUCCESS على SHA الدمج نفسه؛ M-01..M-05 PASS؛ F-1 مغلق بـRED→GREEN؛ ما قبل الإرسال خارج أحدث100 تحسين غير مانع لاحق؛ قبول يدوي/IME/SSE وPROD VERIFIED غير مدعى |
+| 32 | R4-PROFILE-SAVE-1 | حفظ display_name/bio صادق | **CODE DONE / DEPLOYED 2026-10-27**؛ PR #140؛ approved HEAD `05bbfffc43bd58394798fc2a917f1002bbb783c5`؛ merge SHA `05f0f1f84c50a13be36b6d2111a628e14985d039`؛ Quality #381 `40422901712` وDeploy #610 `40422901631` SUCCESS على SHA نفسه؛ 2069 passed / 1 skipped؛ بلا schema/migration/route changes؛ PROD VERIFIED غير مدعى |
+| 32.1 | R4-PROFILE-COLLECTIONS-1 | المشاهدة لاحقًا وسجل المشاهدات في قسم خاص داخل بروفايل صاحبه | **CODE DONE / DEPLOYED 2026-10-27**؛ PR #141؛ approved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`؛ merge SHA `3b1b6b64914cbfc861e00063643431c60539a284`؛ Quality #384 `40498659504` وDeploy #613 `40498659503` SUCCESS على SHA نفسه؛ 2094 passed / 1 skipped؛ G2=300≤310؛ 251 route؛ no migration؛ known P3/non-manual acceptance documented; لا PROD VERIFIED |
+| 32.2 | R4-ACCOUNT-COMP-LIFECYCLE-1 | واجهة تغيير كلمة المرور في الإعدادات + حذف المنافسة من «منافساتي» قبل انضمام خصم مع حارس خادمي ذري | **NEXT / OWNER APPROVED 2026-10-27**؛ المواصفة13§9 وقرار08؛ reuse `PUT /api/account/password`؛ الحذف حصراً `pending`, `opponent_id IS NULL`, `started_at IS NULL` مع شروط حذف ذرية في Model ومنع race مع `acceptInvitationAtomic`; confirm-title-final AR/EN mobile; T/B وOAuth/session invalidation. 57→58 UNIT؛ IDs33–43 محفوظة؛ no migration expected |
 | 33 | R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry ومنع الطلب والرسم القديم المكرر | PLANNED؛12/H-01 وDB-01؛ قياس التكرار، حفظ H7 والفلاتر والجلسة والنفاد؛ لا سقف مصطنع |
 | 33.1 | R4-DEPS-SEC-1 | تحديث Hono (≥4.13.11، الهدف 4.13.13 بعد تحليل التوافق)، ومعالجة Zod (إزالة أو ترقية بمعيار أدلة E1)، وسجل تدقيق الاعتماديات المباشرة وغير المباشرة، وبوابة audit إنتاجية مانعة | PLANNED (الموضع وD-1=YES بقرار المالك 24 أكتوبر؛ يُعتمد بدمج PR #44)؛ [18](18-DEPS-SECURITY-UNIT33-1-SPEC.md)؛ بعد 33 وقبل 34 وأي وحدة DB/hosting/MySQL؛ ليست NEXT؛ لا داخل 30.4/PR133؛ لا H7/مال/إعلانات؛ فحص الكود المعتمد 85eec139: serveStatic وjwt غير مستخدمين وZod بلا مستورد للوحدة الوحيدة؛ D-1 في 08 |
-| 34 | R4-DB-MEASURE-1 | إغلاق DB-01 بقياس فعلي لتكلفة T0/continuation/search/polling والكتابات | OPEN؛ استكمال DoD DIAG/OPT في12؛ لا إعادة104/0039؛ قياس قبل/بعد وميزانية صريحة مع metadata/polling/cache في15 §7؛ أي OPT إضافي مشروط بالقياس ويسجل هنا قبل تنفيذه |
-| 35 | R4-UX-I18N-1 | جميعUX-STATE والترجمة والتذكير وحصيلة التقييم والإتاحة | PLANNED؛12/13 والـ34موضعًا محفوظة؛ O19-17/18 وشريط الحصيلة/عددالمقيمين/الشعارين في15§12.7؛ reminder أيقونةوحراسةوفعالية؛ الأدوات الضرورية للبث مقدمة28.3.1 لا مكررة |
+| 34 | R4-DB-MEASURE-1 | إغلاق DB-01 بقياس T0/continuation/search/polling والكتابات، وربط القياس بالطلب | OPEN؛ DoD DIAG/OPT في12؛ لا إعادة104/0039؛ قياس قبل/بعد وميزانية صريحة وmetadata/polling/cache في15§7؛ أضف requestId middleware خفيفًا وتسجيل أخطاء مهيكل يتضمن requestId/route/method/status/duration/error class لربط D1 بالطلب؛ دون أسرار أو PII أو logging لأجسام الطلبات، ودون مكتبة/خدمة مراقبة جديدة بلا حاجة مثبتة |
+| 35 | R4-UX-I18N-1 | UX-STATE والترجمة والتذكير وحصيلة التقييم والإتاحة؛ I-01/FV20-SMALL وVIS-04 | PLANNED؛ 12/13 ومصفوفة34 موضعًا؛ O19-17/18 في15§12.7؛ I-01 يمنع mojibake وNaN% ويعرض «غير متاح / Unavailable» دون مساس H7؛ VIS-04 يضبط z-index/stacking context/overflow بين InvitePanel وinviteHoverCard وToast، ويبني public/static/styles.css بـnpm run build:css؛ اختبار AR/EN mobile/desktop؛ reminder يظل مستقلًا عن Watch Later |
 | 36 | R4-ADMIN-ACCEPT-1 | قبول الدعم الإداري بحساب مخول، وتتبع ملاحظة stats500 | BLOCKED ACCESS / TARGETED؛ الجزء الإداري من MEDIA-ADMIN-ACCEPT؛12 وWORKLOG/R2-A؛ افحص /api/admin/stats موضعيًا، أصلح المتبقي إن ثبت أو ALREADY DONE بدليل؛ لا إعادة مالية/أدوار |
 | 37 | R4-NOTIFY-CLEANUP-1 | تعليم الإشعارات القديمة مقروءة مرة واحدة | OWNER APPROVED / NOT EXECUTED EVIDENCED؛12 §10.2 وrunbook #106؛ cutoff2026-10-08T03:31:39Z، counts/schema/guard؛ لا إذن مكرر أو مساس رسائل/دعوات |
 | 38 | R4-GUIDE-1 | مركز عن Dueli والمساعدة والتنقل وإدارة المحتوى | PLANNED؛13 §5 و15 §7؛ notice/versioned terms وsubscriber acceptance، إعادة استعمال C1/C2 والوثائق المدارة،8 أقسام، الروابط القديمة واللغة والأجزاء والصلاحيات |
 | 39 | R4-GUIDE-2 | الرسالة والتقنيات ومساهمات AI والسياسات والتواصل والدعم | PLANNED + OWNER CONTENT APPROVAL داخلها؛13 §5 و15 §7؛ حقوق الطرفين ونص الشروط، محتوى موثق AR/EN، لا ادعاء وعي AI أو كيان قانوني أو قناة تبرع غير مثبتة |
-| 40 | R0-LAUNCH-READINESS | إجراءات البنك والمزود والكيان إن لزم، الوصول الإداري وتغيير المؤقت، متطلبات الإطلاق الفعلية | OPEN / HUMAN؛08؛ يبدأ التحضير مبكرًا وهذا موضع حسم الجاهزية؛ H9 محفوظ: الحقيقيات بعد الإطلاق وفق قرار المالك، لا اشتراط كل المسودات قبل البيتا |
-| 41 | R4-ACCEPT-REM-1 | قبول مجمع للرحلات الفاشلة والمعدلة والوسائط والتنزيل والميزانية | PLANNED بعد المعالجات والإجراءات اللازمة؛12/13؛ T/B أولًا ثم جلسة S محددة؛ لا blocker/High معلوم؛ BLOCKED ليس PASS |
+| 40 | R0-LAUNCH-READINESS | إجراءات البنك والمزود والكيان إن لزم، الوصول الإداري، SEC-02، ومتطلبات الإطلاق الفعلية | OPEN / HUMAN؛08؛ طابق SEC-02 في `docs/12-SECURITY-REMEDIATION.md` مع أدلة تنفيذ المال الفعلية من8.A/8.D/#94؛ سجل لكل جزء evidenced/done/open ولا تعِد فتح المالي المغلق بلا عيب جديد. حسم جاهزية الإطلاق يظل قرارًا بشريًا؛ H9 محفوظة |
+| 41 | R4-ACCEPT-REM-1 | قبول مجمع للرحلات الفاشلة والمعدلة والوسائط والتنزيل والميزانية | PLANNED بعد المعالجات؛12/13؛ T/B أولًا ثم S محددة؛ إذا شمل الإطلاق عمليات مالية، أضف withdrawal-path smoke test آمنًا ببيئة/حسابات اختبار غير إنتاجية: إنشاء الطلب والتحقق من الحالة والرصيد المعلق، ثم رفض/إلغاء أو الإكمال في بيئة اختبار مع idempotency؛ لا صرف حقيقي أو كتابة مالية على الإنتاج دون تفويض؛ طابق SEC-02 في `docs/12-SECURITY-REMEDIATION.md` مع نتائج المال السابقة. BLOCKED ليس PASS |
 | 42 | R0-WEB-LAUNCH | عرض الجاهزية الموثقة ثم قرار المالك وإطلاق بيتا الويب | OWNER DECISION عند الجاهزية؛ لا قرار آلي أو ادعاء تشغيل دفع حقيقي دون البنك/المزود |
 | 43 | R5 | PWA وAndroid وiOS وTV والتقنيات والتكلفة وقيود المتاجر | DEFERRED AFTER WEB؛ يعتمد المالك النطاق والترتيب لاحقًا |
 
-**قاعدة السير الحالية:** 31 → 32 → **32.1 (NEXT الآن)** → 33 → 33.1 → 34–42. Gate 30–30.6 مغلقة؛ UNIT31 وUNIT32 مدمجتان ومنشورتان. UNIT32.1 تحتفظ بمواصفة O19-19/20؛ لا خلط بينها وبين reminder UNIT35. UNIT28 ACCEPTED ومغلقة؛ لا إعادة اختبار دون عيب جديد مستقل.
+**قاعدة السير الحالية:** 31 → 32 → 32.1 → **32.2 (NEXT الآن)** → 33 → 33.1 → 34–42. Gate30–30.6 مغلقة؛ UNIT31 و32 و32.1 CODE DONE / DEPLOYED. UNIT32.2 تنفذ الواجهة والحارس المأذونين فقط. UNIT35 تحوي I-01 وVIS-04، و34/40/41 تحمل تعديلات الرصد والجاهزية؛ لا تخلط reminder مع Watch Later. IDs33–43 ثابتة؛ الإجمالي58 UNIT؛ PR110 خارج النطاق؛ لا إعادة اختبار لوحدة مغلقة بلا عيب جديد.
 
 ## 3. ضمان بقاء جميع العيوب
 
@@ -141,9 +144,10 @@
 | N-01/02/03/05/06/07 وreceiver/star/replay/cascade، بنود PDF الخاصة بالإشعارات |23/#106؛ لا إعادة الإصلاح؛ N-04 الخاص بعرض الحالة/اللغة إن بقي ففي35، cleanup37 |
 | M-01/02/03/04/05 للرسائل الشخصية والإدارية |31؛ لا تخلط رقم M-4 في PDF الخاص بالعداد مع M-04 في سجل الخطة الخاص بالعرض الفوري وEnter |
 | P-01 profile |32 |
+| واجهة تغيير كلمة المرور + حذف المنافسة قبل انضمام خصم |32.2؛ لا تعِد #77؛ تأكيد نهائي وحارس ذري مع سباق قبول الدعوة |
 | H-01 Home |33/34 |
 | S-01/S-02 title/doubleescaping |23/#103؛ لا تكرار |
-| I-01؛ U-01..U-05؛ VIS-01/02/03؛ DATA-01 |35 والموضع المتأثر25/26/31/33؛ VIS-02 لم يتكرر في العينة الأحدث، لا تعديل CSS افتراضي؛ لا حذف demo أو مخالفة KEEP NOW |
+| I-01؛ U-01..U-05؛ VIS-01/02/03/04؛ DATA-01 |35 والموضع المتأثر25/26/31/33؛ I-01 يضمن UTF-8 وUnavailable بدل NaN؛ VIS-04 يختبر طبقات نافذة الدعوة وبطاقة التفاصيل وToast بعد بناء CSS؛ VIS-02 لم يتكرر في العينة الأحدث، لا تعديل CSS افتراضي؛ لا حذف demo أو مخالفة KEEP NOW |
 | VOD-01/02، C-1 signaling، D-1 حقيقة التسجيل، انقطاع المضيف والاستئناف والنهاية والتنزيل، handoff107: finalize/drain/upload queue/sequence |24–30؛ لغة المشغل ضمن35؛ لا PASS من وجود vod_url |
 | ADM-01/AUTH-OBS-01؛ ملاحظة /api/admin/stats من سجل الكود |36/40؛ حساب مخول خاص؛ لا username-login أو bootstrap إنتاجي بلا قرار |
 | التقرير الأحدث: showToast16/fullscreen/namespaces/34 موضعًا/score/login/create/help/icons |35؛ مصفوفة13 §4 بكاملها |
@@ -188,6 +192,10 @@
 9. الأصل T/B الأرخص؛ S للحكم الصوتي/البصري/الجهاز الذي لا يحسمه T/B؛ H للقرارات والإجراءات البشرية. لا يعاد المغلق ولا تضاف full suite بدون تغير أو فشل جديد مبرر.
 
 ## 6. سجل ترتيب المسار
+
+### اعتماد المالك 2026-10-27 — إغلاق UNIT32.1 وإضافة UNIT32.2 وتوسعات 34/35/40/41
+
+قبل: `NEXT=32.1`, 57 UNIT. بعد: PR #141 merged at `3b1b6b64914cbfc861e00063643431c60539a284`, Quality #384 `40498659504` and Deploy #613 `40498659503` SUCCESS on that exact merge SHA; `NEXT=32.2`, 58 UNIT. أضيفت وحدة واحدة بعد32.1 وقبل33 دون renumber أو حذف أي من33–43. أضيف VIS-04 إلى مواصفة35، requestId/structured error logging إلى34، وSEC-02/withdrawal smoke gate إلى40/41. مراجعات P3 وحدود عدم إجراء قبول يدوي محفوظة في اللقطة الحالية أعلاه. PLAN PR هذه توثيقية؛ لا تنفذ أي كود أو كتابة إنتاجية.
 
 ### قرار 2026-10-26 — تحديث المسار بعد قبول Gate 30 الجزئي
 قبل: 56 UNIT، NEXT 30.4، قبول مجمع 30–30.4. بعد: **57 UNIT، NEXT 30.6، قبول مجمع 30–30.6**؛ لا إزاحة أو إعادة ترقيم 31–43. حُفظت شواهد Gate 30 الناجحة، وحُسم ID-19 عبر T/B، وأضيف D-01/D-02 إلى 30.6، بينما بقي D-03 في 35.
