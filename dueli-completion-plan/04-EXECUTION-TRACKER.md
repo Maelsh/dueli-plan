@@ -1,18 +1,13 @@
 # Dueli — بوابة استئناف القيادة
 
-## لقطة الاستئناف المعتمدة — 2026-10-27 (بعد دمج ونشر UNIT32.1)
+## لقطة الاستئناف المعتمدة — 2026-10-27 (بعد دمج ونشر UNIT32.2)
 
-- **CODE MAIN / actual merge SHA:** `3b1b6b64914cbfc861e00063643431c60539a284`؛ PR #141 / UNIT32.1؛ BASE `05f0f1f84c50a13be36b6d2111a628e14985d039` وapproved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`.
-- **Post-merge Quality Gate #384:** [run 40498659504](https://github.com/Maelsh/dueli-opus/actions/runs/40498659504) SUCCESS على SHA الدمج نفسه: 2094 ناجحًا و1 متجاوزًا (2095 إجمالًا). **Deploy #613:** [run 40498659503](https://github.com/Maelsh/dueli-opus/actions/runs/40498659503) SUCCESS على SHA نفسه؛ production bindings وread-only schema readiness وfail-closed release readiness وخطوة production deploy كلها PASS. لم تُطبق migration.
-- **UNIT32.1 / R4-PROFILE-COLLECTIONS-1 = CODE DONE / DEPLOYED.** رأيان مستقلان REMOTE APPROVE على HEAD النهائي؛ 22 ملفًا، 251 route، G2=300≤310، لا migration. القوائم خاصة بالمالك وبترقيم keyset حتى النفاد؛ H1/H2 وWATCH_ELIGIBILITY_SECONDS=300 محفوظة.
-- **ملاحظات P3 محفوظة ولا تمنع الدمج:** نقرة Watch Later المبكرة قد تُهمل أثناء hydration؛ cursor يرفض fractional seconds مع أن writer الحالي whole-second؛ E2E 2/2 AR/EN محلية وليست ضمن CI؛ VOD history إشارة عميل مصادق عليها وليست إثبات تشغيل خادميًا، ولا تغير H1/H2. لا نعيد الوحدة دون عيب جديد.
-- **حدود القبول:** جودة الإنتاج والنشر الفعلي موثقان بالـworkflow؛ لا اختبار يدوي إضافي على متصفح/جهاز حقيقي أو قارئ شاشة/IME، لذا لا نسجل `PROD VERIFIED`.
-- **UNIT32 / R4-PROFILE-SAVE-1 = CODE DONE / DEPLOYED**؛ PR #140، merge SHA `05f0f1f84c50a13be36b6d2111a628e14985d039`، Quality #381 `40422901712` وDeploy #610 `40422901631` SUCCESS.
-- **حدود UNIT32 المحفوظة (غير مانعة):** قد تنجح كتابة الملف الشخصي ثم يفشل تحديث التفضيلات فتُعاد 500 رغم حفظ الملف؛ الواجهة تعرض الفشل وإعادة المحاولة تتقارب. إذا فشلت قراءة الملف المرجعية عند التحميل الأول فقد تعرض الصفحة DTO الجلسة. لا يعاد فتح UNIT32 ولا يُدعى قبول يدوي للجهاز أو قارئ الشاشة/IME.
-- **حدود الاعتماديات:** Hono moderate وZod high ما زالا ضمن grace-period المسجل ويعالجان في UNIT33.1؛ لا ادعاء بأن dependencies خالية من الثغرات.
-- **Gate 30–30.6 مغلقة؛ UNIT31 و32 و32.1 CODE DONE / DEPLOYED.** PR #110 خارج النطاق ولا يدمج.
-- **NEXT = UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1** بموافقة المالك 2026-10-27؛ بعد32.1 وقبل33. تشمل واجهة تغيير كلمة المرور من API القائم، وحذف المنافسة المؤهلة قبل الخصم بحارس ذري؛ التفاصيل في14 و13§9. المسار: 32.2 →33 →33.1 →34–42؛ **58 UNIT**، دون ترقيم جديد أو إزاحة33–43.
-- **PLAN BASE قبل هذا التحديث:** `a72d9c36e600f38cfb33f6414b51b9a665ef472f`. لقطة14 أعلى الملف هي المصدر الوحيد للحالة/NEXT؛ اللقطات أدناه تاريخية.
+- **CODE MAIN / actual merge SHA:** `603d826834e3f8490caff3a67db854fb6eedb647`؛ PR #142 / UNIT32.2؛ approved HEAD `5fa03f443c8c7dcf51f167afbdba45449beae92b`; BASE `3b1b6b64914cbfc861e00063643431c60539a284`.
+- **Post-merge Quality Gate #386:** [run 40512334779](https://github.com/Maelsh/dueli-opus/actions/runs/40512334779) SUCCESS: 2107 passed / 1 skipped, G2 300≤310, routes251. **Deploy #615:** [run 40512334753](https://github.com/Maelsh/dueli-opus/actions/runs/40512334753) SUCCESS on the same SHA; production deploy step and read-only schema readiness passed. No migration.
+- **UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1 = CODE MERGED / DEPLOYED.** Two independent REMOTE APPROVEs on exact HEAD. No manual browser/device/screen-reader/IME testing; do not label PROD VERIFIED.
+- **Review findings to route by owner decision:** latest-50 owner-list cap conflicts with13§9 discoverability requirement; title double-quotes can break JSON in data-csp-args; password UI trims values although reset preserves raw value; OAuth-linked accounts that have a local password can still be routed to reset; focused test count is13, not14. See12/13 for details. These are not assigned to33/34/35 by inference. Delete/accept ordering tests are sequential, not true parallel concurrency tests; code-level atomicity remains based on the D1 batch/SQL guard.
+- **Next code unit in the approved route:** UNIT33 / R4-HOME-UX-1, but wait for owner disposition of the unassigned findings before issuing its LOCAL prompt. Route after disposition:33 →33.1 →34–42; total58 UNIT; IDs33–43 preserved. PR #110 remains out of scope.
+- **PLAN BASE before this update:** `3408b3c102f91aeef63d64a26934622738b1ca7e`;14 remains the sole authority for NEXT.
 
 ## لقطة تاريخية — 2026-10-26 (بعد دمج UNIT31؛ NEXT حينها UNIT32، استُبدلت في27أكتوبر)
 
