@@ -3,19 +3,18 @@
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
 هذا هو المصدر الوحيد **لترتيب العمل وحالته وNEXT**. 08 للقرارات، 11 لأوزان H7 المعتمدة، 10 للدمج والإصدار، 05/12/13/15 للمواصفات. 04 بوابة استئناف تشير إلى هذا المسار، وليست جدولًا منافسًا له.
 
-## الحالة المعتمدة الأحدث — 2026-10-27 / UNIT32 و32.1 مدمجتان ومنشورتان؛ NEXT UNIT32.2
+## الحالة المعتمدة الأحدث — 2026-10-27 / UNIT32.2 مدمجة ومنشورة؛ قرار موضع ملاحظات المراجعة مطلوب
 
-- **CODE MAIN / actual merge SHA:** `3b1b6b64914cbfc861e00063643431c60539a284` (PR #141 / UNIT32.1). BASE `05f0f1f84c50a13be36b6d2111a628e14985d039`; exact approved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`.
-- **Post-merge Quality Gate #384:** [run 40498659504](https://github.com/Maelsh/dueli-opus/actions/runs/40498659504) SUCCESS on the exact merge SHA; 2094 tests passed and 1 skipped (2095 total), G2 any-count 300 against unchanged baseline 310, route inventory 251. **Deploy to Cloudflare Pages #613:** [run 40498659503](https://github.com/Maelsh/dueli-opus/actions/runs/40498659503) SUCCESS on the same SHA; production bindings, read-only production schema state, fail-closed release readiness, and production deploy step all succeeded. No migration was applied.
-- **UNIT32 / R4-PROFILE-SAVE-1 — CODE DONE / DEPLOYED.** PR #140 merged at `05f0f1f84c50a13be36b6d2111a628e14985d039`; Quality #381 `40422901712` and Deploy #610 `40422901631` SUCCESS on that SHA.
-- **UNIT32 non-blocking boundaries retained:** if the profile write succeeds but the preferences write fails, the endpoint can return 500 while the profile is already saved; the UI reports the failure and retry converges. If the authoritative profile GET fails during initial load, session DTO fallback remains. These observations do not reopen UNIT32. No schema/migration/route/dependency changes in UNIT32; no manual device/screen-reader/IME acceptance is claimed.
-- **UNIT32.1 / R4-PROFILE-COLLECTIONS-1 — CODE DONE / DEPLOYED.** PR #141 merged using expected HEAD `b75c52beab12e0b06718bf71e0022352468600dd`. Two independent REMOTE APPROVEs and pre-merge Quality/Preview succeeded. Owner-only Watch Later and Viewing History, server-enforced privacy, keyset pagination to exhaustion, AR/EN, no migration; H1/H2 and 300s eligibility unchanged.
-- **Recorded non-blocking P3 review boundaries:** early Watch Later click may be ignored while first status hydration is pending; fractional-second cursor timestamps are rejected although current writer uses whole seconds; Playwright E2E (2/2 AR/EN) is local evidence, not part of GitHub CI; VOD history remains an authenticated client signal and is not server proof of playback. These are documented, not concealed or treated as manual-production acceptance.
-- **Quality/audit limit:** npm audit continues to report the known Hono moderate and Zod high advisories under existing grace-period handling; UNIT33.1 remains the designated owner-approved dependency/security gate. Do not claim a vulnerability-free dependency tree.
-- **Acceptance limits / not claimed:** Quality and production Deploy are successful, but no additional manual production/browser/device, screen-reader, or physical IME acceptance was performed. Do **not** record `PROD VERIFIED`. The deployment workflow’s actual production deploy step is confirmed; this is distinct from manual product acceptance.
-- **GATE 30–30.6 remains ACCEPTED / CLOSED**; UNIT31 and UNIT32 remain CODE DONE / DEPLOYED. No prior closed unit is reopened, and PR #110 remains outside scope.
-- **NEXT: UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1**; owner-approved on 2026-10-27. It adds password-change UI reusing the existing account API and a safe pre-opponent competition-delete journey with an atomic server-side lifecycle guard. The next order is **32.2 → 33 → 33.1 → 34 → 35–42**. Total plan becomes 58 UNIT; IDs 33–43 are preserved without renumbering.
-- **PLAN BASE before this status update:** `a72d9c36e600f38cfb33f6414b51b9a665ef472f`. This current snapshot and §2 are authoritative; older snapshots below remain historical.
+- **CODE MAIN / actual merge SHA:** `603d826834e3f8490caff3a67db854fb6eedb647` (PR #142 / UNIT32.2). BASE `3b1b6b64914cbfc861e00063643431c60539a284`; exact independently approved HEAD `5fa03f443c8c7dcf51f167afbdba45449beae92b`.
+- **Post-merge Quality Gate #386:** [run 40512334779](https://github.com/Maelsh/dueli-opus/actions/runs/40512334779) SUCCESS on the exact merge SHA; 2107 tests passed, 1 skipped, 0 test failures; G2 any-count 300 against unchanged baseline 310; route inventory 251.
+- **Deploy to Cloudflare Pages #615:** [run 40512334753](https://github.com/Maelsh/dueli-opus/actions/runs/40512334753) SUCCESS on the same SHA; production bindings, read-only production schema state, fail-closed release readiness, and the actual production deploy step succeeded. No migration was applied.
+- **UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1 — CODE MERGED / DEPLOYED.** Password UI reuses existing `PUT /api/account/password`; creator-delete has SQL eligibility predicates on dependent deletes and parent DELETE in one D1 batch; no schema change. This records deployment evidence, not a claim that every product acceptance criterion passed or that manual production/device/screen-reader/IME acceptance occurred.
+- **Owner disposition needed before closing the review follow-ups:** (1) a hard cap of50 in owner competitions conflicts with13§9's “do not hide eligible older entries behind a hard cap”; (2) titles with double quotes can make `data-csp-args` JSON invalid and the delete flow fail closed; (3) `.trim()` in password UI may block passwords with leading/trailing spaces that reset currently preserves; (4) accounts with `oauth_provider` but an actual local password are still routed to reset instead of change; (5) the repository logs say14 focused tests whereas13 test cases are present. Details are listed under new `U32.2-*` entries in12 and the post-merge note in13. These findings are **not silently reassigned** to33/34/35.
+- **Evidence boundary:** both independent REMOTE reviewers approved. Delete/accept ordering tests exercise each order sequentially, not truly parallel D1 requests; the SQL and batch guard are the code-level safety mechanism. No report may call this a true parallel race test. No separate Playwright E2E or manual device acceptance is claimed.
+- **Known dependency advisories:** Hono moderate and Zod high remain under the documented grace-period gate; UNIT33.1 owns dependency remediation.
+- GATE30–30.6, UNIT31, UNIT32, and UNIT32.1 remain closed. PR #110 remains out of scope. Total remains **58 UNIT**, with IDs33–43 unchanged.
+- **Next code unit in the approved sequence remains UNIT33 / R4-HOME-UX-1**, but do not issue its local implementation prompt until the owner decides where the unassigned UNIT32.2 findings—especially the §9 hard-cap mismatch—belong. After disposition, resume `33 → 33.1 → 34 → 35–42`.
+- **PLAN BASE before this status update:** `3408b3c102f91aeef63d64a26934622738b1ca7e`. The current snapshot is authoritative; older snapshots remain historical.
 
 ### لقطة تاريخية — 2026-10-26 / Gate 30–30.6 مغلقة وUNIT31 مدمجة؛ NEXT وقتها UNIT32 (استبدلت في27أكتوبر)
 
@@ -36,11 +35,10 @@
 
 ## أين نحن وكم بقي؟
 
-- **تم:** Gate 30–30.6 مغلقة؛ UNIT31 وUNIT32 وUNIT32.1 مدمجة ومنشورة. آخر CODE MAIN هو `3b1b6b64914cbfc861e00063643431c60539a284`؛ Quality #384 `40498659504` وDeploy #613 `40498659503` نجحا على SHA نفسه.
-- **نحن الآن:** NEXT هو **UNIT32.2 / R4-ACCOUNT-COMP-LIFECYCLE-1**، بعد32.1 وقبل33؛ واجهة تغيير كلمة المرور وحذف المنافسة المؤهلة مع حارس ذري.
-- **التالي:** 32.2 → 33 → 33.1 → 34–42؛ معرفات 33–43 لا تتغير ولا يعاد تنفيذ الوحدات المغلقة.
-- **بعد الويب:** 43/R5، لا يحجب البيتا. لا عدد PRs أوأيام مفروض.
-- إجمالي الخطة 58 UNIT؛ حافظ على جميع البنود والـDoD. PR110 خارج النطاق ولا يدمج.
+- **تم:** Gate30–30.6 مغلقة؛ UNIT31 و32 و32.1 مدمجة ومنشورة؛ UNIT32.2 مدمجة ومنشورة على `603d826834e3f8490caff3a67db854fb6eedb647`؛ Quality #386 `40512334779` وDeploy #615 `40512334753` نجحا على SHA نفسه.
+- **الحالة الحالية:** ملاحظات مراجعة UNIT32.2 غير المسندة وخصوصًا تعارض حد الـ50 مع معيار اكتشاف كل المنافسات المؤهلة معروضة على المالك للبت في موضعها؛ لا يُعيّن لها موضع بالنيابة عنه.
+- **التالي بالمسار المعتمد بعد قرار المالك:** UNIT33 / R4-HOME-UX-1، ثم33.1 →34–42. إجمالي الخطة58 UNIT؛ IDs33–43 ثابتة.
+- **بعد الويب:**43/R5، لا يحجب البيتا. PR110 خارج النطاق ولا يدمج.
 
 ## 1. لقطة المطابقة الحالية — 2026-10-21
 
@@ -118,7 +116,7 @@
 | 31 | R4-MESSAGES-1 | Compose والتاريخ والاسم والعرض الفوري والترتيب وEnter والقراءة والهاتف | **CODE DONE / DEPLOYED 2026-10-26**؛ PR #139 merge SHA `3cee6e78ce0750536c474131363f80902b886c7d`؛ Quality #378 `40371372964` وDeploy #607 `40371372929` SUCCESS على SHA الدمج نفسه؛ M-01..M-05 PASS؛ F-1 مغلق بـRED→GREEN؛ ما قبل الإرسال خارج أحدث100 تحسين غير مانع لاحق؛ قبول يدوي/IME/SSE وPROD VERIFIED غير مدعى |
 | 32 | R4-PROFILE-SAVE-1 | حفظ display_name/bio صادق | **CODE DONE / DEPLOYED 2026-10-27**؛ PR #140؛ approved HEAD `05bbfffc43bd58394798fc2a917f1002bbb783c5`؛ merge SHA `05f0f1f84c50a13be36b6d2111a628e14985d039`؛ Quality #381 `40422901712` وDeploy #610 `40422901631` SUCCESS على SHA نفسه؛ 2069 passed / 1 skipped؛ بلا schema/migration/route changes؛ PROD VERIFIED غير مدعى |
 | 32.1 | R4-PROFILE-COLLECTIONS-1 | المشاهدة لاحقًا وسجل المشاهدات في قسم خاص داخل بروفايل صاحبه | **CODE DONE / DEPLOYED 2026-10-27**؛ PR #141؛ approved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`؛ merge SHA `3b1b6b64914cbfc861e00063643431c60539a284`؛ Quality #384 `40498659504` وDeploy #613 `40498659503` SUCCESS على SHA نفسه؛ 2094 passed / 1 skipped؛ G2=300≤310؛ 251 route؛ no migration؛ known P3/non-manual acceptance documented; لا PROD VERIFIED |
-| 32.2 | R4-ACCOUNT-COMP-LIFECYCLE-1 | واجهة تغيير كلمة المرور في الإعدادات + حذف المنافسة من «منافساتي» قبل انضمام خصم مع حارس خادمي ذري | **NEXT / OWNER APPROVED 2026-10-27**؛ المواصفة13§9 وقرار08؛ reuse `PUT /api/account/password`؛ الحذف حصراً `pending`, `opponent_id IS NULL`, `started_at IS NULL` مع شروط حذف ذرية في Model ومنع race مع `acceptInvitationAtomic`; confirm-title-final AR/EN mobile; T/B وOAuth/session invalidation. 57→58 UNIT؛ IDs33–43 محفوظة؛ no migration expected |
+| 32.2 | R4-ACCOUNT-COMP-LIFECYCLE-1 | واجهة تغيير كلمة المرور + حذف المنافسة المؤهلة من «منافساتي» | **CODE MERGED / DEPLOYED 2026-10-27**؛ PR #142؛ approved HEAD `5fa03f443c8c7dcf51f167afbdba45449beae92b`؛ merge SHA `603d826834e3f8490caff3a67db854fb6eedb647`؛ Quality #386 `40512334779` وDeploy #615 `40512334753` SUCCESS على SHA نفسه؛ 2107 passed / 1 skipped؛ G2=300≤310؛ no migration. Remote P3/DoD follow-ups logged at12/13; **placement not yet owner-decided**; no manual PROD VERIFIED |
 | 33 | R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry ومنع الطلب والرسم القديم المكرر | PLANNED؛12/H-01 وDB-01؛ قياس التكرار، حفظ H7 والفلاتر والجلسة والنفاد؛ لا سقف مصطنع |
 | 33.1 | R4-DEPS-SEC-1 | تحديث Hono (≥4.13.11، الهدف 4.13.13 بعد تحليل التوافق)، ومعالجة Zod (إزالة أو ترقية بمعيار أدلة E1)، وسجل تدقيق الاعتماديات المباشرة وغير المباشرة، وبوابة audit إنتاجية مانعة | PLANNED (الموضع وD-1=YES بقرار المالك 24 أكتوبر؛ يُعتمد بدمج PR #44)؛ [18](18-DEPS-SECURITY-UNIT33-1-SPEC.md)؛ بعد 33 وقبل 34 وأي وحدة DB/hosting/MySQL؛ ليست NEXT؛ لا داخل 30.4/PR133؛ لا H7/مال/إعلانات؛ فحص الكود المعتمد 85eec139: serveStatic وjwt غير مستخدمين وZod بلا مستورد للوحدة الوحيدة؛ D-1 في 08 |
 | 34 | R4-DB-MEASURE-1 | إغلاق DB-01 بقياس T0/continuation/search/polling والكتابات، وربط القياس بالطلب | OPEN؛ DoD DIAG/OPT في12؛ لا إعادة104/0039؛ قياس قبل/بعد وميزانية صريحة وmetadata/polling/cache في15§7؛ أضف requestId middleware خفيفًا وتسجيل أخطاء مهيكل يتضمن requestId/route/method/status/duration/error class لربط D1 بالطلب؛ دون أسرار أو PII أو logging لأجسام الطلبات، ودون مكتبة/خدمة مراقبة جديدة بلا حاجة مثبتة |
@@ -132,7 +130,7 @@
 | 42 | R0-WEB-LAUNCH | عرض الجاهزية الموثقة ثم قرار المالك وإطلاق بيتا الويب | OWNER DECISION عند الجاهزية؛ لا قرار آلي أو ادعاء تشغيل دفع حقيقي دون البنك/المزود |
 | 43 | R5 | PWA وAndroid وiOS وTV والتقنيات والتكلفة وقيود المتاجر | DEFERRED AFTER WEB؛ يعتمد المالك النطاق والترتيب لاحقًا |
 
-**قاعدة السير الحالية:** 31 → 32 → 32.1 → **32.2 (NEXT الآن)** → 33 → 33.1 → 34–42. Gate30–30.6 مغلقة؛ UNIT31 و32 و32.1 CODE DONE / DEPLOYED. UNIT32.2 تنفذ الواجهة والحارس المأذونين فقط. UNIT35 تحوي I-01 وVIS-04، و34/40/41 تحمل تعديلات الرصد والجاهزية؛ لا تخلط reminder مع Watch Later. IDs33–43 ثابتة؛ الإجمالي58 UNIT؛ PR110 خارج النطاق؛ لا إعادة اختبار لوحدة مغلقة بلا عيب جديد.
+**قاعدة السير الحالية:** 31 → 32 → 32.1 → 32.2 (CODE MERGED / DEPLOYED) → **قرار المالك بشأن ملاحظات المراجعة غير المسندة** → 33 → 33.1 → 34–42. لا تعتبر D-50 محققًا: حد50 يخالف شرط discoverability في13§9. بقية الملاحظات موثقة في12/13 ولم توزع على وحدة. العدد58؛ IDs33–43 ثابتة؛ PR110 خارج النطاق.
 
 ## 3. ضمان بقاء جميع العيوب
 
@@ -192,6 +190,10 @@
 9. الأصل T/B الأرخص؛ S للحكم الصوتي/البصري/الجهاز الذي لا يحسمه T/B؛ H للقرارات والإجراءات البشرية. لا يعاد المغلق ولا تضاف full suite بدون تغير أو فشل جديد مبرر.
 
 ## 6. سجل ترتيب المسار
+
+### إغلاق تشغيلي UNIT32.2 — 2026-10-27 / قرار موضع مراجعات مفتوح
+
+PR #142 merged at `603d826834e3f8490caff3a67db854fb6eedb647`; Quality #386 `40512334779` SUCCESS and Deploy #615 `40512334753` SUCCESS on the exact merge SHA. Unit code is deployed; reviewer findings were added to12 and13. Because the latest-50 owner competitions list conflicts with13§9's no-hard-cap discoverability criterion, the owner must disposition the follow-ups before this unit is represented as fully acceptance-closed and before issuing the next LOCAL prompt. The approved future route remains33→33.1→34→35–42; total58 UNIT, no renumbering.
 
 ### اعتماد المالك 2026-10-27 — إغلاق UNIT32.1 وإضافة UNIT32.2 وتوسعات 34/35/40/41
 
