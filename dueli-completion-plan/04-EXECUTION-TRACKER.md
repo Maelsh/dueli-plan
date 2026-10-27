@@ -1,3 +1,13 @@
+## لقطة استئناف محدثة — 2026-10-28 (UNIT33 + UNIT33.1 مدمجتان؛ تحديث الخطة مطلوب قبل UNIT34)
+
+- **CODE MAIN / actual merge SHA:** `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`؛ PR #145 مدموج.
+- **Post-merge Quality Gate:** [40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) SUCCESS على SHA الدمج نفسه.
+- **Deploy:** [40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه، بما في ذلك job الاعتماد على Quality Gate وDeploy to Cloudflare Pages.
+- **UNIT33 + UNIT33.1:** CODE DONE / MERGED / DEPLOYED؛ لا تعني هذه الحالة قبولًا يدويًا شاملًا. بلاغات تجربة المالك الحية في 2026-10-28 محفوظة في08 وفي تقرير قائد التخطيط.
+- **قرار DB-HOSTING:** المالك اعتمد المعمارية الهجينة D1 Core + short-TTL public Edge Cache + shared-hosting media؛ MySQL للأرشفة الباردة بعد البيتا فقط، بلا هجرة قبل البيتا.
+- **NEXT:** دمج تحديث التخطيط الحالي ثم إصدار موجه UNIT34. لا يبدأ التنفيذ قبل تثبيت PLAN SHA الجديد وتوثيق 33/33.1 وفق Protocol10. الإجمالي58 UNIT والترتيب33→33.1→34→35–42 محفوظان.
+- **PR #110:** OPEN/HOLD، لا يُمس.
+
 # Dueli — بوابة استئناف القيادة
 
 ## لقطة الاستئناف المعتمدة — 2026-10-27 (UNIT32.2 + REM1 + UNIT32.3 test closure مدمجة؛ NEXT=UNIT33 غير مُكلّفة في هذه النافذة)
