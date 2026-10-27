@@ -278,3 +278,13 @@ PR107/108/109 CODE DONE / DEPLOYED في نطاقها؛ الحالة الأحدث
 **توثيق التسليم:** PR كود واحدة لهذا النطاق؛ `WORKLOG.md` و`PLAN-STATUS.md` ضمن PR نفسها، وتحتوي على حالة LOCAL الحقيقية وHEAD والاختبارات المحددة ونتيجتها وحدود الأدلة. LOCAL لا يدمج ولا ينشر. REMOTE مستقل يراجع BASE/HEAD الدقيقين. لا إعادة فتح أو إعادة اختبار الأعمال المغلقة التي لا تتأثر.
 
 **خارج النطاق:** UNIT33 و33.1 و34 وما بعدهما، PR #110، H7 والترتيب/التمويل/الإعلانات، ترحيلات قاعدة البيانات غير المبررة، اختبارات تزامن/ضغط إضافية، والقبول اليدوي المجمع المحجوز في41.
+
+
+### UNIT32.3 — R4-ACCOUNT-COMP-LIFECYCLE-EDGE-1 — CLOSED / TEST-EVIDENCE FOLLOW-UP (2026-10-27)
+
+- **القرار:** لم يكشف التحقيق عيبًا في كود المنتج بالملاحظتين؛ أُغلقت فجوة الأدلة باختبارات فقط عبر PR #144، BASE bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7، approved HEAD 1ebc73dc61c0c2eef74a06864de4f536384c794f، actual merge SHA 8e10cdc3ec1f5f2dd1c225feee88ab7d225411cd. مراجعان مستقلان وافقا HEAD نفسه.
+- **بوابات ما بعد الدمج:** Quality Gate #392 [SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/40553795307) على SHA الدمج نفسه: 2122 passed / 1 skipped؛ G2 baseline 310 لم يزد، وجرد المسارات بقي252. Deploy #621 [SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/40553795266) على SHA نفسه؛ فحوص production bindings وread-only schema readiness وrelease readiness وخطوة production deploy نجحت. لا migration أو dependency أو production-code change.
+- **الاختبار الأول — عناوين الحذف:** خمسة اختبارات تفحص SSR مع الاقتباس المفرد/المزدوج ومحارف خاصة، نص confirmation، الإلغاء دون DELETE، التأكيد الذي يرسل DELETE إلى المعرّف الصحيح، وencoding/CSP args في markup المضاف عبر Load More.
+- **حدود تغطية مقبولة بالمراجعتين:** اختبار Load More نفسه يتحقق من markup/attributes ولا ينقر زر البطاقة المضافة لاستدعاء confirmation؛ confirmation/cancel/DELETE يُختبر عبر handler المشترك من بطاقة SSR. كما يستخدم harness renderer مبسطًا للبطاقة، فلا يُعد هذا بحد ذاته اختبار injection شاملًا لـproduction competition-card renderer. هذه حدود لما أثبتته الاختبارات وليست إثباتًا لوجود خلل؛ لم يثبت المراجعان فجوة حاجبة ضمن نطاق PR #144، لذلك لا تفتح متابعة جديدة لمجرد توسيع التغطية الاختيارية.
+- **الاختبار الثاني — تحميل كلمة المرور:** أربعة اختبارات تثبت SSR spinner-only، بقاء النموذج ومسار الاستعادة غير ظاهرين خلال GET المتأخر، اختيار النموذج الصحيح بعد التحميل لحساب محلي مقابل OAuth-only، وعدم إرسال طلب تغيير كلمة المرور قبل وجود المدخلات/الرسم.
+- **الحالة:** UNIT32.3 متابعة فرعية لاختبارات/الأدلة ضمن الصف32.2 وليست UNIT رئيسية إضافية؛ إجمالي الخطة 58 UNIT ومعرفات33–43 لا تتغير. لا يُدّعى قبول يدوي شامل أو PROD VERIFIED. Canonical NEXT يبقى UNIT33 ولا يبدأ تكليفها في هذه النافذة.
