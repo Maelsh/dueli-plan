@@ -228,14 +228,16 @@ PR107/108/109 CODE DONE / DEPLOYED في نطاقها؛ الحالة الأحدث
 
 ### UNIT32.2 — نتائج المراجعة بعد الدمج (2026-10-27) — الحالة الأساسية وحفظ حدود الأدلة
 
-- PR #142 دُمج على `603d826834e3f8490caff3a67db854fb6eedb647`؛ Quality Gate #386 [40512334779](https://github.com/Maelsh/dueli-opus/actions/runs/40512334779) وDeploy #615 [40512334753](https://github.com/Maelsh/dueli-opus/actions/runs/40512334753) نجحا على SHA نفسه؛ 2107 passed / 1 skipped، G2=300≤310، route inventory=251، no migration. خطوة النشر الإنتاجي نجحت. لم يحدث قبول يدوي شامل على المتصفح/الجهاز/قارئ الشاشة/IME، ولا يُدعى `PROD VERIFIED`.
-- خلل حد الـ50 الثابت يخالف معيار اكتشاف كل المسابقات المؤهلة في §9؛ لذلك تبقى دورة حياة الصف32.2 مفتوحة لإكمال متابعة المالك أدناه، رغم أن تنفيذ PR #142 الأساسي مدموج ومنشور.
-- المراجعون وافقوا HEAD الأصلي. اختبارات قبول الدعوة/الحذف نفذت اتجاهي accept-first وdelete-first بالتتابع؛ ليست اختبار تزامن حقيقي لطلبات D1 متوازية. قرر المالك قبول أدلة `db.batch` وشروط أهلية SQL الحالية دون اختبارات ضغط/تزامن جديدة؛ لا يوصف الدليل بأنه أقوى مما هو عليه.
-- العدد الفعلي لحالات الاختبار الجديدة في ملفات PR #142 الأربعة هو 13 (2 API password + 6 API deletion + 4 UI password + 1 profile UI)، وليس14؛ يصحح WORKLOG/PLAN-STATUS ضمن تحديث الكود في REM1.
+- PR #142 دُمج على `603d826834e3f8490caff3a67db854fb6eedb647`؛ Quality Gate #386 [40512334779](https://github.com/Maelsh/dueli-opus/actions/runs/40512334779) وDeploy #615 [40512334753](https://github.com/Maelsh/dueli-opus/actions/runs/40512334753) نجحا على SHA نفسه؛ 2107 passed / 1 skipped، G2=300≤310، route inventory=251، no migration.
+- متابعة المالك REM1 نُفذت عبر PR #143، واعتمدها مراجعان مستقلان على HEAD `ef6e4f51b344ce26240f9fafa5850822636be75d`. actual merge SHA `bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7`; Quality Gate #390 [SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/40535579267) = 2113 passed / 1 skipped، G2=300≤310، route inventory=252؛ Deploy #619 [SUCCESS](https://github.com/Maelsh/dueli-opus/actions/runs/40535579164) على SHA نفسه وخطوة production deploy نجحت. لا migration أو dependency change.
+- **UNIT32.2 + REM1 = CODE DONE / DEPLOYED** ضمن الصف32.2؛ لم يحدث قبول يدوي شامل على المتصفح/الجهاز/قارئ الشاشة/IME، ولذلك لا يُدعى `PROD VERIFIED`.
+- اختبارات REM1 الجديدة = 6. وتوثيق #142 مصحح إلى13 حالة (`2 API password + 6 API deletion + 4 UI password + 1 profile UI`) منفصلة عن بوابة الجودة الإجمالية.
+- الأدلة accept-first/delete-first تسلسلية وليست اختبار تزامن حقيقي لطلبات D1 متوازية؛ قرار المالك يقبل أدلة `db.batch` وشروط SQL الحالية دون ضغط/تزامن إضافي.
+- **تغطية عنوان الحذف — ملاحظة غير حاجبة ومقبولة بالمراجعتين:** اختبار العنوان يثبت ترميز الاقتباس المزدوج و`& < >` وCSP args المقتصر على ID، لكنه لا يختبر apostrophe منفصلًا مع مسار التأكيد/الحذف/الإلغاء في سيناريو واحد. مسار الهروب مشترك والاختبارات الحالية موجودة؛ لم تُسجّل عيبًا وظيفيًا أو مانع إصدار. لا ندّعي أن هذا التركيب الدقيق اختُبر.
 
-### UNIT32.2-REM1 — R4-ACCOUNT-COMP-LIFECYCLE-REM1 — OWNER APPROVED / NEXT 2026-10-27
+### UNIT32.2-REM1 — R4-ACCOUNT-COMP-LIFECYCLE-REM1 — COMPLETED / CODE MERGED & DEPLOYED 2026-10-27
 
-**الموضع:** متابعة ضمن الصف32.2 نفسه، قبل UNIT33؛ ليست وحدة جديدة. تبقى الخطة 58 UNIT وتظل المعرفات/الترتيب `33 → 33.1 → 34 → 35–42` بلا تغيير. مرجع القرار `08`/27أكتوبر، والحالة الحاكمة في `14`. لا تكليف UNIT33 حتى إغلاق REM1 عبر LOCAL → REMOTE المستقل على HEAD الدقيق → مراجعة القائد وCI → الدمج بـ`expected_head_sha` → Quality وDeploy على actual merge SHA.
+**الموضع والنتيجة:** متابعة ضمن الصف32.2 نفسه وليست وحدة جديدة. أُنجزت A–E في PR #143، ثم دُمجت ونُشرت على actual merge SHA المسجل أعلاه بعد نجاح Quality #390 وDeploy #619 على SHA نفسه. تبقى الخطة 58 UNIT، والترتيب `33 → 33.1 → 34 → 35–42` بلا تغيير؛ NEXT الآن UNIT33 وفق14. حدود الاختبار غير الحاجب لحالة apostrophe موضحة في نتيجة المراجعة أعلاه.
 
 #### النطاق الحصري ومعايير القبول
 
