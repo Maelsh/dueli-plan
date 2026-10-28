@@ -389,3 +389,15 @@ Free/Paid/نقلDB والوصول الإداري لم تُعتمد بهذا ال
 - **Canonical NEXT = UNIT35 / R4-UX-I18N-1.** يشمل I-01/FV20-SMALL وVIS-04 وبقية جرد UX/I18N ذي34 موضعًا، مع ملاحظات قبول 28 أكتوبر رقم3 (اتجاه أزرار التحكم بين AR/EN)، رقم4 (Remind Me أيقونة فقط)، ورقم5 (الهيدر/المساعدة/حاويات الهاتف)، وفق تفاصيل12/13/14/15.
 - **UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1** بعدها مباشرة وقبل36، وتشمل فقط الملاحظات1/2/6/7: eye/PiP، fullscreen، انتقال المقاطع، وتجميع/تنزيل MP4. يحظر خلط مكوناتها داخل UNIT35.
 - تحديث حالة التنفيذ هذا لا يغير H7 أو سياسات المنتج، ولا يفتح أي وحدة مغلقة ولا يلمس PR #110.
+
+## قرار التنفيذ — إغلاق PR #110 بوصفها تنفيذًا مستبدلًا — 2026-10-28
+
+**OWNER REQUEST EXECUTED — PR #110 CLOSED WITHOUT MERGE.**
+الرأس القديم `6e7ca1039484980affbcaf6f0eab548a82c35d17` كان تطبيقًا مبكرًا لمجموعة مميزات أصبحت لها تطبيقات أحدث مدمجة على main. قرار الإغلاق لا يعني أن كل قبول وسائطي يدوي ناجح، ولا يعيد فتح الوحدة30 أو وحدات البث المغلقة.
+
+- **A — تنزيل تسجيل واحد MP4:** حلّ محله [PR #129 / UNIT30](https://github.com/Maelsh/dueli-opus/pull/129)، merge SHA `886026f9291fecf9c5640e2aadb942e16a24b380`. سجل PR129 صراحةً أن raw-Blob concat وFFmpeg من CDN في PR110 أُهملا كتنفيذ مستبدل؛ لا يُنقل منهما كود قديم. main الحالية تستخدم manifest خادميًا موثّقًا و`RecordingDownloadPanel` و`RecordingDownloadService` و`Mp4FragmentAssembler` وعامل FFmpeg مستضافًا ذاتيًا واختبارات مرتبطة بها.
+- **B — واجهة بث موحدة:** [PR #120 / UNIT28.3.1](https://github.com/Maelsh/dueli-opus/pull/120)، merge SHA `2abf5ade279804d1ec07a4ece22cbf810b4c50ba`: `/competition/:id` سطح البث الإنتاجي، و`/live/:id` تحويل توافق302. صفحات الاختبار ومسار `/live/:id/finance` منفصلان ومحفوظان.
+- **C — الانتقالات التلقائية:** #120 نشرت أحداث accepted/start عبر competition SSE؛ [PR #124 / UNIT28.5](https://github.com/Maelsh/dueli-opus/pull/124)، merge SHA `d0768783ede68c11aab9cc442c148d99349fead3`، أكملت ended/completed ونهاية cron وتحديث السطح في المكان دون اعتماد على refresh يدوي.
+- **D — lease لمسجل واحد:** استُخرجت الفكرة إلى [PR #112 / R4-CHUNK-UPLOAD-SAFE-1](https://github.com/Maelsh/dueli-opus/pull/112)، merge SHA `d778090edc339fc1e9f12c1dd06b1d2af1e164c6`، ثم طُوّرت في [PR #125 / A28-LEASE](https://github.com/Maelsh/dueli-opus/pull/125)، merge SHA `cc7bed7a34c60223bfcd793cc9f6034ac6fb7c58`، وأعمال receipt/generation fencing اللاحقة. migration0040 الموجودة على main مطابقة للملف المقترح في PR110، لكن model/routes/client في main evolved إلى fencing وإيصالات وdrain-tail؛ لا تُستبدل بنسخة PR110.
+
+**الحد المتبقي المهم:** لا يُعلن قبولًا وسائطيًا كاملًا. تجربة المالك في 2026-10-28 أظهرت أن تجميع المقاطع ما زال أبطأ من اللازم وأن المدة/التشغيل قد يكونان غير صحيحين. يظل السبب غير مثبت قبل التحقيق، والموضع الحاكم هو **UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1** بعد UNIT35؛ يجب إثبات المدة والطوابع الزمنية والترتيب والتشغيل وseek. لا تستخدم إغلاق PR110 لإسقاط هذا العيب أو لإحياء implementation القديم.
