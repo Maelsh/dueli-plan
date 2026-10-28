@@ -263,3 +263,11 @@ DoD: تعطلDB يحاكى محليًا/preview بحقن خطأ محدد لإث�
 - **B — قياس التكلفة الفعلي:** أداة/اختبار قابل للتكرار على synthetic dataset بالحجم المعتمد، يقيس rowsRead/rowsWritten/executions وEXPLAIN QUERY PLAN لبناء جلسة Home/Explore عند T0 مقابل continuation، H7SignalsModel/UserSignalsModel والبحث، SSE/notifications، وعمليات chunk_index/playlist/seek. التقرير يقارن قبل/بعد ولا يدعي قياسات إنتاجية غير مأذون بها.
 - **C — Public Cache & Degraded UI:** كاش قصير الأجل أو قراءة تزايدية للبيانات العامة فقط، مفاتيح تشمل surface/category/subcategory/status/lang/policy_version؛ لا بيانات شخصية/جلسات/حظر في كاش مشترك. تجاوز أو إبطال عند live→completed/finalized؛ حفظ h7-v1 وshort-tier-v1 والمشاركة الفعلية وT0 المجمد وexhaustion؛ حد 100 bind variables؛ حقن فشل D1 محليًا لإثبات رسالة صادقة وretry محدود دون استنزاف حصة الإنتاج.
 - **التسليم:** جدول رقمي قبل/بعد لكل رحلة وميزانية الاستهلاك في تقرير التسليم وWORKLOG.md/PLAN-STATUS.md ليعتمدهما المالك وقائد التخطيط قبل بوابة UNIT40.
+
+
+## تحديث قرار المالك وقائد التخطيط — 2026-10-28 / UNIT35 وUNIT35.1
+
+- إجمالي الخطة المعتمد الآن **59 UNIT** بعد إدراج الوحدة الفرعية35.1؛ لا تتغير أرقام الوحدات34–42. التنفيذ: 34 ثم35 ثم35.1 ثم36. تبقى35 مالكة لملاحظات UX/i18n 3/4/5 (Reminder أيقونة فقط وأهلية العرض؛ mobile header/help/avatar/notifications/long handles؛ RTL/LTR controls/play/comment/time). وتملك35.1 الملاحظات1/2/6/7 (eye/PiP مقابل camera، fullscreen، chunk handoff، تنزيل/remux وتصحيح التوقيت).
+- معايير قبول UNIT35.1 موثقة في قرار08 بتاريخ2026-10-28، وتشمل التتبع قبل patch، اختبار الحالات1/3 و2/4، fullscreen دون أزرار مزدوجة، انتقالات LIVE/VOD، وإثبات مدة وتجربة الملف المجمّع على عينة متعددة المقاطع. 0.6s ليست قيمة مفروضة قبل التحقق.
+- اللقطات البصرية المرجعية: `022333.png`, `022604.png`, `022740.png`, `023213.png`, `023424.png`, `gate30b-race-1-live.png`. تُربط كل لقطة باختبار قبول ذي صلة؛ لا تُعامل الصور وحدها كإثبات سبب جذري.
+- UNIT34 تُطلق فور دمج تحديث الخطة وتثبيت PLAN SHA الجديد، وفق الركائز الأربع A–D المعتمدة. لا تبدأ35 أو35.1 قبل إغلاق34 وتحديث الحالة وفق Protocol10.
