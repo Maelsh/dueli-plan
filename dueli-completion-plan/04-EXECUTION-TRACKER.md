@@ -7,7 +7,7 @@
 - **القياسات المحلية المعتمدة في تقرير `docs/unit34-d1-measurement-report.md`:** Home/Explore T0 = 13 SQL statements باستخدام `idx_competitions_status_started`؛ continuation = 5؛ مسار الزائر البارد = 13 والساخن مع cache = 8؛ `searchCompetitions` = 6؛ `searchUsers` = 9؛ H7 `loadCompetitions` = 1؛ H7 profiles = 3. الأرقام من harness محلي اصطناعي، وليست استهلاكًا إنتاجيًا.
 - **حدود القياس/P3 غير الحاجبة:** Cloudflare D1 `rowsRead/rowsWritten` غير متاحة في هذا harness ولم يُجر اختبار قياس إنتاجي؛ `rowsReadApprox` يعكس SQLite فقط. تم قياس `EXPLAIN QUERY PLAN` على schema محلية. `PublicSurfaceCache` مفحوص من ناحية key isolation وTTL/hit/miss على مستوى الوحدة؛ يظل cache في الذاكرة لكل isolate، ولا يُجمَّد T0، وتبقى نقطة الربط الآمن والإبطال على مسارات القراءة المتبقية متابعة مستقبلية. تُحفظ هذه الحدود صراحةً ولا تُستخدم الأرقام لإثبات ميزانية D1 إنتاجية؛ قراءة Cloudflare Analytics تبقى ضمن UNIT40/41.
 - **التخطيط:** إجمالي الخطة **59 UNIT**؛ التسلسل المعتمد **34 (مغلقة) → 35 → 35.1 → 36–42**، والأرقام34–42 ثابتة. بعد دمج تحديث الخطة هذا، **Canonical NEXT = UNIT35 / R4-UX-I18N-1**.
-- **PR #110:** OPEN/HOLD كما هي؛ لا تُمس ولا تُدمج ضمن هذا العمل.
+- **PR #110:** CLOSED / SUPERSEDED في 2026-10-28 دون merge. حصر الميزات وربط الاستبدالات في08 و14؛ الكود البديل فقط هو المصدر الحالي. ما زال عيب مدة/تقطّع MP4 معروفًا ومُسندًا إلى UNIT35.1.
 
 # Dueli — بوابة استئناف القيادة
 
