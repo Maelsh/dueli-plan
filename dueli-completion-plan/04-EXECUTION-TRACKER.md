@@ -1,3 +1,16 @@
+## لقطة استئناف محدثة — 2026-10-28 بعد دمج UNIT34 (توثيق ما بعد الدمج قيد الإغلاق)
+- **CODE MAIN / actual merge SHA:** `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ PR #146 / UNIT34 مدموج.
+- **Pre-merge Quality Gate:** [40622691772](https://github.com/Maelsh/dueli-opus/actions/runs/40622691772) SUCCESS على HEAD المعتمد `cf93f9b1a1d12d8c6aaf280679cd40658d909909`.
+- **Deploy workflow:** [40622691784](https://github.com/Maelsh/dueli-opus/actions/runs/40622691784) SUCCESS كـworkflow، لكن production deploy SKIPPED وPreview فقط. لا تُسجل UNIT34 DEPLOYED/PRODUCTION VERIFIED قبل التحقق من post-merge Quality + Deploy على merge SHA.
+- **UNIT34 / R4-DB-MEASURE-1:** REMOTE APPROVE ×2؛ الكود مدموج. أرقام القياس وحدودها وP3 follow-ups في [UNIT34-CLOSEOUT-PLANNING-LEAD-REPORT-2026-10-28.md](UNIT34-CLOSEOUT-PLANNING-LEAD-REPORT-2026-10-28.md).
+- **القياسات المحلية المبلّغ عنها:** Home T0/continuation 13/5 statements؛ Explore T0/continuation 13/5؛ guest suggested cold/cache-hit 13/8 (أداة الكاش module-only، لا تستخدم مع T0)؛ searchCompetitions/searchUsers 6/9؛ H7 loadCompetitions/profiles 1/3 وviewerCtx=0 في fixture الضيف فقط. هذه statement counts محلية وليست D1 rowsRead/rowsWritten.
+- **D1 الإنتاجية rowsRead/rowsWritten:** unavailable؛ متابعة موثقة عبر staged analytics لاحقًا. لا تجارب إنتاجية غير معتمدة.
+- **P3 follow-ups:** ازدواج سجل 500؛ console.error قديم غير مهيكل؛ tightening اختياري لـredaction بعد مراجعة المواصفة؛ توضيح بوابة اعتماد المالك قبل UNIT40 وتسميات playlist/timeline. لا عيوب حاجبة ولا إعادة فتح للكود المغلق.
+- **PR #110:** OPEN/HOLD، لم يُمس. **UNIT35 و35.1:** لا تبدأ قبل اكتمال توثيق post-merge gates وإغلاق UNIT34 رسميًا.
+- **Plan branch:** `unit34-closeout`; code merge SHA أعلاه. هذه اللقطة أحدث من اللقطات التاريخية أدناه.
+
+---
+
 ## لقطة استئناف محدثة — 2026-10-28 (UNIT33 + UNIT33.1 مدمجتان؛ تحديث الخطة مطلوب قبل UNIT34)
 
 - **CODE MAIN / actual merge SHA:** `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`؛ PR #145 مدموج.
