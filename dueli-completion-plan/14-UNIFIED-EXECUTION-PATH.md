@@ -342,3 +342,13 @@ showToastفيالمسارالمعطل وSIG/replay→28.3.1؛ الطوابعوا
 - **UNIT33 + UNIT33.1:** merged/deployed. أُغلقت ملاحظات P3 الموثقة قبل الدمج. التحصين الاختياري DUELI_AUDIT_CMD لا يفتح PR145 من جديد وحده.
 - **بلاغات المالك من المنافسة الحية 2026-10-28:** أزرار العين/الكاميرا، fullscreen، اتجاه AR/EN، نص Reminder، تزاحم الهيدر وخروج العناصر عن إطار الهاتف، انتقال المقاطع، وتجميع فيديو تنزيل مدته الأصلية دقيقتان إلى ملف يقارب10 دقائق مع بطء/تقطع. سجل التفاصيل في08 وتقرير قائد التخطيط. السبب الجذري لم يُثبت؛ لا تُسجل هذه البنود كإصلاحات ولا تعاد وحدة مغلقة بلا دليل. يحدد القائد موضع كل بند في الوحدات القائمة مع بقاء PR #110 OPEN/HOLD.
 - **NEXT:** توثيق الإغلاق الفعلي في سجلات الخطة/التسليم وفق بروتوكول10، ثم UNIT34 فقط بعد اكتمال التوثيق. لا يبدأ LOCAL تنفيذ34 قبل دمج تحديث الخطة واعتماد PLAN SHA الجديد. إجمالي58 UNIT وترتيب33→33.1→34→35–42 ثابتان.
+
+
+## تصحيح حاكم للترتيب والحالة — قرار المالك/قائد التخطيط 2026-10-28
+
+هذا القسم يحكم أي ذكر سابق لإجمالي58 UNIT أو الترتيب القديم بعد35: **الإجمالي المعتمد 59 UNIT** بإضافة الوحدة الفرعية **35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1** بعد35 وقبل36؛ أرقام الوحدات34–42 لا تتغير. الترتيب التنفيذي: 34 → 35 → 35.1 → 36–42.
+
+- **UNIT34 / R4-DB-MEASURE-1:** بعد دمج تحديث الخطة وتثبيت PLAN SHA، على CODE MAIN `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`. يشمل A requestId وstructured error logging، B قياس rowsRead/rowsWritten/executions وEXPLAIN قبل/بعد، C bounded public cache مع isolation وdegraded UI/retry، D جدول التسليم الرقمي وميزانية كل رحلة.
+- **UNIT35 / R4-UX-I18N-1:** ملاحظات Reminder (أيقونة وأهلية)، mobile header/help/avatar/notifications/long handles، واتجاه controls/play/comment/time AR/EN.
+- **UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1:** ملاحظات eye/PiP، fullscreen، chunk handoff، وتجميع/تنزيل الفيديو وتطبيع tfdt/baseMediaDecodeTime/timescale/sample durations، مع مسار fMP4 remux سريع عند توافق المقاطع.
+- شواهد المالك الستة: `022333.png`, `022604.png`, `022740.png`, `023213.png`, `023424.png`, `gate30b-race-1-live.png`. توثق كأدلة قبول لا كأسباب جذرية مثبتة.
