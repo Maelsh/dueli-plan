@@ -1,3 +1,12 @@
+## سجل الاستئناف — 2026-10-28 بعد دمج UNIT35
+
+- CODE MAIN: PR #147 / UNIT35 / R4-UX-I18N-1 MERGED على `12181265ca1841af979cf354f064ce69cf3f92e1`؛ [PR](https://github.com/Maelsh/dueli-opus/pull/147).
+- Post-merge Quality #404 [40682055541](https://github.com/Maelsh/dueli-opus/actions/runs/40682055541) SUCCESS؛ Post-merge production Deploy #633 [40682055691](https://github.com/Maelsh/dueli-opus/actions/runs/40682055691) SUCCESS على SHA نفسه. الإنتاج workflow نشر بنجاح؛ لا migration مطبقة ولا ادعاء قبول يدوي شامل.
+- UNIT35 CODE DONE / MERGED / DEPLOYED ضمن النطاق. REMOTE APPROVE. احتفظ بقيود VIS-04 acceptance اليدوي ضمن UNIT41، و34-item historical matrix BLOCKED-BY-SOURCE، وP3 WatchLaterUI guest-401 noise المثبت على BASE؛ لا تعِد فتح الوحدة.
+- **Canonical NEXT = UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1**؛ لا إزاحة للأرقام36–43. النطاق والقيود التفصيلية في14/15: player controls، fullscreen، chunk handoff، MP4 assembly/download. افحص handlers الحالية وSmartVodPlayer/double-buffer، ثم Mp4FragmentAssembler/RecordingDownloadService وtimestamps/timescale/sample durations؛ أثبت duration/playback/seek متصلًا؛ remux بلا إعادة ترميز فقط إذا كانت المقاطع متوافقة. 0.6s فرضية وليست قرارًا. PR #110 CLOSED/SUPERSEDED دون merge ولا يُنقل كوده.
+
+---
+
 ## لقطة الاستئناف المعتمدة — 2026-10-28 (UNIT34 مدمجة ومنشورة؛ Canonical NEXT=UNIT35)
 
 - **CODE MAIN / actual merge SHA:** `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ PR #146 من approved HEAD `cf93f9b1a1d12d8c6aaf280679cd40658d909909` على BASE `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`.
