@@ -288,3 +288,11 @@ PR107/108/109 CODE DONE / DEPLOYED في نطاقها؛ الحالة الأحدث
 - **حدود تغطية مقبولة بالمراجعتين:** اختبار Load More نفسه يتحقق من markup/attributes ولا ينقر زر البطاقة المضافة لاستدعاء confirmation؛ confirmation/cancel/DELETE يُختبر عبر handler المشترك من بطاقة SSR. كما يستخدم harness renderer مبسطًا للبطاقة، فلا يُعد هذا بحد ذاته اختبار injection شاملًا لـproduction competition-card renderer. هذه حدود لما أثبتته الاختبارات وليست إثباتًا لوجود خلل؛ لم يثبت المراجعان فجوة حاجبة ضمن نطاق PR #144، لذلك لا تفتح متابعة جديدة لمجرد توسيع التغطية الاختيارية.
 - **الاختبار الثاني — تحميل كلمة المرور:** أربعة اختبارات تثبت SSR spinner-only، بقاء النموذج ومسار الاستعادة غير ظاهرين خلال GET المتأخر، اختيار النموذج الصحيح بعد التحميل لحساب محلي مقابل OAuth-only، وعدم إرسال طلب تغيير كلمة المرور قبل وجود المدخلات/الرسم.
 - **الحالة:** UNIT32.3 متابعة فرعية لاختبارات/الأدلة ضمن الصف32.2 وليست UNIT رئيسية إضافية؛ إجمالي الخطة 58 UNIT ومعرفات33–43 لا تتغير. لا يُدّعى قبول يدوي شامل أو PROD VERIFIED. Canonical NEXT يبقى UNIT33 ولا يبدأ تكليفها في هذه النافذة.
+
+## Owner/Planning Lead placement — 2026-10-29: UNIT35.2 / 36.1 / 42.1 + `/guide` 38–39
+
+- **UNIT35.2 / R4-EXPLORE-OBSERVER-I18N-FIT-1** — Canonical NEXT بعد دمج PR #148 (`c401b5d5`): Explore `IntersectionObserver` rebind + `i18nAutoFit` (English baseline `--i18n-font-scale`) + truncation/tooltip على النص الديناميكي؛ اختبارات AR/EN وIO في Vitest.
+- **UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1** — بعد36 وقبل37: تسعير السوق، H7 multiplier، Image/GIF/Video، مركز تحكم المتنافس، إعلانات Dueli `is_house`، ledger cents 80/20 (تفاصيل08).
+- **UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1** — بعد41 وقبل42: ترجمة جميع اللغات المعتمدة + فحص `i18nAutoFit` على كل الشاشات.
+- **إجمالي الخطة:** **62 UNIT** (59 + 35.2 + 36.1 + 42.1)؛ أرقام36–43 ثابتة.
+- **UNIT38 / UNIT39 (`/guide`):** إرشاد OBS Virtual Camera للمحاورين في38؛ مخطط المانحين/الهوية غير الربحية (80%/20%) في39 — محتوى يتطلب موافقة المالك.
