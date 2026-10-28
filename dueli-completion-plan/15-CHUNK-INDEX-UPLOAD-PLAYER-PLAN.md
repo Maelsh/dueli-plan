@@ -644,3 +644,16 @@ FULLSCREEN/orientationعلىجهازلايدعمهايسجلحدودالدعمو
 - **Next:** UNIT31 / R4-MESSAGES-1؛ احفظ التسلسل 31 → 32 → 32.1 → 33 → 33.1 → 34–42 دون إعادة ترقيم، ولا تعِد فتح مسار مقبول بلا عيب جديد مثبت.
 
 **Evidence artifact reported by owner:** POST-MERGE-PRODUCTION-ACCEPTANCE-UNIT30.6.docx plus qa-evidence-u306/ (42 evidence files and EVIDENCE-INDEX.md). These artifacts were reported but not independently fetched in this plan update.
+
+
+## Owner/Planning Lead placement — 2026-10-28: UNIT35.1 media controls/download
+
+قرار التسكين: بعد UNIT35 وقبل36 تضاف الوحدة الفرعية `35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1`; إجمالي الخطة59 UNIT مع ثبات أرقام34–42.
+
+### Acceptance scope
+1. **Eye/PiP control:** trace existing click handler. Eye toggles only the small PiP visibility when PiP is active (states2/4); in states1/3 with no PiP it is hidden/disabled or harmless to the large local preview. It must never stop camera/local tracks. Purple camera button alone controls camera on/off. Regression test asserts eye click leaves camera track enabled and local preview intact.
+2. **Fullscreen layout:** center/expand video container with preserved aspect ratio and `object-fit: contain`; unify fullscreen enter/exit controls and prevent overlap with Recorded badge/play control. Reference `022333.png`.
+3. **Chunk transitions:** inspect SmartVodPlayer double-buffer and preload/canplay/handoff timing in LIVE and VOD, audio mute/stop of previous element, and ensure no gap while preserving the previous chunk tail. 0.6s is a hypothesis to verify against current contract, not a newly approved constant.
+4. **Download assembly/remux:** reproduce with compatible multi-chunk MP4 sample. Inspect `Mp4FragmentAssembler` vs `FFmpeg.wasm` path in `RecordingDownloadService`; determine why ~2-minute source across10 chunks yields ~10-minute output and playback stalls. Verify cumulative `tfdt/baseMediaDecodeTime`, timescale, sample durations and offsets. Normalize timestamps so final duration equals sum of actual chunk durations; verify playback and seek are continuous. Prefer direct browser fMP4 remux (no FFmpeg.wasm re-encode) when codecs/container are compatible; preserve a safe fallback for incompatible inputs.
+
+**Required evidence:** before/after source and output durations; chunk count and per-chunk timing metadata; output probe/metadata; successful playback + seek test; measured assembly duration; tests for LIVE/VOD transitions and camera-track invariance. Do not claim root cause before the reproduction and metadata establish it.
