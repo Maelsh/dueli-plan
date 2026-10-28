@@ -378,3 +378,14 @@ Free/Paid/نقلDB والوصول الإداري لم تُعتمد بهذا ال
 - **Download/remux:** تحليل Mp4FragmentAssembler مقابل FFmpeg.wasm في RecordingDownloadService على عينة متعددة المقاطع، وإثبات سبب تضخم مدة مقطع أصله قرابة دقيقتين إلى قرابة10 دقائق لعشرة أجزاء. تحقق من tfdt/baseMediaDecodeTime/timescale/sample durations والإزاحات؛ أصلح تطبيع التوقيت بحيث تساوي مدة الناتج مجموع مدد المقاطع الفعلية، مع تشغيل وseek متصلين. استخدم fMP4 remux مباشرًا دون إعادة ترميز متى كانت المقاطع متوافقة codec/container. اختبارات على metadata ومدة الملف والتشغيل والseek وسرعة التجميع.
 
 لا تعد هذه البنود أسبابًا جذرية مثبتة قبل التحقيق. لا يعاد فتح33/33.1 تلقائيًا، وPR #110 يبقى OPEN/HOLD دون مساس. لا يغيّر هذا القرار ترتيب الوحدات34–42.
+
+
+## إغلاق UNIT34 وتثبيت نطاق NEXT — 2026-10-28 (حالة تنفيذية أحدث)
+
+- **UNIT34 / R4-DB-MEASURE-1: CODE DONE / DEPLOYED.** PR #146 دُمج إلى `a6c1802ba66e2f175d6642693e0afd3f8eff9685`، من approved HEAD `cf93f9b1a1d12d8c6aaf280679cd40658d909909` على BASE `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`.
+- **بوابات ما بعد الدمج على SHA الفعلي:** Quality Gate #400 / [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS؛ Deploy #629 / [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS. تحقق GitHub من أن quality-gate وDeploy كلاهما completed/success، وعلى نفس SHA.
+- **أرقام القياس المحلية التي اعتمدها المالك وقائد التخطيط:** Home/Explore T0 = 13 SQL statements مع `idx_competitions_status_started`؛ continuation = 5؛ guest cold = 13 مقابل hot cached = 8؛ `searchCompetitions` = 6؛ `searchUsers` = 9؛ H7 `loadCompetitions` = 1؛ H7 profiles = 3.
+- **قيد لا يجوز تجاوزه في التقرير:** هذا harness محلي ببيانات اصطناعية؛ D1 `rowsRead/rowsWritten` غير متاحة هنا، و`rowsReadApprox` يعكس SQLite فقط. لا يُدّعى قياس إنتاجي أو إثبات سقف استهلاك Cloudflare. `EXPLAIN QUERY PLAN` محلي. cache TTL/key isolation/hit-miss اختبرت على مستوى الوحدة؛ cache لكل isolate ولا يجمّد T0، والربط الآمن/الإبطال لمسارات القراءة المتبقية متابعة مستقبلية. تظل قراءات Cloudflare D1 Analytics ضمن UNIT40/41. هذه حدود موثقة وغير حاجبة لإغلاق كود UNIT34.
+- **Canonical NEXT = UNIT35 / R4-UX-I18N-1.** يشمل I-01/FV20-SMALL وVIS-04 وبقية جرد UX/I18N ذي34 موضعًا، مع ملاحظات قبول 28 أكتوبر رقم3 (اتجاه أزرار التحكم بين AR/EN)، رقم4 (Remind Me أيقونة فقط)، ورقم5 (الهيدر/المساعدة/حاويات الهاتف)، وفق تفاصيل12/13/14/15.
+- **UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1** بعدها مباشرة وقبل36، وتشمل فقط الملاحظات1/2/6/7: eye/PiP، fullscreen، انتقال المقاطع، وتجميع/تنزيل MP4. يحظر خلط مكوناتها داخل UNIT35.
+- تحديث حالة التنفيذ هذا لا يغير H7 أو سياسات المنتج، ولا يفتح أي وحدة مغلقة ولا يلمس PR #110.

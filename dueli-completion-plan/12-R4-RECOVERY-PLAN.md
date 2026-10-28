@@ -1,5 +1,13 @@
 > **مصدر الترتيب والحالة الوحيد:** [14-UNIFIED-EXECUTION-PATH.md](14-UNIFIED-EXECUTION-PATH.md). هذا الملف يحدد النطاق/العقود فقط؛ أرقام المهام وموضع التنفيذ والحالات القديمة فيه ليست تكليفًا نافذًا. أي تعديل نطاق أو إضافة أو تغيير أولوية يجب أن يحدّث المسار14 في PR الخطة نفسه، مع حفظ كل بند أزيح إلى ترتيب جديد.
 
+## تحديث حالة التنفيذ — 2026-10-28 (يتبع المسار14؛ أحدث من اللقطات التاريخية أدناه)
+
+- **UNIT34 / R4-DB-MEASURE-1 = CODE DONE / DEPLOYED** بعد دمج PR #146 على actual merge SHA `a6c1802ba66e2f175d6642693e0afd3f8eff9685`.
+- **Post-merge Quality Gate #400:** [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS. **Deploy #629:** [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS. كلاهما على SHA الدمج نفسه؛ Quality dependency وDeploy jobs ناجحتان.
+- القياسات المحلية المعتمدة: Home/Explore T0 13 statements باستخدام `idx_competitions_status_started`، continuation 5، guest cold 13 مقابل hot cached 8، `searchCompetitions` 6، `searchUsers` 9، H7 `loadCompetitions` 1، H7 profiles 3.
+- قيود الدليل: `rowsRead/rowsWritten` الإنتاجيتان غير متاحتين في harness ولم تُجر تجربة Cloudflare Analytics؛ `rowsReadApprox` SQLite estimate فقط؛ `EXPLAIN` على schema محلية. cache keys/TTL/hit-miss مغطاة على مستوى الوحدة، لكن cache لكل isolate ولا يُستخدم لتجميد T0. لا تدّعِ إنتاجية/PROD VERIFIED؛ متابعة Analytics ضمن UNIT40/41. هذه الحدود موثقة وغير حاجبة لإغلاق الكود.
+- **Canonical NEXT وفق14: UNIT35 / R4-UX-I18N-1**؛ ثم35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1 ثم36–42. ملاحظات 28 أكتوبر3/4/5 ضمن35، وملاحظات1/2/6/7 ضمن35.1. لا يمس هذا PR #110 OPEN/HOLD أو أي وحدة مغلقة.
+
 ## المزامنة الحاكمة — 2026-10-09
 
 التكامل الجديد والتوثيق في[13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md](13-LIVE-CHUNKS-UNIFIED-GUIDE-PLAN.md)، وحالة04 هي المرجع. التوجيه التاريخي (ليس تكليفًا حاليًا) LIVE-INT-1 لاDIAGمكرر؛ PR103–106 مدموجة و106نشرهاSUCCESS. DB-01 يبقىOPENللقياس. الوحداتوالشواهدالتاريخيةأدناه محفوظة، لايعادreceiver/star/title/0039 منوصفقديمOPEN.

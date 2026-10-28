@@ -3,18 +3,18 @@
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
 هذا هو المصدر الوحيد **لترتيب العمل وحالته وNEXT**. 08 للقرارات، 11 لأوزان H7 المعتمدة، 10 للدمج والإصدار، 05/12/13/15 للمواصفات. 04 بوابة استئناف تشير إلى هذا المسار، وليست جدولًا منافسًا له.
 
-## الحالة المعتمدة الأحدث — 2026-10-27 / UNIT32.2 + REM1 + UNIT32.3 test closure مدمجة؛ NEXT=UNIT33 (لم يبدأ تكليفها)
+## الحالة المعتمدة الأحدث — 2026-10-28 / UNIT34 CLOSED؛ Canonical NEXT=UNIT35
 
-- **CODE MAIN / actual merge SHA:** 8e10cdc3ec1f5f2dd1c225feee88ab7d225411cd (PR #144 / UNIT32.3 candidate — test/evidence only). BASE bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7؛ independently approved HEAD 1ebc73dc61c0c2eef74a06864de4f536384c794f.
-- **Post-merge Quality Gate #392:** [run 40553795307](https://github.com/Maelsh/dueli-opus/actions/runs/40553795307) SUCCESS on exact merge SHA؛ 2122 tests passed, 1 skipped؛ G2 لم يزد فوق baseline 310؛ route inventory بقي252.
-- **Deploy to Cloudflare Pages #621:** [run 40553795266](https://github.com/Maelsh/dueli-opus/actions/runs/40553795266) SUCCESS on the same SHA. Build, production bindings, read-only production schema collection, fail-closed release readiness, and actual production deploy succeeded. No migration was applied.
-- **UNIT32.3 — R4-ACCOUNT-COMP-LIFECYCLE-EDGE-1 = CLOSED / TEST-EVIDENCE FOLLOW-UP.** PR #144 adds 9 focused tests (5 delete-title/confirmation/Load More markup; 4 settings-password loading). No production code, API, schema, route, or dependency change. Two independent REMOTE reviewers approved exact HEAD 1ebc73dc61c0c2eef74a06864de4f536384c794f.
-- **Accepted evidence limits (do not overclaim):** the Load More test asserts appended markup but does not invoke confirmation/delete through the appended button; confirmation/cancel/DELETE are exercised through the shared handler from an SSR card. The harness uses a simplified card renderer, so these tests do not constitute full injection coverage for the production shared card renderer. The independent reviewers found no blocking gap within this scoped test-closure PR; no extra follow-up has been opened.
-- **Settings loading:** SSR spinner-only, delayed settings GET, local-password/OAuth-only final states, and no password API call before the form is rendered are covered by the new tests.
-- **Release state:** CODE DONE / DEPLOYED, but no manual browser/device/screen-reader/IME acceptance; do not record PROD VERIFIED.
-- **Plan classification:** UNIT32.3 is a bounded subtask for test/evidence closure within row32.2, not an additional top-level UNIT. Total remains **58 UNIT**; IDs33–43 and their order remain unchanged. PR #110 remains out of scope.
-- **Canonical NEXT remains UNIT33 / R4-HOME-UX-1**, but its execution prompt is deliberately not issued in this window; the owner will resume it in the next conversation.
-- **PLAN BASE before this update:** f8e8fbbd6ab8a271f72dfb1f3b6c6e7cb69cd2ca.
+- **CODE MAIN / actual merge SHA:** `a6c1802ba66e2f175d6642693e0afd3f8eff9685` (PR #146، approved HEAD `cf93f9b1a1d12d8c6aaf280679cd40658d909909`، BASE `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`).
+- **Post-merge Quality Gate #400:** [run 40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS على actual merge SHA. GitHub job `quality-gate` completed/success.
+- **Deploy to Cloudflare Pages #629:** [run 40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS على SHA نفسه؛ جوب `Quality Gate passed for this SHA` وجوب `Deploy to Cloudflare Pages` completed/success. لا migration طُبقت في هذه الوحدة.
+- **UNIT34 / R4-DB-MEASURE-1 — CODE DONE / DEPLOYED.** ركائز A–D مدمجة، مع توثيق حدود القياس المحلي وعدم الادعاء بقياس إنتاجي أو PROD VERIFIED يدويًا.
+- **الجدول الرقمي المحلي المعتمد:** Home/Explore T0 = 13 SQL statements باستخدام `idx_competitions_status_started`; continuation = 5؛ guest cold path = 13 مقابل hot cached path = 8؛ `searchCompetitions` = 6؛ `searchUsers` = 9؛ H7 `loadCompetitions` = 1؛ H7 profiles = 3.
+- **حدود القياس/P3 غير الحاجبة:** D1 `rowsRead/rowsWritten` غير متاحة في harness المحلي ولم يُنفذ قياس Cloudflare Analytics على الإنتاج؛ `rowsReadApprox` محلي لSQLite وليس rowsRead حقيقيًا. `EXPLAIN QUERY PLAN` قيس على schema محلية. cache مفاتيحه وTTL وhit/miss مفحوصة على مستوى الوحدة، لكنه per-isolate ولا يجمد T0؛ attachment/invalidation الآمن لبقية مسارات القراءة وقراءة D1 Analytics تبقيان متابعة ضمن UNIT40/41. لا تستنتج استهلاكًا أو headroom إنتاجيًا من أرقام statements.
+- **المعمارية الهجينة المعتمدة لا تتغير:** D1 مصدر الحقيقة الحية/الذرية؛ edge cache قصير الأجل للبيانات العامة غير الحساسة فقط بمفاتيح معزولة؛ iFastNet للوسائط الموقعة HMAC؛ MySQL للأرشفة الباردة بعد البيتا فقط.
+- **Canonical NEXT = UNIT35 / R4-UX-I18N-1** بعد إغلاق UNIT34 وتحديث الخطة هذا. بعد35 تأتي35.1 مباشرة ثم36–42. إجمالي الخطة **59 UNIT**، وأرقام34–42 ثابتة. PR #110 OPEN/HOLD ولا تُمس.
+- **PLAN base قبل تحديث إغلاق UNIT34 هذا:** `dc5bc1efd7d94dfa1c19604b7277b8104cdb93ad`.
+
 ### لقطة تاريخية — 2026-10-26 / Gate 30–30.6 مغلقة وUNIT31 مدمجة؛ NEXT وقتها UNIT32 (استبدلت في27أكتوبر)
 
 - **CODE MAIN / actual merge SHA:** `3cee6e78ce0750536c474131363f80902b886c7d` (PR #139 / UNIT31). Merge parents: BASE `70ce057f34fc7c3e39506ee6c9e98ddb917d85fc` + independently approved HEAD `da437d6cc8ecee5c9e1fc600826f1fe89bb76ee3`.
@@ -32,12 +32,12 @@
 
 > لقطة22أكتوبر تاريخية: أُنجزكود30–30.3، وNEXTالحالي30.4والقبولالمجمعحسبلقطة23أكتوبر أعلاه.
 
-## أين نحن وكم بقي؟
+## أين نحن وكم بقي؟ — حالة 2026-10-28
 
-- **تم:** Gate30–30.6 مغلقة؛ UNIT31 و32 و32.1 و32.2/REM1 وUNIT32.3 (متابعة اختبار/دليل) مدمجة ومنشورة. آخر merge SHA: 8e10cdc3ec1f5f2dd1c225feee88ab7d225411cd؛ Quality #392 40553795307 وDeploy #621 40553795266 SUCCESS على SHA نفسه؛ 2122 passed / 1 skipped.
-- **الحالة الحالية:** A–E للوحدة32.2 مغلقة عبر PR #143، وملاحظتا UNIT32.3 أُغلقتا باختبارات فقط عبر PR #144 بعد موافقتين مستقلتين. لا migration أو dependency أو product-code change؛ لا قبول يدوي شامل ولا PROD VERIFIED. حدود الاختبار المقبولة موثقة أعلى الملف وفي13.
-- **التالي المخطط فقط:** UNIT33 / R4-HOME-UX-1، ثم33.1 →34–42. لم يبدأ تكليف UNIT33 في هذه النافذة. إجمالي الخطة58 UNIT؛ IDs33–43 ثابتة.
-- **بعد الويب:**43/R5، لا يحجب البيتا. PR110 خارج النطاق ولا يدمج.
+- **مغلق برمجيًا ومنشورًا حسب الأدلة المسجلة:** Gate30–30.6، وUNIT31، 32، 32.1، 32.2/REM1، 32.3 test-evidence closure، 33، 33.1، و34. آخر CODE merge SHA هو `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ Quality #400 [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) وDeploy #629 [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS على SHA نفسه.
+- **Canonical NEXT:** UNIT35 / R4-UX-I18N-1، ثم UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1، ثم36–42. الإجمالي59 UNIT؛ أرقام34–42 ثابتة.
+- **حدود القبول:** CODE DONE / DEPLOYED لا يعني PROD VERIFIED يدويًا. قياس Cloudflare D1 Analytics الفعلي `rowsRead/rowsWritten` ما زال ضمن40/41؛ أرقام UNIT34 الحالية قياسات محلية كما هو موضح في أعلى الملف.
+- **بعد الويب:** 43/R5 لا يحجب بيتا الويب؛ PR #110 ما زالت OPEN/HOLD وخارج النطاق ولا تُدمج.
 
 ## 1. لقطة المطابقة الحالية — 2026-10-21
 
@@ -117,10 +117,11 @@
 | 32.1 | R4-PROFILE-COLLECTIONS-1 | المشاهدة لاحقًا وسجل المشاهدات في قسم خاص داخل بروفايل صاحبه | **CODE DONE / DEPLOYED 2026-10-27**؛ PR #141؛ approved HEAD `b75c52beab12e0b06718bf71e0022352468600dd`؛ merge SHA `3b1b6b64914cbfc861e00063643431c60539a284`؛ Quality #384 `40498659504` وDeploy #613 `40498659503` SUCCESS على SHA نفسه؛ 2094 passed / 1 skipped؛ G2=300≤310؛ 251 route؛ no migration؛ known P3/non-manual acceptance documented; لا PROD VERIFIED |
 | 32.2 | R4-ACCOUNT-COMP-LIFECYCLE-1 + REM1 | واجهة تغيير كلمة المرور، حذف المنافسة المؤهلة، وإصلاحات A–E | CODE DONE / DEPLOYED؛ PR #142 merge 603d826834e3f8490caff3a67db854fb6eedb647 ثم PR #143 merge bfa09aa57c38b59b7f55a5168dcd44ae41d6edb7؛ Quality #390 [40535579267](https://github.com/Maelsh/dueli-opus/actions/runs/40535579267) وDeploy #619 [40535579164](https://github.com/Maelsh/dueli-opus/actions/runs/40535579164) SUCCESS؛ 2113 passed / 1 skipped؛ G2=300≤310؛ route inventory252؛ no migration. |
 | 32.3 | R4-ACCOUNT-COMP-LIFECYCLE-EDGE-1 — test/evidence closure only | التحقق من title/delete-confirm ومسار كلمة المرور أثناء تحميل الإعدادات | CLOSED / DEPLOYED؛ PR #144 approved HEAD 1ebc73dc61c0c2eef74a06864de4f536384c794f، merge SHA 8e10cdc3ec1f5f2dd1c225feee88ab7d225411cd؛ Quality #392 [40553795307](https://github.com/Maelsh/dueli-opus/actions/runs/40553795307) وDeploy #621 [40553795266](https://github.com/Maelsh/dueli-opus/actions/runs/40553795266) SUCCESS على SHA نفسه؛ 2122 passed / 1 skipped؛ 9 اختبارات جديدة؛ لا تغيير منتج. حدود التغطية المقبولة في13§UNIT32.3. Subtask ضمن32.2؛ لا يغيّر إجمالي58 UNIT. PROD VERIFIED غير مدعى. |
-| 33 | R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry ومنع الطلب والرسم القديم المكرر | CODE DONE / MERGED + DEPLOYED؛ PR #145 merge SHA `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`; Quality Gate [40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) SUCCESS وDeploy [40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه. UNIT33.1 كذلك مدمجة ضمن PR #145؛ بلاغات القبول الحي 2026-10-28 مسجلة في08 وتقرير التخطيط؛ لا PROD VERIFIED شامل، ولا إعادة فتح تلقائية؛ لا يبدأ34 قبل توثيق الإغلاق وفق10 |
-| 33.1 | R4-DEPS-SEC-1 | تحديث Hono/Zod، سجل الاعتماديات وبوابة npm audit مانعة | CODE DONE / MERGED + DEPLOYED ضمن PR #145؛ merge SHA `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`; Quality Gate [40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) وDeploy [40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه. تحصين DUELI_AUDIT_CMD دفاعي اختياري غير حاجب؛ لا يعاد فتح PR لهذا السبب وحده. UNIT34 بعد توثيق الإغلاق؛ لا MySQL قبل البيتا |
-| 34 | R4-DB-MEASURE-1 | إغلاق DB-01 بقياس فعلي قبل/بعد لـT0/continuation/search/SSE/notifications/chunk_index/playlist/seek (rowsRead/rowsWritten/executions + EXPLAIN)، requestId وstructured logging، وكاش عام معزول آمن واختبار degraded UI/retry على المعمارية الهجينة | PLANNED بعد إغلاق33 و33.1؛ مواصفة12 §§3/6 و15 §7 وقرار08 بتاريخ2026-10-27؛ تقرير رقمي لكل رحلة + ميزانية استهلاك يعتمدها المالك وقائد التخطيط قبل UNIT40؛ لا MySQL migration قبل البيتا؛ 58 UNIT ثابتة |
-| 35 | R4-UX-I18N-1 | UX-STATE والترجمة والتذكير وحصيلة التقييم والإتاحة؛ I-01/FV20-SMALL وVIS-04 | PLANNED؛ 12/13 ومصفوفة34 موضعًا؛ O19-17/18 في15§12.7؛ I-01 يمنع mojibake وNaN% ويعرض «غير متاح / Unavailable» دون مساس H7؛ VIS-04 يضبط z-index/stacking context/overflow بين InvitePanel وinviteHoverCard وToast، ويبني public/static/styles.css بـnpm run build:css؛ اختبار AR/EN mobile/desktop؛ reminder يظل مستقلًا عن Watch Later |
+| 33 | R4-HOME-UX-1 | رسم كل rail عند جاهزيته مع loading/retry ومنع الطلب والرسم القديم المكرر | CODE DONE / MERGED + DEPLOYED؛ PR #145 merge SHA `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`; Quality Gate [40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) SUCCESS وDeploy [40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه. UNIT33.1 كذلك مدمجة ضمن PR #145؛ بلاغات القبول الحي 2026-10-28 مسجلة في08 وتقرير التخطيط؛ لا PROD VERIFIED شامل، ولا إعادة فتح تلقائية. UNIT34 مغلقة الآن مع Post-merge Quality #400 وDeploy #629 SUCCESS على SHA الدمج نفسه؛ Canonical NEXT=UNIT35 |
+| 33.1 | R4-DEPS-SEC-1 | تحديث Hono/Zod، سجل الاعتماديات وبوابة npm audit مانعة | CODE DONE / MERGED + DEPLOYED ضمن PR #145؛ merge SHA `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`; Quality Gate [40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) وDeploy [40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه. تحصين DUELI_AUDIT_CMD دفاعي اختياري غير حاجب؛ لا يعاد فتح PR لهذا السبب وحده. UNIT34 مغلقة الآن؛ لا MySQL قبل البيتا |
+| 34 | R4-DB-MEASURE-1 | إغلاق DB-01: requestId/structured logging، قياس Home/Explore/H7/search/SSE/notifications/chunk_index/playlist/seek، public cache معزول وdegraded UI/retry | **CODE DONE / DEPLOYED**؛ PR #146 merge SHA `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ Quality #400 [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) وDeploy #629 [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS على SHA نفسه. قياس محلي: Home/Explore T0=13، continuation=5، guest cold=13/hot=8، searchCompetitions=6، searchUsers=9، H7 loadCompetitions=1، H7 profiles=3. D1 rowsRead/rowsWritten الإنتاجية غير متاحة؛ rowsReadApprox SQLite فقط، وEXPLAIN محلي؛ cache key/TTL اختبار وحدة وper-isolate ولا يجمد T0. هذه حدود موثقة وغير حاجبة؛ D1 Analytics ضمن40/41؛ لا PROD VERIFIED يدويًا؛ 59 UNIT |
+| 35 | R4-UX-I18N-1 | جرد UX/I18N (34 موضعًا)، InvitePanel/NaN%/Toast، التذكير، حصيلة التقييم، الإتاحة، والهاتف | **CANONICAL NEXT / PLANNED**؛ يشمل I-01/FV20-SMALL وVIS-04؛ إزالة mojibake وعرض «غير متاح / Unavailable» مترجمًا عند compatibility_score غير الصالحة بلا تعديل H7؛ ضبط stacking context/z-index/overflow بين InvitePanel overlay وinviteHoverCard وToast؛ توحيد showToast في16 موضعًا؛ Reminder أيقونة فقط مع title/aria-label AR/EN وحراسة الخادم للمنافسات القادمة فقط؛ إخفاء Help top-nav للمستخدم المسجل وإبقاؤه للضيف، عدم اصطدام الشعار ومنع انضغاط avatar، أسماء طويلة، Notifications داخل viewport عند390px RTL/LTR؛ player Play/comment/time واتجاه controls AR/EN؛ شريط تقييم ملون وعدد المقيمين الفريدين لكل طرف؛ بقية12 §10.1/13 §4 بما في ذلك loading/empty وcreate201/double-submit وdonate skip-link وترتيب الدول/سنة النشر وreturnTo الآمن؛ npm run build:css؛ اختبار AR/EN وmobile/desktop. ملاحظات قبول 28أكتوبر3/4/5؛ لا PiP/fullscreen/double-buffer/remux/download هنا؛ Watch Later مستقل |
+| 35.1 | R4-MEDIA-CONTROLS-DOWNLOAD-REM1 | تصحيح eye/PiP مقابل الكاميرا، fullscreen، انتقال المقاطع، وتجميع/تنزيل MP4 | **PLANNED — NEXT بعد35 مباشرة**؛ ملاحظات قبول 28أكتوبر1/2/6/7؛ افحص handlers قبل patch؛ SmartVodPlayer/double-buffer وhandoff في LIVE/VOD؛ حلل Mp4FragmentAssembler/RecordingDownloadService وtfdt/baseMediaDecodeTime/timescale/sample durations؛ أثبت مدة وتشغيل/seek متصلين واستخدم fMP4 remux دون إعادة ترميز عند توافق المقاطع؛ قيمة0.6s فرضية لا قرار؛ لا يُمس PR #110 OPEN/HOLD |
 | 36 | R4-ADMIN-ACCEPT-1 | قبول الدعم الإداري بحساب مخول، وتتبع ملاحظة stats500 | BLOCKED ACCESS / TARGETED؛ الجزء الإداري من MEDIA-ADMIN-ACCEPT؛12 وWORKLOG/R2-A؛ افحص /api/admin/stats موضعيًا، أصلح المتبقي إن ثبت أو ALREADY DONE بدليل؛ لا إعادة مالية/أدوار |
 | 37 | R4-NOTIFY-CLEANUP-1 | تعليم الإشعارات القديمة مقروءة مرة واحدة | OWNER APPROVED / NOT EXECUTED EVIDENCED؛12 §10.2 وrunbook #106؛ cutoff2026-10-08T03:31:39Z، counts/schema/guard؛ لا إذن مكرر أو مساس رسائل/دعوات |
 | 38 | R4-GUIDE-1 | مركز عن Dueli والمساعدة والتنقل وإدارة المحتوى | PLANNED؛13 §5 و15 §7؛ notice/versioned terms وsubscriber acceptance، إعادة استعمال C1/C2 والوثائق المدارة،8 أقسام، الروابط القديمة واللغة والأجزاء والصلاحيات |
@@ -130,7 +131,7 @@
 | 42 | R0-WEB-LAUNCH | عرض الجاهزية الموثقة ثم قرار المالك وإطلاق بيتا الويب | OWNER DECISION عند الجاهزية؛ لا قرار آلي أو ادعاء تشغيل دفع حقيقي دون البنك/المزود |
 | 43 | R5 | PWA وAndroid وiOS وTV والتقنيات والتكلفة وقيود المتاجر | DEFERRED AFTER WEB؛ يعتمد المالك النطاق والترتيب لاحقًا |
 
-**قاعدة السير الحالية:** 31 → 32 → 32.1 → 32.2 (CODE MERGED / DEPLOYED) → **قرار المالك بشأن ملاحظات المراجعة غير المسندة** → 33 → 33.1 → 34–42. لا تعتبر D-50 محققًا: حد50 يخالف شرط discoverability في13§9. بقية الملاحظات موثقة في12/13 ولم توزع على وحدة. العدد58؛ IDs33–43 ثابتة؛ PR110 خارج النطاق.
+**قاعدة السير الحالية — 2026-10-28:** Gate30–30.6 CLOSED؛ 31 و32 و32.1 و32.2/REM1 و32.3 و33 و33.1 CODE DONE / DEPLOYED ضمن أدلتها المسجلة؛ UNIT34 CODE DONE / DEPLOYED على `a6c1802ba66e2f175d6642693e0afd3f8eff9685` مع Quality #400 وDeploy #629 SUCCESS على SHA نفسه. **Canonical NEXT = UNIT35 / R4-UX-I18N-1 → UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1 → 36–42**؛ الإجمالي59 UNIT والمعرفات34–43 ثابتة. D-50 لا يعد محققًا: حد50 يخالف شرط discoverability في13§9. PR #110 خارج النطاق وتبقى OPEN/HOLD.
 
 ## 3. ضمان بقاء جميع العيوب
 
@@ -145,7 +146,7 @@
 | واجهة تغيير كلمة المرور + حذف المنافسة قبل انضمام خصم |32.2؛ لا تعِد #77؛ تأكيد نهائي وحارس ذري مع سباق قبول الدعوة |
 | H-01 Home |33/34 |
 | S-01/S-02 title/doubleescaping |23/#103؛ لا تكرار |
-| I-01؛ U-01..U-05؛ VIS-01/02/03/04؛ DATA-01 |35 والموضع المتأثر25/26/31/33؛ I-01 يضمن UTF-8 وUnavailable بدل NaN؛ VIS-04 يختبر طبقات نافذة الدعوة وبطاقة التفاصيل وToast بعد بناء CSS؛ VIS-02 لم يتكرر في العينة الأحدث، لا تعديل CSS افتراضي؛ لا حذف demo أو مخالفة KEEP NOW |
+| I-01؛ U-01..U-05؛ VIS-01/02/03/04؛ DATA-01 |35 والموضع المتأثر25/26/31/33؛ I-01 يضمن UTF-8 وUnavailable بدل NaN؛ VIS-04 يختبر طبقات نافذة الدعوة وبطاقة التفاصيل وToast بعد بناء CSS. ملاحظة VIS-02 القديمة (لم يتكرر في عينة سابقة) كانت قيدًا على عينة سابقة فقط؛ ملاحظة المالك الحية بتاريخ28أكتوبر أثبتت استمرار تزاحم الهيدر على الهاتف، لذا تُعالج مواضع الهيدر/المساعدة/avatar/viewport تحديدًا ضمن35، بلا إعادة تصميم أو تعديل CSS عام خارج العيب المثبت؛ لا حذف demo أو مخالفة KEEP NOW |
 | VOD-01/02، C-1 signaling، D-1 حقيقة التسجيل، انقطاع المضيف والاستئناف والنهاية والتنزيل، handoff107: finalize/drain/upload queue/sequence |24–30؛ لغة المشغل ضمن35؛ لا PASS من وجود vod_url |
 | ADM-01/AUTH-OBS-01؛ ملاحظة /api/admin/stats من سجل الكود |36/40؛ حساب مخول خاص؛ لا username-login أو bootstrap إنتاجي بلا قرار |
 | التقرير الأحدث: showToast16/fullscreen/namespaces/34 موضعًا/score/login/create/help/icons |35؛ مصفوفة13 §4 بكاملها |
@@ -334,21 +335,24 @@ showToastفيالمسارالمعطل وSIG/replay→28.3.1؛ الطوابعوا
 | — | — | — | — | — | — | **لا استثناء قائم.** Hono (4.13.11) وZod (4.6.6) لهما إصلاح منشور فلا يؤهلان؛ تعالجان في A وB. يطابق هذا الجدول `dev-tools/audit-exceptions.json` حرفيًا عند إنشائه في 33.1 |
 
 
-## تحديث الحالة المعتمدة — 2026-10-28 / UNIT33 + UNIT33.1
+### لقطة تاريخية — تحديث الحالة المعتمدة قبل إغلاق UNIT34 (2026-10-28؛ استُبدلت بالحالة الحالية في أعلى الملف)
 
 - **CODE MAIN / actual merge SHA:** `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4` (PR #145).
 - **Post-merge Quality Gate:** [run 40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) SUCCESS على SHA الدمج نفسه.
 - **Deploy to Cloudflare Pages:** [run 40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه؛ job Quality Gate dependency وDeploy كلاهما SUCCESS. هذا يثبت نجاح مسار النشر، ولا يساوي قبولًا يدويًا شاملًا للرحلات الحية.
 - **UNIT33 + UNIT33.1:** merged/deployed. أُغلقت ملاحظات P3 الموثقة قبل الدمج. التحصين الاختياري DUELI_AUDIT_CMD لا يفتح PR145 من جديد وحده.
 - **بلاغات المالك من المنافسة الحية 2026-10-28:** أزرار العين/الكاميرا، fullscreen، اتجاه AR/EN، نص Reminder، تزاحم الهيدر وخروج العناصر عن إطار الهاتف، انتقال المقاطع، وتجميع فيديو تنزيل مدته الأصلية دقيقتان إلى ملف يقارب10 دقائق مع بطء/تقطع. سجل التفاصيل في08 وتقرير قائد التخطيط. السبب الجذري لم يُثبت؛ لا تُسجل هذه البنود كإصلاحات ولا تعاد وحدة مغلقة بلا دليل. يحدد القائد موضع كل بند في الوحدات القائمة مع بقاء PR #110 OPEN/HOLD.
-- **NEXT:** توثيق الإغلاق الفعلي في سجلات الخطة/التسليم وفق بروتوكول10، ثم UNIT34 فقط بعد اكتمال التوثيق. لا يبدأ LOCAL تنفيذ34 قبل دمج تحديث الخطة واعتماد PLAN SHA الجديد. إجمالي58 UNIT وترتيب33→33.1→34→35–42 ثابتان.
+- **NEXT في تلك اللقطة التاريخية فقط:** كانت الخطة تشير إلى توثيق UNIT33/33.1 ثم UNIT34، بإجمالي58 قبل إدراج35.1. هذا التسلسل استُكمل لاحقًا؛ الحالة الحالية والحجم59 وCanonical NEXT=35 مثبتة في أعلى الملف وجدول §2، ولا يُستخدم هذا السطر لتكليف أو استئناف العمل.
 
 
-## تصحيح حاكم للترتيب والحالة — قرار المالك/قائد التخطيط 2026-10-28
+## الحالة والتنفيذ المعتمدان — تحديث 2026-10-28 بعد إغلاق UNIT34
 
-هذا القسم يحكم أي ذكر سابق لإجمالي58 UNIT أو الترتيب القديم بعد35: **الإجمالي المعتمد 59 UNIT** بإضافة الوحدة الفرعية **35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1** بعد35 وقبل36؛ أرقام الوحدات34–42 لا تتغير. الترتيب التنفيذي: 34 → 35 → 35.1 → 36–42.
+**هذا التحديث يحدّث الحالة فقط ولا يغير السياسة المعتمدة.** الإجمالي **59 UNIT**؛ ترتيب التنفيذ الحالي: **34 CLOSED → 35 → 35.1 → 36–42**. أرقام34–42 ثابتة.
 
-- **UNIT34 / R4-DB-MEASURE-1:** بعد دمج تحديث الخطة وتثبيت PLAN SHA، على CODE MAIN `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`. يشمل A requestId وstructured error logging، B قياس rowsRead/rowsWritten/executions وEXPLAIN قبل/بعد، C bounded public cache مع isolation وdegraded UI/retry، D جدول التسليم الرقمي وميزانية كل رحلة.
-- **UNIT35 / R4-UX-I18N-1:** ملاحظات Reminder (أيقونة وأهلية)، mobile header/help/avatar/notifications/long handles، واتجاه controls/play/comment/time AR/EN.
-- **UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1:** ملاحظات eye/PiP، fullscreen، chunk handoff، وتجميع/تنزيل الفيديو وتطبيع tfdt/baseMediaDecodeTime/timescale/sample durations، مع مسار fMP4 remux سريع عند توافق المقاطع.
-- شواهد المالك الستة: `022333.png`, `022604.png`, `022740.png`, `023213.png`, `023424.png`, `gate30b-race-1-live.png`. توثق كأدلة قبول لا كأسباب جذرية مثبتة.
+- **UNIT34 / R4-DB-MEASURE-1 = CODE DONE / DEPLOYED** على actual merge SHA `a6c1802ba66e2f175d6642693e0afd3f8eff9685` (PR #146؛ approved HEAD `cf93f9b1a1d12d8c6aaf280679cd40658d909909`).
+- Post-merge Quality Gate #400 [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS وDeploy #629 [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS على SHA نفسه.
+- القياسات المحلية المقبولة: Home/Explore T0=13 statements باستخدام `idx_competitions_status_started`; continuation=5؛ guest cold path=13 مقابل hot cached=8؛ `searchCompetitions`=6؛ `searchUsers`=9؛ H7 `loadCompetitions`=1؛ H7 profiles=3.
+- **حدود/ملاحظات P3 غير الحاجبة:** لا قياس Cloudflare D1 Analytics للإنتاج؛ `rowsRead/rowsWritten` غير متاحين من harness و`rowsReadApprox` يعكس SQLite فقط. `EXPLAIN` محلي. cache معزول لكل isolate واختبارات key/TTL/hit-miss على مستوى الوحدة فقط؛ لا تجميد لـT0. رصد Analytics والقياس الإنتاجي يظلان ضمن40/41. لا تسجيل PROD VERIFIED يدوي.
+- **Canonical NEXT = UNIT35 / R4-UX-I18N-1.** مالكها إزالة mojibake وNaN%، VIS-04/Toast، تذكير icon-only وأهلية خادمية، mobile header/help/avatar/long handles/notifications viewport، player/comment/time RTL/LTR، تقييم كل طرف وعدد المقيمين الفريدين، وبقية جرد34 موضعًا و12§10.1/13§4. شواهد القبول المتعلقة بها: ملاحظات3/4/5 في قرار08، واللقطات `022604.png`, `022740.png`, `023213.png`, `023424.png`, `gate30b-race-1-live.png`.
+- **UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1** تأتي بعدها مباشرة وقبل36؛ تملك الملاحظات1/2/6/7: eye/PiP مقابل camera، fullscreen، chunk handoff، وتجميع/download/remux وضبط التوقيت. اللقطة المرتبطة بالـfullscreen `022333.png`؛ بقية اللقطات تحفظ كدليل لا كسبب جذري مثبت. 0.6s قيمة مفترضة تحتاج تحققًا ولا تعد قرارًا.
+- لا يُعد هذا تحديث التخطيط قبولًا يدويًا شاملًا ولا يفوض كتابة إنتاجية. لا إعادة فتح UNIT33/33.1، ولا دمج/تعديل PR #110 الذي يبقى OPEN/HOLD.

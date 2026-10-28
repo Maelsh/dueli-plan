@@ -1,12 +1,13 @@
-## لقطة استئناف محدثة — 2026-10-28 (UNIT33 + UNIT33.1 مدمجتان؛ تحديث الخطة مطلوب قبل UNIT34)
+## لقطة الاستئناف المعتمدة — 2026-10-28 (UNIT34 مدمجة ومنشورة؛ Canonical NEXT=UNIT35)
 
-- **CODE MAIN / actual merge SHA:** `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`؛ PR #145 مدموج.
-- **Post-merge Quality Gate:** [40599735765](https://github.com/Maelsh/dueli-opus/actions/runs/40599735765) SUCCESS على SHA الدمج نفسه.
-- **Deploy:** [40599735788](https://github.com/Maelsh/dueli-opus/actions/runs/40599735788) SUCCESS على SHA نفسه، بما في ذلك job الاعتماد على Quality Gate وDeploy to Cloudflare Pages.
-- **UNIT33 + UNIT33.1:** CODE DONE / MERGED / DEPLOYED؛ لا تعني هذه الحالة قبولًا يدويًا شاملًا. بلاغات تجربة المالك الحية في 2026-10-28 محفوظة في08 وفي تقرير قائد التخطيط.
-- **قرار DB-HOSTING:** المالك اعتمد المعمارية الهجينة D1 Core + short-TTL public Edge Cache + shared-hosting media؛ MySQL للأرشفة الباردة بعد البيتا فقط، بلا هجرة قبل البيتا.
-- **NEXT:** دمج تحديث التخطيط الحالي ثم إصدار موجه UNIT34. لا يبدأ التنفيذ قبل تثبيت PLAN SHA الجديد وتوثيق 33/33.1 وفق Protocol10. الإجمالي58 UNIT والترتيب33→33.1→34→35–42 محفوظان.
-- **PR #110:** OPEN/HOLD، لا يُمس.
+- **CODE MAIN / actual merge SHA:** `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ PR #146 من approved HEAD `cf93f9b1a1d12d8c6aaf280679cd40658d909909` على BASE `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`.
+- **Post-merge Quality Gate #400:** [run 40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS على actual merge SHA نفسه.
+- **Deploy to Cloudflare Pages #629:** [run 40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS على actual merge SHA نفسه؛ job الاعتماد على Quality Gate وjob النشر كلاهما SUCCESS.
+- **UNIT34 / R4-DB-MEASURE-1:** CODE DONE / MERGED / DEPLOYED؛ لا migrations أو production writes ضمن هذه الوحدة. هذا لا يساوي PROD VERIFIED يدويًا.
+- **القياسات المحلية المعتمدة في تقرير `docs/unit34-d1-measurement-report.md`:** Home/Explore T0 = 13 SQL statements باستخدام `idx_competitions_status_started`؛ continuation = 5؛ مسار الزائر البارد = 13 والساخن مع cache = 8؛ `searchCompetitions` = 6؛ `searchUsers` = 9؛ H7 `loadCompetitions` = 1؛ H7 profiles = 3. الأرقام من harness محلي اصطناعي، وليست استهلاكًا إنتاجيًا.
+- **حدود القياس/P3 غير الحاجبة:** Cloudflare D1 `rowsRead/rowsWritten` غير متاحة في هذا harness ولم يُجر اختبار قياس إنتاجي؛ `rowsReadApprox` يعكس SQLite فقط. تم قياس `EXPLAIN QUERY PLAN` على schema محلية. `PublicSurfaceCache` مفحوص من ناحية key isolation وTTL/hit/miss على مستوى الوحدة؛ يظل cache في الذاكرة لكل isolate، ولا يُجمَّد T0، وتبقى نقطة الربط الآمن والإبطال على مسارات القراءة المتبقية متابعة مستقبلية. تُحفظ هذه الحدود صراحةً ولا تُستخدم الأرقام لإثبات ميزانية D1 إنتاجية؛ قراءة Cloudflare Analytics تبقى ضمن UNIT40/41.
+- **التخطيط:** إجمالي الخطة **59 UNIT**؛ التسلسل المعتمد **34 (مغلقة) → 35 → 35.1 → 36–42**، والأرقام34–42 ثابتة. بعد دمج تحديث الخطة هذا، **Canonical NEXT = UNIT35 / R4-UX-I18N-1**.
+- **PR #110:** OPEN/HOLD كما هي؛ لا تُمس ولا تُدمج ضمن هذا العمل.
 
 # Dueli — بوابة استئناف القيادة
 
@@ -106,10 +107,9 @@ LOCAL ينفذ؛ REMOTE مستقل يراجع؛ القائد ينسق ويدمج
 التحديث تخطيط فقط؛ لاcode/PHP/D1/نشر أوإعادةفتحمراحل مغلقة. Apache400 محلول وشهادةالمالكعنالمقاطعالصالحة محفوظة.
 
 
-## استئناف حاكم — 2026-10-28 (بعد قرار التسكين)
+## سجل توجيه 2026-10-28 — لقطة ما قبل إغلاق UNIT34 (تاريخية؛ الحالة الحالية في أعلى الملف)
 
-- إجمالي الخطة: **59 UNIT** (إضافة35.1 بعد35 وقبل36)؛ أرقام34–42 ثابتة.
-- CODE MAIN: `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`، PR #145 merged؛ Quality Gate #40599735765 وDeploy #40599735788 SUCCESS على SHA نفسه.
-- PLAN PR #54: يحدّث قرار DB-HOSTING الهجين ومواصفة34 وتسكين ملاحظات القبول الحي؛ يجب دمجه وتثبيت PLAN SHA قبل إصدار تكليف34.
-- NEXT بعد دمج PR #54: تكليف LOCAL UNIT34 فقط. بعد إغلاق34 يأتي35 (UX/i18n)، ثم35.1 (media controls/download/remux)، ثم36؛ لا يتغير ترقيم34–42.
-- PR #110 يبقى OPEN/HOLD ولا يُمس.
+- قبل إغلاق UNIT34 كان CODE MAIN `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4` مع PR #145 مدموجة؛ أصبحت الوحدة34 لاحقًا CODE DONE / DEPLOYED على `a6c1802ba66e2f175d6642693e0afd3f8eff9685`، مع Quality #400 وDeploy #629 SUCCESS على SHA نفسه.
+- قُرر إجمالي **59 UNIT** بإضافة35.1 بعد35 وقبل36. يظل الترتيب: 34 → 35 → 35.1 → 36–42.
+- **Canonical NEXT الحالي: UNIT35 / R4-UX-I18N-1** بعد دمج تحديث الخطة الحالي وتثبيت PLAN SHA الناتج.
+- **PR #110 OPEN/HOLD** ولا يُمس.
