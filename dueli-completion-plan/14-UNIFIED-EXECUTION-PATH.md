@@ -1,3 +1,14 @@
+## تحديث حالة القيادة — 2026-10-28 بعد دمج UNIT35
+
+- **CODE MAIN:** PR #147 / UNIT35 / R4-UX-I18N-1 MERGED؛ actual merge SHA `12181265ca1841af979cf354f064ce69cf3f92e1` (approved HEAD `4902cdabd3e10cc576b241f4fe401bdd6db867e4`; BASE `a6c1802ba66e2f175d6642693e0afd3f8eff9685`). [PR #147](https://github.com/Maelsh/dueli-opus/pull/147)
+- **Post-merge Quality Gate #404:** [run 40682055541](https://github.com/Maelsh/dueli-opus/actions/runs/40682055541) SUCCESS على actual merge SHA نفسه.
+- **Post-merge Deploy #633:** [run 40682055691](https://github.com/Maelsh/dueli-opus/actions/runs/40682055691) SUCCESS على actual merge SHA نفسه؛ production bindings، read-only schema state، fail-closed readiness، وproduction deployment كلها SUCCESS؛ لم تُطبق migration. هذا يثبت deployment workflow لا قبولًا يدويًا شاملًا للإنتاج.
+- **UNIT35:** CODE DONE / MERGED / DEPLOYED ضمن النطاق المراجع. REMOTE APPROVE على HEAD نفسه. الاختبارات المستقلة شملت AR/EN وRTL/LTR ومقاسات 390×844 و1440×900؛ 43/45، والفشلان ضجيج WatchLaterUI لضيف 401 وقد أُثبتا على BASE، P3 غير حاجب. بقي التفاعل اليدوي الشامل لـVIS-04 ضمن قبول المالك المخطط في UNIT41؛ مصفوفة التدقيق التاريخية ذات34 بندًا ما زالت BLOCKED-BY-SOURCE لأن مصدرها غير موجود في plan repo؛ لا تدّعِ اكتمالها. لا تعِد فتح UNIT35 لهذه الحدود غير الحاجبة.
+- **Canonical NEXT = UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1**، ثم36–42؛ إجمالي الخطة59 UNIT والمعرفات34–43 ثابتة. النطاق التالي: عيوب eye/PiP مقابل الكاميرا، fullscreen، انتقال المقاطع، وتجميع/تنزيل MP4؛ ابدأ بتحقيق محلي موجّه للـhandlers الحالية في main، وSmartVodPlayer/double-buffer وhandoff في LIVE/VOD، ثم Mp4FragmentAssembler/RecordingDownloadService وtfdt/baseMediaDecodeTime/timescale/sample durations. أثبت مدة وتشغيل/seek متصلين؛ fMP4 remux بلا إعادة ترميز فقط عند توافق المقاطع. قيمة0.6s فرضية وليست قرارًا. PR #110 CLOSED / SUPERSEDED دون merge؛ لا تنقل تنفيذها القديم، والكود الحالي في main هو المصدر.
+- **قاعدة التنفيذ:** LOCAL واحد يثبت السبب ويجري الاختبارات قبل patch ضمن المهمة نفسها؛ بعد ذلك تحقق GitHub/CI على exact HEAD ثم REMOTE مستقل؛ لا موجه REMOTE قبل تقرير LOCAL ومراجعة GitHub. بعد APPROVE ندمج وفق10، ثم Quality + production Deploy على merge SHA نفسه، ثم تحديث الحالة. لا تغييرات D1/schema أو توسيع النطاق دون مبرر.
+
+---
+
 # Dueli — المسار التنفيذي الواحد حتى إطلاق الويب
 
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
