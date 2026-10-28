@@ -46,3 +46,11 @@ D) تقرير رقمي قبل/بعد لكل رحلة وميزانية استهل
 - لا تعِد فتح UNIT33/33.1 تلقائيًا؛ أي إصلاح لاحق يحتاج إعادة إنتاج موضعية ودليل مستقل وقرارًا بشأن مكانه في المسار.
 - لا تلمس PR #110 ولا تبدأ UNIT34 قبل دمج تحديث الخطة.
 - التحصين الاختياري `DUELI_AUDIT_CMD` يظل تحسينًا دفاعيًا غير حاجب؛ لا يعاد فتح PR #145 لهذا السبب وحده.
+
+
+## قرار التسكين المعتمد — تحديث 2026-10-28
+
+- **UNIT35 (R4-UX-I18N-1):** الملاحظات3/4/5: Reminder icon-only + eligibility/server guard؛ mobile header/help/avatar/long handles/notifications viewport; RTL/LTR controls/play/comment/time.
+- **UNIT35.1 (R4-MEDIA-CONTROLS-DOWNLOAD-REM1):** الملاحظات1/2/6/7: eye/PiP vs camera; fullscreen; chunk transition; slow/wrong assembled download and timestamp normalization/direct fMP4 remux where compatible.
+- الإجمالي59 UNIT؛35.1 بعد35 وقبل36؛ أرقام34–42 لا تتغير. اللقطات الست المذكورة في قرار08 مراجع قبول. لا تُعد الأسباب الجذرية مثبتة قبل إعادة الإنتاج والتحليل.
+- التالي بعد دمج هذا التحديث: UNIT34 على CODE MAIN `20c16dc7bbda3af1aa3b0597f0f147a59c44b1c4`، مع A–D. لا يبدأ35 حتى إغلاق34 وفق Protocol10. PR #110 OPEN/HOLD دون مساس.
