@@ -1,3 +1,15 @@
+## الحالة المعتمدة الأحدث — 2026-10-28 / UNIT34 مدمجة؛ التحقق بعد الدمج مطلوب قبل إغلاق الحالة رسميًا
+- **CODE MAIN / actual merge SHA:** `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ PR #146 / UNIT34 R4-DB-MEASURE-1 مدموج بعد APPROVE مستقلين على HEAD `cf93f9b1a1d12d8c6aaf280679cd40658d909909`.
+- **Pre-merge Quality Gate:** [40622691772](https://github.com/Maelsh/dueli-opus/actions/runs/40622691772) SUCCESS. **Deploy workflow:** [40622691784](https://github.com/Maelsh/dueli-opus/actions/runs/40622691784) SUCCESS كـworkflow، لكن production deployment SKIPPED وPreview فقط. حالة CODE MERGED؛ لا تدّعِ DEPLOYED/PRODUCTION VERIFIED حتى يظهر دليل post-merge Quality + Deploy على exact merge SHA.
+- **UNIT34 A–D:** request ID + structured logging/redaction؛ harness قياس الرحلات التسع؛ cache utility + T0 regression correction + bounded retry/degraded UI؛ report/WORKLOG/PLAN-STATUS في code PR. REMOTE: APPROVE ×2، بلا blockers.
+- **الأرقام المحلية المسجلة:** Home T0/continuation=13/5 statements؛ Explore T0/continuation=13/5؛ guest suggested cold/cache hit=13/8؛ searchCompetitions/searchUsers=6/9؛ H7 loadCompetitions/profiles=1/3؛ viewerCtx=0 بسبب fixture ضيف بمسار فارغ. Statement counts محلية synthetic فقط، و0 لا يعمم على الإنتاج. بقية الرحلات (SSE، notifications، chunk_index timeline/seek، UserSignalsModel.loadUsers) غطّاها harness لكن لا توجد أرقام عددية منفصلة في ملخص التقرير الملتزم.
+- **Cloudflare D1 rowsRead/rowsWritten:** غير متاحة في الاختبارات المحلية؛ متابعة موثقة تحتاج staged analytics معتمد. `rowsReadApprox` SQLite ليس قياس D1.
+- **قرار الكاش:** `buildOrderedIds` uncached لحماية T0 snapshot؛ PublicSurfaceCache مفحوص كأداة module-only، وليس تحسين إنتاجيًا مثبتًا. أي ربط مستقبلي يتطلب explicit invalidation ولا يمس T0.
+- **متابعات P3 فقط:** ازدواج سجل 500؛ console.error قديم غير مهيكل؛ تدقيق إضافي لكفاية redaction وفق المواصفة؛ توثيق بوابة اعتماد المالك قبل UNIT40 وتسميات playlist/timeline. لا تفتح وحدات جديدة ولا تعيد عملًا مغلقًا بلا دليل جديد.
+- **Canonical next:** بعد إثبات post-merge gates وتحديث الخطة على main، UNIT35 / R4-UX-I18N-1 ثم UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1 حسب الترتيب المعتمد. لا يبدأ أي منهما قبل إغلاق UNIT34 رسميًا. PR #110 remains OPEN/HOLD.
+
+---
+
 # Dueli — المسار التنفيذي الواحد حتى إطلاق الويب
 
 **اعتماد المالك: 2026-10-09 — طلب مسار واحد وحفظ جميع البنود عند إعادة ترتيبها.**
