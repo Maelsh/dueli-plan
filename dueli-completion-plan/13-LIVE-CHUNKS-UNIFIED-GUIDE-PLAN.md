@@ -293,6 +293,7 @@ PR107/108/109 CODE DONE / DEPLOYED في نطاقها؛ الحالة الأحدث
 
 - **UNIT35.2 / R4-EXPLORE-OBSERVER-I18N-FIT-1** — Canonical NEXT بعد دمج PR #148 (`c401b5d5`): Explore `IntersectionObserver` rebind + `i18nAutoFit` (English baseline `--i18n-font-scale`) + truncation/tooltip على النص الديناميكي؛ اختبارات AR/EN وIO في Vitest.
 - **UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1** — بعد36 وقبل37: تسعير السوق، H7 multiplier، Image/GIF/Video، مركز تحكم المتنافس، إعلانات Dueli `is_house`، ledger cents 80/20 (تفاصيل08).
-- **UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1** — بعد41 وقبل42: ترجمة جميع اللغات المعتمدة + فحص `i18nAutoFit` على كل الشاشات.
-- **إجمالي الخطة:** **62 UNIT** (59 + 35.2 + 36.1 + 42.1)؛ أرقام36–43 ثابتة.
-- **UNIT38 / UNIT39 (`/guide`):** إرشاد OBS Virtual Camera للمحاورين في38؛ مخطط المانحين/الهوية غير الربحية (80%/20%) في39 — محتوى يتطلب موافقة المالك.
+- **UNIT41.1 / R4-UI-UX-BROWSER-POLISH-1** — بعد41 وقبل42.1: تنظيف مودال OAuth (`Outlook` → `Microsoft`، إزالة `X/twitter` و`TikTok` و`Snapchat` من الواجهة للاكتفاء بـ4 طرق فعالة) + مراجعة وتجميل شامل للـ UI/UX عبر وكيل متصفح بعدة حسابات.
+- **UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1** — بعد41.1 وقبل42: ترجمة جميع اللغات المعتمدة عبر مولد آلي مقسم بالدفعات (`AST Chunked Generator` + Glossary + حارس تطابق المتغيرات) + `hreflang` + فحص `i18nAutoFit` على كل الشاشات.
+- **إجمالي الخطة:** **63 UNIT** (59 + 35.2 + 36.1 + 41.1 + 42.1)؛ أرقام36–43 ثابتة.
+- **UNIT38 / UNIT39 (`/guide` + Global SEO + Splash Portal):** إرشاد OBS Virtual Camera للمحاورين، Global SEO/Meta/OpenGraph/JSON-LD، وبوابة افتتاحية للدومين المساند بشعار **(ارتقِ، تثقف، استمتع، اربح)** وتحويل تلقائي لـ`dueli.maelshpro.com` (برعاية `Maelsh Pro`) في38؛ مخطط المانحين/الهوية غير الربحية (80%/20%) في39 — محتوى يتطلب موافقة المالك.

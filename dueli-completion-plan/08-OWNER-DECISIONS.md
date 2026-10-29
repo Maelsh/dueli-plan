@@ -18,7 +18,15 @@
 **UPDATE — 2026-10-29 (إغلاق UNIT36 وتفويض H8 التجريبي):**
 - **UNIT36 / R4-ADMIN-ACCEPT-1 = CODE DONE / MERGED / DEPLOYED / PROD VERIFIED** عبر [PR #151](https://github.com/Maelsh/dueli-opus/pull/151) على `79d84849259838791125818556ac10fe62347fd8` (Quality `40817792420` + Deploy `40817792403` SUCCESS على SHA نفسه). أُصلح `stats500` (`COALESCE(SUM(total),0)`)، ودُعم الدخول بـ`email OR username`، ونُفذت المرحلة B بتفويض المالك بإنشاء حساب المدير التجريبي `admin` / `admin@dueli.local` (`id=9053`, `SuperAdmin`) على `dueli-db` مع تحقق إنتاجي مباشر على `dueli.maelshpro.com` (دخول بالمعرّفين 200، `/api/admin/stats` بجلسة 200 وبلا جلسة 403).
 - **شرط إلزامي معلّق قبل الإطلاق في UNIT40 وUNIT42 (H8):** تدوير اسم وكلمة مرور حساب المدير التجريبي (`id=9053`) وحذف الحسابات التجريبية الثلاثة قبل إطلاق بيتا الويب.
-- **Canonical NEXT = UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ الإجمالي **62 UNIT** وأرقام 37–43 ثابتة.
+- **Canonical NEXT = UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ الإجمالي **63 UNIT** وأرقام 37–43 ثابتة.
+
+**UPDATE — 2026-10-29 (قرارات المالك: Global SEO، Splash Portal، UNIT41.1 UI/UX & OAuth Modal، وخط أنابيب ترجمة UNIT42.1):**
+1. **Global SEO & Meta Data (`UNIT38` / `UNIT39` + `UNIT42.1`):** تزويد القالب العام (`layout.ts`) وصفحات التوثيق (`/guide`) بوسوم ميتا قوية متعددة اللغات (`description`, OpenGraph, Twitter Cards, `canonical`, `hreflang`, `Schema.org JSON-LD` يعرّف Dueli كأول منصة منافسات حوارية/علمية/مواهب عالمية برعاية `Maelsh Pro`، مع `/robots.txt` و`/sitemap.xml`).
+2. **بوابة الافتتاحية للدومين المساند (`Splash Portal` ضمن `UNIT38`):** الإبقاء على `dueli.maelshpro.com` كدومين تشغيلي أساسي (حفاظاً على روابط OAuth/Webhooks/الجلسات والدعاية لشركة المالك `Maelsh Pro`)، وتجهيز صفحة افتتاحية فائقة الجاذبية للدومين المساند السهل تعرض شعار Dueli بتأثيرات بصرية وعبارة **(ارتقِ .. تثقف .. استمتع .. اربح)** بطريقة تتابعية ثم تحوّل الزائر تلقائيًا وبسلاسة إلى `dueli.maelshpro.com`.
+3. **استحداث `UNIT41.1 / R4-UI-UX-BROWSER-POLISH-1` (بعد `41` وقبل `42.1` — يرفع الإجمالي إلى `63 UNIT` دون إزاحة 37–43):**
+   - **تنظيف مودال التسجيل والدخول (`login-modal.ts`):** الاكتفاء بـ **4 طرق مصادقة فعالة** (البريد الإلكتروني/اسم المستخدم + `Google` + `Microsoft` + `Facebook`)، وتغيير تسمية الزر من `Outlook` إلى **`Microsoft`** لشموليته، و**إزالة الأزرار الثلاثة غير العاملة (`X/twitter`, `TikTok`, `Snapchat`)** من الواجهة.
+   - **مراجعة وتجميل شامل للـ UI/UX عبر وكيل متصفح:** استخدام وكيل يرى المتصفح ويجرب المنصة بعدة حسابات (متنافسين، مشاهد، معلن، مدير) في أوضاع Dark/Light وRTL/LTR والجوال/سطح المكتب لاقتراح وتطبيق تحسينات الجاذبية البصرية وتناسق الألوان والمسافات قبل الإطلاق.
+4. **آلية الترجمة السريعة والدقيقة لكل اللغات في `UNIT42.1`:** بناء أداة توليد مقسمة بالدفعات (`AST Chunked Translation Generator`) تعتمد `ar.ts` + `en.ts` كمصدر مزدوج مع قاموس مصطلحات Dueli الثابت، وفحص آلي صارم لتطابق المتغيرات (`{placeholders}`) وعدد المفاتيح 100%، وفحص `i18nAutoFit` شامل.
 
 ## H1/H4 — خمس دقائق وتقييم قابل للتعديل
 

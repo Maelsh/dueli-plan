@@ -6,7 +6,7 @@
 - **Post-merge Quality Gate #400:** [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS. **Deploy #629:** [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS. كلاهما على SHA الدمج نفسه؛ Quality dependency وDeploy jobs ناجحتان.
 - القياسات المحلية المعتمدة: Home/Explore T0 13 statements باستخدام `idx_competitions_status_started`، continuation 5، guest cold 13 مقابل hot cached 8، `searchCompetitions` 6، `searchUsers` 9، H7 `loadCompetitions` 1، H7 profiles 3.
 - قيود الدليل: `rowsRead/rowsWritten` الإنتاجيتان غير متاحتين في harness ولم تُجر تجربة Cloudflare Analytics؛ `rowsReadApprox` SQLite estimate فقط؛ `EXPLAIN` على schema محلية. cache keys/TTL/hit-miss مغطاة على مستوى الوحدة، لكن cache لكل isolate ولا يُستخدم لتجميد T0. لا تدّعِ إنتاجية/PROD VERIFIED؛ متابعة Analytics ضمن UNIT40/41. هذه الحدود موثقة وغير حاجبة لإغلاق الكود.
-- **Canonical NEXT وفق14: UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ ثم 37–41 → **42.1** → 42. إجمالي **62 UNIT**. UNIT35 و35.1 و35.2 و36 مغلقة (PR #147/#148/#149+#150/#151؛ UNIT36 PROD VERIFIED على `79d84849259838791125818556ac10fe62347fd8` مع بقاء تدوير حساب المدير التجريبي وحذف الحسابات التجريبية الثلاثة شرطًا إلزاميًا في UNIT40/42). PR #110 SUPERSEDED.
+- **Canonical NEXT وفق14: UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ ثم 37–41 → **41.1** → **42.1** → 42. إجمالي **63 UNIT**. UNIT35 و35.1 و35.2 و36 مغلقة (PR #147/#148/#149+#150/#151؛ UNIT36 PROD VERIFIED على `79d84849259838791125818556ac10fe62347fd8` مع بقاء تدوير حساب المدير التجريبي وحذف الحسابات التجريبية الثلاثة شرطًا إلزاميًا في UNIT40/42). PR #110 SUPERSEDED.
 
 ## المزامنة الحاكمة — 2026-10-09
 
