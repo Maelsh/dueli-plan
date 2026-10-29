@@ -1,3 +1,14 @@
+## سجل الاستئناف — 2026-10-29 بعد إغلاق UNIT36 (PROD VERIFIED)
+
+- **CODE MAIN / actual merge SHA:** `79d84849259838791125818556ac10fe62347fd8` ([PR #151](https://github.com/Maelsh/dueli-opus/pull/151) / UNIT36، BASE `4692e1b7`، approved HEAD `5419958e`).
+- **Post-merge على SHA نفسه:** Quality Gate [40817792420](https://github.com/Maelsh/dueli-opus/actions/runs/40817792420) SUCCESS؛ Deploy [40817792403](https://github.com/Maelsh/dueli-opus/actions/runs/40817792403) SUCCESS.
+- **UNIT36 / R4-ADMIN-ACCEPT-1 = CODE DONE / MERGED / DEPLOYED / PROD VERIFIED:** أُصلح `AdminStatsModel.totalRevenue → COALESCE(SUM(total),0)` ودعم `AuthController.login` لـ`email OR username` (trim/lowercase، email أولاً، 401 عام موحد). مراجعة REMOTE مستقلة APPROVE على exact HEAD (21/21 + tsc + 2216 suite)؛ مراجع ثانٍ BLOCKED بيئي (NOT VERIFIED). نُفذت المرحلة B بتفويض المالك: إنشاء حساب المدير التجريبي `admin` / `admin@dueli.local` (`id=9053`، `SuperAdmin`) على `dueli-db`، وتحقق إنتاجي مباشر على `dueli.maelshpro.com` (دخول بالمعرّفين 200، `/api/admin/stats` بجلسة 200 وبلا جلسة 403).
+- **بند معلّق إلزامي في UNIT40 وUNIT42 (H8):** تدوير اسم/كلمة مرور حساب المدير التجريبي وحذف الحسابات التجريبية الثلاثة قبل إطلاق بيتا الويب.
+- **Canonical NEXT = UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ ثم **37 → 38 → 39 → 40 → 41 → 42.1 → 42**. إجمالي الخطة **62 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `b38a8a9f729fe90f96707c92e3166812ab1dfe35`.
+
+---
+
 ## سجل الاستئناف — 2026-10-29 بعد دمج UNIT35.2
 
 - CODE MAIN: PR #149 ثم PR #150؛ production SHA `4692e1b7bad7848853eec83a08da614f62c2c157`.
