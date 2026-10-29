@@ -1,3 +1,12 @@
+## سجل الاستئناف — 2026-10-29 بعد إغلاق UNIT37 (EXECUTED / PROD VERIFIED)
+
+- **CODE MAIN / actual merge SHA:** `9c66315f4f3f6a8a7528aee3cf3c37392f46d5a5` ([PR #152](https://github.com/Maelsh/dueli-opus/pull/152) / UNIT36.1 — بلا تغيير كود في UNIT37).
+- **UNIT37 / R4-NOTIFY-CLEANUP-1 = EXECUTED / PROD VERIFIED:** وحدة تشغيلية OWNER APPROVED في 12 §10.2 (لا PR كود). نُفذت على `dueli-db` الإنتاجية (`f877f573-…`, EEUR) بتاريخ `2026-10-29 ~14:55Z` بأمر واحد حرفي بعد مراجعة المرحلة 1 (مخطط/أعداد/guard): `UPDATE notifications SET is_read=1 WHERE is_read=0 AND created_at < '2026-10-08 03:31:39'` (cutoff ثابت `2026-10-08T03:31:39Z`، UTC مثبت). المتأثر الفعلي `62` = المتوقع؛ قبل/بعد: مؤهل متبقٍّ `62→0`، غير مقروءة بعد cutoff `60→60`، إجمالي `199→199`، مقروءة قبل cutoff `51→113`. لا `DELETE` ولا مساس بـ`messages/invitations/requests/users` (أعدادها ثابتة)، وIdempotent (المتبقي `0`). تحقق القائد المباشر read-only من D1 بعد التنفيذ طابق الأرقام (`total=199`, `eligible_remaining=0`, `unread_post_cutoff=60`). السياسة الدائمة (`closed=read`) غير معتمدة وغير منفذة وتبقى خارج الإغلاق.
+- **Canonical NEXT = UNIT38 / R4-GUIDE-1**؛ ثم **39 → 40 → 41 → 41.1 → 42.1 → 42**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `3be9699db01670e9d086cb68a43f4a42101a8d6d`.
+
+---
+
 ## سجل الاستئناف — 2026-10-29 بعد إغلاق UNIT36.1 (CODE DONE / MERGED / DEPLOYED)
 
 - **CODE MAIN / actual merge SHA:** `9c66315f4f3f6a8a7528aee3cf3c37392f46d5a5` ([PR #152](https://github.com/Maelsh/dueli-opus/pull/152) / UNIT36.1، BASE `79d84849`، approved HEAD `e0cb58f0`).
