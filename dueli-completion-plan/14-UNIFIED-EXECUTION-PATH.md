@@ -1,10 +1,11 @@
-## تحديث حالة القيادة — 2026-10-29 / UNIT35.1 MERGED؛ Canonical NEXT=UNIT35.2
+## تحديث حالة القيادة — 2026-10-29 / UNIT35.2 MERGED؛ Canonical NEXT=UNIT36
 
-- **CODE MAIN:** PR #148 / UNIT35.1 / R4-MEDIA-CONTROLS-DOWNLOAD-REM1 MERGED؛ actual merge SHA `c401b5d5e8d238939c1d73778f237f02e257e5bf` (BASE `12181265ca1841af979cf354f064ce69cf3f92e1`). [PR #148](https://github.com/Maelsh/dueli-opus/pull/148)
-- **UNIT35.1:** CODE DONE / MERGED ضمن نطاق Explore live-search، إصلاحات تنزيل MP4، ومشاركة المنافسة؛ استمرارية القيادة وفق `19`. REMOTE re-review/CI على SHA الدمج يبقى خارج نطاق تحديث الخطة هذا إن لم يُثبت بعد.
-- **Canonical NEXT = UNIT35.2 / R4-EXPLORE-OBSERVER-I18N-FIT-1** (IntersectionObserver + i18nAutoFit + truncation/tooltip)، ثم **36 → 36.1 → 37–41 → 42.1 → 42**؛ إجمالي الخطة **62 UNIT**؛ أرقام **36–43 ثابتة** مع الوحدات الفرعية **35.2** (بين35.1 و36)، **36.1** (بetween36 و37)، **42.1** (بetween41 و42).
-- **UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1** و**UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1** موثقتان في08 بتاريخ2026-10-29؛ لا يبدأ تنفيذهما قبل إغلاق35.2 و36 على التوالي.
-- **UNIT38 / UNIT39:** إرشاد OBS Virtual Camera للمحاورين في38؛ مخطط المانحين/الهوية غير الربحية (80%/20%) في39 — تثبيت المالك 2026-10-29.
+- **CODE MAIN:** PR #149 / UNIT35.2 MERGED ثم إصلاح بوابة الجودة PR #150؛ actual production SHA `4692e1b7bad7848853eec83a08da614f62c2c157`. [PR #149](https://github.com/Maelsh/dueli-opus/pull/149) · [PR #150](https://github.com/Maelsh/dueli-opus/pull/150)
+- **UNIT35.1:** CODE DONE / MERGED على `c401b5d5e8d238939c1d73778f237f02e257e5bf` ([PR #148](https://github.com/Maelsh/dueli-opus/pull/148)).
+- **UNIT35.2:** CODE DONE / MERGED / DEPLOYED (IntersectionObserver + i18nAutoFit + إصلاحات المنافسة 2266).
+- **Canonical NEXT = UNIT36 / R4-ADMIN-ACCEPT-1**، ثم **36.1 → 37–41 → 42.1 → 42**؛ إجمالي الخطة **62 UNIT**؛ أرقام **36–43 ثابتة** مع الوحدات الفرعية **35.2** (بين 35.1 و36)، **36.1** (بين 36 و37)، **42.1** (بين 41 و42).
+- **UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1** و**UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1** موثقتان في 08 بتاريخ 2026-10-29؛ لا يبدأ 36.1 قبل إغلاق 36، ولا 42.1 قبل إغلاق 41.
+- **UNIT38 / UNIT39:** إرشاد OBS Virtual Camera للمحاورين في 38؛ مخطط المانحين/الهوية غير الربحية (80%/20%) في 39 — تثبيت المالك 2026-10-29.
 
 ## تحديث حالة القيادة — 2026-10-28 بعد دمج UNIT35
 
@@ -141,7 +142,7 @@
 | 34 | R4-DB-MEASURE-1 | إغلاق DB-01: requestId/structured logging، قياس Home/Explore/H7/search/SSE/notifications/chunk_index/playlist/seek، public cache معزول وdegraded UI/retry | **CODE DONE / DEPLOYED**؛ PR #146 merge SHA `a6c1802ba66e2f175d6642693e0afd3f8eff9685`؛ Quality #400 [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) وDeploy #629 [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS على SHA نفسه. قياس محلي: Home/Explore T0=13، continuation=5، guest cold=13/hot=8، searchCompetitions=6، searchUsers=9، H7 loadCompetitions=1، H7 profiles=3. D1 rowsRead/rowsWritten الإنتاجية غير متاحة؛ rowsReadApprox SQLite فقط، وEXPLAIN محلي؛ cache key/TTL اختبار وحدة وper-isolate ولا يجمد T0. هذه حدود موثقة وغير حاجبة؛ D1 Analytics ضمن40/41؛ لا PROD VERIFIED يدويًا؛ 59 UNIT |
 | 35 | R4-UX-I18N-1 | جرد UX/I18N (34 موضعًا)، InvitePanel/NaN%/Toast، التذكير، حصيلة التقييم، الإتاحة، والهاتف | **CODE DONE / MERGED / DEPLOYED**؛ PR #147 merge SHA `12181265ca1841af979cf354f064ce69cf3f92e1`؛ Quality #404 وDeploy #633 SUCCESS على SHA نفسه؛ VIS-04 يدوي ضمن41؛ 62 UNIT |
 | 35.1 | R4-MEDIA-CONTROLS-DOWNLOAD-REM1 | Explore live search، تنزيل/تجميع MP4، مشاركة المنافسة | **CODE DONE / MERGED**؛ PR #148 merge SHA `c401b5d5e8d238939c1d73778f237f02e257e5bf`؛ ملاحظات1/2/6/7 ضمن النطاق المُنجَز؛ عيب Explore IO المنفصل يُغلق في35.2 |
-| 35.2 | R4-EXPLORE-OBSERVER-I18N-FIT-1 | إعادة ربط IntersectionObserver بعد reset/live search/filters + i18nAutoFit English-baseline + truncation/tooltip | **CANONICAL NEXT / IN PROGRESS**؛ فرع `feat/unit35-2-explore-observer-i18n-fit-1` من BASE `c401b5d5`؛ اختبارات IO + i18nAutoFit AR/EN |
+| 35.2 | R4-EXPLORE-OBSERVER-I18N-FIT-1 | إعادة ربط IntersectionObserver بعد reset/live search/filters + i18nAutoFit English-baseline + truncation/tooltip | **CODE DONE / MERGED / DEPLOYED**؛ PR #149 ثم PR #150؛ production SHA `4692e1b7bad7848853eec83a08da614f62c2c157` |
 | 36 | R4-ADMIN-ACCEPT-1 | قبول الدعم الإداري بحساب مخول، وتتبع ملاحظة stats500 | BLOCKED ACCESS / TARGETED؛ الجزء الإداري من MEDIA-ADMIN-ACCEPT؛12 وWORKLOG/R2-A؛ افحص /api/admin/stats موضعيًا، أصلح المتبقي إن ثبت أو ALREADY DONE بدليل؛ لا إعادة مالية/أدوار |
 | 36.1 | R4-ADS-PRICING-CONTROL-HOUSE-1 | تسعير السوق لكل بلد، H7 multiplier، Image/GIF/Video، مركز تحكم المتنافس، إعلانات Dueli الرسمية، ledger cents 80/20 | **PLANNED — بعد36 مباشرة وقبل37**؛ قرار المالك2026-10-29؛ Admin pricing + competitor ad ethics center + `is_house` fallback |
 | 37 | R4-NOTIFY-CLEANUP-1 | تعليم الإشعارات القديمة مقروءة مرة واحدة | OWNER APPROVED / NOT EXECUTED EVIDENCED؛12 §10.2 وrunbook #106؛ cutoff2026-10-08T03:31:39Z، counts/schema/guard؛ لا إذن مكرر أو مساس رسائل/دعوات |
@@ -153,7 +154,7 @@
 | 42 | R0-WEB-LAUNCH | عرض الجاهزية الموثقة ثم قرار المالك وإطلاق بيتا الويب | OWNER DECISION عند الجاهزية؛ لا قرار آلي أو ادعاء تشغيل دفع حقيقي دون البنك/المزود |
 | 43 | R5 | PWA وAndroid وiOS وTV والتقنيات والتكلفة وقيود المتاجر | DEFERRED AFTER WEB؛ يعتمد المالك النطاق والترتيب لاحقًا |
 
-**قاعدة السير الحالية — 2026-10-29:** Gate30–30.6 CLOSED؛ 31–35.1 CODE DONE / DEPLOYED أو MERGED ضمن أدلتها؛ UNIT35.1 على `c401b5d5e8d238939c1d73778f237f02e257e5bf`. **Canonical NEXT = UNIT35.2 → 36 → 36.1 → 37–41 → 42.1 → 42**؛ الإجمالي **62 UNIT** والمعرفات34–43 ثابتة. PR #110 SUPERSEDED؛ ads ethics/pricing في36.1؛ global i18n في42.1.
+**قاعدة السير الحالية — 2026-10-29:** Gate30–30.6 CLOSED؛ 31–35.2 CODE DONE / DEPLOYED أو MERGED ضمن أدلتها؛ UNIT35.2 منشورة على `4692e1b7bad7848853eec83a08da614f62c2c157`. **Canonical NEXT = UNIT36 → 36.1 → 37–41 → 42.1 → 42**؛ الإجمالي **62 UNIT** والمعرفات34–43 ثابتة. PR #110 SUPERSEDED؛ ads ethics/pricing في36.1؛ global i18n في42.1.
 
 ## 3. ضمان بقاء جميع العيوب
 

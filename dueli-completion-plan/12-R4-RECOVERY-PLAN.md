@@ -6,7 +6,7 @@
 - **Post-merge Quality Gate #400:** [40638126237](https://github.com/Maelsh/dueli-opus/actions/runs/40638126237) SUCCESS. **Deploy #629:** [40638126230](https://github.com/Maelsh/dueli-opus/actions/runs/40638126230) SUCCESS. كلاهما على SHA الدمج نفسه؛ Quality dependency وDeploy jobs ناجحتان.
 - القياسات المحلية المعتمدة: Home/Explore T0 13 statements باستخدام `idx_competitions_status_started`، continuation 5، guest cold 13 مقابل hot cached 8، `searchCompetitions` 6، `searchUsers` 9، H7 `loadCompetitions` 1، H7 profiles 3.
 - قيود الدليل: `rowsRead/rowsWritten` الإنتاجيتان غير متاحتين في harness ولم تُجر تجربة Cloudflare Analytics؛ `rowsReadApprox` SQLite estimate فقط؛ `EXPLAIN` على schema محلية. cache keys/TTL/hit-miss مغطاة على مستوى الوحدة، لكن cache لكل isolate ولا يُستخدم لتجميد T0. لا تدّعِ إنتاجية/PROD VERIFIED؛ متابعة Analytics ضمن UNIT40/41. هذه الحدود موثقة وغير حاجبة لإغلاق الكود.
-- **Canonical NEXT وفق14: UNIT35.2 / R4-EXPLORE-OBSERVER-I18N-FIT-1**؛ ثم36 → **36.1** → 37–41 → **42.1** → 42. إجمالي **62 UNIT**. UNIT35 و35.1 مغلقتان (PR #147/#148). PR #110 SUPERSEDED.
+- **Canonical NEXT وفق14: UNIT36 / R4-ADMIN-ACCEPT-1**؛ ثم **36.1** → 37–41 → **42.1** → 42. إجمالي **62 UNIT**. UNIT35 و35.1 و35.2 مغلقة (PR #147/#148/#149+#150). PR #110 SUPERSEDED.
 
 ## المزامنة الحاكمة — 2026-10-09
 

@@ -1,7 +1,7 @@
-## سجل الاستئناف — 2026-10-29 بعد دمج UNIT35.1
+## سجل الاستئناف — 2026-10-29 بعد دمج UNIT35.2
 
-- CODE MAIN: PR #148 / UNIT35.1 MERGED على `c401b5d5e8d238939c1d73778f237f02e257e5bf`؛ [PR #148](https://github.com/Maelsh/dueli-opus/pull/148).
-- **Canonical NEXT = UNIT35.2 / R4-EXPLORE-OBSERVER-I18N-FIT-1**؛ ثم36 → **36.1** → 37–41 → **42.1** → 42. إجمالي الخطة **62 UNIT**؛ أرقام36–43 ثابتة.
+- CODE MAIN: PR #149 ثم PR #150؛ production SHA `4692e1b7bad7848853eec83a08da614f62c2c157`.
+- **UNIT35.2 CODE DONE / MERGED / DEPLOYED.** Canonical NEXT = **UNIT36 / R4-ADMIN-ACCEPT-1**؛ ثم **36.1** → 37–41 → **42.1** → 42. إجمالي الخطة **62 UNIT**؛ أرقام36–43 ثابتة.
 - UNIT38: إرشاد OBS Virtual Camera في `/guide`. UNIT39: مخطط المانحين/الهوية غير الربحية (80%/20%). قرار08 بتاريخ2026-10-29.
 
 ---
