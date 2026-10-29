@@ -1,3 +1,16 @@
+## سجل الاستئناف — 2026-10-29 بعد إغلاق UNIT36.1 (CODE DONE / MERGED / DEPLOYED)
+
+- **CODE MAIN / actual merge SHA:** `9c66315f4f3f6a8a7528aee3cf3c37392f46d5a5` ([PR #152](https://github.com/Maelsh/dueli-opus/pull/152) / UNIT36.1، BASE `79d84849`، approved HEAD `e0cb58f0`).
+- **Post-merge على SHA نفسه:** Quality Gate [40891812932](https://github.com/Maelsh/dueli-opus/actions/runs/40891812932) SUCCESS؛ Deploy [40891813109](https://github.com/Maelsh/dueli-opus/actions/runs/40891813109) SUCCESS.
+- **UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1 = CODE DONE / MERGED / DEPLOYED (ليست PROD VERIFIED بعد):** طُبقت `migrations/0044_ad_pricing_control_house.sql` (إضافية فقط) على `dueli-db` الإنتاجية قبل الدمج بتفويض المالك الدائم 10 §9 (`SHA256 00b7b5c9277782f583d470700f6a95a7b8989198238d85b948e5c6a3a8908eac` = manifest `baseline-0044`، `0043→0044`، لا pending، Readiness PASS). أُنجزت `AdPricing` (بلد × H7 × استهداف × وسيط × مدة، تقريب واحد، أرضية 1 cent، غياب الضبط = السعر الحالي)، وتوحيد `charged_cents` عبر العرض/الخصم/الدفتر و80/20، وImage/GIF/Video بموضع ثابت، ومركز تحكم المتنافس (`auto/allow/manual/block`، `FR-016` سليم)، و`is_house` حتى 3 ذريًا وغير قابل للحظر وبلا خصم وfallback. حكما REMOTE مستقلان APPROVE على exact HEAD (M1–M6).
+- **OWNER DECISIONS PENDING لـUNIT36.1:** (أ) أسعار البلدان وقيم المعاملات الإنتاجية من لوحة المشرف؛ (ب) محتوى/روابط إعلانات Dueli الرسمية الثلاثة (`is_house`)؛ (ج) مصادقة المالك على دلالة `allow` مقابل `manual`.
+- **ملاحظة توثيقية غير حاجبة (لا تعيد فتح الوحدة):** خلل مقتطف جمع الفهارس في runbook §2 (يسقط فهارس خارج جداول manifest بينما الفهارس موجودة إنتاجيًا).
+- **بند معلّق إلزامي في UNIT40 وUNIT42 (H8):** تدوير اسم/كلمة مرور حساب المدير التجريبي (`id=9053`) وحذف الحسابات التجريبية الثلاثة قبل إطلاق بيتا الويب.
+- **Canonical NEXT = UNIT37 / R4-NOTIFY-CLEANUP-1**؛ ثم **38 → 39 → 40 → 41 → 41.1 → 42.1 → 42**. إجمالي الخطة **63 UNIT** (62 + `UNIT41.1`)؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `7ffdf8b48a18caf468d9ad4db80c5b6abf58d69a`.
+
+---
+
 ## سجل الاستئناف — 2026-10-29 بعد إغلاق UNIT36 (PROD VERIFIED)
 
 - **CODE MAIN / actual merge SHA:** `79d84849259838791125818556ac10fe62347fd8` ([PR #151](https://github.com/Maelsh/dueli-opus/pull/151) / UNIT36، BASE `4692e1b7`، approved HEAD `5419958e`).
