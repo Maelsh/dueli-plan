@@ -4,8 +4,8 @@
 - **Post-merge على SHA نفسه:** Quality Gate [40817792420](https://github.com/Maelsh/dueli-opus/actions/runs/40817792420) SUCCESS؛ Deploy [40817792403](https://github.com/Maelsh/dueli-opus/actions/runs/40817792403) SUCCESS.
 - **UNIT36 / R4-ADMIN-ACCEPT-1 = CODE DONE / MERGED / DEPLOYED / PROD VERIFIED:** أُصلح `AdminStatsModel.totalRevenue → COALESCE(SUM(total),0)` ودعم `AuthController.login` لـ`email OR username` (trim/lowercase، email أولاً، 401 عام موحد). مراجعة REMOTE مستقلة APPROVE على exact HEAD (21/21 + tsc + 2216 suite)؛ مراجع ثانٍ BLOCKED بيئي (NOT VERIFIED). نُفذت المرحلة B بتفويض المالك: إنشاء حساب المدير التجريبي `admin` / `admin@dueli.local` (`id=9053`، `SuperAdmin`) على `dueli-db`، وتحقق إنتاجي مباشر على `dueli.maelshpro.com` (دخول بالمعرّفين 200، `/api/admin/stats` بجلسة 200 وبلا جلسة 403).
 - **بند معلّق إلزامي في UNIT40 وUNIT42 (H8):** تدوير اسم/كلمة مرور حساب المدير التجريبي وحذف الحسابات التجريبية الثلاثة قبل إطلاق بيتا الويب.
-- **Canonical NEXT = UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ ثم **37 → 38 → 39 → 40 → 41 → 42.1 → 42**. إجمالي الخطة **62 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
-- **PLAN BASE قبل هذا التحديث:** `b38a8a9f729fe90f96707c92e3166812ab1dfe35`.
+- **Canonical NEXT = UNIT36.1 / R4-ADS-PRICING-CONTROL-HOUSE-1**؛ ثم **37 → 38 → 39 → 40 → 41 → 41.1 → 42.1 → 42**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة (أُضيفت `UNIT41.1 / R4-UI-UX-BROWSER-POLISH-1` لمراجعة UI/UX الشاملة بالمتصفح وتنظيف مودال OAuth إلى 4 طرق فعالة، وتوسعت `38/39` لـGlobal SEO/Meta + Splash Portal بشعار "ارتقِ، تثقف، استمتع، اربح"، و`42.1` لمولد الترجمة الآلي بالدفعات).
+- **PLAN BASE قبل هذا التحديث:** `c0835a4f135ec7fd0da10ff44bc11b8ebfa1f6b9`.
 
 ---
 
