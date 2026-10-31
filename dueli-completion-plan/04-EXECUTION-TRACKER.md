@@ -1,3 +1,15 @@
+## سجل الاستئناف — 2026-10-30 بعد إغلاق UNIT38 (CODE DONE / MERGED / DEPLOYED)
+
+- **CODE MAIN / actual merge SHA:** `aa81db25c3bcbb9174d2bf772f560d7f7940e2b8` ([PR #153](https://github.com/Maelsh/dueli-opus/pull/153) / UNIT38، BASE `9c66315f`، approved HEAD بعد remediation `f1bbf199`).
+- **Post-merge على SHA نفسه:** Quality Gate [40964503789](https://github.com/Maelsh/dueli-opus/actions/runs/40964503789) SUCCESS؛ Deploy [40964503688](https://github.com/Maelsh/dueli-opus/actions/runs/40964503688) SUCCESS. تحقق إنتاجي بنيوي مباشر من القائد: `/guide/overview` و`/welcome` و`/robots.txt` و`/sitemap.xml` كلها `200` و`canonical/OG/JSON-LD` حية على `dueli.maelshpro.com`.
+- **UNIT38 / R4-GUIDE-1 = CODE DONE / MERGED / DEPLOYED:** أنجز مركز `/guide` بثمانية أقسام server-rendered ومصدر محتوى واحد لـ`about/help`، وإرشاد OBS Virtual Camera مطابق للواجهة الفعلية، وSEO عالمي (`ar/en + x-default`)، و`robots/sitemap` من سجل واحد، و`/welcome` (شعار + «ارتقِ..تثقف..استمتع..اربح» + `By Maelsh Pro` + تحويل للدومين الرئيسي). دورة مراجعة موثقة: APPROVE أول على `e99c04c9`، ثم remediation إلزامية بقرار المالك (3 عيوب غير مخططة: تطابق canonical لمحتوى `/about`، دقة صياغة الجرد `260→262`، ربط runs بكوميتاتها) أُصلحت في نفس PR وثبتت بـ red-first، ثم APPROVE جديدان على `f1bbf199` قبل الدمج بـ`expected_head_sha`.
+- **توضيح القائد (مثبت بدل أي تصحيح كودي):** مسارا `/robots.txt` و`/sitemap.xml` مصنفان في الجرد `UNGUARDED` (عامّان بقصد)؛ عداد `UNGUARDED` بعد الدمج `44` ضمن تحذير `SEC-13` القائم.
+- **مفتوح ومخطط (لا يعيد فتح 38):** ربط الدومين المساند (`DNS/Cloudflare` — مالك)، والمحتوى النهائي وجرد شركات/نماذج AI في `UNIT39` بموافقات المالك.
+- **Canonical NEXT = UNIT39 / R4-GUIDE-2**؛ ثم **40 → 41 → 41.1 → 42.1 → 42**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `9c4903f4dfc9b84c2a065e80124af08bbc82bd4b`.
+
+---
+
 ## سجل الاستئناف — 2026-10-29 بعد إغلاق UNIT37 (EXECUTED / PROD VERIFIED)
 
 - **CODE MAIN / actual merge SHA:** `9c66315f4f3f6a8a7528aee3cf3c37392f46d5a5` ([PR #152](https://github.com/Maelsh/dueli-opus/pull/152) / UNIT36.1 — بلا تغيير كود في UNIT37).
