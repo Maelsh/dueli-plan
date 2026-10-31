@@ -35,7 +35,7 @@
   - **(ب)** محتوى/روابط إعلانات Dueli الرسمية الثلاثة (`is_house`).
   - **(ج)** مصادقة المالك على دلالة `allow` (إذن شامل يبقي حظر الإعلان الواحد أقوى) مقابل `manual` (قائمة بيضاء بمنح صريح لكل إعلان).
 - **ملاحظة غير حاجبة:** خلل مقتطف جمع الفهارس في runbook §2 (يسقط فهارس خارج جداول manifest بينما الفهارس موجودة إنتاجيًا) — بند توثيقي مستقبلي لا يعيد فتح الوحدة.
-- **Canonical NEXT = UNIT38 / R4-GUIDE-1**؛ ثم `39 → 40 → 41 → 41.1 → 42.1 → 42` (بعد إغلاق `UNIT37 / R4-NOTIFY-CLEANUP-1` كـ`EXECUTED / PROD VERIFIED` على `dueli-db` بتحديث `62→0` قبل cutoff `2026-10-08T03:31:39Z`).
+- **Canonical NEXT = UNIT39 / R4-GUIDE-2**؛ ثم `40 → 41 → 41.1 → 42.1 → 42` (بعد إغلاق `UNIT37 / R4-NOTIFY-CLEANUP-1` كـ`EXECUTED / PROD VERIFIED` على `dueli-db`، وإغلاق `UNIT38 / R4-GUIDE-1` كـ`CODE DONE / MERGED / DEPLOYED` عبر [PR #153](https://github.com/Maelsh/dueli-opus/pull/153) على `aa81db25c3bcbb9174d2bf772f560d7f7940e2b8` مع تحقق إنتاجي بنيوي مباشر لـ`/guide/overview` و`/welcome` و`/robots.txt` و`/sitemap.xml` وبقاء ربط الدومين المساند `DNS/Cloudflare` والمحتوى النهائي وجرد AI في `UNIT39`).
 
 ## H1/H4 — خمس دقائق وتقييم قابل للتعديل
 
