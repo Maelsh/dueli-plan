@@ -1,3 +1,13 @@
+## سجل الاستئناف — 2026-11-02 بعد إغلاق UNIT39 (CODE DONE / MERGED / DEPLOYED / PROD VERIFIED)
+
+- **CODE MAIN / actual merge SHA:** `062600e5fce53921483f56d94d55069de4ed6847` ([PR #154](https://github.com/Maelsh/dueli-opus/pull/154) / UNIT39، BASE `aa81db25c3bcbb9174d2bf772f560d7f7940e2b8`، approved HEAD `64677e3b897781d76b2805ef2a191177f0b26d1b`).
+- **Post-merge على SHA نفسه:** Quality Gate [41499568753](https://github.com/Maelsh/dueli-opus/actions/runs/41499568753) SUCCESS؛ Deploy [41499568764](https://github.com/Maelsh/dueli-opus/actions/runs/41499568764) SUCCESS. تحقق إنتاجي مباشر على `dueli.maelshpro.com`: `/guide`, `/guide/overview`, `/guide/ai`, `/guide/terms`, `/guide/contact`, `/privacy-policy`, `/welcome?lang=en`, `/welcome?lang=ar` كلها `200`، صفر ورود لـ`support@maelsh.com`، وشعار `/welcome` الإنجليزي `Elevate / Learn / Enjoy / Earn` (4/4) والعربي `ارتقِ / تثقف / استمتع / اربح` (4/4) حيّان.
+- **UNIT39 / R4-GUIDE-2 = CODE DONE / MERGED / DEPLOYED / PROD VERIFIED:** استُكمل محتوى `/guide` (الرسالة، التقنيات، مساهمات وجرد شركات/نماذج AI، مخطط المانحين والهوية غير الربحية 80%/20%، السياسات والشروط وحقوق الطرفين، وقنوات التواصل المعتمدة `dueli@maelshpro.com` مع إزالة `support@maelsh.com` من المصادر المخدومة و`public/privacy-policy.html`، ومواءمة شعار `/welcome` الإنجليزي `Elevate / Learn / Enjoy / Earn`). مراجعة REMOTE مستقلة APPROVE وتأكيد القائد على `64677e3b` (2309/2309 اختباراً، 64/64 لمجموعة الدليل، `any=299<=310`، `routes=262`، 14 ملفاً / 4 التزامات / `+1737 -95`)، وتصويب سجل خريطة CI الرسمي مثبت في تعليق الإغلاق على PR #154.
+- **Canonical NEXT = UNIT40 / R0-LAUNCH-READINESS**؛ ثم **41 → 41.1 → 42.1 → 42**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `26b63ee`.
+
+---
+
 ## سجل الاستئناف — 2026-10-30 بعد إغلاق UNIT38 (CODE DONE / MERGED / DEPLOYED)
 
 - **CODE MAIN / actual merge SHA:** `aa81db25c3bcbb9174d2bf772f560d7f7940e2b8` ([PR #153](https://github.com/Maelsh/dueli-opus/pull/153) / UNIT38، BASE `9c66315f`، approved HEAD بعد remediation `f1bbf199`).
