@@ -1,3 +1,13 @@
+## سجل الاستئناف — 2026-11-04 بعد إغلاق UNIT41 (CODE DONE / MERGED / DEPLOYED)
+
+- **CODE MAIN / actual merge SHA:** `3d8faf36a22ed418f2a82344e2f767e9ad0e643f` ([PR #156](https://github.com/Maelsh/dueli-opus/pull/156) / UNIT41، BASE `7b90838c`، approved HEAD `5c5399b7`).
+- **Post-merge على SHA نفسه:** Quality Gate [41877032563](https://github.com/Maelsh/dueli-opus/actions/runs/41877032563) SUCCESS؛ Deploy [41877032774](https://github.com/Maelsh/dueli-opus/actions/runs/41877032774) SUCCESS (تأخر runners خارجي موثق، لا فشل). حكما REMOTE ماليان دحضيان APPROVE (9 هجمات كسر على G3 فشلت كلها).
+- **UNIT41 / R4-ACCEPT-REM-1 = CODE DONE / MERGED / DEPLOYED:** أُغلقت فجوات `SEC-02` برمجياً وبأدلة: `G1` حذف المسارات الميتة الثلاثة + `EarningsModel` + مستورد `AdminController:8` (الجرد `262→259`)، و`G2` اشتقاق `on_hold/withdrawn/total` من `ledger_entries` حصراً، و`G3` حارس `approve` داخل `UPDATE` (صافي مرجع الطلب `>= amount+fee`) + `releaseHold` مشتق من الدفتر وidempotent. حزمة اختبارات `SEC-02` مسماة في `docs/12` (6 ملفات/32) خضراء + smoke سحب كامل. تحديث عقد `r2-p` تصحيح لتوثيق الثغرة نفسها كسلوك مرغوب. القبول المجمع الآلي (بأعداد المراجعين الدقيقة): `LIVE 78/78`، `CHUNKS 101/101`، `MEDIA/DOWNLOAD 139/139`، `AD BUDGET 88/88` (بدل `77/135` في سجل الكود؛ وسطر `docs/03` القديم لمسارات `earnings` يُصحح في `41.1`). قبول وسائط المتصفح/الأجهزة الحقيقي يبقى `BLOCKED` بأمانة لجولة المتصفح في `41.1` أو قبول المالك.
+- **Canonical NEXT = UNIT41.1 / R4-UI-UX-BROWSER-POLISH-1**؛ ويشمل: (1) بوابة `dueli.win` السينمائية 3D بالصور الثلاث في `assets/welcome/`؛ (2) تنظيف مودال OAuth؛ (3) عزل الوهميين من اختيار المنافس وتفعيل تقاعدهم التدريجي؛ (4) ربط الفيديو الموحد المعتمد `https://maelshpro.com/ffmpeg/storage/live/match_fake/fake.mp4` لكل منافسة ليس لها فيديو (مع قابلية ضبطه من `/admin` عبر `demo_explainer_video_url`)؛ (5) **بوابة قفل/فتح المسارات المالية والإعلانية لغير الإدارة (`public_monetization_enabled` في `platform_settings`، افتراضياً `'0'` مغلق)** بعبارة لطيفة (*«سيتم فتح الباب بعد استكمال الإجراءات»*) وتحكم مباشر من `/admin` دون العودة للكود؛ (6) قسم ميثاق التحالف (`20`) في `/guide` وتصحيح سطر `docs/03`؛ (7) جولة متصفح شاملة لتجميل UI/UX. ثم **42.1 → 42**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `6b58914af7a45d76daaec3752158a73040fb4bc2`.
+
+---
+
 ## سجل الاستئناف — 2026-11-04 بعد إغلاق UNIT40 (DOCS DONE / MERGED / DEPLOYED)
 
 - **CODE MAIN / actual merge SHA:** `7b90838c619462ea40f0750d4bcff78f511b4670` ([PR #155](https://github.com/Maelsh/dueli-opus/pull/155) / UNIT40، BASE `062600e5`، approved HEAD `06d31fc8`).
