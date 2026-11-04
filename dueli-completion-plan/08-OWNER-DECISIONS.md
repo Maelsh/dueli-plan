@@ -53,8 +53,8 @@
 2. **ربط دومين `dueli.win` و`www.dueli.win` (**DONE / PROD VERIFIED 2026-11-04**) وتطوير بوابة `/welcome` السينمائية ثلاثية الأبعاد (`UNIT41.1`):**
    - رُبط `dueli.win` و`www.dueli.win` فعلياً كـ Custom Domains مباشرة على نفس مشروع Cloudflare Pages (`project-8e7c178d`، CNAME Flattening + SSL Full Strict + Always Use HTTPS + Redirect Rule 302 مؤقتة للمسار الجذري `/` إلى `/welcome`، وتُحقق من `200 OK` حياً).
    - حُفظت الصور الثلاث المعتمدة من المالك رسمياً داخل مستودع الخطة (`dueli-completion-plan/assets/welcome/scene-1-sparks.png`, `scene-2-stardust.png`, `scene-3-nebula.png`) ليقوم الوكيل المنفذ في `UNIT41.1` بنسخها إلى `public/static/welcome/` وبناء عرض سينمائي ثلاثي الأبعاد (3D Canvas Particles + Parallax + Camera Dolly) يعمل على `/welcome` وعلى الجذر `/` عند القدوم من `dueli.win` أو `www.dueli.win` ثم يحوّل إلى `dueli.maelshpro.com`.
-3. **مسار `UNIT40` (`PR #155` HEAD `06d31fc8f569d52330c1ffaed76042fc204c453e`) والفجوات الثلاث (`SEC-02-G1/G2/G3`):**
-   - تُستكمل مراجعة `REMOTE` ودمج `PR #155` التوثيقي لإغلاق `UNIT40`، وتُرحَّل الفجوات البرمجية الثلاث المكتشفة (`SEC-02-G1` `/api/earnings` 500، `SEC-02-G2` `on_hold/withdrawn` stale، `SEC-02-G3` crash windows) ليتم إصلاحها واختبارها برمجياً ضمن **`UNIT41 (R4-ACCEPT-REM-1)`**.
+3. **إغلاق الشق التوثيقي لـ`UNIT40` ([PR #155](https://github.com/Maelsh/dueli-opus/pull/155) على `7b90838c619462ea40f0750d4bcff78f511b4670`) وتثبيت `Canonical NEXT = UNIT41`:**
+   - دُمج `PR #155` التوثيقي (`DOCS DONE / MERGED / DEPLOYED`، Quality `41834024651` وDeploy `41834024560` SUCCESS، حكما REMOTE APPROVE)، وأصبح `Canonical NEXT = UNIT41 (R4-ACCEPT-REM-1)` شاملاً إصلاح الفجوات البرمجية الثلاث (`SEC-02-G1` `/api/earnings` 500 وأعمدة `status/amount` في `AdvertisementModel` + تنظيف مستورد `EarningsModel` الميت في `AdminController:8`، و`SEC-02-G2` `on_hold/withdrawn` stale، و`SEC-02-G3` الثلاث كتابات المالية المنفصلة و`releaseHold` المبكر عند `hold_tx_id=null`، وتسمية حزمة اختبارات `SEC-02` داخل `docs/12`) بالإضافة إلى `withdrawal-path smoke test` والقبول المجمع.
 
 ## H1/H4 — خمس دقائق وتقييم قابل للتعديل
 
