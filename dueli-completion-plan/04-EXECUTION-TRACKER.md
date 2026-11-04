@@ -1,3 +1,14 @@
+## سجل الاستئناف — 2026-11-04 بعد إغلاق UNIT40 (DOCS DONE / MERGED / DEPLOYED)
+
+- **CODE MAIN / actual merge SHA:** `7b90838c619462ea40f0750d4bcff78f511b4670` ([PR #155](https://github.com/Maelsh/dueli-opus/pull/155) / UNIT40، BASE `062600e5`، approved HEAD `06d31fc8`).
+- **Post-merge على SHA نفسه:** Quality Gate [41834024651](https://github.com/Maelsh/dueli-opus/actions/runs/41834024651) SUCCESS؛ Deploy [41834024560](https://github.com/Maelsh/dueli-opus/actions/runs/41834024560) SUCCESS. حكما REMOTE تدقيقيان APPROVE.
+- **UNIT40 / R0-LAUNCH-READINESS (الشق التوثيقي) = DOCS DONE / MERGED / DEPLOYED:** مطابقة `SEC-02` مثبتة (`3 EVIDENCED` + `4 EQUIVALENT-EVIDENCED` عبر `LedgerService` + `3 GAP` مجدولة في `UNIT41`: `SEC-02-G1` `/api/earnings` 500 وأعمدة `status/amount` غير الموجودة في `AdvertisementModel` + تنظيف مستورد `EarningsModel` الميت في `AdminController:8`، و`SEC-02-G2` `on_hold/withdrawn` stale، و`SEC-02-G3` ثلاث كتابات مالية منفصلة + `releaseHold` مبكر عند `hold_tx_id=null`، مع تسمية حزمة اختبارات `SEC-02` داخل `docs/12`). دليل المالك للوصول الإداري موثق ومتحقق (13 قسم `/admin`، `/messages?tab=admin`، `/settings`، حساب `id=9053`، `is_fake=1`، وrunbook قطع `UNIT42`).
+- **بنود المالك وحالتها:** `H8` مصنف `DEFERRED TO UNIT42 CUTOVER`؛ ربط `dueli.win` و`www.dueli.win` **DONE / PROD VERIFIED** على `project-8e7c178d`؛ قرارات `UNIT36.1` وبنك/Stripe (`H9`) `OPEN OWNER ACTION` (مع اعتماد الإطلاق المرن `House-Ad Mode` وفق الوثيقة `20`). لا إطلاق معلن.
+- **Canonical NEXT = UNIT41 / R4-ACCEPT-REM-1** (ويشمل إصلاح `G1/G2/G3` برمجيًا + تنظيف `AdminController:8` + تسمية اختبارات `SEC-02` في `docs/12` + `withdrawal-path smoke test`)؛ ثم **41.1 → 42.1 → 42**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `c3951f40aa31736c9d433ac082397052c37a0505`.
+
+---
+
 ## سجل الاستئناف — 2026-11-02 بعد إغلاق UNIT39 (CODE DONE / MERGED / DEPLOYED / PROD VERIFIED)
 
 - **CODE MAIN / actual merge SHA:** `062600e5fce53921483f56d94d55069de4ed6847` ([PR #154](https://github.com/Maelsh/dueli-opus/pull/154) / UNIT39، BASE `aa81db25c3bcbb9174d2bf772f560d7f7940e2b8`، approved HEAD `64677e3b897781d76b2805ef2a191177f0b26d1b`).
