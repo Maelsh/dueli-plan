@@ -58,6 +58,8 @@
 4. **قرارات المالك الإضافية لـ`UNIT41.1` (2026-11-04):**
    - **اعتماد رابط الفيديو الموحد لكل منافسة ليس لها فيديو:** `https://maelshpro.com/ffmpeg/storage/live/match_fake/fake.mp4` كقيمة افتراضية حية (`200 OK`) لمفتاح `demo_explainer_video_url` في `platform_settings` (قابلة للتعديل من `/admin`)، بحيث يظهر في مربع الفيديو لأي منافسة منتهية/استعراضية لا تملك تسجيل فيديو فعلي.
    - **بوابة قفل/فتح الوصول المالي والإعلاني لغير الإدارة (`public_monetization_enabled` في `platform_settings`):** إغلاق وصول المستخدمين العاديين (مع استثناء حسابات الإدارة `is_admin=1` / `AdminRoleModel`) إلى المسارات والصفحات المالية والإعلانية (`/earnings`, `/advertiser`, `/donate` وواجهاتها البرمجية) بعبارة لطيفة مترجمة (*«سيتم فتح الباب بعد استكمال الإجراءات»* / *«This section will open soon upon completion of procedures»*)، مع توفير مفتاح تحكم مباشر في لوحة الإدارة (`/admin`) يمكّن المدير من فتح الوصول لكافة المستخدمين أو إغلاقه في أي وقت دون الحاجة لتعديل الكود البرمجي.
+5. **إغلاق `UNIT41.1` ([PR #157](https://github.com/Maelsh/dueli-opus/pull/157) على `7be22348cb2c4e735a132325af8eaa4e8cd96a89`) وتثبيت `Canonical NEXT = UNIT42.1` (2026-11-05):**
+   - دُمج `PR #157` (`CODE DONE / MERGED / DEPLOYED`، Quality `41949689043` وDeploy `41949689021` SUCCESS، ترحيل `0045_monetization_gate_seed.sql` مطبق إنتاجياً `0044→0045` بـ`SHA256 eccb9568…f7fef45b`، وحكما REMOTE APPROVE)، وتُحقق إنتاجياً من `/earnings` زائر `403` و`/welcome` `200`. تنبيه تشغيلي للمالك: المسارات المالية والإعلانية مغلقة عن المستخدمين العاديين منذ هذا النشر بقراره حتى يقلب المفتاح من `/admin`. `Canonical NEXT = UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1` وبعده `UNIT42`.
 
 ## H1/H4 — خمس دقائق وتقييم قابل للتعديل
 
