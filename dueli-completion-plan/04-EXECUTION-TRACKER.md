@@ -1,3 +1,13 @@
+## سجل الاستئناف — 2026-11-05 بعد إغلاق UNIT41.1 (CODE DONE / MERGED / DEPLOYED)
+
+- **CODE MAIN / actual merge SHA:** `7be22348cb2c4e735a132325af8eaa4e8cd96a89` ([PR #157](https://github.com/Maelsh/dueli-opus/pull/157) / UNIT41.1، BASE `3d8faf36`، approved HEAD `660b782a`).
+- **Post-merge على SHA نفسه:** Quality Gate [41949689043](https://github.com/Maelsh/dueli-opus/actions/runs/41949689043) SUCCESS؛ Deploy [41949689021](https://github.com/Maelsh/dueli-opus/actions/runs/41949689021) SUCCESS. حكما REMOTE مستقلان APPROVE (أحدهما هجوم تجاوز 5/5 فاشل).
+- **UNIT41.1 / R4-UI-UX-BROWSER-POLISH-1 = CODE DONE / MERGED / DEPLOYED:** طُبقت `migrations/0045_monetization_gate_seed.sql` على `dueli-db` قبل الدمج بتفويض 10 §9 (`SHA256 eccb9568…f7fef45b` = manifest `baseline-0045`، `0044→0045`، لا pending، Readiness PASS `77/0`، `INSERT OR IGNORE` بلا سحق). أنجزت بوابة `dueli.win/welcome` السينمائية (أصول الخطة الثلاثة مطابقة بايتياً + `Host` root)، وفيديو `fake.mp4` الموحد للمنافسات بلا تسجيل (`demo_explainer_video_url` من `/admin`)، وبوابة `public_monetization_enabled` (افتراضي `0`؛ حجب خادمي صفحة+API برسالة المالك الحرفية؛ `admin/AdminRole` يمر؛ قلب فوري من `/admin`؛ تحقق إنتاجي `/earnings` زائر `403` و`/welcome` `200`)، وعزل `is_fake` من اختيار المنافس والدعوات (`409` خادمي) وتقاعد تدريجي آمن، وتنظيف مودال OAuth (4 طرق، `Microsoft`)، وقسم ميثاق التحالف في `/guide`، وتصحيح `docs/03`. قبول متصفح إنتاجي بحساب `id=9053` وجولة أجهزة حقيقية يبقى `NOT VERIFIED`/بشري للمالك ولا يعيد فتح الوحدة تقنياً.
+- **Canonical NEXT = UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1**؛ وبعده **UNIT42 (الإطلاق + قطع H8 النهائي)**. إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `8ba67f3c55682f05010b35fd6cf4a2aae87b9b7b`.
+
+---
+
 ## سجل الاستئناف — 2026-11-04 بعد إغلاق UNIT41 (CODE DONE / MERGED / DEPLOYED)
 
 - **CODE MAIN / actual merge SHA:** `3d8faf36a22ed418f2a82344e2f767e9ad0e643f` ([PR #156](https://github.com/Maelsh/dueli-opus/pull/156) / UNIT41، BASE `7b90838c`، approved HEAD `5c5399b7`).
