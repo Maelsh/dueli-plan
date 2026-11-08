@@ -3,8 +3,8 @@
 - **CODE MAIN / actual merge SHA:** `596b98a83dcee69e2ec3b48bf260605682682220` ([PR #158](https://github.com/Maelsh/dueli-opus/pull/158) / UNIT42.1، BASE `7be22348cb2c4e735a132325af8eaa4e8cd96a89`، approved HEAD `188e24549e13dd745606161a2f1352fc1d2ab510`).
 - **Post-merge على SHA نفسه:** Quality Gate [42318069853](https://github.com/Maelsh/dueli-opus/actions/runs/42318069853) SUCCESS؛ Deploy [42318069854](https://github.com/Maelsh/dueli-opus/actions/runs/42318069854) SUCCESS. تحقق إنتاجي مباشر على `dueli.maelshpro.com`: `/guide?lang=es`, `/guide?lang=ja`, `/guide?lang=he`, `/welcome?lang=de`, `/static/locales/sw.json` كلها `200 OK`، مع `57` وسم `hreflang` وحقن `__DUELI_LOCALE_PACK__` حيًا.
 - **UNIT42.1 / R4-GLOBAL-I18N-ALL-LANGS-1 = CODE DONE / MERGED / DEPLOYED / PROD VERIFIED:** فُعّلت **56 لغة عالمية كاملة (`56/56`)**؛ بقيت `ar.ts` و`en.ts` فقط داخل `_worker.js` (+1.6 KB) و`app.js` (+406 B)، وصُدّرت **54 لغة** كقواميس JSON متداخلة في `public/static/locales/<lang>.json` (`1,813` سطراً، `1,525` ورقة + `19` مصفوفة مترجمة شاملة `pillars` و`charter_content`، وتطابق `100%` في `{placeholders}`) مع `ensureLanguageLoaded` و`RTL` لـ`ar/fa/ur/he` و`2,427/2,427` اختبارًا أخضر (`any=298<=310`).
-- **Canonical NEXT = UNIT42 / R0-WEB-LAUNCH** (عرض الجاهزية الموثقة + قطع `H8` النهائي بتدوير حساب المدير `id=9053` وحذف الحسابات التجريبية + إطلاق بيتا الويب في وضع `House-Ad Mode` وإرسال مراسلات التحالف العالمي التأسيسي). إجمالي الخطة **63 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
-- **PLAN BASE قبل هذا التحديث:** `6ff9b559a7e511fa79bd6541e9db58e7c6579d37`.
+- **Canonical NEXT = UNIT41.2 / R4-OWNER-AUDIT-REMEDIATION-1** (إصلاح شامل للعيوب الـ12 التي رصدها المالك في فحصه الحي للمنصة بتاريخ 2026-11-09 دون إضافة أي مفتاح ترجمة جديد حفاظاً على الـ56 لغة)، ثم **UNIT42 / R0-WEB-LAUNCH** (عرض الجاهزية الموثقة + قطع `H8` النهائي + إطلاق بيتا الويب وإرسال مراسلات التحالف العالمي التأسيسي). إجمالي الخطة **64 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `e4dbebfeac1ae71971cbc7091446fc262c8e0b92`.
 
 ---
 
