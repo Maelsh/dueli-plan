@@ -74,9 +74,9 @@
      * `G7` (C-2 CLOSED): إصلاح `Edge Hover Auto-Scroll` واتجاه RTL وتعارض snap + إرجاع بيانات الخصم من `SearchModel.ts` وتطوير بطاقة نتائج البحث في `HomePage.ts` مع `HomePage.escStored` لمنع التهريب المزدوج.
      * `G8`: فصل تهريب النصوص عن السمات في `layout.ts` و`seo.ts` لمنع `&#39;`.
      * `G9`: إزالة رابط `Documents` من الفوتر وتحويل `/docs` إلى `/guide`، ومنع الزائر غير المسجل من الوصول لواجهة `/messages?tab=admin`.
-   - **الدفعة الثانية المستقلة (`Canonical NEXT = UNIT41.2-P2` — `G11 + G10`):**
-     * `G11`: موجه مستقل لإعادة بناء `src/modules/pages/welcome-page.ts` بمشهد CSS 3D حقيقي وCanvas متعدد الطبقات وشعار بارز ومضيء بلا صور ممددة باهتة ولا قص على الجوال.
-     * `G10`: رفع قائمة جرد سجلات QA المرشحة للمالك دون حذف.
+   - **الدفعة الثانية المستقلة (`UNIT41.2-P2` — `G11` = `CODE DONE / MERGED / DEPLOYED` عبر [PR #161](https://github.com/Maelsh/dueli-opus/pull/161) على `161a7c81718d70476afd4359dede21d2259de23d`، Approved HEAD `9fe5bf68`، Quality `42923385270` وDeploy `42923385278` SUCCESS، `2,500/2,500` اختباراً أخضر، `41/41` تكافؤ الـ56 لغة):**
+     * `G11`: أُعيد بناء `src/modules/pages/welcome-page.ts` بمشهد CSS 3D حقيقي وCanvas متعدد الطبقات وشعار بارز ومضيء بلا قص على الجوال، وأصبح `Canonical NEXT = UNIT42 (R0-WEB-LAUNCH)`.
+     * `G10`: أي تصرف في سجلات QA القديمة يظل خاضعاً لقرار المالك دون أي حذف آلي غير مأذون.
 
 ## H1/H4 — خمس دقائق وتقييم قابل للتعديل
 
