@@ -64,17 +64,17 @@
    - **CODE MAIN المحدّث:** `220d2279d4f4f3c570401a6688b7f92f6e689437` (بعد نشر رخصة `Ethical Source & Continuity License v2`).
    - **أمر رسائل التحالف العالمي التأسيسي:** تم تنفيذه واستلامه من المالك — **مغلق ولا يُعاد تكليفه**.
    - **قواعد سلامة البيانات الإلزامية:** منافسات «منافستي للتجربة 1..10» أنشأها المالك وتُحفظ ولا تُحذف؛ لا يُنفذ أي حذف يدوي أو SQL cleanup لمنافسات `2267–2269` أو سجلات `[QA]` بدون تفويض مستقل بعد إصلاح القواعد البرمجية.
-   - **الدفعة الأولى (`UNIT41.2-P1` — `G1..G9` في PR واحدة متكاملة لمنع تعارض `HomePage.ts` وبشرط `ZERO NEW I18N KEYS`):**
-     * `G4` (P0): منع تكرار إنشاء المنافسة من عملية واحدة في `create-page.ts` + حارس idempotency/dedup ذري في الخادم (`CompetitionController.create` / `CompetitionModel.create`).
-     * `G5` (P0): إصلاح تطبيق قانون انتهاء المنافسات المعلقة بلا خصم بعد ساعة (`Rule A` / `Rule B`) في `ScheduledTaskService` / `CronHandler` وضمان عدم ظهور المعلقة المنتهية الصلاحية في القراءة.
+   - **الدفعة الأولى (`UNIT41.2-P1` — `G1..G9` = `CODE DONE / MERGED / DEPLOYED` عبر [PR #160](https://github.com/Maelsh/dueli-opus/pull/160) على `6b6efe9d88f14c367602391abea1c64233315fe1`، Approved HEAD `d5ddeb79`، Quality `42912465383` وDeploy `42912464997` SUCCESS، حكما REMOTE APPROVE، `41/41` تكافؤ الـ56 لغة):**
+     * `G4` (P0): منع تكرار إنشاء المنافسة من عملية واحدة في `create-page.ts` + حارس idempotency/dedup ذري في الخادم + `scheduleIfAbsent`.
+     * `G5` (P0 / C-1 CLOSED): إصلاح تطبيق قانون انتهاء المنافسات المعلقة بلا خصم بعد ساعة (`Rule A` / `Rule B`) ودفعة الحذف الذرية `this.db.batch` في `ScheduledTaskService`.
      * `G2`: تشغيل الفيديو الموحد (`fake.mp4`) في الفروع الثلاثة في `competition-page.ts`.
      * `G3`: توحيد بوابات الأهلية الأربع في `RecommendationModel`, `CompetitionModel`, `ExploreSessionService`, `HomeRailProviders` لتشمل المنافسات المكتملة ذات المقاطع الحقيقية (مثل `2260`) أو المؤهلة للفيديو الموحد.
      * `G1`: إخفاء `Admin Panel` لغير المديرين في `styles.css` + مسافة علوية لـ`guide-nav.ts` + أزرار OAuth بعرض كامل في `login-modal.ts`.
      * `G6`: مدخل واضح وأزرار حذف عنصر مفرد ومسح كامل لـ`Watch History` و`Watch Later` في `watch/routes.ts` و`WatchCollectionsController.ts` و`profile-page.ts`.
-     * `G7`: إصلاح `Edge Hover Auto-Scroll` واتجاه RTL وتعارض snap + إرجاع بيانات الخصم من `SearchModel.ts` وتطوير بطاقة نتائج البحث في `HomePage.ts` (`showSearchResults`).
+     * `G7` (C-2 CLOSED): إصلاح `Edge Hover Auto-Scroll` واتجاه RTL وتعارض snap + إرجاع بيانات الخصم من `SearchModel.ts` وتطوير بطاقة نتائج البحث في `HomePage.ts` مع `HomePage.escStored` لمنع التهريب المزدوج.
      * `G8`: فصل تهريب النصوص عن السمات في `layout.ts` و`seo.ts` لمنع `&#39;`.
      * `G9`: إزالة رابط `Documents` من الفوتر وتحويل `/docs` إلى `/guide`، ومنع الزائر غير المسجل من الوصول لواجهة `/messages?tab=admin`.
-   - **الدفعة الثانية المستقلة (`UNIT41.2-P2` — `G11 + G10`):**
+   - **الدفعة الثانية المستقلة (`Canonical NEXT = UNIT41.2-P2` — `G11 + G10`):**
      * `G11`: موجه مستقل لإعادة بناء `src/modules/pages/welcome-page.ts` بمشهد CSS 3D حقيقي وCanvas متعدد الطبقات وشعار بارز ومضيء بلا صور ممددة باهتة ولا قص على الجوال.
      * `G10`: رفع قائمة جرد سجلات QA المرشحة للمالك دون حذف.
 

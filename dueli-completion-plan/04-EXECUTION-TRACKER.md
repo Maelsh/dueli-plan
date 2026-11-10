@@ -1,3 +1,13 @@
+## سجل الاستئناف — 2026-11-11 بعد دمج UNIT41.2-P1 (CODE DONE / MERGED / DEPLOYED)؛ Canonical NEXT=UNIT41.2-P2
+
+- **CODE MAIN / actual merge SHA:** `6b6efe9d88f14c367602391abea1c64233315fe1` ([PR #160](https://github.com/Maelsh/dueli-opus/pull/160) / UNIT41.2-P1، BASE `220d2279`، remediation BASE `42442a5d`، approved HEAD `d5ddeb7901d06626948de5005e30f4edcdb49bfd`).
+- **Post-merge على SHA نفسه:** Quality Gate [42912465383](https://github.com/Maelsh/dueli-opus/actions/runs/42912465383) SUCCESS؛ Deploy [42912464997](https://github.com/Maelsh/dueli-opus/actions/runs/42912464997) SUCCESS. حكما REMOTE مستقلان `APPROVE` على `d5ddeb79`.
+- **UNIT41.2-P1 (G1–G9) = CODE DONE / MERGED / DEPLOYED (ليست PROD VERIFIED بعد):** أُغلق `C-1 / G5` (`this.db.batch` ذرية لحذف التبعيات والمنافسة مع حراسة `status='pending' AND opponent_id IS NULL` وفحص `changes===1`)، وأُغلق `C-2 / G7` (`HomePage.escStored` لمنع التهريب المزدوج مع حماية XSS عبر `happy-dom`)، واجتاز `G4` (`scheduleIfAbsent` لمنع تكرار مهام الحذف المجدولة). ثوابت المشروع: `41/41` تكافؤ الـ56 لغة (صفر مفاتيح جديدة)، `welcome-page.ts` لم يُمس، `any=296<=310`، وإجمالي الاختبارات `2,492` (`2,491 passed + 1 skipped` محليًا لغياب fixture MP4 سابق على BASE / `2,492` في التقرير الثاني). سُجلت النقاط الست غير الحاجبة كمتابعات مستقلة.
+- **Canonical NEXT = UNIT41.2-P2 (الموجه المستقل لإعادة بناء `/welcome` السينمائية ثلاثية الأبعاد `G11` + جرد `G10` بدون حذف)**، ثم **UNIT42 / R0-WEB-LAUNCH**. إجمالي الخطة **64 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `59746a4b9cce65be062a16b1c492fff3f9a47ff1`.
+
+---
+
 ## سجل الاستئناف — 2026-11-07 بعد إغلاق UNIT42.1 (56 LANGUAGES PROD VERIFIED)
 
 - **CODE MAIN / actual merge SHA:** `596b98a83dcee69e2ec3b48bf260605682682220` ([PR #158](https://github.com/Maelsh/dueli-opus/pull/158) / UNIT42.1، BASE `7be22348cb2c4e735a132325af8eaa4e8cd96a89`، approved HEAD `188e24549e13dd745606161a2f1352fc1d2ab510`).
