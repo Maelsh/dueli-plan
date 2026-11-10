@@ -1,3 +1,13 @@
+## سجل الاستئناف — 2026-11-11 بعد دمج UNIT41.2-P2 (/welcome 3D) وإغلاق UNIT41.2 بالكامل؛ Canonical NEXT=UNIT42
+
+- **CODE MAIN / actual merge SHA:** `161a7c81718d70476afd4359dede21d2259de23d` ([PR #161](https://github.com/Maelsh/dueli-opus/pull/161) / UNIT41.2-P2، BASE `6b6efe9d`، approved HEAD `9fe5bf68`).
+- **Post-merge على SHA نفسه:** Quality Gate [42923385270](https://github.com/Maelsh/dueli-opus/actions/runs/42923385270) SUCCESS؛ Deploy [42923385278](https://github.com/Maelsh/dueli-opus/actions/runs/42923385278) SUCCESS. تحقق إنتاجي مباشر `200 OK` على `dueli.maelshpro.com/welcome` و`dueli.win/welcome`.
+- **UNIT41.2 = CODE DONE / MERGED / DEPLOYED** (`P1` عبر [PR #160](https://github.com/Maelsh/dueli-opus/pull/160) على `6b6efe9d` لـ`G1..G9` شاملة `C-1/G5` و`C-2/G7` و`G4`، و`P2` عبر [PR #161](https://github.com/Maelsh/dueli-opus/pull/161) على `161a7c81` لـ`G11 /welcome` بمشهد CSS 3D وCanvas متعدد الطبقات، `2,500/2,500` اختبارًا أخضر، فحص Chromium `5/5`، و`41/41` تكافؤ الـ56 لغة بصفر مفاتيح جديدة).
+- **Canonical NEXT = UNIT42 / R0-WEB-LAUNCH** (قطع `H8` النهائي + إطلاق بيتا الويب في وضع `House-Ad Mode` وإرسال دعوات التحالف العالمي التأسيسي). إجمالي الخطة **64 UNIT**؛ أرقام37–43 ثابتة بلا إزاحة.
+- **PLAN BASE قبل هذا التحديث:** `138600326a168c4ab9b66a0556d4dd204a0874a4`.
+
+---
+
 ## سجل الاستئناف — 2026-11-11 بعد دمج UNIT41.2-P1 (CODE DONE / MERGED / DEPLOYED)؛ Canonical NEXT=UNIT41.2-P2
 
 - **CODE MAIN / actual merge SHA:** `6b6efe9d88f14c367602391abea1c64233315fe1` ([PR #160](https://github.com/Maelsh/dueli-opus/pull/160) / UNIT41.2-P1، BASE `220d2279`، remediation BASE `42442a5d`، approved HEAD `d5ddeb7901d06626948de5005e30f4edcdb49bfd`).
